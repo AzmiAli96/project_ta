@@ -24,7 +24,7 @@ class MahasiswaFactory extends Factory
             'email'=>fake()->unique()->safeEmail(),
             'password' => static::$password ??= Hash::make('password'),
             'prodi_id'=>mt_rand(1,3),
-            'ipk'=>fake()->bothify('#,#'),
+            'ipk'=>fake()->bothify('#.#'),
             'status_id'=>mt_rand(1,4),
         ];
     }
