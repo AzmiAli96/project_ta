@@ -19,6 +19,12 @@
     <div class="card-body">
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+            <a href="/exportMahasiswa" class="btn btn-primary mb-3 mr-1">
+                <i class="fas fa-solid fa-plus"> Export</i>
+            </a>
+            <a href="/importMahasiswa" class="btn btn-primary mb-3 mr-1" data-toggle="modal" data-target="#importForm">
+                <i class="fas fa-solid fa-plus"> Import</i>
+            </a>
             <a href="mahasiswa/create" class="btn btn-primary mb-3">create</a>
         </div>
         <div class="table-responsive">
@@ -55,6 +61,30 @@
                     @endforeach
             </table>
             {{ $mahasiswas->links() }}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="importForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Import Data Mahasiswa</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form action="/importMahasiswa" method="POST" enctype="multipart/form-data">
+                @csrf
+            <div class="modal-body">
+                <label for="formFile" class="form-label">Default file input example</label>
+                <input class="form-control" type="file" name="file" id="formFile">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Import</button>
+            </div>
+            </form>
         </div>
     </div>
 </div>

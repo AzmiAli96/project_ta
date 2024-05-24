@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\MahasiswaExport;
+use App\Imports\MahasiswaImport;
 use App\Models\Mahasiswa;
 use App\Models\prodi;
 use App\Models\Status;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MahasiswaController extends Controller
 {
@@ -86,5 +89,15 @@ class MahasiswaController extends Controller
     {
         Mahasiswa::destroy($id);
         return redirect('/mahasiswa')->with('pesan', 'Berhasil Dihapuskan.');
+    }
+
+    public function export()
+    {
+        return Excel::download(new MahasiswaExport(), 'Mahasiswa.csv');
+    }
+
+    public function import()
+    {
+        Excel::import(new MahasiswaImport, request()->file('file'));
     }
 }

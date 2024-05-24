@@ -32,3 +32,6 @@ route::middleware(['auth'])->group(function(){
     Route::resource('/mahasiswa',MahasiswaController::class);
     route::get('/logout',[LoginController::class,'logout']);
 });
+
+route::get('/exportMahasiswa',[MahasiswaController::class,'export'])->name('mahasiswa.export');
+route::post('/importMahasiswa',[MahasiswaController::class,'import']);
