@@ -21,7 +21,7 @@ class DosenController extends Controller
      */
     public function create()
     {
-        //
+        return view('mahasiswa.create');
     }
 
     /**
@@ -29,7 +29,18 @@ class DosenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nidn'=> 'required|unique:dsn',
+            'nama'=>'required|min:3',
+            'email'=>'required',
+            'password'=>'required',
+            'no_telp'=>'required',
+            'level'=>'required',
+            'alamat'=>'required',
+        ]);
+
+        Dosen::create($validated);
+        return redirect('/dosen')->with('pesan', 'berhasil menyimpan data.');
     }
 
     /**
@@ -45,22 +56,34 @@ class DosenController extends Controller
      */
     public function edit(Dosen $dosen)
     {
-        //
+        return view('mahasiswa.edit');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Dosen $dosen)
+    public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'nidn'=> 'required|unique:dsn',
+            'nama'=>'required|min:3',
+            'email'=>'required',
+            'password'=>'required',
+            'no_telp'=>'required',
+            'level'=>'required',
+            'alamat'=>'required',
+        ]);
+
+        Dosen::where('id',$id)->update($validated);
+        return redirect('/dosen')->with('pesan', 'berhasil menyimpan data.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Dosen $dosen)
+    public function destroy($id)
     {
-        //
+        Dosen::destroy($id);
+        return redirect('/dosen')->with('pesan', 'Berhasil Dihapuskan.');
     }
 }

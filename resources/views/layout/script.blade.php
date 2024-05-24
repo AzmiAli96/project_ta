@@ -37,4 +37,6 @@
 
     <!-- Page level custom scripts -->
     <script src="{{ asset('vendor/startbootstrap-sb-admin-2-gh-pages/js/demo/datatables-demo.js') }}"></script>
+
+    <script src="/js/bootstrap.bundle.min.js" ></script>
     

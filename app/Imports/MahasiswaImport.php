@@ -25,6 +25,7 @@ class MahasiswaImport implements ToModel
             "email" => $row["email"],
             "password" => $row["password"],
             "prodi_id" => $row["prodi_id"],
+            "ipk" => $row["ipk"],
             "status_id" => $row["status_id"],
         ]);
     }

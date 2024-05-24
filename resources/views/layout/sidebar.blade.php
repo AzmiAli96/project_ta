@@ -8,7 +8,7 @@
                         <div class="sidebar-brand-icon rotate-n-30">
 
                         </div>
-                        <div class="sidebar-brand-text mx-3"> <img src="image/ti.png" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 10px; float: center;">Sidang TA</div>
+                        <div class="sidebar-brand-text mx-3"> <img src="/image/ti.png" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 10px; float: center;">Sidang TA</div>
                     </a>
 
                     <!-- Divider -->

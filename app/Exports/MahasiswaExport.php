@@ -16,6 +16,7 @@ class MahasiswaExport implements FromCollection
             'no_bp',
             'nama',
             'prodi_id',
+            'ipk',
             'status_id',
         ])->get();
         return $mahasiswa;
@@ -26,6 +27,7 @@ class MahasiswaExport implements FromCollection
             "no_bp",
             "nama",
             "prodi_id",
+            "ipk",
             "status_id",
         ];
     }

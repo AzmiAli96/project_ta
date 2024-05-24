@@ -3,12 +3,14 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Dosen>
  */
 class DosenFactory extends Factory
 {
+    protected static ?string $password;
     /**
      * Define the model's default state.
      *
@@ -20,7 +22,8 @@ class DosenFactory extends Factory
             'nidn'=> fake()->bothify('##########'),
             'nama'=>fake()->name(),
             'email'=>fake()->unique()->safeEmail(),
-            'no_telp'=>fake()->bothify('##########'),
+            'password' => static::$password ??= Hash::make('password'),
+            'no_telp'=>fake()->bothify('08########'),
             'level'=>fake()->randomElement(['penguji','pembimbing']),
             'alamat'=>$this->faker->address(),
         ];

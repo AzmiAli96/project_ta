@@ -23,5 +23,7 @@
     <!-- Custom styles for this page -->
     <link href="{{ asset('vendor/startbootstrap-sb-admin-2-gh-pages/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
 
 </head>

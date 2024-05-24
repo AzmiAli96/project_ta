@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('password');
             $table->foreignId('prodi_id');
+            $table->decimal('ipk',3,2);
             $table->string('status_id');
             $table->timestamps();
         });

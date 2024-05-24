@@ -25,7 +25,7 @@
             <a href="/importMahasiswa" class="btn btn-primary mb-3 mr-1" data-toggle="modal" data-target="#importForm">
                 <i class="fas fa-solid fa-plus"> Import</i>
             </a>
-            <a href="mahasiswa/create" class="btn btn-primary mb-3">create</a>
+            <a href="mahasiswa/create" class="btn btn-primary mb-3">Create</a>
         </div>
         <div class="table-responsive">
             <table class="table table-bordered" width="100%" cellspacing="0">
@@ -36,6 +36,7 @@
                         <th>Nama</th>
                         <th>Email</th>
                         <th>Prodi</th>
+                        <th>IPK</th>
                         <th>status</th>
                         <th>Action</th>
                     </tr>
@@ -47,8 +48,9 @@
                         <td>{{$mahasiswa->no_bp}}</td>
                         <td>{{ $mahasiswa->nama }}</td>
                         <td>{{ $mahasiswa->email }}</td>
-                        <td>{{ $mahasiswa->prodi_id }}</td>
-                        <td>{{ $mahasiswa->status_id }}</td>
+                        <td>{{ $mahasiswa->prodi->nama }}</td>
+                        <td>{{ $mahasiswa->ipk }}</td>
+                        <td>{{ $mahasiswa->status->ket }}</td>
                         <td>
                             <form action="/mahasiswa/{{$mahasiswa->id}}" method="post" class="d-inline">
                                 @method('DELETE')

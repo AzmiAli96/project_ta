@@ -43,10 +43,10 @@
                 </div>
                 <div class="col-lg-6 text-lg-right">
                     <a href="https://ti.pnp.ac.id/">
-                        <img src="image/ti.png" alt="Logo" class="me-2" style="width: 25px; height: 25px; border-radius: 50%; margin-right: 10px; float: center;"> Teknologi Informasi
+                        <img src="/image/ti.png" alt="Logo" class="me-2" style="width: 25px; height: 25px; border-radius: 50%; margin-right: 10px; float: center;"> Teknologi Informasi
                     </a><br>
                     <a href="https://www.pnp.ac.id/">
-                        <img src="image/PNP.jpg" alt="Logo" class="me-2" style="width: 25px; height: 25px; border-radius: 40%; margin-right: 10px; float: center;"> pnp.ac.id
+                        <img src="/image/PNP.jpg" alt="Logo" class="me-2" style="width: 25px; height: 25px; border-radius: 40%; margin-right: 10px; float: center;"> pnp.ac.id
                     </a><br>
                    
                 </div>

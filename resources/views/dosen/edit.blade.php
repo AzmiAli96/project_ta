@@ -1,8 +1,8 @@
 @extends('layout.main')
-@section('title', 'Edit Mahasiswa')
+@section('title', 'Edit Dosen')
 @section('content')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h2>Edit Mahasiswa</h2>
+    <h2>Edit Dosen</h2>
 </div>
 @if (session()->has('pesan'))    
 <div class="alert alert-primary" role="alert">
@@ -10,13 +10,13 @@
 </div>
 @endif
 <div class="col-6">
-    <form action="/mahasiswa/{{ $mahasiswa->id }}" method="post">
+    <form action="/dosen/{{ $dosen->id }}" method="post">
     @method('PUT')    
     @csrf
         <div class="mb-3">
-            <label class="form-label">NO_BP</label>
-            <input type="number" class="form-control @error('no_bp') is-invalid @enderror" name="no_bp" value="{{old('no_bp',$mahasiswa->no_bp)}}" readonly>
-            @error('no_bp')
+            <label class="form-label">NIDN</label>
+            <input type="number" class="form-control @error('nidn') is-invalid @enderror" name="nidn" value="{{old('nidn',$mahasiswa->nidn)}}" readonly>
+            @error('nidn')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
@@ -50,6 +50,15 @@
             @enderror
         </div>
         <div class="mb-3">
+            <label class="form-label">No Telp</label>
+            <input type="number" class="form-control @error('no_telp') is-invalid @enderror" name="no_telp" value="{{old('no_telp'$dosen->no_telp)}}">
+            @error('no_telp')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="mb-3">
             <label class="form-label @error('prodi_id') is-invalid @enderror">Prodi</label>
             <select name="prodi_id" class="form-select">
                 <option value="" hidden>--pilih prodi--</option>
@@ -68,27 +77,9 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label class="form-label">IPK</label>
-            <input type="number" class="form-control @error('ipk') is-invalid @enderror" name="ipk" value="{{old('ipk',$mahasiswa->ipk)}}" readonly>
-            @error('ipk')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-            @enderror
-        </div>
-        <div class="mb-3">
-            <label class="form-label @error('status_id') is-invalid @enderror">Status</label>
-            <select name="status_id" class="form-select">
-                <option value="" hidden>-- status --</option>
-                @foreach ($statuses as $status)
-                @if (old('status_id',$mahasiswa->status_id)==$status->id)
-                    <option value="{{$status->id}}" selected>{{ $status->ket }}</option>
-                    @else
-                    <option value="{{ $status->id }}">{{ $status->ket }}</option>
-                @endif
-                @endforeach
-            </select>
-            @error('status_id')
+            <label class="form-label">Alamat</label>
+            <textarea class="form-control @error('alamat') is-invalid @enderror" rows="3" name="alamat">{{old('alamat',$dosen->alamat)}}</textarea>
+            @error('alamat')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>

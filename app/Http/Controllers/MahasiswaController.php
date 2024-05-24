@@ -41,6 +41,7 @@ class MahasiswaController extends Controller
             'email'=>'required',
             'password'=>'required',
             'prodi_id'=>'required',
+            'ipk'=>'required',
             'status_id'=>'required',
         ]);
 
@@ -75,6 +76,7 @@ class MahasiswaController extends Controller
             'email'=>'required',
             'password'=>'required',
             'prodi_id'=>'required',
+            'ipk'=>'required',
             'status_id'=>'required',
         ]);
         

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->char('nidn',10);
             $table->string('nama');
             $table->string('email')->unique();
+            $table->string('password');
             $table->char('no_telp',15);
             $table->string('level');
             $table->string('alamat');

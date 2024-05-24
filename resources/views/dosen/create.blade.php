@@ -1,8 +1,8 @@
 @extends('layout.main')
-@section('title', 'create Mahasiswa')
+@section('title', 'create Dosen')
 @section('content')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h2>Create Mahasiswa</h2>
+    <h2>Create Dosen</h2>
 </div>
 @if (session()->has('pesan'))    
 <div class="alert alert-primary" role="alert">
@@ -10,12 +10,12 @@
 </div>
 @endif
 <div class="col-6">
-    <form action="/mahasiswa" method="post">
+    <form action="/dosen" method="post">
         @csrf
         <div class="mb-3">
-            <label class="form-label">NO_BP</label>
-            <input type="number" class="form-control @error('no_bp') is-invalid @enderror" name="no_bp" value="{{old('no_bp')}}">
-            @error('no_bp')
+            <label class="form-label">NIDN</label>
+            <input type="number" class="form-control @error('nidn') is-invalid @enderror" name="nidn" value="{{old('nidn')}}">
+            @error('nidn')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
@@ -49,9 +49,18 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label class="form-label @error('prodi_id') is-invalid @enderror">Prodi</label>
+            <label class="form-label">No Telp</label>
+            <input type="number" class="form-control @error('no_telp') is-invalid @enderror" name="no_telp" value="{{old('no_telp')}}">
+            @error('no_telp')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label class="form-label @error('prodi_id') is-invalid @enderror">Roll</label>
             <select name="prodi_id" class="form-select">
-                <option value="" hidden>--pilih prodi--</option>
+                <option value="" hidden>--pilih Roll anda--</option>
                 @foreach ($prodis as $prodi)
                 <option value="{{$prodi->id}}">{{$prodi->nama}}</option>
                 @endforeach
@@ -63,28 +72,15 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label class="form-label">IPK</label>
-            <input type="number" class="form-control @error('ipk') is-invalid @enderror" name="ipk" value="{{old('ipk')}}">
-            @error('ipk')
+            <label class="form-label">Alamat</label>
+            <textarea class="form-control @error('alamat') is-invalid @enderror" rows="3" name="alamat">{{old('alamat')}}</textarea>
+            @error('alamat')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
             @enderror
         </div>
-        <div class="mb-3">
-            <label class="form-label @error('status_id') is-invalid @enderror">Prodi</label>
-            <select name="status_id" class="form-select">
-                <option value="" hidden>-- status --</option>
-                @foreach ($statuses as $status)
-                <option value="{{$status->id}}">{{$status->ket}}</option>
-                @endforeach
-            </select>
-            @error('status_id')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-            @enderror
-        </div>
+        
         <button type="submit" class="btn btn-primary">submit</button>
     </form>
 </div>

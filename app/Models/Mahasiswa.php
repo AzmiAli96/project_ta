@@ -9,4 +9,12 @@ class Mahasiswa extends Model
 {
     use HasFactory;
     protected $guarded=[];
+
+    public function prodi(){
+        return $this->belongsTo(prodi::class,'prodi_id');
+    }
+
+    public function status(){
+        return $this->belongsTo(status::class,'status_id');
+    }
 }
