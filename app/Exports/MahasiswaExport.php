@@ -4,31 +4,46 @@ namespace App\Exports;
 
 use App\Models\Mahasiswa;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\FromQuery;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
 
-class MahasiswaExport implements FromCollection
+class MahasiswaExport implements FromQuery, WithHeadings, WithMapping
 {
     /**
     * @return \Illuminate\Support\Collection
     */
-    public function collection()
+    public function query()
     {
-        $mahasiswa = Mahasiswa::select([
-            'no_bp',
-            'nama',
-            'prodi_id',
-            'ipk',
-            'status_id',
-        ])->get();
-        return $mahasiswa;
+        return Mahasiswa::with(['prodi', 'user', 'status'])
+            ->select(['no_bp', 'ipk'])
+            ->addSelect([
+                'prodi_id as prodi_nama', 
+                'user_id as user_email', 
+                'status_id as status_ket'
+            ]);
     }
 
-    public function headings(): array{
+
+   public function headings(): array
+    {
         return [
-            "no_bp",
-            "nama",
-            "prodi_id",
-            "ipk",
-            "status_id",
+            'No BP',
+            'IPK',
+            'Program Studi',
+            'Email',
+            'Status'
+        ];
+    }
+
+    public function map($mahasiswa): array
+    {
+        return [
+            $mahasiswa->no_bp,
+            $mahasiswa->ipk,
+            $mahasiswa->prodi_nama,
+            $mahasiswa->user_email,
+            $mahasiswa->status_ket
         ];
     }
 }

@@ -23,8 +23,8 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Nama</label>
-            <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{old('nama')}}">
-            @error('nama')
+            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{old('name')}}">
+            @error('name')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
@@ -64,7 +64,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label">IPK</label>
-            <input type="number" class="form-control @error('ipk') is-invalid @enderror" name="ipk" value="{{old('ipk')}}">
+            <input type="number" class="form-control" name="ipk" value="{{old('ipk')}}">
             @error('ipk')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -85,6 +85,7 @@
             </div>
             @enderror
         </div>
+        <input type="hidden" name="level" id="level" value="Mahasiswa">
         <button type="submit" class="btn btn-primary">submit</button>
     </form>
 </div>

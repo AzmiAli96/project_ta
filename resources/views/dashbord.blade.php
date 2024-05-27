@@ -3,13 +3,13 @@
 @section('content')
 
 
-    <div class="text-bg-warning p-3 rounded">
-        <h1>Welcome, {{ Auth::user()->name }}</h1>
+    <div class="text-bg-warning p-3 rounded mb-3">
+        <h1>Selamat Datang, {{ Auth::user()->name }}</h1>
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat nihil inventore ea corrupti? Magnam, voluptatem! Mollitia tempore natus ab quo libero quod nulla. Expedita tempora corrupti aspernatur, enim perspiciatis necessitatibus!</p>
     </div>
 
 
-
+    @if (auth()->user()->level == 'Admin' )
     <div class="row">
         <div class="col mb-4">
             <div class="card card-raised border-start border-primary border-4" style="width: 18rem;">
@@ -64,6 +64,22 @@
             <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
         </div>
     </div>
+    @endif
+
+    @if (auth()->user()->level == 'Mahasiswa' )
+    <div class="row ml-4">
+        <h4>Tahap-tahap Melaksanakan sidang akhir</h4>
+        <p>Tahap 1 : Mengajukan Proposal Sidang Akhir</p>
+        <br>
+        <p>Tahap 2 : Penungguan verifikasi oleh Kaprodi</p>
+        <br>
+        <p>Tahap 3 : Pendaftaran Sidang Tugas Akhir</p>
+
+        
+
+    </div>
+    @endif
+    
 
 
 

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dosen;
 use App\Models\Mahasiswa;
+use App\Models\prodi;
+use App\Models\Status;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,16 +45,16 @@ class LoginController extends Controller
     // echo "ini coba saja";
     }
 
-    public function createUser(){
-        $pass = bcrypt('123');
-        User::created([
-            "email"=>"test@gmail.com",
-            "password"=>$pass
-        ]);
-    }
+    // public function createUser(){
+    //     $pass = bcrypt('123');
+    //     User::created([
+    //         "email"=>"test@gmail.com",
+    //         "password"=>$pass
+    //     ]);
+    // }
 
     public function showRegister(){
-        return view('login.registerM');
+        return view('login.registerM',['prodis'=>prodi::all()],['statuses'=>Status::all()]);
     }
 
     public function create(Request $request){
@@ -76,6 +79,26 @@ class LoginController extends Controller
             'level'=>$request->level,
             'password'=>Hash::make($request->password),
         ]);
+
+        if ($request->level == 'Mahasiswa') {
+            Mahasiswa::create([
+                'no_bp'=>$request->no_bp,
+                'user_id'=>$users->id,
+                'prodi_id'=>$request->prodi_id,
+                'status_id'=>$request->status_id,            
+            ]);
+        }
+        else if ($request->level == 'Dosen') {
+            Dosen::create([
+                'nidn'=>$request->nidn,
+                'user_id'=>$users->id,
+                'no_telp'=>$request->no_telp,
+                'sebagai'=>$request->sebagai,
+                'alamat'=>$request->alamat,            
+            ]);
+        }
+
+
 
         if ($users) {
             return redirect('login')->with('succes','Akun'. $users->name .'Berhasil dibuat');

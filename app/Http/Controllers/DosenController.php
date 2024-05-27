@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dosen;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class DosenController extends Controller
 {
@@ -21,7 +23,7 @@ class DosenController extends Controller
      */
     public function create()
     {
-        return view('mahasiswa.create');
+        return view('dosen.create');
     }
 
     /**
@@ -29,17 +31,21 @@ class DosenController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'nidn'=> 'required|unique:dsn',
-            'nama'=>'required|min:3',
-            'email'=>'required',
-            'password'=>'required',
-            'no_telp'=>'required',
-            'level'=>'required',
-            'alamat'=>'required',
+        $users = User::create([
+            'name'=>$request->firstname.' '.$request->lastname,
+            'email'=>$request->email,
+            'level'=>$request->level,
+            'password'=>Hash::make($request->password),
         ]);
 
-        Dosen::create($validated);
+        $dosen = Dosen::create([
+            'no_bp'=>$request->no_bp,
+            'user_id'=>$users->id,
+            'no_telp'=>$request->no_telp,
+            'sebagai'=>$request->sebagai,
+            'alamat'=>$request->alamat,            
+        ]);
+
         return redirect('/dosen')->with('pesan', 'berhasil menyimpan data.');
     }
 
@@ -56,7 +62,7 @@ class DosenController extends Controller
      */
     public function edit(Dosen $dosen)
     {
-        return view('mahasiswa.edit');
+        return view('dosen.edit');
     }
 
     /**
@@ -66,11 +72,9 @@ class DosenController extends Controller
     {
         $validated = $request->validate([
             'nidn'=> 'required|unique:dsn',
-            'nama'=>'required|min:3',
-            'email'=>'required',
-            'password'=>'required',
+            'user_id'=>'required',
             'no_telp'=>'required',
-            'level'=>'required',
+            'sebagai'=>'required',
             'alamat'=>'required',
         ]);
 

@@ -3,8 +3,8 @@
 @section('content')
 
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Tables</h1>
-<p class="mb-4">Semua Data Mahasiswa</p>
+<h1 class="h3 mb-2 text-gray-800">Tables Data Mahasiswa</h1>
+<!-- <p class="mb-4">Semua </p> -->
 @if (session()->has('pesan'))
 <div class="alert alert-primary" role="alert">
     {{ session('pesan') }}
@@ -19,6 +19,18 @@
     <div class="card-body">
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+            <!-- Topbar Search -->
+            <form action="/mahasiswa" method="GET" class="d-none d-sm-inline-block form-inline mr-auto md-3 my-2 my-md-0 mw-100 navbar-search">
+                @csrf
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
             <a href="/exportMahasiswa" class="btn btn-primary mb-3 mr-1">
                 <i class="fas fa-solid fa-plus"> Export</i>
             </a>
@@ -46,8 +58,8 @@
                     <tr>
                         <td>{{ $mahasiswas->firstItem()+$loop->index }}</td>
                         <td>{{$mahasiswa->no_bp}}</td>
-                        <td>{{ $mahasiswa->nama }}</td>
-                        <td>{{ $mahasiswa->email }}</td>
+                        <td>{{ $mahasiswa->user->name }}</td>
+                        <td>{{ $mahasiswa->user->email }}</td>
                         <td>{{ $mahasiswa->prodi->nama }}</td>
                         <td>{{ $mahasiswa->ipk }}</td>
                         <td>{{ $mahasiswa->status->ket }}</td>
@@ -55,9 +67,9 @@
                             <form action="/mahasiswa/{{$mahasiswa->id}}" method="post" class="d-inline">
                                 @method('DELETE')
                                 @csrf
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin mau dihapus?')">Delete</button>
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin mau dihapus?')"><i class="fas fa-trash-alt"></i></button>
                             </form>
-                            <a href="/mahasiswa/{{$mahasiswa->id}}/edit" class="btn btn-warning">Edit</a>
+                            <a href="/mahasiswa/{{$mahasiswa->id}}/edit" class="btn btn-warning"><i class="fas fa-edit"></i></a>
                         </td>
                     </tr>
                     @endforeach
@@ -78,14 +90,14 @@
             </div>
             <form action="/importMahasiswa" method="POST" enctype="multipart/form-data">
                 @csrf
-            <div class="modal-body">
-                <label for="formFile" class="form-label">Default file input example</label>
-                <input class="form-control" type="file" name="file" id="formFile">
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <button type="submit" class="btn btn-primary">Import</button>
-            </div>
+                <div class="modal-body">
+                    <label for="formFile" class="form-label">Default file input example</label>
+                    <input class="form-control" type="file" name="file" id="formFile">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Import</button>
+                </div>
             </form>
         </div>
     </div>

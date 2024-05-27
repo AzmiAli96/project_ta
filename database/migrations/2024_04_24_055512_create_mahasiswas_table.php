@@ -14,11 +14,9 @@ return new class extends Migration
         Schema::create('mahasiswas', function (Blueprint $table) {
             $table->id();
             $table->char('no_bp',10);
-            $table->string('nama');
-            $table->string('email');
-            $table->string('password');
+            $table->foreignId('user_id');
             $table->foreignId('prodi_id');
-            $table->decimal('ipk',3,2);
+            $table->decimal('ipk',3,2)->nullable();
             $table->string('status_id');
             $table->timestamps();
         });

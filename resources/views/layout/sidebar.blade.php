@@ -69,7 +69,7 @@
                         Addons
                     </div>
 
-                    @if (auth()->user()->level == 'Admin' )
+                    
                     <!-- Nav Item - Pages Collapse Menu -->
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
@@ -89,15 +89,16 @@
                             </div>
                         </div>
                     </li>
-                    @endif
+                    
 
-
+                    @if (auth()->user()->level == 'Admin' )
                     <!-- Nav Item - Charts -->
                     <li class="nav-item">
                         <a class="nav-link" href="charts.html">
                             <i class="fas fa-fw fa-chart-area"></i>
                             <span>Charts</span></a>
                     </li>
+                    @endif
 
                     <!-- Nav Item - Tables -->
                     <li class="nav-item">

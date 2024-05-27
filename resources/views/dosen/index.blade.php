@@ -46,18 +46,18 @@
                     <tr>
                         <td>{{ $dsn->firstItem()+$loop->index }}</td>
                         <td>{{$dosen->nidn}}</td>
-                        <td>{{ $dosen->nama }}</td>
-                        <td>{{ $dosen->email }}</td>
+                        <td>{{ $dosen->user->name }}</td>
+                        <td>{{ $dosen->user->email }}</td>
                         <td>{{ $dosen->no_telp }}</td>
-                        <td>{{ $dosen->level }}</td>
+                        <td>{{ $dosen->sebagai }}</td>
                         <td>{{ $dosen->alamat }}</td>
                         <td>
                             <form action="/dosen/{{$dosen->id}}" method="post" class="d-inline">
                                 @method('DELETE')
                                 @csrf
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin mau dihapus?')">Delete</button>
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin mau dihapus?')"><i class="fas fa-trash-alt"></i></button>
                             </form>
-                            <a href="/dosen/{{$dosen->id}}/edit" class="btn btn-warning">Edit</a>
+                            <a href="/dosen/{{$dosen->id}}/edit" class="btn btn-warning"><i class="fas fa-edit"></i></a>
                         </td>
                     </tr>
                     @endforeach

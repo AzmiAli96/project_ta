@@ -20,9 +20,7 @@ class MahasiswaFactory extends Factory
     {
         return [
             'no_bp'=>fake()->bothify('22########'),
-            'nama'=>fake()->name(),
-            'email'=>fake()->unique()->safeEmail(),
-            'password' => static::$password ??= Hash::make('password'),
+            'user_id'=>mt_rand(),
             'prodi_id'=>mt_rand(1,3),
             'ipk'=>fake()->bothify('#.#'),
             'status_id'=>mt_rand(1,4),

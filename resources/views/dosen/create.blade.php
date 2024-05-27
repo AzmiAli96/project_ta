@@ -4,7 +4,7 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h2>Create Dosen</h2>
 </div>
-@if (session()->has('pesan'))    
+@if (session()->has('pesan'))
 <div class="alert alert-primary" role="alert">
     {{ session('pesan') }}
 </div>
@@ -23,8 +23,8 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Nama</label>
-            <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{old('nama')}}">
-            @error('nama')
+            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{old('name')}}">
+            @error('name')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
@@ -58,18 +58,11 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label class="form-label @error('prodi_id') is-invalid @enderror">Roll</label>
-            <select name="prodi_id" class="form-select">
+            <label class="form-label @error('sebagai') is-invalid @enderror">Roll</label>
+            <select name="sebagai" class="form-select" value="{{ old('sebagai') }}">
                 <option value="" hidden>--pilih Roll anda--</option>
-                @foreach ($prodis as $prodi)
-                <option value="{{$prodi->id}}">{{$prodi->nama}}</option>
-                @endforeach
-            </select>
-            @error('prodi_id')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-            @enderror
+                <option value="Penguji">Penguji</option>
+                <option value="Pembimbing">Pembimbing</option>
         </div>
         <div class="mb-3">
             <label class="form-label">Alamat</label>
@@ -80,7 +73,7 @@
             </div>
             @enderror
         </div>
-        
+        <input type="hidden" name="level" id="level" value="Dosen">
         <button type="submit" class="btn btn-primary">submit</button>
     </form>
 </div>

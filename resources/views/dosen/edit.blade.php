@@ -15,7 +15,7 @@
     @csrf
         <div class="mb-3">
             <label class="form-label">NIDN</label>
-            <input type="number" class="form-control @error('nidn') is-invalid @enderror" name="nidn" value="{{old('nidn',$mahasiswa->nidn)}}" readonly>
+            <input type="number" class="form-control @error('nidn') is-invalid @enderror" name="nidn" value="{{old('nidn',$dosen->nidn)}}" readonly>
             @error('nidn')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -24,7 +24,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Nama</label>
-            <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{old('nama',$mahasiswa->nama)}}">
+            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{old('name',$dosen->user->name)}}">
             @error('nama')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -33,7 +33,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Email</label>
-            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{old('email',$mahasiswa->email)}}">
+            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{old('email',$dosen->user->email)}}">
             @error('email')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -42,7 +42,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Password</label>
-            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{old('password',$mahasiswa->password)}}">
+            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{old('password',$dosen->user->password)}}">
             @error('password')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -59,16 +59,11 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label class="form-label @error('prodi_id') is-invalid @enderror">Prodi</label>
-            <select name="prodi_id" class="form-select">
-                <option value="" hidden>--pilih prodi--</option>
-                @foreach ($prodis as $prodi)
-                @if (old('prodi_id',$mahasiswa->prodi_id)==$prodi->id)
-                    <option value="{{$prodi->id}}" selected>{{ $prodi->nama }}</option>
-                    @else
-                    <option value="{{ $prodi->id }}">{{ $prodi->nama }}</option>
-                @endif
-                @endforeach
+            <label class="form-label @error('sebagai') is-invalid @enderror">Roll</label>
+            <select name="sebagai" class="form-select" value="{{ old('sebagai',$dosen->sebagai) }}">
+                <option value="" hidden>--Roll anda--</option>
+                <option value="Penguji">Penguji</option>
+                <option value="Pembimbing">Pembimbing</option>
             </select>
             @error('prodi_id')
             <div class="invalid-feedback">
@@ -85,6 +80,7 @@
             </div>
             @enderror
         </div>
+        <input type="hidden" name="level" id="level" value="Dosen">
         <button type="submit" class="btn btn-primary" value="update">submit</button>
     </form>
 </div>

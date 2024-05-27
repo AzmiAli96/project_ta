@@ -1,4 +1,3 @@
-
 <head>
 
     <meta charset="utf-8">
@@ -32,16 +31,16 @@
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
                             @if ($errors->any())
-                                                    <div class="alert alert-danger">
-                                                        <ul>
-                                                            @foreach ($errors->all() as $item)
-                                                                <li>{{$item  }}</li>
-                                                                
-                                                            @endforeach
-                                                        </ul>
-                                                    </div>
-                                                    
-                                                @endif
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $item)
+                                    <li>{{$item }}</li>
+
+                                    @endforeach
+                                </ul>
+                            </div>
+
+                            @endif
                             <form class="user" method="POST" action="{{route('register.create')}}">
                                 @csrf
                                 <div class="form-group row">
@@ -64,14 +63,54 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                            <select class="form-select form-control" name="level">
-                                                <option selected hidden>Roll anda</option>
-                                                <option value="Admin">Admin</option>
-                                                <option value="Kaprodi">Kaprodi</option>
-                                                <option value="Dosen">Dosen</option>
-                                                <option value="Mahasiswa">Mahasiswa</option>
-                                            </select>
+                                    <select class="form-select form-control" name="level" id="level">
+                                        <option selected hidden>Roll anda</option>
+                                        <option value="Admin">Admin</option>
+                                        <option value="Kaprodi">Kaprodi</option>
+                                        <option value="Dosen">Dosen</option>
+                                        <option value="Mahasiswa">Mahasiswa</option>
+                                    </select>
+                                </div>
+                                <div id="Mahasiswa" class="mb-4" style="display: none;">
+                                    <div class="form-group">
+                                        <input type="number" id="no_bp" class="form-control form-control-user" name="no_bp" placeholder="NO BP">
+                                    </div>
+                                    <div class="form-group">
+                                        <select name="prodi_id" id="prodi_id" class="form-select form-control">
+                                            <option value="" hidden>--pilih prodi--</option>
+                                            @foreach ($prodis as $prodi)
+                                            <option value="{{$prodi->id}}">{{$prodi->nama}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('prodi_id')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
                                         </div>
+                                        @enderror
+                                    </div>
+                                    <input type="hidden" name="status_id" id="status_id" value="3">
+                                </div>
+
+                                <div id="Dosen" class="mb-4" style="display: none;">
+                                    <div class="form-group">
+                                        <input type="number" id="nidn" class="form-control form-control-user" name="nidn" placeholder="NIDN">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="number" id="no_telp" class="form-control form-control-user" name="no_telp" placeholder="NO Telp">
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-select form-control" name="sebagai" id="sebagai">
+                                            <option selected hidden>Roll anda</option>
+                                            <option value="Penguji">Penguji</option>
+                                            <option value="Pembimbing">Pembimbing</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                    <textarea class="form-control form-control-user" rows="2" id="alamat" name="alamat" placeholder="Alamat"></textarea>
+                                    </div>
+                                </div>
+
+
                                 <button type="submit" class="btn btn-primary btn-user btn-block">
                                     Register Account
                                 </button>
@@ -100,6 +139,53 @@
 
     <!-- Custom scripts for all pages-->
     <script src="vendor/startbootstrap-sb-admin-2-gh-pages/js/sb-admin-2.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var mahasiswaSelect = document.getElementById('Mahasiswa');
+            var no_bpSection = document.getElementById('no_bp');
+            var prodi_idSection = document.getElementById('prodi_id');
+            var status_idSection = document.getElementById('status_id');
+            var levelSelect = document.getElementById('level');
+
+            var dosenSelect = document.getElementById('Dosen');
+            var nidnSection = document.getElementById('nidn');
+            var no_telpSection = document.getElementById('no_telp');
+            var sebagaiSection = document.getElementById('sebagai');
+            var alamatSection = document.getElementById('alamat');
+
+
+
+            levelSelect.addEventListener('change', function() {
+                // Saya lupa apa aja yang perlu pake ini :v
+                if (levelSelect.value === 'Mahasiswa') {
+                    mahasiswaSelect.style.display = 'block';
+                    no_bpSection.setAttribute('required', 'required');
+                    prodi_idSection.setAttribute('required', 'required');
+                    status_idSection.setAttribute('required', 'required');
+                } else {
+                    mahasiswaSelect.style.display = 'none';
+                    no_bpSection.removeAttribute('required');
+                    prodi_idSection.removeAttribute('required');
+                    status_idSection.removeAttribute('required');
+                }
+                if (levelSelect.value === 'Dosen') {
+                    dosenSelect.style.display = 'block';
+                    nidnSection.setAttribute('required', 'required');
+                    no_telpSection.setAttribute('required', 'required');
+                    sebagaiSection.setAttribute('required', 'required');
+                    alamatSection.setAttribute('required', 'required');
+                } else {
+                    dosenSelect.style.display = 'none';
+                    nidnSection.removeAttribute('required');
+                    no_telpSection.removeAttribute('required');
+                    sebagaiSection.removeAttribute('required');
+                    alamatSection.removeAttribute('required');
+                }
+            });
+            levelSelect.dispatchEvent(new Event('change'));
+        });
+    </script>
 
 </body>
 

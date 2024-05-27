@@ -7,7 +7,9 @@ use App\Imports\MahasiswaImport;
 use App\Models\Mahasiswa;
 use App\Models\prodi;
 use App\Models\Status;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 
 class MahasiswaController extends Controller
@@ -35,17 +37,27 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'no_bp'=> 'required|unique:mahasiswas',
-            'nama'=>'required|min:3',
-            'email'=>'required',
-            'password'=>'required',
-            'prodi_id'=>'required',
-            'ipk'=>'required',
-            'status_id'=>'required',
-        ]);
+        // $validated = $request->validate([
+        //     'no_bp'=> 'required|unique:mahasiswas',
+        //     'user_id'=>'required',
+        //     'prodi_id'=>'required',
+        //     'ipk'=>'required',
+        //     'status_id'=>'required',
+        // ]);
 
-        Mahasiswa::create($validated);
+        $users = User::create([
+            'name'=>$request->firstname.' '.$request->lastname,
+            'email'=>$request->email,
+            'level'=>$request->level,
+            'password'=>Hash::make($request->password),
+        ]);
+        $mahasiswa = Mahasiswa::create([
+            'no_bp'=>$request->no_bp,
+            'user_id'=>$users->id,
+            'prodi_id'=>$request->prodi_id,
+            'status_id'=>$request->status_id,
+            
+        ]);
         return redirect('/mahasiswa')->with('pesan', 'berhasil menyimpan data.');
     }
 
@@ -72,9 +84,7 @@ class MahasiswaController extends Controller
     {
         $validated = $request->validate([
             'no_bp'=> 'required',
-            'nama'=>'required|min:3',
-            'email'=>'required',
-            'password'=>'required',
+            'user_id'=>'required',
             'prodi_id'=>'required',
             'ipk'=>'required',
             'status_id'=>'required',
