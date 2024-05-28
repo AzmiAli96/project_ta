@@ -51,7 +51,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label">No Telp</label>
-            <input type="number" class="form-control @error('no_telp') is-invalid @enderror" name="no_telp" value="{{old('no_telp'$dosen->no_telp)}}">
+            <input type="number" class="form-control @error('no_telp') is-invalid @enderror" name="no_telp" value="{{old('no_telp',$dosen->no_telp)}}">
             @error('no_telp')
             <div class="invalid-feedback">
                 {{ $message }}

@@ -42,6 +42,8 @@ class LoginController extends Controller
         echo "gagal";
     }
 
+    activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' Berhasil melakukan login');
+
     // echo "ini coba saja";
     }
 
@@ -111,6 +113,7 @@ class LoginController extends Controller
     }
 
     function logout(){
+        activity()->causedBy(Auth::user())->log('user ' . auth()->user()->name . ' melakukan logout');
         Auth::logout();
         return redirect('');
     }

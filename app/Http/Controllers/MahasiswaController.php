@@ -82,15 +82,21 @@ class MahasiswaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $validated = $request->validate([
+        $validatedU = $request->validate([
+            'name'=> 'required',
+            'email'=>'required',
+            'password'=>'required',
+        ]);
+        User::where('id',$id)->update($validatedU);
+
+        $validatedM = $request->validate([
             'no_bp'=> 'required',
-            'user_id'=>'required',
             'prodi_id'=>'required',
             'ipk'=>'required',
             'status_id'=>'required',
         ]);
         
-        Mahasiswa::where('id',$id)->update($validated);
+        Mahasiswa::where('id',$id)->update($validatedM);
         return redirect('/mahasiswa')->with('pesan', 'Data Berhasil di-edit.');
     }
 

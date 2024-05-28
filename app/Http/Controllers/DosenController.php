@@ -39,7 +39,7 @@ class DosenController extends Controller
         ]);
 
         $dosen = Dosen::create([
-            'no_bp'=>$request->no_bp,
+            'nidn'=>$request->nidn,
             'user_id'=>$users->id,
             'no_telp'=>$request->no_telp,
             'sebagai'=>$request->sebagai,
@@ -60,9 +60,9 @@ class DosenController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Dosen $dosen)
+    public function edit(string $id)
     {
-        return view('dosen.edit');
+        return view('dosen.edit',['dosen'=>Dosen::find($id)]);
     }
 
     /**
@@ -71,7 +71,7 @@ class DosenController extends Controller
     public function update(Request $request, string $id)
     {
         $validated = $request->validate([
-            'nidn'=> 'required|unique:dsn',
+            'nidn'=> 'required',
             'user_id'=>'required',
             'no_telp'=>'required',
             'sebagai'=>'required',
@@ -79,6 +79,7 @@ class DosenController extends Controller
         ]);
 
         Dosen::where('id',$id)->update($validated);
+        User::where('id',$id)->update($validated);
         return redirect('/dosen')->with('pesan', 'berhasil menyimpan data.');
     }
 

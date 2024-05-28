@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MahasiswaController;
@@ -17,8 +18,6 @@ Route::get('/404', function () {
     return view('404');
 });
 
-route::resource('/dosen',DosenController::class);
-
 
 route::middleware(['guest'])->group(function(){
     Route::get('/login', [LoginController::class,'index']);
@@ -30,6 +29,8 @@ route::middleware(['guest'])->group(function(){
 
 route::middleware(['auth'])->group(function(){
     Route::resource('/mahasiswa',MahasiswaController::class);
+    route::resource('/dosen',DosenController::class);
+    route::resource('/activityLog',ActivityLogController::class);
     route::get('/logout',[LoginController::class,'logout']);
 });
 

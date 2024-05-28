@@ -63,6 +63,7 @@
                 <option value="" hidden>--pilih Roll anda--</option>
                 <option value="Penguji">Penguji</option>
                 <option value="Pembimbing">Pembimbing</option>
+            </select>
         </div>
         <div class="mb-3">
             <label class="form-label">Alamat</label>
