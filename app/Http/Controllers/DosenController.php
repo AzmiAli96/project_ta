@@ -40,7 +40,7 @@ class DosenController extends Controller
 
         $dosen = Dosen::create([
             'nidn'=>$request->nidn,
-            'user_id'=>$users->id,
+            'user_id'=>$users->user_id,
             'no_telp'=>$request->no_telp,
             'sebagai'=>$request->sebagai,
             'alamat'=>$request->alamat,            

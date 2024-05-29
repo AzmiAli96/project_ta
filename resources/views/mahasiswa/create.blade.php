@@ -13,9 +13,9 @@
     <form action="/mahasiswa" method="post">
         @csrf
         <div class="mb-3">
-            <label class="form-label">NO_BP</label>
-            <input type="number" class="form-control @error('no_bp') is-invalid @enderror" name="no_bp" value="{{old('no_bp')}}">
-            @error('no_bp')
+            <label class="form-label">NO BP</label>
+            <input type="number" class="form-control @error('nobp') is-invalid @enderror" name="nobp" value="{{old('nobp')}}">
+            @error('nobp')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
@@ -49,6 +49,20 @@
             @enderror
         </div>
         <div class="mb-3">
+            <label class="form-label @error('jurusan_id') is-invalid @enderror">Jurusan</label>
+            <select name="jurusan_id" class="form-select">
+                <option value="" hidden>--pilih jurusan--</option>
+                @foreach ($jurusans as $jurusan)
+                <option value="{{$jurusan->id}}">{{$jurusan->nama}}</option>
+                @endforeach
+            </select>
+            @error('jurusan_id')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="mb-3">
             <label class="form-label @error('prodi_id') is-invalid @enderror">Prodi</label>
             <select name="prodi_id" class="form-select">
                 <option value="" hidden>--pilih prodi--</option>
@@ -63,9 +77,18 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label class="form-label">IPK</label>
-            <input type="number" class="form-control" name="ipk" value="{{old('ipk')}}">
-            @error('ipk')
+            <label class="form-label">Judul</label>
+            <input type="text" class="form-control" name="judul" value="{{old('judul')}}">
+            @error('judul')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label for="formFile" class="form-label">file tugas akhir</label>
+            <input class="form-control" type="file" name="dokumen" value="{{ old('judul') }}" id="formFile">
+            @error('dokumen')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>

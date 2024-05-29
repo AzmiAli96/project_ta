@@ -84,8 +84,9 @@ class LoginController extends Controller
 
         if ($request->level == 'Mahasiswa') {
             Mahasiswa::create([
-                'no_bp'=>$request->no_bp,
-                'user_id'=>$users->id,
+                'nobp'=>$request->nobp,
+                'user_id'=>$users->user_id,
+                'jurusan_id'=>$request->jurusan_id,
                 'prodi_id'=>$request->prodi_id,
                 'status_id'=>$request->status_id,            
             ]);
@@ -93,7 +94,7 @@ class LoginController extends Controller
         else if ($request->level == 'Dosen') {
             Dosen::create([
                 'nidn'=>$request->nidn,
-                'user_id'=>$users->id,
+                'user_id'=>$users->user_id,
                 'no_telp'=>$request->no_telp,
                 'sebagai'=>$request->sebagai,
                 'alamat'=>$request->alamat,            

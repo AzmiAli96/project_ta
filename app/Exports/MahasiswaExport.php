@@ -16,7 +16,7 @@ class MahasiswaExport implements FromQuery, WithHeadings, WithMapping
     public function query()
     {
         return Mahasiswa::with(['prodi', 'user', 'status'])
-            ->select(['no_bp', 'ipk'])
+            ->select(['nobp', 'ipk'])
             ->addSelect([
                 'prodi_id as prodi_nama', 
                 'user_id as user_email', 
@@ -39,7 +39,7 @@ class MahasiswaExport implements FromQuery, WithHeadings, WithMapping
     public function map($mahasiswa): array
     {
         return [
-            $mahasiswa->no_bp,
+            $mahasiswa->nobp,
             $mahasiswa->ipk,
             $mahasiswa->prodi_nama,
             $mahasiswa->user_email,

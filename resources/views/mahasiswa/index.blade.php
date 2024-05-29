@@ -47,8 +47,10 @@
                         <th>NO BP</th>
                         <th>Nama</th>
                         <th>Email</th>
+                        <th>Jurusan</th>
                         <th>Prodi</th>
-                        <th>IPK</th>
+                        <th>Judul</th>
+                        <th>Dokumen</th>
                         <th>status</th>
                         <th>Action</th>
                     </tr>
@@ -60,8 +62,10 @@
                         <td>{{$mahasiswa->no_bp}}</td>
                         <td>{{ $mahasiswa->user->name }}</td>
                         <td>{{ $mahasiswa->user->email }}</td>
+                        <td>{{ $mahasiswa->jurusan->nama }}</td>
                         <td>{{ $mahasiswa->prodi->nama }}</td>
-                        <td>{{ $mahasiswa->ipk }}</td>
+                        <td>{{ $mahasiswa->judul }}</td>
+                        <td>{{ $mahasiswa->dokumen }}</td>
                         <td>{{ $mahasiswa->status->ket }}</td>
                         <td>
                             <form action="/mahasiswa/{{$mahasiswa->id}}" method="post" class="d-inline">

@@ -12,7 +12,8 @@ class ProdiController extends Controller
      */
     public function index()
     {
-        //
+        $prodi=prodi::latest()->paginate(10);
+        return view ('prodi.index', ['prodis'=>$prodi]);
     }
 
     /**
@@ -20,7 +21,7 @@ class ProdiController extends Controller
      */
     public function create()
     {
-        //
+        return view('prodi.create',[]);
     }
 
     /**
@@ -28,7 +29,12 @@ class ProdiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nama'=> 'required',
+            'prodi_id'=>'required',
+            'jurusan_id'=>'required',
+        ]);
+        return redirect('/prodi')->with('pesan', 'berhasil menyimpan data.');
     }
 
     /**
@@ -42,24 +48,31 @@ class ProdiController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(prodi $prodi)
+    public function edit(string $id)
     {
-        //
+        return view('prodi.edit',['prodi'=>prodi::find($id)]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, prodi $prodi)
+    public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'nama'=> 'required',
+            'prodi_id'=>'required',
+            'jurusan_id'=>'required',
+        ]);
+        prodi::where('id',$id)->update($validated);
+        return redirect('/prodi')->with('pesan', 'berhasil di-update.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(prodi $prodi)
+    public function destroy(string $id)
     {
-        //
+        prodi::destroy($id);
+        return redirect('/prodi')->with('pesan', 'Berhasil Dihapuskan.');
     }
 }

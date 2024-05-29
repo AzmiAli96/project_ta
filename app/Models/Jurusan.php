@@ -5,12 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class prodi extends Model
+class Jurusan extends Model
 {
     use HasFactory;
     protected $guarded=[];
 
-    public function jurusan(){
-        return $this->belongsTo(jurusan::class,'jurusan_id');
-    }
+    
 }

@@ -52,9 +52,12 @@ class MahasiswaController extends Controller
             'password'=>Hash::make($request->password),
         ]);
         $mahasiswa = Mahasiswa::create([
-            'no_bp'=>$request->no_bp,
-            'user_id'=>$users->id,
+            'nobp'=>$request->nobp,
+            'user_id'=>$users->user_id,
+            'jurusan_id'=>$users->jurusan_id,
             'prodi_id'=>$request->prodi_id,
+            'jurusan'=>$request->jurusan,
+            'dokumen'=>$request->dokumen,
             'status_id'=>$request->status_id,
             
         ]);
@@ -90,9 +93,11 @@ class MahasiswaController extends Controller
         User::where('id',$id)->update($validatedU);
 
         $validatedM = $request->validate([
-            'no_bp'=> 'required',
+            'nobp'=> 'required',
+            'jurusan_id'=>'required',
             'prodi_id'=>'required',
-            'ipk'=>'required',
+            'judul'=>'required',
+            'dokumen'=>'required',
             'status_id'=>'required',
         ]);
         
@@ -111,7 +116,7 @@ class MahasiswaController extends Controller
 
     public function export()
     {
-        return Excel::download(new MahasiswaExport(), 'Mahasiswa.csv');
+        return Excel::download(new MahasiswaExport(), 'Mahasiswa.xlsx');
     }
 
     public function import()
