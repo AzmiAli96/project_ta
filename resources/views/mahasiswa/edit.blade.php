@@ -55,13 +55,15 @@
                 <option value="" hidden>--pilih jurusan--</option>
                 @foreach ($jurusans as $jurusan)
                 @if (old('jurusan_id',$mahasiswa->jurusan_id)==$jurusan->id)
-                <option value="{{$jurusan->id}}" selected>{{ $jurusan->nama }}</option>
+                <option value="{{$jurusan->id}}" selected>{{ $jurusan->nama_jurusan }}</option>
                 @else
-                <option value="{{ $jurusan->id }}">{{ $jurusan->nama }}</option>
+                <option value="{{ $jurusan->id }}">{{ $jurusan->nama_jurusan }}</option>
                 @endif
+                <!-- cara menampilkan nama di select versi bagaz -->
+                <!-- {{ $jurusan->id == $mahasiswa->jurusan_id ? 'selected':'' }} -->
                 @endforeach
             </select>
-            @error('prodi_id')
+            @error('jurusan_id')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>

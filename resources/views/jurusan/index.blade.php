@@ -37,14 +37,18 @@
                     <tr>
                         <th>No</th>
                         <th>Jurusan</th>
+                        <th>Ketua Jurusan</th>
+                        <th>Sekretaris Jurusan</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($jurusans as $jurusan )
                     <tr>
-                        <td>{{ $jurusans->firstItem()+$loop->index }}</td>>
-                        <td>{{ $jurusan->nama }}</td>
+                        <td>{{ $jurusans->firstItem()+$loop->index }}</td>
+                        <td>{{ $jurusan->nama_jurusan }}</td>
+                        <td>{{ $jurusan->pkajur->user->name }}</td>
+                        <td>{{ $jurusan->psekjur->user->name }}</td>
                         <td>
                             <form action="/jurusan/{{$jurusan->id}}" method="post" class="d-inline">
                                 @method('DELETE')

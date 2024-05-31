@@ -65,7 +65,7 @@
                                 <div class="form-group">
                                     <select class="form-select form-control" name="level" id="level">
                                         <option selected hidden>Roll anda</option>
-                                        <option value="Admin">Admin</option>
+                                        <option value="Admin" hidden>Admin</option>
                                         <option value="Kaprodi">Kaprodi</option>
                                         <option value="Dosen">Dosen</option>
                                         <option value="Mahasiswa">Mahasiswa</option>
@@ -73,7 +73,20 @@
                                 </div>
                                 <div id="Mahasiswa" class="mb-4" style="display: none;">
                                     <div class="form-group">
-                                        <input type="number" id="no_bp" class="form-control form-control-user" name="no_bp" placeholder="NO BP">
+                                        <input type="number" id="nobp" class="form-control form-control-user" name="nobp" placeholder="NO BP">
+                                    </div>
+                                    <div class="form-group">
+                                        <select name="jurusan_id" id="jurusan_id" class="form-select form-control">
+                                            <option value="" hidden>--pilih Jurusan--</option>
+                                            @foreach ($jurusans as $jurusan)
+                                            <option value="{{$jurusan->id}}">{{$jurusan->nama_jurusan}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('jurusan_id')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <select name="prodi_id" id="prodi_id" class="form-select form-control">
@@ -93,18 +106,21 @@
 
                                 <div id="Dosen" class="mb-4" style="display: none;">
                                     <div class="form-group">
+                                        <input type="number" id="code" class="form-control form-control-user" name="code" placeholder="code verifikasi">
+                                    </div>
+                                    <div class="form-group">
                                         <input type="number" id="nidn" class="form-control form-control-user" name="nidn" placeholder="NIDN">
                                     </div>
                                     <div class="form-group">
                                         <input type="number" id="no_telp" class="form-control form-control-user" name="no_telp" placeholder="NO Telp">
                                     </div>
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <select class="form-select form-control" name="sebagai" id="sebagai">
                                             <option selected hidden>Roll anda</option>
                                             <option value="Penguji">Penguji</option>
                                             <option value="Pembimbing">Pembimbing</option>
                                         </select>
-                                    </div>
+                                    </div> -->
                                     <div class="form-group">
                                     <textarea class="form-control form-control-user" rows="2" id="alamat" name="alamat" placeholder="Alamat"></textarea>
                                     </div>
@@ -143,7 +159,8 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var mahasiswaSelect = document.getElementById('Mahasiswa');
-            var no_bpSection = document.getElementById('no_bp');
+            var nobpSection = document.getElementById('nobp');
+            var jurusan_idSection = document.getElementById('jurusan_id');
             var prodi_idSection = document.getElementById('prodi_id');
             var status_idSection = document.getElementById('status_id');
             var levelSelect = document.getElementById('level');
@@ -151,7 +168,7 @@
             var dosenSelect = document.getElementById('Dosen');
             var nidnSection = document.getElementById('nidn');
             var no_telpSection = document.getElementById('no_telp');
-            var sebagaiSection = document.getElementById('sebagai');
+            var codeSection = document.getElementById('code');
             var alamatSection = document.getElementById('alamat');
 
 
@@ -160,12 +177,14 @@
                 // Saya lupa apa aja yang perlu pake ini :v
                 if (levelSelect.value === 'Mahasiswa') {
                     mahasiswaSelect.style.display = 'block';
-                    no_bpSection.setAttribute('required', 'required');
+                    nobpSection.setAttribute('required', 'required');
+                    jurusan_idSection.setAttribute('required', 'required');
                     prodi_idSection.setAttribute('required', 'required');
                     status_idSection.setAttribute('required', 'required');
                 } else {
                     mahasiswaSelect.style.display = 'none';
-                    no_bpSection.removeAttribute('required');
+                    nobpSection.removeAttribute('required');
+                    jurusan_idSection.removeAttribute('required');
                     prodi_idSection.removeAttribute('required');
                     status_idSection.removeAttribute('required');
                 }
@@ -173,13 +192,13 @@
                     dosenSelect.style.display = 'block';
                     nidnSection.setAttribute('required', 'required');
                     no_telpSection.setAttribute('required', 'required');
-                    sebagaiSection.setAttribute('required', 'required');
+                    codeSection.setAttribute('required', 'required');
                     alamatSection.setAttribute('required', 'required');
                 } else {
                     dosenSelect.style.display = 'none';
                     nidnSection.removeAttribute('required');
                     no_telpSection.removeAttribute('required');
-                    sebagaiSection.removeAttribute('required');
+                    codeSection.removeAttribute('required');
                     alamatSection.removeAttribute('required');
                 }
             });

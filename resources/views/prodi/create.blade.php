@@ -14,7 +14,7 @@
         @csrf
         <div class="mb-3">
             <label class="form-label">Prodi</label>
-            <input type="text" class="form-control @error('nama') is-invalid @enderror" nama="nama" value="{{old('nama')}}">
+            <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{old('nama')}}">
             @error('nama')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -26,10 +26,24 @@
             <select name="jurusan_id" class="form-select">
                 <option value="" hidden>--pilih jurusan--</option>
                 @foreach ($jurusans as $jurusan)
-                <option value="{{$jurusan->id}}">{{$jurusan->nama}}</option>
+                <option value="{{$jurusan->id}}">{{$jurusan->nama_jurusan}}</option>
                 @endforeach
             </select>
             @error('jurusan_id')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label class="form-label @error('kaprodi') is-invalid @enderror">Ketua Program Studi</label>
+            <select name="kaprodi" class="form-select">
+                <option value="" hidden>--pilih ketua program studi--</option>
+                @foreach ($dosens as $dosen)
+                <option value="{{$dosen->id}}">{{$dosen->user->name}}</option>
+                @endforeach
+            </select>
+            @error('kaprodi')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>

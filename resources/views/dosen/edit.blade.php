@@ -59,19 +59,6 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label class="form-label @error('sebagai') is-invalid @enderror">Roll</label>
-            <select name="sebagai" class="form-select" value="{{ old('sebagai',$dosen->sebagai) }}">
-                <option value="" hidden>--Roll anda--</option>
-                <option value="Penguji">Penguji</option>
-                <option value="Pembimbing">Pembimbing</option>
-            </select>
-            @error('prodi_id')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-            @enderror
-        </div>
-        <div class="mb-3">
             <label class="form-label">Alamat</label>
             <textarea class="form-control @error('alamat') is-invalid @enderror" rows="3" name="alamat">{{old('alamat',$dosen->alamat)}}</textarea>
             @error('alamat')

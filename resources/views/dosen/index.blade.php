@@ -36,20 +36,18 @@
                         <th>Nama</th>
                         <th>Email</th>
                         <th>NO Telp</th>
-                        <th>Roll</th>
                         <th>alamat</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($dsn as $dosen )
+                    @foreach ($dosens as $dosen )
                     <tr>
-                        <td>{{ $dsn->firstItem()+$loop->index }}</td>
+                        <td>{{ $dosens->firstItem()+$loop->index }}</td>
                         <td>{{$dosen->nidn}}</td>
                         <td>{{ $dosen->user->name }}</td>
                         <td>{{ $dosen->user->email }}</td>
                         <td>{{ $dosen->no_telp }}</td>
-                        <td>{{ $dosen->sebagai }}</td>
                         <td>{{ $dosen->alamat }}</td>
                         <td>
                             <form action="/dosen/{{$dosen->id}}" method="post" class="d-inline">
@@ -62,7 +60,7 @@
                     </tr>
                     @endforeach
             </table>
-            {{ $dsn->links() }}
+            {{ $dosens->links() }}
         </div>
     </div>
 </div>

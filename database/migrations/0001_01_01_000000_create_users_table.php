@@ -18,6 +18,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('level',['Admin','Kaprodi','Mahasiswa','Dosen']);
+            // $table->foreignId('mahasiswa_id')->nullable();
+            // $table->foreignId('dosen_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

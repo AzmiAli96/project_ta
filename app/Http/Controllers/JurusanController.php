@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dosen;
 use App\Models\Jurusan;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,7 @@ class JurusanController extends Controller
      */
     public function create()
     {
-        return view('jurusan.create');
+        return view('jurusan.create',['dosens'=>Dosen::all()]);
     }
 
     /**
@@ -30,8 +31,11 @@ class JurusanController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nama'=>'required',
+            'nama_jurusan'=>'required',
+            'kajur'=>'required',
+            'sekjur'=>'required',
         ]);
+        Jurusan::create($validated);
         return redirect('/jurusan')->with('pesan', 'berhasil menyimpan data.');
     }
 
@@ -48,7 +52,7 @@ class JurusanController extends Controller
      */
     public function edit(string $id)
     {
-        return view('jurusan.edit',['jurusan'=>Jurusan::find($id)]);
+        return view('jurusan.edit',['dosens'=>Dosen::all()],['jurusan'=>Jurusan::find($id)]);
     }
 
     /**
@@ -57,7 +61,9 @@ class JurusanController extends Controller
     public function update(Request $request, String $id)
     {
         $validated = $request->validate([
-            'nama'=>'required',
+            'nama_jurusan'=>'required',
+            'kajur'=>'required',
+            'sekjur'=>'required',
         ]);
         Jurusan::where('id',$id)->update($validated);
         return redirect('/jurusan')->with('pesan', 'Data Berhasil di-update.');

@@ -9,7 +9,7 @@
     </div>
 
 
-    @if (auth()->user()->level == 'Admin' )
+    @if (auth()->user()->level == 'Admin'||auth()->user()->level == 'Kaprodi' )
     <div class="row">
         <div class="col mb-4">
             <div class="card card-raised border-start border-primary border-4" style="width: 18rem;">

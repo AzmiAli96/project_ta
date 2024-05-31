@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('jurusan_id');
             $table->foreignId('prodi_id');
-            $table->string('judul');
+            $table->string('judul')->nullable();
             $table->string('dokumen')->nullable();
             $table->string('status_id');
             $table->timestamps();

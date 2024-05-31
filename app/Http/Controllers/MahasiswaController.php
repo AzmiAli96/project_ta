@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\MahasiswaExport;
 use App\Imports\MahasiswaImport;
+use App\Models\Jurusan;
 use App\Models\Mahasiswa;
 use App\Models\prodi;
 use App\Models\Status;
@@ -29,7 +30,7 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        return view('mahasiswa.create',['prodis'=>prodi::all()],['statuses'=>status::all()]);
+        return view('mahasiswa.create',['prodis'=>prodi::all(),'statuses'=>status::all(),'jurusans'=>Jurusan::all()]);
     }
 
     /**
@@ -53,10 +54,10 @@ class MahasiswaController extends Controller
         ]);
         $mahasiswa = Mahasiswa::create([
             'nobp'=>$request->nobp,
-            'user_id'=>$users->user_id,
-            'jurusan_id'=>$users->jurusan_id,
+            'user_id'=>$users->id,
+            'jurusan_id'=>$request->jurusan_id,
             'prodi_id'=>$request->prodi_id,
-            'jurusan'=>$request->jurusan,
+            'judul'=>$request->judul,
             'dokumen'=>$request->dokumen,
             'status_id'=>$request->status_id,
             
@@ -77,7 +78,7 @@ class MahasiswaController extends Controller
      */
     public function edit(string $id)
     {
-        return view('mahasiswa.edit',['prodis'=>prodi::all(),'statuses'=>status::all(),'mahasiswa'=>Mahasiswa::find($id)]);
+        return view('mahasiswa.edit',['prodis'=>prodi::all(),'statuses'=>status::all(),'jurusans'=>Jurusan::all(),'mahasiswa'=>Mahasiswa::find($id)]);
     }
 
     /**
@@ -90,14 +91,14 @@ class MahasiswaController extends Controller
             'email'=>'required',
             'password'=>'required',
         ]);
-        User::where('id',$id)->update($validatedU);
+        User::where('id',Mahasiswa::findOrFail($id)->user->id)->update($validatedU);
 
         $validatedM = $request->validate([
             'nobp'=> 'required',
             'jurusan_id'=>'required',
             'prodi_id'=>'required',
-            'judul'=>'required',
-            'dokumen'=>'required',
+            'judul'=>'nullable',
+            'dokumen'=>'nullable',
             'status_id'=>'required',
         ]);
         
@@ -110,6 +111,7 @@ class MahasiswaController extends Controller
      */
     public function destroy(string $id)
     {
+        User::destroy(Mahasiswa::findOrFail($id)->user->id);
         Mahasiswa::destroy($id);
         return redirect('/mahasiswa')->with('pesan', 'Berhasil Dihapuskan.');
     }

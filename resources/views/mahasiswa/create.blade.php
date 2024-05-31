@@ -23,13 +23,14 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Nama</label>
-            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{old('name')}}">
+            <input type="text" class="form-control @error('name') is-invalid @enderror" name="firstname" value="{{old('name')}}">
             @error('name')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
             @enderror
         </div>
+        <input type="hidden" name="lastname" value="">
         <div class="mb-3">
             <label class="form-label">Email</label>
             <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{old('email')}}">
@@ -53,7 +54,7 @@
             <select name="jurusan_id" class="form-select">
                 <option value="" hidden>--pilih jurusan--</option>
                 @foreach ($jurusans as $jurusan)
-                <option value="{{$jurusan->id}}">{{$jurusan->nama}}</option>
+                <option value="{{$jurusan->id}}">{{$jurusan->nama_jurusan}}</option>
                 @endforeach
             </select>
             @error('jurusan_id')

@@ -23,13 +23,14 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Nama</label>
-            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{old('name')}}">
+            <input type="text" class="form-control @error('name') is-invalid @enderror" name="firstname" value="{{old('name')}}">
             @error('name')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
             @enderror
         </div>
+        <input type="hidden" name="lastname" value="">
         <div class="mb-3">
             <label class="form-label">Email</label>
             <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{old('email')}}">
@@ -56,14 +57,6 @@
                 {{ $message }}
             </div>
             @enderror
-        </div>
-        <div class="mb-3">
-            <label class="form-label @error('sebagai') is-invalid @enderror">Roll</label>
-            <select name="sebagai" class="form-select" value="{{ old('sebagai') }}">
-                <option value="" hidden>--pilih Roll anda--</option>
-                <option value="Penguji">Penguji</option>
-                <option value="Pembimbing">Pembimbing</option>
-            </select>
         </div>
         <div class="mb-3">
             <label class="form-label">Alamat</label>

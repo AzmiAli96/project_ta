@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dosen;
+use App\Models\Jurusan;
 use App\Models\prodi;
 use Illuminate\Http\Request;
 
@@ -21,7 +23,7 @@ class ProdiController extends Controller
      */
     public function create()
     {
-        return view('prodi.create',[]);
+        return view('prodi.create',['jurusans'=>Jurusan::all(),'dosens'=>Dosen::all()]);
     }
 
     /**
@@ -31,9 +33,10 @@ class ProdiController extends Controller
     {
         $validated = $request->validate([
             'nama'=> 'required',
-            'prodi_id'=>'required',
             'jurusan_id'=>'required',
+            'kaprodi'=>'required',
         ]);
+        prodi::create($validated);
         return redirect('/prodi')->with('pesan', 'berhasil menyimpan data.');
     }
 
@@ -50,7 +53,7 @@ class ProdiController extends Controller
      */
     public function edit(string $id)
     {
-        return view('prodi.edit',['prodi'=>prodi::find($id)]);
+        return view('prodi.edit',['jurusan'=>Jurusan::all(),'dosen'=>Dosen::all(),'prodi'=>prodi::find($id)]);
     }
 
     /**
@@ -60,8 +63,8 @@ class ProdiController extends Controller
     {
         $validated = $request->validate([
             'nama'=> 'required',
-            'prodi_id'=>'required',
             'jurusan_id'=>'required',
+            'kaprodi'=>'required',
         ]);
         prodi::where('id',$id)->update($validated);
         return redirect('/prodi')->with('pesan', 'berhasil di-update.');

@@ -34,7 +34,25 @@
                 @endif
                 @endforeach
             </select>
-            @error('prodi_id')
+            @error('jurusan_id')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label class="form-label @error('kaprodi') is-invalid @enderror">Ketua Program Studi</label>
+            <select name="kaprodi" class="form-select">
+                <option value="" hidden>--pilih ketua program studi--</option>
+                @foreach ($dosens as $dosen)
+                @if (old('kaprodi',$dosen->kaprodi)==$dosen->id)
+                <option value="{{$dosen->id}}" selected>{{ $dosen->user->nama }}</option>
+                @else
+                <option value="{{ $dosen->id }}">{{ $dosen->user->nama }}</option>
+                @endif
+                @endforeach
+            </select>
+            @error('kaprodi')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>

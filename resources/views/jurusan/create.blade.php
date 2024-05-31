@@ -14,8 +14,36 @@
         @csrf
         <div class="mb-3">
             <label class="form-label">Jurusan</label>
-            <input type="text" class="form-control @error('nama') is-invalid @enderror" nama="nama" value="{{old('nama')}}">
-            @error('nama')
+            <input type="text" class="form-control @error('nama_jurusan') is-invalid @enderror" name="nama_jurusan" value="{{old('nama_jurusan')}}">
+            @error('nama_jurusan')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label class="form-label @error('kajur') is-invalid @enderror">Ketua Jurusan</label>
+            <select name="kajur" class="form-select">
+                <option value="" hidden>--pilih ketua jurusan--</option>
+                @foreach ($dosens as $dosen)
+                <option value="{{$dosen->id}}">{{$dosen->user->name}}</option>
+                @endforeach
+            </select>
+            @error('kajur')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label class="form-label @error('sekjur') is-invalid @enderror">Sekretaris Jurusan</label>
+            <select name="sekjur" class="form-select">
+                <option value="" hidden>--pilih sekretaris jurusan--</option>
+                @foreach ($dosens as $dosen)
+                <option value="{{$dosen->id}}" >{{$dosen->user->name}}</option>
+                @endforeach
+            </select>
+            @error('sekjur')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>

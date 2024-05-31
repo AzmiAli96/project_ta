@@ -13,4 +13,7 @@ class prodi extends Model
     public function jurusan(){
         return $this->belongsTo(jurusan::class,'jurusan_id');
     }
+    public function pkaprodi(){
+        return $this->belongsTo(dosen::class,'kaprodi');
+    }
 }

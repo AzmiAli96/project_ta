@@ -14,8 +14,8 @@ class DosenController extends Controller
      */
     public function index()
     {
-        $dosens=Dosen::latest()->paginate(10);
-        return view('dosen.index',['dsn'=>$dosens]);
+        $dosen=Dosen::latest()->paginate(10);
+        return view('dosen.index',['dosens'=>$dosen]);
     }
 
     /**
@@ -31,22 +31,24 @@ class DosenController extends Controller
      */
     public function store(Request $request)
     {
-        $users = User::create([
-            'name'=>$request->firstname.' '.$request->lastname,
-            'email'=>$request->email,
-            'level'=>$request->level,
-            'password'=>Hash::make($request->password),
-        ]);
-
-        $dosen = Dosen::create([
-            'nidn'=>$request->nidn,
-            'user_id'=>$users->user_id,
-            'no_telp'=>$request->no_telp,
-            'sebagai'=>$request->sebagai,
-            'alamat'=>$request->alamat,            
-        ]);
-
-        return redirect('/dosen')->with('pesan', 'berhasil menyimpan data.');
+        // if ($request->code == '1234') {
+            
+            $users = User::create([
+                'name'=>$request->firstname.' '.$request->lastname,
+                'email'=>$request->email,
+                'level'=>$request->level,
+                'password'=>Hash::make($request->password),
+            ]);
+    
+            $dosen = Dosen::create([
+                'nidn'=>$request->nidn,
+                'user_id'=>$users->id,
+                'no_telp'=>$request->no_telp,
+                'alamat'=>$request->alamat,            
+            ]);
+    
+            return redirect('/dosen')->with('pesan', 'berhasil menyimpan data.');
+        // }
     }
 
     /**
@@ -70,16 +72,20 @@ class DosenController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $validatedU = $request->validate([
+            'name'=> 'required',
+            'email'=>'required',
+            'password'=>'required',
+        ]);
+        User::where('id',Dosen::findOrFail($id)->user->id)->update($validatedU);
+
         $validated = $request->validate([
             'nidn'=> 'required',
-            'user_id'=>'required',
             'no_telp'=>'required',
-            'sebagai'=>'required',
             'alamat'=>'required',
         ]);
 
         Dosen::where('id',$id)->update($validated);
-        User::where('id',$id)->update($validated);
         return redirect('/dosen')->with('pesan', 'berhasil menyimpan data.');
     }
 
@@ -88,6 +94,7 @@ class DosenController extends Controller
      */
     public function destroy($id)
     {
+        User::destroy(Dosen::findOrFail($id)->user->id);
         Dosen::destroy($id);
         return redirect('/dosen')->with('pesan', 'Berhasil Dihapuskan.');
     }

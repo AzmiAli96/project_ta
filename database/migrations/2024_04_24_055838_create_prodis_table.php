@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->foreignId('jurusan_id');
+            $table->string('kaprodi')->constrain('dosen_id');
             $table->timestamps();
         });
     }

@@ -59,10 +59,10 @@
                     @foreach ($mahasiswas as $mahasiswa )
                     <tr>
                         <td>{{ $mahasiswas->firstItem()+$loop->index }}</td>
-                        <td>{{$mahasiswa->no_bp}}</td>
+                        <td>{{$mahasiswa->nobp}}</td>
                         <td>{{ $mahasiswa->user->name }}</td>
                         <td>{{ $mahasiswa->user->email }}</td>
-                        <td>{{ $mahasiswa->jurusan->nama }}</td>
+                        <td>{{ $mahasiswa->jurusan->nama_jurusan }}</td>
                         <td>{{ $mahasiswa->prodi->nama }}</td>
                         <td>{{ $mahasiswa->judul }}</td>
                         <td>{{ $mahasiswa->dokumen }}</td>

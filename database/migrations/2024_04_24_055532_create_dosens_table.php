@@ -16,7 +16,6 @@ return new class extends Migration
             $table->char('nidn',10);
             $table->foreignId('user_id');
             $table->char('no_telp',15);
-            $table->string('sebagai');
             $table->string('alamat');
             $table->timestamps();
         });

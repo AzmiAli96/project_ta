@@ -17,15 +17,14 @@ class DatabaseSeeder extends Seeder
         // \App\Models\Mahasiswa::factory(20)->create();
         // \App\Models\Dosen::factory(20)->create();
 
-        \App\Models\prodi::create([
-            'nama'=> 'Manajemen Informatika',
-        ]);
-        \App\Models\prodi::create([
-            'nama'=> 'Teknik Komputer',
-        ]);
-        \App\Models\prodi::create([
-            'nama'=> 'TRPL',
-        ]);
+        // \App\Models\prodi::create([
+        //     'nama'=> 'Manajemen Informatika',
+            
+        // ]);
+        // \App\Models\prodi::create([
+        //     'nama'=> 'Teknik Komputer',
+        // ]);
+        
 
         \App\Models\Status::create([
             'ket'=> 'Lulus',
@@ -38,6 +37,30 @@ class DatabaseSeeder extends Seeder
         ]);
         \App\Models\Status::create([
             'ket'=> 'Persidangan',
+        ]);
+        \App\Models\User::create([
+            'name'=> 'Azmi Ali',
+            'email'=> 'azmiali@gmail.com',
+            'password'=> bcrypt('123123123'),
+            'level'=> 'Dosen',
+        ]);
+        \App\Models\Dosen::create([
+            'nidn'=> '2211081004',
+            'user_id'=> '1',
+            'no_telp'=> '082199175396',
+            'alamat'=> 'taluak',
+        ]);
+
+        \App\Models\Jurusan::create([
+            'nama_jurusan'=> 'Teknologi Informasi',
+            'kajur'=> '1',
+            'sekjur'=> '1',
+        ]);
+
+        \App\Models\prodi::create([
+            'nama'=> 'TRPL',
+            'jurusan_id'=> '1',
+            'kaprodi'=> '1',
         ]);
 
         // User::factory()->create([
