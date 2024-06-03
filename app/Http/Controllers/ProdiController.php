@@ -23,6 +23,10 @@ class ProdiController extends Controller
      */
     public function create()
     {
+        $availableDosens = Dosen::whereDoesntHave('Dkaprodi')
+            ->whereDoesntHave('Dsekjur')
+            ->whereDoesntHave('Dkajur')
+            ->get();
         return view('prodi.create',['jurusans'=>Jurusan::all(),'dosens'=>Dosen::all()]);
     }
 
@@ -32,12 +36,27 @@ class ProdiController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nama'=> 'required',
-            'jurusan_id'=>'required',
-            'kaprodi'=>'required',
+            'kode_prodi' => 'required|unique:prodis',
+            'jenjang' => 'required',
+            'nama_prodi' => 'required',
+            'jurusan_id' => 'required',
+            'kaprodi' => 'nullable|exists:dosens,id|different:kajur,',
         ]);
-        prodi::create($validated);
-        return redirect('/prodi')->with('pesan', 'berhasil menyimpan data.');
+
+        $errors = [];
+
+        $kaprodiDosen = Dosen::find($request->kaprodi);
+        if ($kaprodiDosen && ($kaprodiDosen->Dkaprodi || $kaprodiDosen->Dsekjur || $kaprodiDosen->Dkajur)) {
+            $errors['kaprodi'] = 'Dosen ini sudah memiliki peran lain.';
+        }
+
+        if (!empty($errors)) {
+            return redirect()->back()->withErrors($errors)->withInput();
+        }
+
+        prodi::create($request->all());
+        return redirect()->route('prodi.index')->with('success', 'prodi berhasil dibuat.');
+
     }
 
     /**

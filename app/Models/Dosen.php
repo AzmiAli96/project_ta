@@ -13,4 +13,18 @@ class Dosen extends Model
     public function user(){
         return $this->belongsTo(user::class,'user_id');
     }
+
+    public function Dkajur()
+    {
+        return $this->hasOne(Jurusan::class, 'kajur');
+    }
+    public function Dsekjur()
+    {
+        return $this->hasOne(Jurusan::class, 'sekjur');
+    }
+
+    public function Dkaprodi()
+    {
+        return $this->hasOne(prodi::class, 'kaprodi');
+    }
 }

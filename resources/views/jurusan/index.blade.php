@@ -36,6 +36,7 @@
                 <thead>
                     <tr>
                         <th>No</th>
+                        <th>Kode Jurusan</th>
                         <th>Jurusan</th>
                         <th>Ketua Jurusan</th>
                         <th>Sekretaris Jurusan</th>
@@ -46,6 +47,7 @@
                     @foreach ($jurusans as $jurusan )
                     <tr>
                         <td>{{ $jurusans->firstItem()+$loop->index }}</td>
+                        <td>{{ $jurusan->kode_jurusan }}</td>
                         <td>{{ $jurusan->nama_jurusan }}</td>
                         <td>{{ $jurusan->pkajur->user->name }}</td>
                         <td>{{ $jurusan->psekjur->user->name }}</td>

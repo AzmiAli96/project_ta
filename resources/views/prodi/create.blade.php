@@ -13,9 +13,27 @@
     <form action="/prodi" method="post">
         @csrf
         <div class="mb-3">
+            <label class="form-label">Kode Prodi</label>
+            <input type="text" class="form-control @error('kode_prodi') is-invalid @enderror" name="kode_prodi" value="{{old('kode_prodi')}}">
+            @error('kode_prodi')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label class="form-label">jenjang</label>
+            <input type="text" class="form-control @error('jenjang') is-invalid @enderror" name="jenjang" value="{{old('jenjang')}}">
+            @error('jenjang')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="mb-3">
             <label class="form-label">Prodi</label>
-            <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{old('nama')}}">
-            @error('nama')
+            <input type="text" class="form-control @error('nama_prodi') is-invalid @enderror" name="nama_prodi" value="{{old('nama_prodi')}}">
+            @error('nama_prodi')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>

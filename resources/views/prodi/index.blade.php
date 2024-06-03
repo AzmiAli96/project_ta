@@ -38,6 +38,8 @@
                 <thead>
                     <tr>
                         <th>No</th>
+                        <th>Kode Prodi</th>
+                        <th>jenjang</th>
                         <th>Prodi</th>
                         <th>Jurusan</th>
                         <th>Ketua Program Studi</th>
@@ -48,7 +50,9 @@
                     @foreach ($prodis as $prodi )
                     <tr>
                         <td>{{ $prodis->firstItem()+$loop->index }}</td>
-                        <td>{{ $prodi->nama }}</td>
+                        <td>{{ $prodi->kode_prodi }}</td>
+                        <td>{{ $prodi->jenjang }}</td>
+                        <td>{{ $prodi->nama_prodi }}</td>
                         <td>{{ $prodi->jurusan->nama_jurusan }}</td>
                         <td>{{ $prodi->pkaprodi->user->name }}</td>
                         <td>

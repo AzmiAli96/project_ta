@@ -13,6 +13,15 @@
     <form action="/jurusan" method="post">
         @csrf
         <div class="mb-3">
+            <label class="form-label">Kode Jurusan</label>
+            <input type="text" class="form-control @error('kode_jurusan') is-invalid @enderror" name="kode_jurusan" value="{{old('kode_jurusan')}}">
+            @error('kode_jurusan')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="mb-3">
             <label class="form-label">Jurusan</label>
             <input type="text" class="form-control @error('nama_jurusan') is-invalid @enderror" name="nama_jurusan" value="{{old('nama_jurusan')}}">
             @error('nama_jurusan')
@@ -26,7 +35,7 @@
             <select name="kajur" class="form-select">
                 <option value="" hidden>--pilih ketua jurusan--</option>
                 @foreach ($dosens as $dosen)
-                <option value="{{$dosen->id}}">{{$dosen->user->name}}</option>
+                <option value="{{$dosen->id}}">{{$dosen->user->name}} ({{ $dosen->nidn }})</option>
                 @endforeach
             </select>
             @error('kajur')
@@ -40,7 +49,7 @@
             <select name="sekjur" class="form-select">
                 <option value="" hidden>--pilih sekretaris jurusan--</option>
                 @foreach ($dosens as $dosen)
-                <option value="{{$dosen->id}}" >{{$dosen->user->name}}</option>
+                <option value="{{$dosen->id}}" >{{$dosen->user->name}} ({{ $dosen->nidn }}) </option>
                 @endforeach
             </select>
             @error('sekjur')

@@ -14,6 +14,15 @@
         @method('PUT')
         @csrf
         <div class="mb-3">
+            <label class="form-label">Kode Jurusan</label>
+            <input type="text" class="form-control @error('kode_jurusan') is-invalid @enderror" name="kode_jurusan" value="{{old('kode_jurusan',$jurusan->kode_jurusan)}}">
+            @error('kode_jurusan')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="mb-3">
             <label class="form-label">Jurusan</label>
             <input type="text" class="form-control @error('nama_jurusan') is-invalid @enderror" name="nama_jurusan" value="{{old('nama_jurusan',$jurusan->nama_jurusan)}}">
             @error('nama_jurusan')
@@ -28,9 +37,9 @@
                 <option value="" hidden>--pilih ketua jurusan--</option>
                 @foreach ($dosens as $dosen)
                 @if (old('kajur',$dosen->kajur)==$dosen->id)
-                <option value="{{$dosen->id}}" selected>{{$dosen->user->name}}</option>
+                <option value="{{$dosen->id}}" selected>{{$dosen->user->name}} ({{ $dosen->nidn }})</option>
                 @else
-                <option value="{{$dosen->id}}">{{$dosen->user->name}}</option>
+                <option value="{{$dosen->id}}">{{$dosen->user->name}} ({{ $dosen->nidn }})</option>
                 @endif
                 @endforeach
             </select>

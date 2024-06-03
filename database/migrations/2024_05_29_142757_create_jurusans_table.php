@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('jurusans', function (Blueprint $table) {
             $table->id();
+            $table->string('kode_jurusan')->unique();
             $table->string('nama_jurusan');
-            $table->string('kajur')->constrain('dosen_id');
-            $table->string('sekjur')->constrain('dosen_id');;
+            $table->string('kajur')->nullable()->constrain('dosen_id');
+            $table->string('sekjur')->nullable()->constrain('dosen_id');
             $table->timestamps();
         });
     }

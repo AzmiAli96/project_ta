@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('prodis', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
+            $table->string('kode_prodi')->unique();
+            $table->string('jenjang');
+            $table->string('nama_prodi');
             $table->foreignId('jurusan_id');
-            $table->string('kaprodi')->constrain('dosen_id');
+            $table->string('kaprodi')->nullable()->constrain('dosen_id');
             $table->timestamps();
         });
     }
