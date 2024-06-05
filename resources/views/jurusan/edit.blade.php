@@ -36,7 +36,7 @@
             <select name="kajur" class="form-select">
                 <option value="" hidden>--pilih ketua jurusan--</option>
                 @foreach ($dosens as $dosen)
-                @if (old('kajur',$dosen->kajur)==$dosen->id)
+                @if (old('kajur',$jurusan->kajur)==$dosen->id)
                 <option value="{{$dosen->id}}" selected>{{$dosen->user->name}} ({{ $dosen->nidn }})</option>
                 @else
                 <option value="{{$dosen->id}}">{{$dosen->user->name}} ({{ $dosen->nidn }})</option>
@@ -54,7 +54,7 @@
             <select name="sekjur" class="form-select">
                 <option value="" hidden>--pilih Sekretaris jurusan--</option>
                 @foreach ($dosens as $dosen)
-                @if (old('sekjur',$dosen->sekjur)==$dosen->id)
+                @if (old('sekjur',$jurusan->sekjur)==$dosen->id)
                 <option value="{{$dosen->id}}" selected>{{$dosen->user->name}}</option>
                 @else
                 <option value="{{$dosen->id}}">{{$dosen->user->name}}</option>

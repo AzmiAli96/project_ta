@@ -85,7 +85,9 @@
                                 <!-- <div class="collapse-divider"></div>
                                 <h6 class="collapse-header">Other Pages:</h6> -->
                                 <a class="collapse-item" href="/sesi">Sesi waktu</a>
-                                <a class="collapse-item" href="blank.html">Blank Page</a>
+                                <a class="collapse-item" href="/tanggal">Tanggal</a>
+                                <a class="collapse-item" href="/ta">Tugas Akhir</a>
+                                <a class="collapse-item" href="/validasi">Validasi</a>
                             </div>
                         </div>
                     </li>

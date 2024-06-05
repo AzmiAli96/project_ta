@@ -16,4 +16,8 @@ class prodi extends Model
     public function pkaprodi(){
         return $this->belongsTo(dosen::class,'kaprodi');
     }
+    // public function prodip($jurusan ){
+    //     return self::where('jurusan_id',$jurusan);
+    // }
+    
 }

@@ -100,6 +100,21 @@ class DatabaseSeeder extends Seeder
             'alamat'=> 'taluak',
         ]);
 
+        \App\Models\Jurusan::create([
+            'kode_jurusan'=> 'TI',
+            'nama_jurusan'=> 'Teknologi Informasi',
+            'kajur'=> '2',
+            'sekjur'=> '3',
+        ]);
+
+        \App\Models\prodi::create([
+            'kode_prodi'=> 'TRPL',
+            'jenjang'=> 'D4',
+            'nama_prodi'=> 'Teknologi Rekayasa Perangkat Lunak',
+            'jurusan_id'=> '1',
+            'kaprodi'=> '4',
+        ]);
+
         // \App\Models\Jurusan::create([
         //     'nama_jurusan'=> 'Teknologi Informasi',
         //     'kajur'=> '2211083017',

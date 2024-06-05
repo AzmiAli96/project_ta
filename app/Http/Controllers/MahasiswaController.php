@@ -57,8 +57,6 @@ class MahasiswaController extends Controller
             'user_id'=>$users->id,
             'jurusan_id'=>$request->jurusan_id,
             'prodi_id'=>$request->prodi_id,
-            'judul'=>$request->judul,
-            'dokumen'=>$request->dokumen,
             'status_id'=>$request->status_id,
             
         ]);
@@ -97,8 +95,6 @@ class MahasiswaController extends Controller
             'nobp'=> 'required',
             'jurusan_id'=>'required',
             'prodi_id'=>'required',
-            'judul'=>'nullable',
-            'dokumen'=>'nullable',
             'status_id'=>'required',
         ]);
         

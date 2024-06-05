@@ -6,8 +6,12 @@ use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\ProdiController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RuanganController;
 use App\Http\Controllers\SesiController;
+use App\Http\Controllers\TAController;
+use App\Http\Controllers\TanggalController;
+use App\Http\Controllers\ValidasiController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -26,8 +30,8 @@ Route::get('/404', function () {
 route::middleware(['guest'])->group(function(){
     Route::get('/login', [LoginController::class,'index']);
     Route::post('/login', [LoginController::class,'login'])->name('login');
-    Route::get('/register', [LoginController::class,'showRegister'])->name('register.show');
-    Route::post('/register', [LoginController::class,'create'])->name('register.create');
+    Route::get('/register', [RegisterController::class,'register'])->name('register.show');
+    Route::post('/register', [RegisterController::class,'create'])->name('register.create');
 });
 
 
@@ -39,6 +43,9 @@ route::middleware(['auth'])->group(function(){
     route::resource('/prodi',ProdiController::class);
     route::resource('/ruangan',RuanganController::class);
     route::resource('/sesi',SesiController::class);
+    route::resource('/tanggal',TanggalController::class);
+    route::resource('/ta',TAController::class);
+    route::resource('/validasi',ValidasiController::class);
     route::get('/logout',[LoginController::class,'logout']);
 });
 

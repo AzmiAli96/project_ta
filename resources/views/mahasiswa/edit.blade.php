@@ -88,24 +88,6 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label class="form-label">Judul</label>
-            <input type="text" class="form-control" name="judul" value="{{old('judul',$mahasiswa->judul)}}">
-            @error('judul')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-            @enderror
-        </div>
-        <div class="mb-3">
-            <label for="formFile" class="form-label">file tugas akhir</label>
-            <input class="form-control" type="file" name="dokumen" value="{{ old('judul',$mahasiswa->dokumen) }}" id="formFile">
-            @error('dokumen')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-            @enderror
-        </div>
-        <div class="mb-3">
             <label class="form-label @error('status_id') is-invalid @enderror">Status</label>
             <select name="status_id" class="form-select">
                 <option value="" hidden>-- status --</option>

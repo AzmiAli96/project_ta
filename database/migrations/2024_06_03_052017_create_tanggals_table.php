@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\tanggal;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,13 +12,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mahasiswas', function (Blueprint $table) {
+        Schema::create('tanggals', function (Blueprint $table) {
             $table->id();
-            $table->char('nobp',10)->unique();
-            $table->foreignId('user_id');
-            $table->foreignId('jurusan_id');
-            $table->foreignId('prodi_id');
-            $table->string('status_id');
+            $table->date('tanggal');
+            $table->foreignId('ruangan_id');
+            $table->foreignId('sesi_id');
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('mahasiswas');
+        Schema::dropIfExists('tanggals');
     }
 };
