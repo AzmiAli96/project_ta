@@ -19,6 +19,9 @@ class TA extends Model
     public function Dpembimbing2(){
         return $this->belongsTo(Dosen::class,'pembimbing2');
     }
-
+    
+public function validasi(){
+    return $this->belongsTo(Validasi::class, 'id', 'ta_id');
+}
 
 }

@@ -40,7 +40,7 @@
             <select name="status" class="form-select">
                 <option value="" hidden>--pilih status--</option>
                 <option value="1" >Lengkap</option>
-                <option value="2" >Belum Lengkap</option>
+                <option value="0" >Belum Lengkap</option>
             </select>
             @error('status')
             <div class="invalid-feedback">

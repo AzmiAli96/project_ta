@@ -10,7 +10,7 @@ class Validasi extends Model
     use HasFactory;
     protected $guarded=[];
 
-    public function mahasiswa(){
+    public function ta(){
         return $this->belongsTo(TA::class,'ta_id');
     }
 }

@@ -25,4 +25,8 @@ class Mahasiswa extends Model
     public function status(){
         return $this->belongsTo(status::class,'status_id');
     }
+
+    public function ta(){
+        return $this->belongsTo(TA::class, 'nobp', 'nobp');
+    }
 }

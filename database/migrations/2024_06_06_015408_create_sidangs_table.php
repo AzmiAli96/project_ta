@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('validasis', function (Blueprint $table) {
+        Schema::create('sidangs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('ta_id');
-            $table->string('komentar');
-            $table->boolean('status')->default(false);
+            $table->foreignId('validasi_id');
+            $table->foreignId('tanggal_id');
+            $table->string('sekr_sidang')->constrain('dosen_id');
+            $table->string('anggota1')->constrain('dosen_id');
+            $table->string('anggota2')->constrain('dosen_id');
             $table->timestamps();
         });
     }
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('validasis');
+        Schema::dropIfExists('sidangs');
     }
 };
