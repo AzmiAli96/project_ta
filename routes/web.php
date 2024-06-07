@@ -14,7 +14,9 @@ use App\Http\Controllers\TAController;
 use App\Http\Controllers\TanggalController;
 use App\Http\Controllers\ValidasiController;
 use App\Models\Mahasiswa;
+use App\Models\Sidang;
 use App\Models\TA;
+use App\Models\tanggal;
 use App\Models\Validasi;
 use Illuminate\Support\Facades\Route;
 
@@ -58,8 +60,8 @@ route::get('/exportMahasiswa',[MahasiswaController::class,'export'])->name('maha
 route::post('/importMahasiswa',[MahasiswaController::class,'import']);
 
 Route::get('test', function(){
-$test = Mahasiswa::with('ta')->get();
-$test2 = TA::with(['validasi'])->get();
+$test = Tanggal::with('sesi')->get();
+$test2 = Ta::with(['mahasiswa'])->get();
 
-dd($test2);
+dd($test);
 });

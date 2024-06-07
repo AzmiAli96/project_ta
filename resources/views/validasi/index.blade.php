@@ -49,8 +49,8 @@
                     @foreach ($validasis as $validasi )
                     <tr>
                         <td>{{ $validasis->firstItem()+$loop->index }}</td>
-                        <td>{{ $validasi->mahasiswa->nobp }}</td>
-                        <td>{{ $validasi->mahasiswa->dokumen }}</td>
+                        <td>{{ $validasi->ta->nobp }}</td>
+                        <td>{{ $validasi->ta->dokumen }}</td>
                         <td>{{ $validasi->komentar }}</td>
                         <td>{{ $validasi->status }}</td>
                         <td>

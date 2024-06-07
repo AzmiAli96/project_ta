@@ -17,16 +17,16 @@ class Sidang extends Model
     public function jadwal(){
         return $this->belongsTo(tanggal::class,'tanggal_id');
     }
-    
+
     public function psek_sidang(){
         return $this->belongsTo(Dosen::class,'sekr_sidang');
     }
 
-    public function anggota1(){
+    public function panggota1(){
         return $this->belongsTo(Dosen::class,'anggota1');
     }
 
-    public function anggota2(){
+    public function panggota2(){
         return $this->belongsTo(Dosen::class,'anggota2');
     }
 }

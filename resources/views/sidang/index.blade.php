@@ -47,7 +47,8 @@
                         <th>Sesi</th>
                         <th>Ketua Sidang</th>
                         <th>Sekretaris Sidang</th>
-                        <th>Sekretaris Sidang</th>
+                        <th>Anggota sidang 1</th>
+                        <th>Anggota sidang 2</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -55,11 +56,17 @@
                     @foreach ($sidangs as $sidang )
                     <tr>
                         <td>{{ $sidangs->firstItem()+$loop->index }}</td>
-                        <td>{{ $sidang->pta }}</td>
-                        <td>{{ $sidang->tanggal_id }}</td>
-                        <td>{{ $sidang->sekr_sidang }}</td>
-                        <td>{{ $sidang->anggota1 }}</td>
-                        <td>{{ $sidang->anggota2 }}</td>
+                        <td>{{ $sidang->validasi->ta->nobp }}</td>
+                        <td>{{ $sidang->validasi->ta->mahasiswa->user->name }}</td>
+                        <td>{{ $sidang->validasi->ta->judul }}</td>
+                        <td>{{ $sidang->validasi->ta->dokumen }}</td>
+                        <td>{{ $sidang->jadwal->tanggal }}</td>
+                        <td>{{ $sidang->jadwal->ruangan->nama_ruangan }}</td>
+                        <td>{{ $sidang->jadwal->sesi->sesi }}</td>
+                        <td>{{ $sidang->validasi->ta->Dpembimbing1->user->name }} && {{ $sidang->validasi->ta->Dpembimbing2->user->name }}</td>
+                        <td>{{ $sidang->psek_sidang->user->name }}</td>
+                        <td>{{ $sidang->panggota1->user->name }}</td>
+                        <td>{{ $sidang->panggota2->user->name }}</td>
                         <td>
                             <form action="/sidang/{{$sidang->id}}" method="post" class="d-inline">
                                 @method('DELETE')

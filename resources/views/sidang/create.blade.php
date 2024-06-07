@@ -17,7 +17,7 @@
             <select name="validasi_id" class="form-select">
                 <option value="" hidden>--pilih Mahasiswa--</option>
                 @foreach ($validasis as $validasi)
-                <option value="{{$validasi->id}}">{{$validasi->id}}  -   {{$validasi->nama}}</option>
+                <option value="{{$validasi->id}}">{{$validasi->ta->id}}  -   {{$validasi->ta->nobp}}</option>
                 @endforeach
             </select>
             @error('validasi_id')
@@ -55,14 +55,28 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label class="form-label @error('anggota_sidang') is-invalid @enderror">Anggota Sidang</label>
-            <select name="anggota_sidang" class="form-select">
+            <label class="form-label @error('anggota1') is-invalid @enderror">Anggota Sidang</label>
+            <select name="anggota1" class="form-select">
                 <option value="" hidden>--pilih dosen pembimbing--</option>
                 @foreach ($dosens as $dosen)
                 <option value="{{$dosen->id}}">{{$dosen->user->name}}</option>
                 @endforeach
             </select>
-            @error('anggota_sidang')
+            @error('anggota1')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label class="form-label @error('anggota2') is-invalid @enderror">Anggota Sidang</label>
+            <select name="anggota2" class="form-select">
+                <option value="" hidden>--pilih dosen pembimbing--</option>
+                @foreach ($dosens as $dosen)
+                <option value="{{$dosen->id}}">{{$dosen->user->name}}</option>
+                @endforeach
+            </select>
+            @error('anggota2')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>

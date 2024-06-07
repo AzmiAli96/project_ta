@@ -11,7 +11,7 @@ class TA extends Model
     protected $guarded=[];
 
     public function mahasiswa(){
-        return $this->belongsTo(Mahasiswa::class,'nobp');
+        return $this->belongsTo(Mahasiswa::class,'nobp', 'nobp');
     }
     public function Dpembimbing1(){
         return $this->belongsTo(Dosen::class,'pembimbing1');

@@ -16,7 +16,9 @@ class SidangController extends Controller
      */
     public function index()
     {
-        $sidang=Sidang::latest()->paginate(10);
+        $sidang=Sidang::with([
+            'validasi'
+        ])->latest()->paginate(10);
         return view ('sidang.index', ['sidangs'=>$sidang]);
     }
 
@@ -25,7 +27,9 @@ class SidangController extends Controller
      */
     public function create()
     {
-        return view('sidang.create',['validasis'=>Validasi::all(),'tanggals'=>tanggal::all(),'dosens'=> Dosen::all()]);
+       $taTervalidasi = Validasi::with(['ta'])->where('status', '=', true)->get();
+
+        return view('sidang.create',['validasis'=>$taTervalidasi,'tanggals'=>tanggal::all(),'dosens'=> Dosen::all()]);
     }
 
     /**
@@ -37,8 +41,13 @@ class SidangController extends Controller
             'validasi_id' => 'required',
             'tanggal_id' => 'required',
             'sekr_sidang' => 'required',
-            'anggota_sidang' => 'required',
+            'anggota1' => 'required',
+            'anggota2' => 'required',
         ]);
+
+// $data = [
+//     "validasi_id	tanggal_id	sekr_sidang	anggota1	anggota2"
+// ];
         Sidang::create($validated);
         return redirect('/sidang')->with('pesan', 'berhasil menyimpan data.');
     }

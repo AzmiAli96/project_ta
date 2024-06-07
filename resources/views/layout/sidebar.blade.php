@@ -88,13 +88,12 @@
                                 <a class="collapse-item" href="/tanggal">Tanggal</a>
                                 <a class="collapse-item" href="/ta">Tugas Akhir</a>
                                 <a class="collapse-item" href="/validasi">Validasi</a>
-                                <a class="collapse-item" href="/sidang">Jadwal Sidang</a>
                             </div>
                         </div>
                     </li>
                     
 
-                    @if (auth()->user()->level == 'Admin' )
+                    @if (auth()->user()->level == 'Admin'|auth()->user()->level == 'Kaprodi' )
                     <!-- Nav Item - Charts -->
                     <li class="nav-item">
                         <a class="nav-link" href="charts.html">
@@ -105,9 +104,9 @@
 
                     <!-- Nav Item - Tables -->
                     <li class="nav-item">
-                        <a class="nav-link" href="/jadwal">
+                        <a class="nav-link" href="/sidang">
                             <i class="fas fa-fw fa-table"></i>
-                            <span>Tables</span></a>
+                            <span>Jadwal Sidang</span></a>
                     </li>
 
                     <!-- Divider -->
