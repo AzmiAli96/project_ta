@@ -20,7 +20,7 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        $mahasiswa=Mahasiswa::latest()->paginate(10);
+        $mahasiswa=Mahasiswa::latest()->pencarian()->paginate(10);
         return view ('mahasiswa.index', ['mahasiswas'=>$mahasiswa]);
         
     }

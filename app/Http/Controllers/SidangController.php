@@ -65,7 +65,7 @@ class SidangController extends Controller
      */
     public function edit(string $id)
     {
-        return view('sidang.edit',['validasis'=>Validasi::all(),'dosens'=>Dosen::all(),'tanggals'=>tanggal::all(),'sidangs'=>Sidang::find($id)]);
+        return view('sidang.edit',['validasis'=>Validasi::all(),'dosens'=>Dosen::all(),'tanggals'=>tanggal::all(),'sidang'=>Sidang::find($id)]);
     }
 
     /**

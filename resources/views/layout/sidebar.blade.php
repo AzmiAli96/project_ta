@@ -28,38 +28,22 @@
                     <div class="sidebar-heading">
                         User
                     </div>
-
+                    @if (auth()->user()->level == 'Admin'|auth()->user()->level == 'Kaprodi'|auth()->user()->level == 'Dosen' )
                     <!-- Nav Item - Pages Collapse Menu -->
                     <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                            <i class="fas fa-fw fa-cog"></i>
-                            <span>Dosen</span>
-                        </a>
-                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header">System</h6>
-                                <a class="collapse-item" href="/dosen">User Dosen</a>
-                                <a class="collapse-item" href="cards.html">Cards</a>
-                            </div>
-                        </div>
+                        <a class="nav-link" href="/dosen">
+                        <i class="fas fa-users"></i>
+                            <span>Dosen</span></a>
                     </li>
-
+                    @endif
+                    @if (auth()->user()->level == 'Admin'|auth()->user()->level == 'Kaprodi'|auth()->user()->level == 'Mahasiswa' )
                     <!-- Nav Item - Utilities Collapse Menu -->
                     <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                            <i class="fas fa-fw fa-wrench"></i>
-                            <span>Mahasiswa</span>
-                        </a>
-                        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                            <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header">System</h6>
-                                <a class="collapse-item" href="/mahasiswa">User Mahasiswa</a>
-                                <a class="collapse-item" href="utilities-border.html">Borders</a>
-                                <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                                <a class="collapse-item" href="utilities-other.html">Other</a>
-                            </div>
-                        </div>
+                        <a class="nav-link" href="/mahasiswa">
+                        <i class="fas fa-user"></i>
+                            <span>Mahasiswa</span></a>
                     </li>
+                    @endif
 
                     <!-- Divider -->
                     <hr class="sidebar-divider">
@@ -74,11 +58,12 @@
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                             <i class="fas fa-fw fa-folder"></i>
-                            <span>Pages</span>
+                            <span>Kegiatan</span>
                         </a>
                         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                             <div class="bg-white py-2 collapse-inner rounded">
-                                <h6 class="collapse-header">Login Screens:</h6>
+                                <h6 class="collapse-header">Activity Screens:</h6>
+                                @if (auth()->user()->level == 'Admin' )
                                 <a class="collapse-item" href="/jurusan">Jurusan</a>
                                 <a class="collapse-item" href="/prodi">Prodi</a>
                                 <a class="collapse-item" href="/ruangan">Ruangan Sidang</a>
@@ -86,9 +71,16 @@
                                 <h6 class="collapse-header">Other Pages:</h6> -->
                                 <a class="collapse-item" href="/sesi">Sesi waktu</a>
                                 <a class="collapse-item" href="/tanggal">Tanggal</a>
+                                @endif
+                                @if (auth()->user()->level == 'Admin'|auth()->user()->level == 'Mahasiswa' )
                                 <a class="collapse-item" href="/ta">Tugas Akhir</a>
+                                @endif
+                                @if (auth()->user()->level == 'Admin'|auth()->user()->level == 'Kaprodi' )
                                 <a class="collapse-item" href="/validasi">Validasi</a>
+                                @endif
+                                @if (auth()->user()->level == 'Admin'|auth()->user()->level == 'Dosen' )
                                 <a class="collapse-item" href="/nilai">Nilai</a>
+                                @endif
                             </div>
                         </div>
                     </li>

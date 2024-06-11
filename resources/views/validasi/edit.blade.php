@@ -1,8 +1,8 @@
 @extends('layout.main')
-@section('title', 'Edit Tanggal')
+@section('title', 'Edit Validasi')
 @section('content')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h2>Edit Tanggal</h2>
+    <h2>Edit Validasi</h2>
 </div>
 @if (session()->has('pesan'))
 <div class="alert alert-primary" role="alert">
@@ -10,18 +10,18 @@
 </div>
 @endif
 <div class="col-6">
-    <form action="/tanggal/{{ $tanggal->id }}" method="post">
+    <form action="/validasi/{{ $validasi->id }}" method="post">
         @method('PUT')
         @csrf
         <div class="mb-3">
             <label class="form-label @error('ta_id') is-invalid @enderror">Tugas Akhir Mahasiswa</label>
-            <select name="ta_id" class="form-select">
+            <select name="ta_id" class="form-select" readonly>
                 <option value="" hidden>--pilih Tugas Akhir Mahasiswa--</option>
                 @foreach ($tas as $ta)
-                @if (old('ta_id',$ta->ta_id)==$ta->id)
-                <option value="{{$ta->id}}" selected>{{$ta->ta}}</option>
+                @if (old('ta_id',$validasi->ta_id)==$ta->id)
+                <option value="{{$ta->id}}" selected>{{$ta->nobp}} / {{ $ta->mahasiswa->user->name }}</option>
                 @else
-                <option value="{{$ta->id}}">{{$ta->ta}}</option>
+                <option value="{{$ta->id}}">{{$ta->nobp}} / {{ $ta->mahasiswa->user->name }}</option>
                 @endif
                 @endforeach
             </select>
@@ -33,7 +33,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Komentar</label>
-            <textarea class="form-control @error('komentar') is-invalid @enderror" rows="3" name="komentar">{{old('komentar'$validasi->komentar)}}</textarea>
+            <textarea class="form-control @error('komentar') is-invalid @enderror" rows="3" name="komentar">{{old('komentar',$validasi->komentar)}}</textarea>
             @error('komentar')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -41,18 +41,13 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label class="form-label @error('ruangan') is-invalid @enderror">Ruangan</label>
-            <select name="ruangan" class="form-select">
-                <option value="" hidden>--pilih Ruangan--</option>
-                @foreach ($ruangans as $ruangan)
-                @if (old('ruangan',$ruangan->ruangan)==$ruangan->id)
-                <option value="{{$ruangan->id}}" selected>{{ $ruangan->nama_ruangan }}</option>
-                @else
-                <option value="{{ $ruangan->id }}">{{ $ruangan->nama_ruangan }}</option>
-                @endif
-                @endforeach
+            <label class="form-label @error('status') is-invalid @enderror">status</label>
+            <select name="status" class="form-select">
+                <option value="" hidden>--pilih status--</option>
+                <option value="1" {{ old('status', $validasi->status) == 1 ? 'selected' : '' }} >Lengkap</option>
+                <option value="0" {{ old('status', $validasi->status) == 1 ? 'selected' : '' }}>Belum Lengkap</option>
             </select>
-            @error('ruangan')
+            @error('status')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>

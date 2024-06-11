@@ -20,4 +20,5 @@ class prodi extends Model
     //     return self::where('jurusan_id',$jurusan);
     // }
     
+    
 }

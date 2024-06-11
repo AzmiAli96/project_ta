@@ -1,8 +1,8 @@
 @extends('layout.main')
-@section('title', 'Edit Tugas Akhir')
+@section('title', 'Edit Jadwal Sidang')
 @section('content')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h2>Edit Tugas Akhir</h2>
+    <h2>Edit Jadwal Sidang</h2>
 </div>
 @if (session()->has('pesan'))
 <div class="alert alert-primary" role="alert">
@@ -10,18 +10,18 @@
 </div>
 @endif
 <div class="col-6">
-    <form action="/ta/{{ $ta->id }}" method="post">
+    <form action="/sidang/{{ $sidang->id }}" method="post">
         @method('PUT')
         @csrf
         <div class="mb-3">
-            <label class="form-label @error('validasi_id') is-invalid @enderror">sesi</label>
+            <label class="form-label @error('validasi_id') is-invalid @enderror">Mahasisawa</label>
             <select name="validasi_id" class="form-select">
-                <option value="" hidden>--pilih sesi--</option>
+                <option value="" hidden>--pilih Mahasiswa--</option>
                 @foreach ($validasis as $validasi)
-                @if (old('nobp',$validasi->nobp)==$validasi->nobp)
-                <option value="{{$validasi->nobp}}" selected>{{ $validasi->nobp }} {{ $validasi->user->name }}</option>
+                @if (old('nobp',$sidang->nobp)==$validasi->nobp)
+                <option value="{{$validasi->nobp}}" selected>{{ $validasi->nobp }} {{ $validasi->ta->mahasiswa->user->name }}</option>
                 @else
-                <option value="{{ $validasi->nobp }}">{{ $validasi->nobp }} {{ $validasi->nama }}</option>
+                <option value="{{ $validasi->nobp }}">{{ $validasi->nobp }} {{ $validasi->ta->mahasiswa->user->name }}</option>
                 @endif
                 @endforeach
             </select>

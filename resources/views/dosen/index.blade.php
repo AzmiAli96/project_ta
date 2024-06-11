@@ -19,6 +19,17 @@
     <div class="card-body">
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+            <form action="/dosen" method="GET" class="d-none d-sm-inline-block form-inline mr-auto md-3 my-2 my-md-0 mw-100 navbar-search">
+                @csrf
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
             <a href="/exportDosen" class="btn btn-primary mb-3 mr-1">
                 <i class="fas fa-solid fa-plus"> Export</i>
             </a>
@@ -76,14 +87,14 @@
             </div>
             <form action="/importDosen" method="POST" enctype="multipart/form-data">
                 @csrf
-            <div class="modal-body">
-                <label for="formFile" class="form-label">Default file input example</label>
-                <input class="form-control" type="file" name="file" id="formFile">
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <button type="submit" class="btn btn-primary">Import</button>
-            </div>
+                <div class="modal-body">
+                    <label for="formFile" class="form-label">Default file input example</label>
+                    <input class="form-control" type="file" name="file" id="formFile">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Import</button>
+                </div>
             </form>
         </div>
     </div>

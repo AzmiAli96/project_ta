@@ -56,7 +56,7 @@ class NilaiController extends Controller
      */
     public function edit(string $id)
     {
-        return view('nilai.edit',['sidangs'=>Sidang::all(),'nilais'=>Nilai::find($id)]);
+        return view('nilai.edit',['sidangs'=>Sidang::all(),'nilai'=>Nilai::find($id)]);
     }
 
     /**
@@ -66,11 +66,11 @@ class NilaiController extends Controller
     {
         $validated = $request->validate([
             'sidang_id'=> 'required',
-            'nilai_ketua'=> 'required',
-            'nilai_sekr'=> 'required',
-            'nilai_ang1'=> 'required',
-            'nilai_ang2'=> 'required',
-            'nilai_akhir'=> 'required',
+            'nilai_ketua'=> 'nullable',
+            'nilai_sekr'=> 'nullable',
+            'nilai_ang1'=> 'nullable',
+            'nilai_ang2'=> 'nullable',
+            'nilai_akhir'=> 'nullable',
             'status'=> 'required',
         ]);
         Nilai::where('id',$id)->update($validated);

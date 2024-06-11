@@ -14,7 +14,7 @@ class DosenController extends Controller
      */
     public function index()
     {
-        $dosen=Dosen::latest()->paginate(10);
+        $dosen=Dosen::latest()->pencarian()->paginate(10);
         return view('dosen.index',['dosens'=>$dosen]);
     }
 

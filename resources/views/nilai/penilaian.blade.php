@@ -41,19 +41,21 @@
                     </tr>
                 </thead>
                 <tbody>
+                @foreach ($nilais as $nilai )
                     <tr>
                         <td>1</td>
-                        <td>Pembimbing 1</td>
-                        <td>Nama </td>
+                        <td>Ketua Sidang</td>
+                        <td>{{ $nilai->sidang->validasi->ta->Dpembimbing1->user->name }} </td>
                         <td>nilai</td>
                     </tr>
                     <tr>
                         <td>2</td>
-                        <td>Pembimbing 2</td>
+                        <td>{{ $nilai->sidang->validasi->ta->Dpembimbing2->user->name }}</td>
                         <td>Nama </td>
                         <td>nilai</td>
                     </tr>
                     <tr>
+                        <td></td>
                         <td>Nilai Rata-rata Pembimbing :</td>
                         <td>nilai</td>
                     </tr>
@@ -82,17 +84,24 @@
                         <td>nilai</td>
                     </tr>
                     <tr>
+                        <td></td>
                         <td>Nilai Rata-rata Penguji :</td>
+                        <td></td>
                         <td>nilai</td>
                     </tr>
                     <tr>
+                        <td></td>
                         <td>Nilai Akhir :</td>
+                        <td></td>
                         <td>nilai</td>
                     </tr>
                     <tr>
+                        <td></td>
                         <td>Hasil Akhir :</td>
+                        <td></td>
                         <td>nilai</td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

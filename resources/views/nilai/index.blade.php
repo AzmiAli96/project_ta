@@ -51,10 +51,10 @@
                         <td>{{ $nilais->firstItem()+$loop->index }}</td>
                         <td>{{$nilai->sidang->validasi->ta->nobp}} / {{ $nilai->sidang->validasi->ta->mahasiswa->user->name }}</td>
                         <td>{{ $nilai->sidang->validasi->ta->Dpembimbing1->user->name }} && {{ $nilai->sidang->validasi->ta->Dpembimbing2->user->name }}</td>
-                        <td>{{ $nilai->sidang->sekr_sidang }}</td>
-                        <td>{{ $nilai->sidang->anggota1 }} & {{ $nilai->sidang->anggota2 }}</td>
+                        <td>{{ $nilai->sidang->psek_sidang->user->name }}</td>
+                        <td>{{ $nilai->sidang->panggota1->user->name }} & {{ $nilai->sidang->panggota2->user->name }}</td>
                         <td>{{ $nilai->nilai_akhir }}</td>
-                        <td>{{ $nilai->status }}</td>
+                        <td>{{ $nilai->status ? 'Lulus':'Belum lulus' }}</td>
                         <td>
                             <form action="/nilai/{{$nilai->id}}" method="post" class="d-inline">
                                 @method('DELETE')

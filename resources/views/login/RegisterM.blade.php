@@ -92,7 +92,7 @@
                                         <select name="prodi_id" id="prodi_id" class="form-select form-control">
                                             <option value="" hidden>--pilih prodi--</option>
                                             @foreach ($prodis as $prodi)
-                                            <option value="{{$prodi->id}}">{{$prodi->nama}}</option>
+                                            <option value="{{$prodi->id}}">{{$prodi->nama_prodi}}</option>
                                             @endforeach
                                         </select>
                                         @error('prodi_id')
@@ -105,9 +105,6 @@
                                 </div>
 
                                 <div id="Dosen" class="mb-4" style="display: none;">
-                                    <div class="form-group">
-                                        <input type="number" id="code" class="form-control form-control-user" name="code" placeholder="code verifikasi">
-                                    </div>
                                     <div class="form-group">
                                         <input type="number" id="nidn" class="form-control form-control-user" name="nidn" placeholder="NIDN">
                                     </div>
@@ -168,7 +165,6 @@
             var dosenSelect = document.getElementById('Dosen');
             var nidnSection = document.getElementById('nidn');
             var no_telpSection = document.getElementById('no_telp');
-            var codeSection = document.getElementById('code');
             var alamatSection = document.getElementById('alamat');
 
 

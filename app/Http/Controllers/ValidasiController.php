@@ -52,7 +52,7 @@ class ValidasiController extends Controller
      */
     public function edit(String $id)
     {
-        return view('validasi.edit',['tas'=>TA::all(),'validasis'=>Validasi::find($id)]);
+        return view('validasi.edit',['tas'=>TA::all(),'validasi'=>Validasi::find($id)]);
     }
 
     /**

@@ -49,10 +49,10 @@
                     @foreach ($validasis as $validasi )
                     <tr>
                         <td>{{ $validasis->firstItem()+$loop->index }}</td>
-                        <td>{{ $validasi->ta->nobp }}</td>
+                        <td>{{ $validasi->ta->nobp }} / {{ $validasi->ta->mahasiswa->user->name }}</td>
                         <td>{{ $validasi->ta->dokumen }}</td>
                         <td>{{ $validasi->komentar }}</td>
-                        <td>{{ $validasi->status }}</td>
+                        <td>{{ $validasi->status ? 'Lengkap':'Belum Lengkap' }}</td>
                         <td>
                             <form action="/validasi/{{$validasi->id}}" method="post" class="d-inline">
                                 @method('DELETE')

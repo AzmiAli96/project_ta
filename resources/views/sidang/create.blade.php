@@ -17,7 +17,7 @@
             <select name="validasi_id" class="form-select">
                 <option value="" hidden>--pilih Mahasiswa--</option>
                 @foreach ($validasis as $validasi)
-                <option value="{{$validasi->id}}">{{$validasi->ta->id}}  -   {{$validasi->ta->nobp}}</option>
+                <option value="{{$validasi->id}}">{{$validasi->ta->mahasiswa->user->name}}  -   {{$validasi->ta->nobp}}</option>
                 @endforeach
             </select>
             @error('validasi_id')
@@ -31,7 +31,7 @@
             <select name="tanggal_id" class="form-select">
                 <option value="" hidden>--pilih Tanggal penjadwalan--</option>
                 @foreach ($tanggals as $tanggal)
-                <option value="{{$tanggal->id}}">{{$tanggal->id}}</option>
+                <option value="{{$tanggal->id}}">{{$tanggal->tanggal}}</option>
                 @endforeach
             </select>
             @error('tanggal_id')
