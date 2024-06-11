@@ -18,16 +18,16 @@ class DatabaseSeeder extends Seeder
         // \App\Models\Dosen::factory(20)->create();
 
         \App\Models\Status::create([
+            'ket'=> 'Tugas Akhir',
+        ]);
+        \App\Models\Status::create([
+            'ket'=> 'Sidang',
+        ]);
+        \App\Models\Status::create([
             'ket'=> 'Lulus',
         ]);
         \App\Models\Status::create([
-            'ket'=> 'Persiapan',
-        ]);
-        \App\Models\Status::create([
-            'ket'=> 'Belum Lengkap',
-        ]);
-        \App\Models\Status::create([
-            'ket'=> 'Persidangan',
+            'ket'=> 'Belum Daftar',
         ]);
         
         \App\Models\User::create([

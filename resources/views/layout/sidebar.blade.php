@@ -88,6 +88,7 @@
                                 <a class="collapse-item" href="/tanggal">Tanggal</a>
                                 <a class="collapse-item" href="/ta">Tugas Akhir</a>
                                 <a class="collapse-item" href="/validasi">Validasi</a>
+                                <a class="collapse-item" href="/nilai">Nilai</a>
                             </div>
                         </div>
                     </li>

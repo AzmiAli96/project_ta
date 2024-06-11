@@ -5,6 +5,7 @@ use App\Http\Controllers\DosenController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RuanganController;
@@ -53,15 +54,16 @@ route::middleware(['auth'])->group(function(){
     route::resource('/ta',TAController::class);
     route::resource('/validasi',ValidasiController::class);
     route::resource('/sidang',SidangController::class);
+    route::resource('/nilai',NilaiController::class);
     route::get('/logout',[LoginController::class,'logout']);
 });
 
 route::get('/exportMahasiswa',[MahasiswaController::class,'export'])->name('mahasiswa.export');
 route::post('/importMahasiswa',[MahasiswaController::class,'import']);
 
-Route::get('test', function(){
-$test = Tanggal::with('sesi')->get();
-$test2 = Ta::with(['mahasiswa'])->get();
-
-dd($test);
-});
+// Route::get('/nilai', function () {
+//     return view('nilai/penilaian');
+// });
+// Route::get('/penilai', function () {
+//     return view('nilai/index');
+// });

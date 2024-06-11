@@ -73,6 +73,7 @@
                         </td>
                     </tr>
                     @endforeach
+                </tbody>
             </table>
             {{ $mahasiswas->links() }}
         </div>
