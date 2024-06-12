@@ -15,7 +15,7 @@
         @csrf
         <div class="mb-3">
             <label class="form-label">Ruangan</label>
-            <input type="text" class="form-control @error('nama_ruangan') is-invalid @enderror" nama="nama_ruangan" value="{{old('nama_ruangan',$ruangan->nama_ruangan)}}">
+            <input type="text" class="form-control @error('nama_ruangan') is-invalid @enderror" name="nama_ruangan" value="{{old('nama_ruangan',$ruangan->nama_ruangan)}}">
             @error('nama_ruangan')
             <div class="invalid-feedback">
                 {{ $message }}

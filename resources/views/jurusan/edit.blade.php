@@ -15,7 +15,7 @@
         @csrf
         <div class="mb-3">
             <label class="form-label">Kode Jurusan</label>
-            <input type="text" class="form-control @error('kode_jurusan') is-invalid @enderror" name="kode_jurusan" value="{{old('kode_jurusan',$jurusan->kode_jurusan)}}">
+            <input type="text" class="form-control @error('kode_jurusan') is-invalid @enderror" name="kode_jurusan" value="{{old('kode_jurusan',$jurusan->kode_jurusan)}}" disabled>
             @error('kode_jurusan')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -55,9 +55,9 @@
                 <option value="" hidden>--pilih Sekretaris jurusan--</option>
                 @foreach ($dosens as $dosen)
                 @if (old('sekjur',$jurusan->sekjur)==$dosen->id)
-                <option value="{{$dosen->id}}" selected>{{$dosen->user->name}}</option>
+                <option value="{{$dosen->id}}" selected>{{$dosen->user->name}} ({{ $dosen->nidn }})</option>
                 @else
-                <option value="{{$dosen->id}}">{{$dosen->user->name}}</option>
+                <option value="{{$dosen->id}}">{{$dosen->user->name}} ({{ $dosen->nidn }})</option>
                 @endif
                 @endforeach
             </select>

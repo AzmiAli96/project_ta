@@ -17,7 +17,7 @@
             <select name="nobp" class="form-select">
                 <option value="" hidden>--pilih Mahasiswa--</option>
                 @foreach ($mahasiswas as $mahasiswa)
-                <option value="{{$mahasiswa->nobp}}">{{$mahasiswa->nobp}}  -   {{$mahasiswa->nama}}</option>
+                <option value="{{$mahasiswa->nobp}}">{{$mahasiswa->nobp}}  -   {{$mahasiswa->user->name}}</option>
                 @endforeach
             </select>
             @error('sesi_id')
@@ -37,7 +37,8 @@
         </div>
         <div class="mb-3">
             <label for="formFileMultiple" class="form-label">file tugas akhir</label>
-            <input class="form-control" type="file" name="dokumen" value="{{ old('dokumen') }}" id="formFileMultiple" multiple>
+            <input class="form-control @error('dokumen') is-invalid @enderror" type="file" name="dokumen" value="{{ old('dokumen') }}" id="formFileMultiple" multiple>
+            
             @error('dokumen')
             <div class="invalid-feedback">
                 {{ $message }}

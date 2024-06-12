@@ -22,11 +22,7 @@ class JurusanController extends Controller
      */
     public function create()
     {
-        $availableDosens = Dosen::whereDoesntHave('Dkajur')
-            ->whereDoesntHave('Dsekjur')
-            ->whereDoesntHave('Dkaprodi')
-            ->get();
-        return view('jurusan.create',compact('availableDosens'),['dosens'=>Dosen::all()]);
+        return view('jurusan.create',['dosens'=>Dosen::all()]);
     }
 
     /**
@@ -34,52 +30,15 @@ class JurusanController extends Controller
      */
     public function store(Request $request)
     {
-        // $validated = $request->validate([
-        //     'nama_jurusan'=>'required',
-        //     'kajur'=>'required',
-        //     'sekjur'=>'required',
-        // ]);
-        // Jurusan::create($validated);
-        // return redirect('/jurusan')->with('pesan', 'berhasil menyimpan data.');
-
-        $request->validate([
-            'kode_jurusan' => 'required|unique:jurusans',
-            'nama_jurusan' => 'required',
-            'kajur' => 'nullable|exists:dosens,id|different:sekjur',
-            'sekjur' => 'nullable|exists:dosens,id|different:kajur',
+        $validated = $request->validate([
+            'kode_jurusan'=>'required',
+            'nama_jurusan'=>'required',
+            'kajur'=>'nullable|exists:dosens,id|different:sekjur',
+            'sekjur'=>'nullable|exists:dosens,id|different:kajur',
         ]);
+        Jurusan::create($validated);
+        return redirect('/jurusan')->with('pesan', 'berhasil menyimpan data.');
 
-        // // Ensure the dosen is not already assigned a different role
-        // $kajurDosen = Dosen::find($request->kajur);
-        // if ($kajurDosen && ($kajurDosen->Dsekjur || $kajurDosen->Dkajur)) {
-        //     return back()->withErrors(['kajur' => 'Dosen ini sudah memiliki peran lain.']);
-        // }
-
-        // $sekjurDosen = Dosen::find($request->sekjur);
-        // if ($sekjurDosen && ($sekjurDosen->Dsekjur || $sekjurDosen->Dkajur)) {
-        //     return back()->withErrors(['sekjur' => 'Dosen ini sudah memiliki peran lain.']);
-        // }
-        $errors = [];
-
-        // Ensure the dosen is not already assigned a different role
-        $kajurDosen = Dosen::find($request->kajur);
-        if ($kajurDosen && ($kajurDosen->Dkajur || $kajurDosen->Dsekjur || $kajurDosen->Dkaprodi)) {
-            $errors['kajur'] = 'Dosen ini sudah memiliki peran lain.';
-        }
-
-        $sekjurDosen = Dosen::find($request->sekjur);
-        if ($sekjurDosen && ($sekjurDosen->Dkajur || $sekjurDosen->Dsekjur || $sekjurDosen->Dkaprodi)) {
-            $errors['sekjur'] = 'Dosen ini sudah memiliki peran lain.';
-        }
-
-        if (!empty($errors)) {
-            return redirect()->back()->withErrors($errors)->withInput();
-        }
-
-        Jurusan::create($request->all());
-
-        // return redirect('/jurusan')->back()->with('success', 'Jurusan berhasil dibuat.');
-        return redirect()->route('jurusan.index')->with('success', 'Jurusan berhasil dibuat.');
     }
 
     /**

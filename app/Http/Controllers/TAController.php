@@ -23,10 +23,7 @@ class TAController extends Controller
      */
     public function create()
     {
-        $availableDosens = Dosen::whereDoesntHave('Ppembimbing1')
-            ->whereDoesntHave('Ppembimbing2')
-            ->get();
-        return view('ta.create',compact('availableDosens'),['mahasiswas'=>Mahasiswa::all(),'dosens'=>Dosen::all()]);
+        return view('ta.create',['mahasiswas'=>Mahasiswa::all(),'dosens'=>Dosen::all()]);
     }
 
     /**
@@ -34,29 +31,15 @@ class TAController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'nobp' => 'required',
             'judul' => 'required',
             'dokumen' => 'required',
             'pembimbing1' => 'required|exists:dosens,id|different:pembimbing2',
             'pembimbing2' => 'required|exists:dosens,id|different:pembimbing1',
         ]);
-        $errors = [];
 
-        $dosenp1 = Dosen::find($request->pembimbing1);
-        if ($dosenp1 && ($dosenp1->Ppembimbing1 || $dosenp1->Ppembimbing2 )) {
-            $errors['pembimbing1'] = 'Dosen ini sudah memiliki peran lain.';
-        }
-        $dosenp2 = Dosen::find($request->pembimbing2);
-        if ($dosenp2 && ($dosenp2->Ppembimbing2 || $dosenp2->Ppembimbing1 )) {
-            $errors['pembimbing2'] = 'Dosen ini sudah memiliki peran lain.';
-        }
-        if (!empty($errors)) {
-            return redirect()->back()->withErrors($errors)->withInput();
-        }
-
-
-        TA::create($request->all());
+        TA::create($validated);
         return redirect('/ta')->with('pesan', 'berhasil menyimpan data.');
     }
 
