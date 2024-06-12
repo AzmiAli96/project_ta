@@ -73,7 +73,7 @@ class TAController extends Controller
      */
     public function edit(String $id)
     {
-        return view('ta.edit',['mahasiswas'=>Mahasiswa::all(),'dosen'=>Dosen::all(),'tas'=>TA::find($id)]);
+        return view('ta.edit',['mahasiswas'=>Mahasiswa::all(),'dosens'=>Dosen::all(),'ta'=>TA::find($id)]);
     }
 
     /**

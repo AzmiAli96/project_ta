@@ -52,14 +52,14 @@
                         <td>{{ $tgl->tanggal }}</td>
                         <td>{{ $tgl->sesi->sesi }}</td>
                         <td>{{ $tgl->ruangan->nama_ruangan }}</td>
-                        <td>{{ $tgl->nama_status() }}</td>
+                        <td>{{ $tgl->status ? 'Berisi':'Kosong' }}</td>
                         <td>
-                            <form action="/tgl/{{$tgl->id}}" method="post" class="d-inline">
+                            <form action="/tanggal/{{$tgl->id}}" method="post" class="d-inline">
                                 @method('DELETE')
                                 @csrf
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin mau dihapus?')"><i class="fas fa-trash-alt"></i></button>
                             </form>
-                            <a href="/tgl/{{$tgl->id}}/edit" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                            <a href="/tanggal/{{$tgl->id}}/edit" class="btn btn-warning"><i class="fas fa-edit"></i></a>
                         </td>
                     </tr>
                     @endforeach

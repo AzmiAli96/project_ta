@@ -75,9 +75,9 @@
                 <option value="" hidden>--pilih prodi--</option>
                 @foreach ($prodis as $prodi)
                 @if (old('prodi_id',$mahasiswa->prodi_id)==$prodi->id)
-                <option value="{{$prodi->id}}" selected>{{ $prodi->nama }}</option>
+                <option value="{{$prodi->id}}" selected>{{ $prodi->nama_prodi }}</option>
                 @else
-                <option value="{{ $prodi->id }}">{{ $prodi->nama }}</option>
+                <option value="{{ $prodi->id }}">{{ $prodi->nama_prodi }}</option>
                 @endif
                 @endforeach
             </select>
@@ -88,18 +88,9 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label class="form-label @error('status_id') is-invalid @enderror">Status</label>
-            <select name="status_id" class="form-select">
-                <option value="" hidden>-- status --</option>
-                @foreach ($statuses as $status)
-                @if (old('status_id',$mahasiswa->status_id)==$status->id)
-                <option value="{{$status->id}}" selected>{{ $status->ket }}</option>
-                @else
-                <option value="{{ $status->id }}">{{ $status->ket }}</option>
-                @endif
-                @endforeach
-            </select>
-            @error('status_id')
+            <label class="form-label">IPS</label>
+            <input type="number" class="form-control @error('ips') is-invalid @enderror" name="ips" value="{{old('ips',$mahasiswa->ips)}}" readonly>
+            @error('ips')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>

@@ -49,7 +49,7 @@
                         <th>Email</th>
                         <th>Jurusan</th>
                         <th>Prodi</th>
-                        <th>status</th>
+                        <th>IPS</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -62,7 +62,7 @@
                         <td>{{ $mahasiswa->user->email }}</td>
                         <td>{{ $mahasiswa->jurusan->nama_jurusan }}</td>
                         <td>{{ $mahasiswa->prodi->nama_prodi }}</td>
-                        <td>{{ $mahasiswa->status->ket }}</td>
+                        <td>{{ $mahasiswa->ips }}</td>
                         <td>
                             <form action="/mahasiswa/{{$mahasiswa->id}}" method="post" class="d-inline">
                                 @method('DELETE')

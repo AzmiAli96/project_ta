@@ -56,7 +56,6 @@ class RegisterController extends Controller
                 'user_id' => $users->id,
                 'jurusan_id' => $request->jurusan_id,
                 'prodi_id' => $request->prodi_id,
-                'status_id' => $request->status_id,
             ]);
         } else if ($request->level == 'Dosen') {
             Dosen::create([

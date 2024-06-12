@@ -9,7 +9,11 @@
     {{ session('pesan') }}
 </div>
 @endif
-<div class="col-6">
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">DataTables nilai</h6>
+    </div>
+<div class="card-body">
     <form action="/nilai/{{ $nilai->id }}" method="post">
         @method('PUT')
         @csrf
@@ -27,43 +31,44 @@
                 @foreach ($nilais as $nilai )
                     <tr>
                         <td>1</td>
-                        <td>Ketua Sidang</td>
+                        <td>Pembimbing 1/td>
                         <td>{{ $nilai->sidang->validasi->ta->Dpembimbing1->user->name }} </td>
                         <td>nilai</td>
                     </tr>
                     <tr>
                         <td>2</td>
+                        <td>Pembimbing 2 </td>
                         <td>{{ $nilai->sidang->validasi->ta->Dpembimbing2->user->name }}</td>
-                        <td>Nama </td>
                         <td>nilai</td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>Nilai Rata-rata Pembimbing :</td>
+                        <td></td>
                         <td>nilai</td>
                     </tr>
                     <tr>
                         <td>3</td>
                         <td>Ketua</td>
-                        <td>Nama </td>
+                        <td>{{ $nilai->sidang->validasi->ta->Dpembimbing1->user->name }} / {{ $nilai->sidang->validasi->ta->Dpembimbing2->user->name }} </td>
                         <td>nilai</td>
                     </tr>
                     <tr>
                         <td>4</td>
                         <td>Sekretaris</td>
-                        <td>Nama </td>
+                        <td>{{ $nilai->sidang->psek_sidang->user->name }} </td>
                         <td>nilai</td>
                     </tr>
                     <tr>
                         <td>5</td>
                         <td>Anggota 1</td>
-                        <td>Nama </td>
+                        <td>{{ $nilai->sidang->panggota1->user->name }} </td>
                         <td>nilai</td>
                     </tr>
                     <tr>
                         <td>6</td>
                         <td>Anggota 2</td>
-                        <td>Nama </td>
+                        <td>{{ $nilai->sidang->panggota2->user->name }} </td>
                         <td>nilai</td>
                     </tr>
                     <tr>

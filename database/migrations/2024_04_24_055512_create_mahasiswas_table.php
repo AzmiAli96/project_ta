@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('jurusan_id');
             $table->foreignId('prodi_id');
-            $table->string('status_id');
+            $table->float('ips')->nullable();
             $table->timestamps();
         });
     }

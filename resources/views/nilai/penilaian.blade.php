@@ -35,75 +35,143 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Jabatan</th>
-                        <th>Nama</th>
-                        <th>Total Nilai</th>
+                        <th>Materi Penilaian</th>
+                        <th>Bobot(%)</th>
+                        <th>Skor</th>
                     </tr>
                 </thead>
                 <tbody>
-                @foreach ($nilais as $nilai )
                     <tr>
                         <td>1</td>
-                        <td>Ketua Sidang</td>
-                        <td>{{ $nilai->sidang->validasi->ta->Dpembimbing1->user->name }} </td>
-                        <td>nilai</td>
+                        <td colspan="3">PRESENTASI</td>
+
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Sikap dan Penampilan</td>
+                        <td>5 </td>
+                        <td>
+                            <div class="col-2">
+                                <input type="number">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Komunikasi dan Sistematika</td>
+                        <td>5</td>
+                        <td>
+                            <div class="col-2">
+                                <input type="number">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Penguatan Materi</td>
+                        <td>20 </td>
+                        <td>
+                            <div class="col-2">
+                                <input type="number">
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <td>2</td>
-                        <td>{{ $nilai->sidang->validasi->ta->Dpembimbing2->user->name }}</td>
-                        <td>Nama </td>
-                        <td>nilai</td>
+                        <td colspan="3">MAKALAH</td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>Nilai Rata-rata Pembimbing :</td>
-                        <td>nilai</td>
+                        <td>Identifikasi Masalah, tujuan dan kontribusi penelitian</td>
+                        <td>5 </td>
+                        <td>
+                            <div class="col-2">
+                                <input type="number">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Relevasnsi teori/referensi pustaka dan konsep dengan masalah penelitian</td>
+                        <td>5</td>
+                        <td>
+                            <div class="col-2">
+                                <input type="number">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Metode / Algoritma yang digunakan</td>
+                        <td>10</td>
+                        <td>
+                            <div class="col-2">
+                                <input type="number">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Hasil dan Pembahasan</td>
+                        <td>15</td>
+                        <td>
+                            <div class="col-2">
+                                <input type="number">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Kesimpulan dan Saran</td>
+                        <td>5</td>
+                        <td>
+                            <div class="col-2">
+                                <input type="number">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Penggunaan Bahasa dan Tata Tulis</td>
+                        <td>5</td>
+                        <td>
+                            <div class="col-2">
+                                <input type="number">
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <td>3</td>
-                        <td>Ketua</td>
-                        <td>Nama </td>
-                        <td>nilai</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Sekretaris</td>
-                        <td>Nama </td>
-                        <td>nilai</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Anggota 1</td>
-                        <td>Nama </td>
-                        <td>nilai</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>Anggota 2</td>
-                        <td>Nama </td>
-                        <td>nilai</td>
+                        <td colspan="3">Produk</td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>Nilai Rata-rata Penguji :</td>
-                        <td></td>
-                        <td>nilai</td>
+                        <td>Kesesuaian fungsionalitas sistem</td>
+                        <td>25</td>
+                        <td>
+                            <div class="col-2">
+                                <input type="number">
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>Nilai Akhir :</td>
-                        <td></td>
-                        <td>nilai</td>
+                        <td colspan="2"><b>Total</b></td>
+                        <td>
+                            <div class="col-2">
+                                <input type="number">
+                            </div>
+                        </td>
                     </tr>
-                    <tr>
-                        <td></td>
-                        <td>Hasil Akhir :</td>
-                        <td></td>
-                        <td>nilai</td>
-                    </tr>
-                    @endforeach
                 </tbody>
             </table>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Revisi</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Lihat isi Laporan"></textarea>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button type="submit" class="btn btn-success btn-lg" value="submit">Submit</button>
+            </div>
         </div>
     </div>
 </div>

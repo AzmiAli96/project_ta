@@ -61,9 +61,9 @@ route::middleware(['auth'])->group(function(){
 route::get('/exportMahasiswa',[MahasiswaController::class,'export'])->name('mahasiswa.export');
 route::post('/importMahasiswa',[MahasiswaController::class,'import']);
 
-// Route::get('/nilai', function () {
-//     return view('nilai/penilaian');
-// });
+Route::get('/penilaian', function () {
+    return view('nilai/penilaian');
+});
 // Route::get('/penilai', function () {
 //     return view('nilai/index');
 // });

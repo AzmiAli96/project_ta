@@ -36,8 +36,8 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="formFile" class="form-label">file tugas akhir</label>
-            <input class="form-control" type="file" name="dokumen" value="{{ old('dokumen') }}" id="formFile">
+            <label for="formFileMultiple" class="form-label">file tugas akhir</label>
+            <input class="form-control" type="file" name="dokumen" value="{{ old('dokumen') }}" id="formFileMultiple" multiple>
             @error('dokumen')
             <div class="invalid-feedback">
                 {{ $message }}

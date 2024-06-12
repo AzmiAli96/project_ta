@@ -30,7 +30,7 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        return view('mahasiswa.create',['prodis'=>prodi::all(),'statuses'=>status::all(),'jurusans'=>Jurusan::all()]);
+        return view('mahasiswa.create',['prodis'=>prodi::all(),'jurusans'=>Jurusan::all()]);
     }
 
     /**
@@ -57,7 +57,6 @@ class MahasiswaController extends Controller
             'user_id'=>$users->id,
             'jurusan_id'=>$request->jurusan_id,
             'prodi_id'=>$request->prodi_id,
-            'status_id'=>$request->status_id,
             
         ]);
         return redirect('/mahasiswa')->with('pesan', 'berhasil menyimpan data.');
@@ -76,7 +75,7 @@ class MahasiswaController extends Controller
      */
     public function edit(string $id)
     {
-        return view('mahasiswa.edit',['prodis'=>prodi::all(),'statuses'=>status::all(),'jurusans'=>Jurusan::all(),'mahasiswa'=>Mahasiswa::find($id)]);
+        return view('mahasiswa.edit',['prodis'=>prodi::all(),'jurusans'=>Jurusan::all(),'mahasiswa'=>Mahasiswa::find($id)]);
     }
 
     /**
@@ -95,7 +94,8 @@ class MahasiswaController extends Controller
             'nobp'=> 'required',
             'jurusan_id'=>'required',
             'prodi_id'=>'required',
-            'status_id'=>'required',
+            'ips'=>'nullable',
+            // 'status_id'=>'required',
         ]);
         
         Mahasiswa::where('id',$id)->update($validatedM);

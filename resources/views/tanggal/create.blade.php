@@ -53,8 +53,8 @@
             <label class="form-label @error('status') is-invalid @enderror">status</label>
             <select name="status" class="form-select">
                 <option value="" hidden>--pilih status--</option>
-                <option value="1" >Isi</option>
-                <option value="2" >Kosong</option>
+                <option value="0" >Isi</option>
+                <option value="1" >Kosong</option>
             </select>
             @error('status')
             <div class="invalid-feedback">

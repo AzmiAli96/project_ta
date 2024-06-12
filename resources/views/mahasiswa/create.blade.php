@@ -78,14 +78,9 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label class="form-label @error('status_id') is-invalid @enderror">Prodi</label>
-            <select name="status_id" class="form-select">
-                <option value="" hidden>-- status --</option>
-                @foreach ($statuses as $status)
-                <option value="{{$status->id}}">{{$status->ket}}</option>
-                @endforeach
-            </select>
-            @error('status_id')
+            <label class="form-label">IPS</label>
+            <input type="number" class="form-control @error('ips') is-invalid @enderror" name="ips" value="{{old('ips')}}">
+            @error('ips')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>

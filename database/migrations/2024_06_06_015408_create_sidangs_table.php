@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('sidangs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('validasi_id');
+            $table->foreignId('validasi_id')->unique();
             $table->foreignId('tanggal_id');
             $table->string('sekr_sidang')->constrain('dosen_id');
             $table->string('anggota1')->constrain('dosen_id');

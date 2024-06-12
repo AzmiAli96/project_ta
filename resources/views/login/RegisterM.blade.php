@@ -101,7 +101,6 @@
                                         </div>
                                         @enderror
                                     </div>
-                                    <input type="hidden" name="status_id" id="status_id" value="3">
                                 </div>
 
                                 <div id="Dosen" class="mb-4" style="display: none;">
@@ -159,7 +158,6 @@
             var nobpSection = document.getElementById('nobp');
             var jurusan_idSection = document.getElementById('jurusan_id');
             var prodi_idSection = document.getElementById('prodi_id');
-            var status_idSection = document.getElementById('status_id');
             var levelSelect = document.getElementById('level');
 
             var dosenSelect = document.getElementById('Dosen');
@@ -176,13 +174,11 @@
                     nobpSection.setAttribute('required', 'required');
                     jurusan_idSection.setAttribute('required', 'required');
                     prodi_idSection.setAttribute('required', 'required');
-                    status_idSection.setAttribute('required', 'required');
                 } else {
                     mahasiswaSelect.style.display = 'none';
                     nobpSection.removeAttribute('required');
                     jurusan_idSection.removeAttribute('required');
                     prodi_idSection.removeAttribute('required');
-                    status_idSection.removeAttribute('required');
                 }
                 if (levelSelect.value === 'Dosen') {
                     dosenSelect.style.display = 'block';

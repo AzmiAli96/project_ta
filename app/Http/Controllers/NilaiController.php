@@ -56,7 +56,7 @@ class NilaiController extends Controller
      */
     public function edit(string $id)
     {
-        return view('nilai.edit',['sidangs'=>Sidang::all(),'nilai'=>Nilai::find($id)]);
+        return view('nilai.edit',['sidangs'=>Sidang::all(),'nilais'=>Nilai::all(),'nilai'=>Nilai::find($id)]);
     }
 
     /**

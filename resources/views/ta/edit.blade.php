@@ -15,13 +15,13 @@
         @csrf
         <div class="mb-3">
             <label class="form-label @error('nobp') is-invalid @enderror">sesi</label>
-            <select name="nobp" class="form-select">
+            <select name="nobp" class="form-select" disabled>
                 <option value="" hidden>--pilih sesi--</option>
                 @foreach ($mahasiswas as $mahasiswa)
-                @if (old('nobp',$mahasiswa->nobp)==$mahasiswa->nobp)
-                <option value="{{$mahasiswa->nobp}}" selected>{{ $mahasiswa->nobp }} {{ $mahasiswa->nama }}</option>
+                @if (old('nobp',$ta->nobp)==$mahasiswa->nobp)
+                <option value="{{$mahasiswa->nobp}}" selected>{{ $mahasiswa->nobp }} - {{ $mahasiswa->user->name }}</option>
                 @else
-                <option value="{{ $mahasiswa->nobp }}">{{ $mahasiswa->nobp }} {{ $mahasiswa->nama }}</option>
+                <option value="{{ $mahasiswa->nobp }}">{{ $mahasiswa->nobp }} - {{ $mahasiswa->user->name }}</option>
                 @endif
                 @endforeach
             </select>
@@ -54,10 +54,10 @@
             <select name="pembimbing1" class="form-select">
                 <option value="" hidden>--pilih dosen pembimbing--</option>
                 @foreach ($dosens as $dosen)
-                @if (old('dosen',$dosen->dosen)==$dosen->id)
-                <option value="{{$dosen->id}}" selected>{{ $dosen->nama }}</option>
+                @if (old('pembimbing1',$ta->pembimbing1)==$dosen->id)
+                <option value="{{$dosen->id}}" selected>{{ $dosen->user->name }} </option>
                 @else
-                <option value="{{ $dosen->id }}">{{ $dosen->nama }}</option>
+                <option value="{{ $dosen->id }}">{{ $dosen->user->name }}</option>
                 @endif
                 @endforeach
             </select>
@@ -72,10 +72,10 @@
             <select name="pembimbing2" class="form-select">
                 <option value="" hidden>--pilih dosen pembimbing--</option>
                 @foreach ($dosens as $dosen)
-                @if (old('dosen',$dosen->dosen)==$dosen->id)
-                <option value="{{$dosen->id}}" selected>{{ $dosen->nama }}</option>
+                @if (old('pembimbing2',$ta->pembimbing2)==$dosen->id)
+                <option value="{{$dosen->id}}" selected>{{ $dosen->user->name }}</option>
                 @else
-                <option value="{{ $dosen->id }}">{{ $dosen->nama }}</option>
+                <option value="{{ $dosen->id }}">{{ $dosen->user->name }}</option>
                 @endif
                 @endforeach
             </select>

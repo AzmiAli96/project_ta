@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('nilais', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sidang_id');
+            $table->foreignId('sidang_id')->unique();
             $table->float('nilai_ketua')->nullable();
             $table->float('nilai_sekre')->nullable();
             $table->float('nilai_ang1')->nullable();

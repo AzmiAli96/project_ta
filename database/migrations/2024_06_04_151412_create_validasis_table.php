@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('validasis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('ta_id');
+            $table->foreignId('ta_id')->unique();
             $table->string('komentar');
             $table->boolean('status')->default(false);
             $table->timestamps();

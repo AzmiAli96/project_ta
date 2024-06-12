@@ -31,7 +31,7 @@
             <select name="tanggal_id" class="form-select">
                 <option value="" hidden>--pilih Tanggal penjadwalan--</option>
                 @foreach ($tanggals as $tanggal)
-                <option value="{{$tanggal->id}}">{{$tanggal->tanggal}}</option>
+                <option value="{{$tanggal->id}}">{{$tanggal->tanggal}} / {{$tanggal->sesi->sesi}} / {{$tanggal->ruangan->nama_ruangan}} </option>
                 @endforeach
             </select>
             @error('tanggal_id')
@@ -55,7 +55,7 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label class="form-label @error('anggota1') is-invalid @enderror">Anggota Sidang</label>
+            <label class="form-label @error('anggota1') is-invalid @enderror">Anggota Sidang 1</label>
             <select name="anggota1" class="form-select">
                 <option value="" hidden>--pilih dosen pembimbing--</option>
                 @foreach ($dosens as $dosen)
@@ -69,7 +69,7 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label class="form-label @error('anggota2') is-invalid @enderror">Anggota Sidang</label>
+            <label class="form-label @error('anggota2') is-invalid @enderror">Anggota Sidang 2</label>
             <select name="anggota2" class="form-select">
                 <option value="" hidden>--pilih dosen pembimbing--</option>
                 @foreach ($dosens as $dosen)
