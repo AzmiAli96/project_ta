@@ -15,7 +15,7 @@
         @csrf
         <div class="mb-3">
             <label class="form-label">Kode Jurusan</label>
-            <input type="text" class="form-control @error('kode_jurusan') is-invalid @enderror" name="kode_jurusan" value="{{old('kode_jurusan',$jurusan->kode_jurusan)}}" disabled>
+            <input type="text" class="form-control @error('kode_jurusan') is-invalid @enderror" name="kode_jurusan" value="{{old('kode_jurusan',$jurusan->kode_jurusan)}}" readonly>
             @error('kode_jurusan')
             <div class="invalid-feedback">
                 {{ $message }}

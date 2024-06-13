@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Dosen;
 use App\Models\Jurusan;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class JurusanController extends Controller
 {
@@ -62,8 +63,9 @@ class JurusanController extends Controller
      */
     public function update(Request $request, String $id)
     {
+        $data = Jurusan::find($id);
         $validated = $request->validate([
-            'kode_jurusan' => 'required|unique:jurusans',
+            'kode_jurusan' => 'required|'. Rule::unique('jurusans')->ignore($data),
             'nama_jurusan' => 'required',
             'kajur' => 'nullable|exists:dosens,id|different:sekjur',
             'sekjur' => 'nullable|exists:dosens,id|different:kajur',
