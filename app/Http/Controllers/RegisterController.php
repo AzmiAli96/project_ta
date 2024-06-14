@@ -28,6 +28,7 @@ class RegisterController extends Controller
             'level' => 'required|in:Admin,Kaprodi,Mahasiswa,Dosen',
             // 'mahasiswa_id'=>'required',
             // 'dosen_id'=>'required',
+            'captcha' => 'required|captcha'
         ], [
             'firstname.required' => 'Nama wajib diisi',
             'email.required' => 'Email wajib diisi',
@@ -36,6 +37,8 @@ class RegisterController extends Controller
             'email.unique' => 'Email sudah pernah digunakan, Silahkan gunakan Email lain',
             'password.required' => 'Password wajib diisi',
             'password.min' => 'Minimum password yang dimasukkan adalah 8',
+            'captcha.required' => 'Inputkan karakter captcha',
+            'captcha.captcha' => 'input karakter salah'
         ]);
 
         $users = User::create([

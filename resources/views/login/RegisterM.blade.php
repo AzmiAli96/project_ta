@@ -121,8 +121,20 @@
                                     <textarea class="form-control form-control-user" rows="2" id="alamat" name="alamat" placeholder="Alamat"></textarea>
                                     </div>
                                 </div>
+{{-- captcha --}}
 
+                                <div>
+                                    <img src="{{ captcha_src('math') }}" alt="captcha">
+                                    <div class="mt-2"></div>
+                                    <input 
+                                        type="text" name="captcha" class="form-control @error('captcha') is-invalid @enderror" placeholder="Please Insert Captch"
+                                        >
+                                    @error('captcha') 
+                                    <div class="invalid-feedback">{{ $message }}</div> @enderror 
 
+                                </div>
+
+{{-- ------- --}}
                                 <button type="submit" class="btn btn-primary btn-user btn-block">
                                     Register Account
                                 </button>
