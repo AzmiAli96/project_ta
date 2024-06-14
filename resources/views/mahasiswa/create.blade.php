@@ -77,9 +77,9 @@
             </div>
             @enderror
         </div>
-        <div class="mb-3">
+        <div class="col-2 mb-3 ">
             <label class="form-label">IPS</label>
-            <input type="number" class="form-control @error('ips') is-invalid @enderror" name="ips" value="{{old('ips')}}">
+            <input type="text" class="form-control @error('ips') is-invalid @enderror" name="ips" value="{{old('ips')}}">
             @error('ips')
             <div class="invalid-feedback">
                 {{ $message }}

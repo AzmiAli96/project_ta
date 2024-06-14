@@ -26,19 +26,7 @@
             </div>
             @enderror
         </div>
-        <div class="mb-3">
-            <label class="form-label @error('status') is-invalid @enderror">status</label>
-            <select name="status" class="form-select">
-                <option value="" hidden>--pilih status--</option>
-                <option value="1" >Lulus</option>
-                <option value="0" >Belum Lulus</option>
-            </select>
-            @error('status')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-            @enderror
-        </div>
+        <input type="hidden" name="status" value="0">
         <button type="submit" class="btn btn-primary">submit</button>
     </form>
 </div>

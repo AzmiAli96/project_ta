@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Nilai;
+use App\Models\Penjumlahan;
 use App\Models\Sidang;
 use Illuminate\Http\Request;
 
@@ -22,7 +23,7 @@ class NilaiController extends Controller
      */
     public function create()
     {
-        return view('nilai.create',['sidangs'=>Sidang::all()]);
+        return view('nilai.create',['sidangs'=>Sidang::all(),'penjumlahans'=>Penjumlahan::all()]);
     }
 
     /**
@@ -56,7 +57,7 @@ class NilaiController extends Controller
      */
     public function edit(string $id)
     {
-        return view('nilai.edit',['sidangs'=>Sidang::all(),'nilais'=>Nilai::all(),'nilai'=>Nilai::find($id)]);
+        return view('nilai.edit',['sidangs'=>Sidang::all(),'nilais'=>Nilai::all(),'penjumlahans'=>Penjumlahan::all(),'nilai'=>Nilai::find($id)]);
     }
 
     /**

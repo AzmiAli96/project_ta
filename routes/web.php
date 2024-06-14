@@ -6,6 +6,7 @@ use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\NilaiController;
+use App\Http\Controllers\PenjumlahanController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RuanganController;
@@ -55,6 +56,7 @@ route::middleware(['auth'])->group(function(){
     route::resource('/validasi',ValidasiController::class);
     route::resource('/sidang',SidangController::class);
     route::resource('/nilai',NilaiController::class);
+    route::resource('/penjumlahan',PenjumlahanController::class);
     route::get('/logout',[LoginController::class,'logout']);
 });
 

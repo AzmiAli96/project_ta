@@ -25,21 +25,24 @@
                         <th>Jabatan</th>
                         <th>Nama</th>
                         <th>Total Nilai</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                @foreach ($nilais as $nilai )
+                @foreach ($penjumlahans as $penjumlahan )
                     <tr>
                         <td>1</td>
-                        <td>Pembimbing 1/td>
-                        <td>{{ $nilai->sidang->validasi->ta->Dpembimbing1->user->name }} </td>
+                        <td>Pembimbing 1</td>
+                        <td>{{ $penjumlahan->nilai->sidang->validasi->ta->Dpembimbing1->user->name }} </td>
                         <td>nilai</td>
+                        <td><a href="/penjumlahan/{{request('id')}}/create" class="btn btn-warning"><i class="fas fa-edit"></i></a></td>
                     </tr>
                     <tr>
                         <td>2</td>
                         <td>Pembimbing 2 </td>
-                        <td>{{ $nilai->sidang->validasi->ta->Dpembimbing2->user->name }}</td>
+                        <td>{{ $penjumlahan->nilai->sidang->validasi->ta->Dpembimbing2->user->name }}</td>
                         <td>nilai</td>
+                        <td><a href="/nilai/{{$nilai->id}}/edit" class="btn btn-warning"><i class="fas fa-edit"></i></a></td>
                     </tr>
                     <tr>
                         <td></td>
@@ -50,26 +53,30 @@
                     <tr>
                         <td>3</td>
                         <td>Ketua</td>
-                        <td>{{ $nilai->sidang->validasi->ta->Dpembimbing1->user->name }} / {{ $nilai->sidang->validasi->ta->Dpembimbing2->user->name }} </td>
+                        <td>{{ $penjumlahan->nilai->sidang->validasi->ta->Dpembimbing1->user->name }} / {{ $penjumlahan->nilai->sidang->validasi->ta->Dpembimbing2->user->name }} </td>
                         <td>nilai</td>
+                        <td><a href="/nilai/{{$nilai->id}}/edit" class="btn btn-warning"><i class="fas fa-edit"></i></a></td>
                     </tr>
                     <tr>
                         <td>4</td>
                         <td>Sekretaris</td>
-                        <td>{{ $nilai->sidang->psek_sidang->user->name }} </td>
+                        <td>{{ $penjumlahan->nilai->sidang->psek_sidang->user->name }} </td>
                         <td>nilai</td>
+                        <td><a href="/nilai/{{$nilai->id}}/edit" class="btn btn-warning"><i class="fas fa-edit"></i></a></td>
                     </tr>
                     <tr>
                         <td>5</td>
                         <td>Anggota 1</td>
-                        <td>{{ $nilai->sidang->panggota1->user->name }} </td>
+                        <td>{{ $penjumlahan->nilai->sidang->panggota1->user->name }} </td>
                         <td>nilai</td>
+                        <td><a href="/nilai/{{$nilai->id}}/edit" class="btn btn-warning"><i class="fas fa-edit"></i></a></td>
                     </tr>
                     <tr>
                         <td>6</td>
                         <td>Anggota 2</td>
-                        <td>{{ $nilai->sidang->panggota2->user->name }} </td>
+                        <td>{{ $penjumlahan->nilai->sidang->panggota2->user->name }} </td>
                         <td>nilai</td>
+                        <td><a href="/nilai/{{$nilai->id}}/edit" class="btn btn-warning"><i class="fas fa-edit"></i></a></td>
                     </tr>
                     <tr>
                         <td></td>

@@ -36,7 +36,8 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>nilai</th>
+                        <th>Mahasiswa</th>
+                        <th>Prodi</th>
                         <th>Ketua Sidang</th>
                         <th>Sekretaris Sidang</th>
                         <th>Anggota Sidang</th>
@@ -50,6 +51,7 @@
                     <tr>
                         <td>{{ $nilais->firstItem()+$loop->index }}</td>
                         <td>{{$nilai->sidang->validasi->ta->nobp}} / {{ $nilai->sidang->validasi->ta->mahasiswa->user->name }}</td>
+                        <td>{{$nilai->sidang->validasi->ta->mahasiswa->prodi->jenjang}} - {{ $nilai->sidang->validasi->ta->mahasiswa->prodi->kode_prodi }}</td>
                         <td>{{ $nilai->sidang->validasi->ta->Dpembimbing1->user->name }} && {{ $nilai->sidang->validasi->ta->Dpembimbing2->user->name }}</td>
                         <td>{{ $nilai->sidang->psek_sidang->user->name }}</td>
                         <td>{{ $nilai->sidang->panggota1->user->name }} & {{ $nilai->sidang->panggota2->user->name }}</td>
