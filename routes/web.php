@@ -64,6 +64,6 @@ route::post('/importMahasiswa',[MahasiswaController::class,'import']);
 Route::get('/penilaian', function () {
     return view('nilai/penilaian');
 });
-// Route::get('/penilai', function () {
-//     return view('nilai/index');
-// });
+Route::get('/profile', function () {
+    return view('profile/index');
+});
