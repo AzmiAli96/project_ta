@@ -56,7 +56,9 @@ route::middleware(['auth'])->group(function(){
     route::resource('/validasi',ValidasiController::class);
     route::resource('/sidang',SidangController::class);
     route::resource('/nilai',NilaiController::class);
-    route::resource('/penjumlahan',PenjumlahanController::class);
+    route::post('/nilai/penjumlahan',[PenjumlahanController::class,'edit']);
+    // route::resource('/D4',NilaiController::class,'D4');
+    // route::resource('/penjumlahan',PenjumlahanController::class);
     route::get('/logout',[LoginController::class,'logout']);
 });
 

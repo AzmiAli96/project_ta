@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('penjumlahans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('nilai_id');
+            $table->string('penilai');
             $table->String('n1')->nullable();
             $table->String('n2')->nullable();
             $table->String('n3')->nullable();

@@ -27,6 +27,14 @@ class ProgramSeeder extends Seeder
             'kaprodi'=> '4',
         ]);
 
+        \App\Models\prodi::create([
+            'kode_prodi'=> 'MI',
+            'jenjang'=> 'D3',
+            'nama_prodi'=> 'Manajemen Informasi',
+            'jurusan_id'=> '1',
+            'kaprodi'=> '3',
+        ]);
+
         \App\Models\Ruangan::create([
             'nama_ruangan'=> 'E301',
         ]);

@@ -11,8 +11,11 @@ class Penjumlahan extends Model
     protected $guarded=[];
 
     public function nilai(){
-        return $this->belongsTo(sidang::class,'nilai_id');
+        return $this->belongsTo(Nilai::class,'nilai_id');
     }
-
     
+    public function scopeWithNilaiIdAndPenilai($query, $nilaiId, $penilai)
+    {
+        return $query->where('nilai_id', $nilaiId)->where('penilai', $penilai)->first();
+    }
 }

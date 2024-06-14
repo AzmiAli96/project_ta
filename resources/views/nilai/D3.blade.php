@@ -48,7 +48,7 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td>Sikap dan Penampilan</td>
+                        <td>Etika dan penampilan</td>
                         <td>5 </td>
                         <td>
                             <div class="col-2">

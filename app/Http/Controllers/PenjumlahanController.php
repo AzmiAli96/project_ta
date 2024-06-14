@@ -13,8 +13,8 @@ class PenjumlahanController extends Controller
      */
     public function index()
     {
-        $penjumlahan=Penjumlahan::latest()->paginate(10);
-        return view ('nilai.index', ['penjumlahans'=>$penjumlahan]);
+        // $penjumlahan=Penjumlahan::latest()->paginate(10);
+        // return view ('nilai.edit', ['penjumlahans'=>$penjumlahan]);
     }
 
     /**
@@ -32,6 +32,7 @@ class PenjumlahanController extends Controller
     {
         $validated = $request->validate([
             'nilai_id'=> 'required',
+            'penilai'=> 'required',
             'n1'=> 'nullable',
             'n2'=> 'nullable',
             'n3'=> 'nullable',
@@ -59,10 +60,33 @@ class PenjumlahanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        return view('nilai.D3')->with(['nilais'=>Nilai::all(),'penjumlahan'=>Penjumlahan::find($id)]);
+    public function edit()
+{
+    $jenjang = request('jenjang');
+    $penilai = request('penilai');
+    $nilai = Nilai::find(request('nilai_id'));
+
+    if (!$nilai) {
+        return redirect()->back()->withErrors(['msg' => 'Nilai not found.']);
     }
+
+    $penjumlahan = Penjumlahan::withNilaiIdAndPenilai(request('nilai_id'), $penilai);
+
+    if ($jenjang == 'D3') {
+        return view('nilai.D3')->with([
+            'nilais' => $nilai,
+            'penjumlahan' => $penjumlahan,
+            'penilai' => $penilai
+        ]);
+    } else {
+        return view('nilai.D4')->with([
+            'nilais' => $nilai,
+            'penjumlahan' => $penjumlahan,
+            'penilai' => $penilai
+        ]);
+    }
+}
+
 
     /**
      * Update the specified resource in storage.
@@ -71,6 +95,7 @@ class PenjumlahanController extends Controller
     {
         $validated = $request->validate([
             'nilai_id'=> 'required',
+            'penilai'=> 'required',
             'n1'=> 'nullable',
             'n2'=> 'nullable',
             'n3'=> 'nullable',

@@ -23,7 +23,7 @@ class NilaiController extends Controller
      */
     public function create()
     {
-        return view('nilai.create',['sidangs'=>Sidang::all(),'penjumlahans'=>Penjumlahan::all()]);
+        return view('nilai.create',['sidangs'=>Sidang::all()]);
     }
 
     /**
@@ -57,7 +57,7 @@ class NilaiController extends Controller
      */
     public function edit(string $id)
     {
-        return view('nilai.edit',['sidangs'=>Sidang::all(),'nilais'=>Nilai::all(),'penjumlahans'=>Penjumlahan::all(),'nilai'=>Nilai::find($id)]);
+        return view('nilai.edit',['sidangs'=>Sidang::all(),'penjumlahans'=>Penjumlahan::all(),'nilai'=>Nilai::find($id)]);
     }
 
     /**
@@ -78,7 +78,12 @@ class NilaiController extends Controller
         return redirect('/nilai')->with('pesan', 'berhasil di-update.');
     }
 
-    /**
+    // public function D4(string $id)
+    // {
+    //     return view('nilai.D4',['sidangs'=>Sidang::all(),'nilai'=>Nilai::find($id)]);
+    // }
+
+    /**     
      * Remove the specified resource from storage.
      */
     public function destroy(String $id)

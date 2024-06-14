@@ -63,7 +63,12 @@
                                 @csrf
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin mau dihapus?')"><i class="fas fa-trash-alt"></i></button>
                             </form>
-                            <a href="/nilai/{{$nilai->id}}/edit" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                            <form action="/nilai/{{$nilai->id}}/edit">
+                                @method('PUT')
+                                @csrf
+                                <input type="hidden" name="jenjang" value="{{$nilai->sidang->validasi->ta->mahasiswa->prodi->jenjang}}">
+                                <button type="submit" class="btn btn-warning"><i class="fas fa-edit"></i></button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach
