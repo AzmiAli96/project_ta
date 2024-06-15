@@ -8,41 +8,50 @@ use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
-class MahasiswaExport implements FromQuery, WithHeadings, WithMapping
+class MahasiswaExport implements WithHeadings, FromCollection
 {
     /**
     * @return \Illuminate\Support\Collection
     */
-    public function query()
-    {
-        return Mahasiswa::with(['prodi', 'user',])
-            ->select(['nobp', 'ips'])
-            ->addSelect([
-                'prodi_id as prodi_nama', 
-                'user_id as user_email', 
-            ]);
-    }
+   
 
 
    public function headings(): array
     {
         return [
-            'No BP',
-            'IPK',
+            'NoBP',
+            'Nama',
+            'Jurusan',
             'Program Studi',
             'Email',
-            'Status'
+            'Status',
+            'IPS'
         ];
     }
 
-    public function map($mahasiswa): array
+    public function collection()
     {
-        return [
-            $mahasiswa->nobp,
-            $mahasiswa->ips,
-            $mahasiswa->prodi_nama,
-            $mahasiswa->user_email,
-            $mahasiswa->status_ket
-        ];
+        // return Mahasiswa::with(['jurusan','prodi'])->get()->map(function($mahasiswa){
+        //     return [
+        //         $mahasiswa->nobp,
+        //         $mahasiswa->ips,
+                
+        //         $mahasiswa->prodi_nama,
+        //         $mahasiswa->user_email,
+        //         $mahasiswa->status_ket
+        //     ];
+        // });
+        return Mahasiswa::with(['jurusan', 'prodi','user'])->get()->map(function($mahasiswa){
+            return [
+                'nobp' => $mahasiswa->nobp,
+                'nama' => $mahasiswa->user->name,
+                'nama_jurusan' => $mahasiswa->jurusan->nama_jurusan,
+                'nama_prodi' => $mahasiswa->prodi->nama_prodi,
+                'email' => $mahasiswa->user->email,
+                'status' => $mahasiswa->status,
+                'IPS' => $mahasiswa->ips
+
+            ];
+        });
     }
 }

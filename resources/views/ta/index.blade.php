@@ -52,7 +52,7 @@
                         <td>{{ $tas->firstItem()+$loop->index }}</td>
                         <td>{{ $ta->nobp }}</td>
                         <td>{{ $ta->judul }}</td>
-                        <td>{{ $ta->dokumen }}</td>
+                        <td> <a href="/download-dokumen/{{ $ta->id }}" >{{ $ta->dokumen }}</a> </td>
                         <td>{{ $ta->Dpembimbing1->user->name }}</td>
                         <td>{{ $ta->Dpembimbing2->user->name }}</td>
                         <td>

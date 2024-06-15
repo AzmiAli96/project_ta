@@ -14,7 +14,12 @@ class TAController extends Controller
      */
     public function index()
     {
-        $ta=TA::with(['mahasiswa', 'Dpembimbing1', 'Dpembimbing2'])->latest()->paginate(10);
+        if(in_array(auth()->user()->level, ['Admin', 'Kaprodi'])){
+            $ta=TA::with(['mahasiswa', 'Dpembimbing1', 'Dpembimbing2'])->latest()->paginate(10);
+            
+        }else{
+            $ta=TA::with(['mahasiswa', 'Dpembimbing1', 'Dpembimbing2'])->where('nobp', '=', auth()->user()->mahasiswa->nobp)->latest()->paginate(10);
+        }
         return view ('ta.index', ['tas'=>$ta]);
     }
 
@@ -32,14 +37,26 @@ class TAController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nobp' => 'required',
+            // 'nobp' => 'required',
             'judul' => 'required',
             'dokumen' => 'required',
             'pembimbing1' => 'required|exists:dosens,id|different:pembimbing2',
             'pembimbing2' => 'required|exists:dosens,id|different:pembimbing1',
         ]);
 
-        TA::create($validated);
+        if($request->hasFile('dokumen')){
+            $file = $request->file('dokumen');
+            $fileName = uniqid(). '-'. time().'.'. $file->getClientOriginalExtension();
+            $file->storeAs('public/ta', $fileName);
+        }
+
+        TA::create([
+            'nobp'=>$request->nobp,
+            'dokumen'=>$fileName,
+            'pembimbing1'=>$request->pembimbing1,
+            'pembimbing2'=>$request->pembimbing2,
+            'judul'=>$request->judul
+        ]);
         return redirect('/ta')->with('pesan', 'berhasil menyimpan data.');
     }
 

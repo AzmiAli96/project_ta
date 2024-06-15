@@ -58,8 +58,8 @@
                     <tr>
                         <td>{{ $mahasiswas->firstItem()+$loop->index }}</td>
                         <td>{{$mahasiswa->nobp}}</td>
-                        <td>{{ $mahasiswa->user->name }}</td>
-                        <td>{{ $mahasiswa->user->email }}</td>
+                        <td>{{ $mahasiswa->user->name ?? 'belum punya akun' }}</td>
+                        <td>{{ $mahasiswa->user->email ?? 'belum punya akun' }}</td>
                         <td>{{ $mahasiswa->jurusan->nama_jurusan }}</td>
                         <td>{{ $mahasiswa->prodi->nama_prodi }}</td>
                         <td>{{ $mahasiswa->ips }}</td>

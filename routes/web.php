@@ -21,6 +21,7 @@ use App\Models\TA;
 use App\Models\tanggal;
 use App\Models\Validasi;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 Route::get('/', function () {
     return view('dashbord');
@@ -34,40 +35,73 @@ Route::get('/404', function () {
     return view('404');
 });
 
+//------------------------------------------------------------------//
 
-route::middleware(['guest'])->group(function(){
-    Route::get('/login', [LoginController::class,'index']);
-    Route::post('/login', [LoginController::class,'login'])->name('login');
-    Route::get('/register', [RegisterController::class,'register'])->name('register.show');
-    Route::post('/register', [RegisterController::class,'create'])->name('register.create');
+route::middleware(['guest'])->group(function () {
+    Route::get('/login', [LoginController::class, 'index']);
+    Route::post('/login', [LoginController::class, 'login'])->name('login');
+    Route::get('/register', [RegisterController::class, 'register'])->name('register.show');
+    Route::post('/register', [RegisterController::class, 'create'])->name('register.create');
 });
 
 
-route::middleware(['auth'])->group(function(){
-    Route::resource('/mahasiswa',MahasiswaController::class);
-    route::resource('/dosen',DosenController::class);
-    route::resource('/activityLog',ActivityLogController::class);
-    route::resource('/jurusan',JurusanController::class);
-    route::resource('/prodi',ProdiController::class);
-    route::resource('/ruangan',RuanganController::class);
-    route::resource('/sesi',SesiController::class);
-    route::resource('/tanggal',TanggalController::class);
-    route::resource('/ta',TAController::class);
-    route::resource('/validasi',ValidasiController::class);
-    route::resource('/sidang',SidangController::class);
-    route::resource('/nilai',NilaiController::class);
-    route::post('/nilai/penjumlahan',[PenjumlahanController::class,'edit']);
+//-----------------------------------------------------------------//
+
+route::middleware(['auth'])->group(function () {
+
+    ////////////////// Akses untuk semua level user//////////////////
+    Route::get('/profile', function () {
+        return view('profile/index');
+    });
+
+    Route::get('download-dokumen/{id}', function ($id) {
+        $dokumen = TA::where('id', $id)->first();
+        return Storage::download('public/ta/' . $dokumen->dokumen, $dokumen->dokumen);
+    })->name('download.dokumen');
+
+    route::resource('/ta', TAController::class);
+    route::resource('/sidang', SidangController::class);
+    route::get('/logout', [LoginController::class, 'logout']);
+    //////////////////--------------------------/////////////////////
+
+    Route::group(['middleware' => 'userAkses:Admin'], function () {
+
+        route::resource('/activityLog', ActivityLogController::class);
+
+    });
+
+    ///////////////// Akses untuk user admin & kaprodi//////////////
+    Route::group(['middleware' => 'userAkses:Admin|Kaprodi'], function () {
+        Route::resource('/mahasiswa', MahasiswaController::class);
+        route::resource('/dosen', DosenController::class);
+        route::resource('/jurusan', JurusanController::class);
+        route::resource('/prodi', ProdiController::class);
+        route::resource('/ruangan', RuanganController::class);
+        route::resource('/sesi', SesiController::class);
+        route::resource('/tanggal', TanggalController::class);
+
+        route::resource('/validasi', ValidasiController::class);
+        route::resource('/nilai', NilaiController::class);
+        route::post('/nilai/penjumlahan', [PenjumlahanController::class, 'edit']);
+        route::get('/exportMahasiswa', [MahasiswaController::class, 'export'])->name('mahasiswa.export');
+        route::post('/importMahasiswa', [MahasiswaController::class, 'import']);
+    });
+    ////////////////----------------------------////////////////////
+
     // route::resource('/D4',NilaiController::class,'D4');
     // route::resource('/penjumlahan',PenjumlahanController::class);
-    route::get('/logout',[LoginController::class,'logout']);
+
+    Route::get('/penilaian', function () {
+        return view('nilai/penilaian');
+    });
+
+
 });
 
-route::get('/exportMahasiswa',[MahasiswaController::class,'export'])->name('mahasiswa.export');
-route::post('/importMahasiswa',[MahasiswaController::class,'import']);
 
-Route::get('/penilaian', function () {
-    return view('nilai/penilaian');
-});
-Route::get('/profile', function () {
-    return view('profile/index');
-});
+
+
+
+// Route::get('test', function(){
+// dd();
+// });

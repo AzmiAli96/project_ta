@@ -120,5 +120,6 @@ class MahasiswaController extends Controller
     public function import()
     {
         Excel::import(new MahasiswaImport, request()->file('file'));
+        return redirect('/mahasiswa');
     }
 }

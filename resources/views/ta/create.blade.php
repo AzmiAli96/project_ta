@@ -10,7 +10,7 @@
 </div>
 @endif
 <div class="col-6">
-    <form action="/ta" method="post">
+    <form action="/ta" method="post" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label class="form-label @error('nobp') is-invalid @enderror">NoBP</label>
