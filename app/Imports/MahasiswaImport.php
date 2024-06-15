@@ -2,10 +2,13 @@
 
 namespace App\Imports;
 
+use App\Models\Jurusan;
 use App\Models\Mahasiswa;
+use App\Models\prodi;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class MahasiswaImport implements ToModel
+class MahasiswaImport implements ToModel, WithHeadingRow
 {
     /**
      * @param array $row
@@ -14,19 +17,21 @@ class MahasiswaImport implements ToModel
      */
     public function model(array $row)
     {
-        $data = Mahasiswa::where('no_bp', $row['nobp'])->first();
+        // dd($row);
+        $data = Mahasiswa::where('nobp', $row['nobp'])->first();
         if ($data) {
             return null;
         }
 
+        $idJurusan = Jurusan::where('nama_jurusan', $row['jurusan'])->first();
+        $idProdi = prodi::where('nama_prodi', '=', $row['prodi'])->first();
+// dd($idJurusan);
         return new Mahasiswa([
-            "no_bp" => $row["nobp"],
-            "nama" => $row["nama"],
-            "email" => $row["email"],
-            "password" => $row["password"],
-            "prodi_id" => $row["prodi_id"],
-            "ipk" => $row["ipk"],
-            "status_id" => $row["status_id"],
+
+            "nobp" => $row['nobp'],
+            "jurusan_id" => $idJurusan->id,
+            "prodi_id" => $idProdi->id,
+            "ips" => $row['ips']
         ]);
     }
 }

@@ -56,8 +56,8 @@
                     <tr>
                         <td>{{ $dosens->firstItem()+$loop->index }}</td>
                         <td>{{$dosen->nidn}}</td>
-                        <td>{{ $dosen->user->name }}</td>
-                        <td>{{ $dosen->user->email }}</td>
+                        <td>{{ $dosen->user->name ?? 'belum ada akun' }}</td>
+                        <td>{{ $dosen->user->email ?? 'belum ada akun' }}</td>
                         <td>{{ $dosen->no_telp }}</td>
                         <td>{{ $dosen->alamat }}</td>
                         <td>

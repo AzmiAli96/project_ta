@@ -14,7 +14,9 @@ use App\Http\Controllers\SesiController;
 use App\Http\Controllers\SidangController;
 use App\Http\Controllers\TAController;
 use App\Http\Controllers\TanggalController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ValidasiController;
+use App\Models\Dosen;
 use App\Models\Mahasiswa;
 use App\Models\Sidang;
 use App\Models\TA;
@@ -67,6 +69,8 @@ route::middleware(['auth'])->group(function () {
     Route::group(['middleware' => 'userAkses:Admin'], function () {
 
         route::resource('/activityLog', ActivityLogController::class);
+        Route::resource('/user', UserController::class);
+
 
     });
 
@@ -85,6 +89,8 @@ route::middleware(['auth'])->group(function () {
         route::post('/nilai/penjumlahan', [PenjumlahanController::class, 'edit']);
         route::get('/exportMahasiswa', [MahasiswaController::class, 'export'])->name('mahasiswa.export');
         route::post('/importMahasiswa', [MahasiswaController::class, 'import']);
+        route::get('/exportDosen', [DosenController::class, 'export'])->name('dosen.export');
+
     });
     ////////////////----------------------------////////////////////
 
@@ -93,6 +99,15 @@ route::middleware(['auth'])->group(function () {
 
     Route::get('/penilaian', function () {
         return view('nilai/penilaian');
+    });
+
+    Route::get('getDosen', function(){
+     $dosen = Dosen::where('user_id', null)->get();
+     return response()->json([$dosen]);   
+    });
+    Route::get('getMahasiswa', function(){
+     $mahasiswa = Mahasiswa::whereNull('user_id')->get();
+     return response()->json([$mahasiswa]);   
     });
 
 

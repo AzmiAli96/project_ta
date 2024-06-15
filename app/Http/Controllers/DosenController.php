@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DosenExport;
 use App\Models\Dosen;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DosenController extends Controller
 {
@@ -97,5 +99,10 @@ class DosenController extends Controller
         User::destroy(Dosen::findOrFail($id)->user->id);
         Dosen::destroy($id);
         return redirect('/dosen')->with('pesan', 'Berhasil Dihapuskan.');
+    }
+
+    public function export()
+    {
+        return Excel::download(new DosenExport(), 'Dosen.xlsx');
     }
 }

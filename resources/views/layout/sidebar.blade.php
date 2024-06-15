@@ -26,9 +26,17 @@
 
                     <!-- Heading -->
                     <div class="sidebar-heading">
-                        User
+                        Daftar
                     </div>
-                    @if (auth()->user()->level == 'Admin'|auth()->user()->level == 'Kaprodi'|auth()->user()->level == 'Dosen' )
+                    @if (in_array(auth()->user()->level, ['Admin']))
+                    <!-- Nav Item - Pages Collapse Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user">
+                        <i class="fas fa-user"></i>
+                            <span>User</span></a>
+                    </li>
+                    @endif
+                    @if (auth()->user()->level == 'Admin'|auth()->user()->level == 'Kaprodi')
                     <!-- Nav Item - Pages Collapse Menu -->
                     <li class="nav-item">
                         <a class="nav-link" href="/dosen">
@@ -40,7 +48,7 @@
                     <!-- Nav Item - Utilities Collapse Menu -->
                     <li class="nav-item">
                         <a class="nav-link" href="/mahasiswa">
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-users"></i>
                             <span>Mahasiswa</span></a>
                     </li>
                     @endif
