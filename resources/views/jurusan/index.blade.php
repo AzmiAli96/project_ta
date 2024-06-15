@@ -29,10 +29,12 @@
                     </div>
                 </div>
             </form>
-            <a href="jurusan/create" class="btn btn-primary mb-3">Create</a>
+            <a href="jurusan/create" class="btn btn-primary">
+                <i class="fas fa-solid fa-plus-circle"></i>
+            </a>
         </div>
         <div class="table-responsive">
-            <table class="table table-bordered" width="100%" cellspacing="0">
+            <table class="table table-striped" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -40,7 +42,7 @@
                         <th>Jurusan</th>
                         <th>Ketua Jurusan</th>
                         <th>Sekretaris Jurusan</th>
-                        <th>Action</th>
+                        <th class=" d-flex justify-content-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,15 +51,15 @@
                         <td>{{ $jurusans->firstItem()+$loop->index }}</td>
                         <td>{{ $jurusan->kode_jurusan }}</td>
                         <td>{{ $jurusan->nama_jurusan }}</td>
-                        <td>{{ $jurusan->pkajur->user->name }}</td>
-                        <td>{{ $jurusan->psekjur->user->name }}</td>
-                        <td>
+                        <td>{{ $jurusan->pkajur->user?->name }}</td>
+                        <td>{{ $jurusan->psekjur->user?->name }}</td>
+                        <td class="gap-2 d-md-flex justify-content-md-end">
                             <form action="/jurusan/{{$jurusan->id}}" method="post" class="d-inline">
                                 @method('DELETE')
                                 @csrf
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin mau dihapus?')"><i class="fas fa-trash-alt"></i></button>
+                                <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Yakin mau dihapus?')"><i class="fas fa-trash-alt"></i></button>
                             </form>
-                            <a href="/jurusan/{{$jurusan->id}}/edit" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                            <a href="/jurusan/{{$jurusan->id}}/edit" class="btn btn-sm btn-outline-warning"><i class="fas fa-edit"></i></a>
                         </td>
                     </tr>
                     @endforeach

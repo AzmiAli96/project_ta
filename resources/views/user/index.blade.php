@@ -3,7 +3,7 @@
 @section('content')
 
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Tables Data User</h1>
+<h1 class="h3 mb-2 text-gray-800">Data User</h1>
 <!-- <p class="mb-4">Semua </p> -->
 @if (session()->has('pesan'))
 <div class="alert alert-primary" role="alert">
@@ -11,7 +11,7 @@
 </div>
 @endif
 
-<div class="card shadow mb-4">
+<div class="card mb-4">
     <div class="card-header py-3">
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <!-- Topbar Search -->
@@ -32,7 +32,9 @@
             <a href="/importUser" class="btn btn-sm btn-dark mr-1" data-toggle="modal" data-target="#importForm">
                 <i class="fas fa-solid fa-upload"> </i> Import
             </a>
-            <a href="user/create" class="btn btn-primary btn-sm ">Create</a>
+            <a href="user/create" class="btn btn-primary">
+                <i class="fas fa-solid fa-user-plus"></i>
+            </a>
         </div>
     </div>
 
@@ -86,11 +88,10 @@
             <form action="/importUser" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
-                    <label for="formFile" class="form-label">Default file input example</label>
                     <input class="form-control" type="file" name="file" id="formFile">
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-danger" type="button" data-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary">Import</button>
                 </div>
             </form>

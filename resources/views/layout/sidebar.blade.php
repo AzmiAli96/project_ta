@@ -30,26 +30,29 @@
                     </div>
                     @if (in_array(auth()->user()->level, ['Admin']))
                     <!-- Nav Item - Pages Collapse Menu -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/user">
-                        <i class="fas fa-user"></i>
-                            <span>User</span></a>
+                    <li class="nav-item {{ request()->routeIs('user.index') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('user.index') }}">
+                            <i class="fas fa-user"></i>
+                            <span>User</span>
+                        </a>
                     </li>
                     @endif
                     @if (auth()->user()->level == 'Admin'|auth()->user()->level == 'Kaprodi')
                     <!-- Nav Item - Pages Collapse Menu -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/dosen">
-                        <i class="fas fa-users"></i>
-                            <span>Dosen</span></a>
+                    <li class="nav-item {{ request()->routeIs('dosen.index') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('dosen.index') }}">
+                            <i class="fas fa-user-friends"></i>
+                            <span>Dosen</span>
+                        </a>
                     </li>
                     @endif
                     @if (auth()->user()->level == 'Admin'|auth()->user()->level == 'Kaprodi'|auth()->user()->level == 'Mahasiswa' )
                     <!-- Nav Item - Utilities Collapse Menu -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/mahasiswa">
-                        <i class="fas fa-users"></i>
-                            <span>Mahasiswa</span></a>
+                    <li class="nav-item {{ request()->routeIs('mahasiswa.index') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('mahasiswa.index') }}">
+                            <i class="fas fa-user-friends"></i>
+                            <span>Mahasiswa</span>
+                        </a>
                     </li>
                     @endif
 
@@ -63,7 +66,7 @@
 
                     
                     <!-- Nav Item - Pages Collapse Menu -->
-                    <li class="nav-item">
+                    <li class="nav-item ">
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                             <i class="fas fa-fw fa-folder"></i>
                             <span>Kegiatan</span>
@@ -104,8 +107,8 @@
                     @endif
 
                     <!-- Nav Item - Tables -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/sidang">
+                    <li class="nav-item {{ request()->routeIs('sidang.index') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('sidang.index') }}">
                             <i class="fas fa-fw fa-table"></i>
                             <span>Jadwal Sidang</span></a>
                     </li>

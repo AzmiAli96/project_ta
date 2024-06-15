@@ -3,26 +3,20 @@
 @section('content')
 
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Tables</h1>
-<p class="mb-4">Semua Data Dosen</p>
+<h1 class="h3 mb-2 text-gray-800">Data Dosen</h1>
 @if (session()->has('pesan'))
 <div class="alert alert-primary" role="alert">
     {{ session('pesan') }}
 </div>
 @endif
 
-<div class="card shadow mb-4">
+<div class="card mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">DataTables Dosen</h6>
-    </div>
-
-    <div class="card-body">
-
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <form action="/dosen" method="GET" class="d-none d-sm-inline-block form-inline mr-auto md-3 my-2 my-md-0 mw-100 navbar-search">
                 @csrf
                 <div class="input-group">
-                    <input type="text" name="search" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                    <input type="text" name="search" class="form-control border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="submit">
                             <i class="fas fa-search fa-sm"></i>
@@ -30,16 +24,23 @@
                     </div>
                 </div>
             </form>
-            <a href="/exportDosen" class="btn btn-primary mb-3 mr-1">
-                <i class="fas fa-solid fa-plus"> Export</i>
+            <a href="/exportDosen" class="btn btn-dark btn-sm">
+                <i class="fas fa-solid fa-download"></i> Export
             </a>
-            <a href="/importDosen" class="btn btn-primary mb-3 mr-1" data-toggle="modal" data-target="#importForm">
-                <i class="fas fa-solid fa-plus"> Import</i>
+            <a href="/importDosen" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#importForm">
+                <i class="fas fa-solid fa-upload"></i> Import
             </a>
-            <a href="dosen/create" class="btn btn-primary mb-3">Create</a>
+            <a href="dosen/create" class="btn btn-primary">
+                <i class="fas fa-solid fa-plus-circle"></i>
+            </a>
         </div>
+    </div>
+
+    <div class="card-body">
+
+       
         <div class="table-responsive">
-            <table class="table table-bordered" width="100%" cellspacing="0">
+            <table class="table table-striped" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -48,7 +49,7 @@
                         <th>Email</th>
                         <th>NO Telp</th>
                         <th>alamat</th>
-                        <th>Action</th>
+                        <th class="d-flex justify-content-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -60,13 +61,13 @@
                         <td>{{ $dosen->user->email ?? 'belum ada akun' }}</td>
                         <td>{{ $dosen->no_telp }}</td>
                         <td>{{ $dosen->alamat }}</td>
-                        <td>
+                        <td class="gap-2 d-md-flex justify-content-md-end">
                             <form action="/dosen/{{$dosen->id}}" method="post" class="d-inline">
                                 @method('DELETE')
                                 @csrf
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin mau dihapus?')"><i class="fas fa-trash-alt"></i></button>
+                                <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Yakin mau dihapus?')"><i class="fas fa-trash-alt"></i></button>
                             </form>
-                            <a href="/dosen/{{$dosen->id}}/edit" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                            <a href="/dosen/{{$dosen->id}}/edit" class="btn btn-outline-warning btn-sm"><i class="fas fa-edit"></i></a>
                         </td>
                     </tr>
                     @endforeach
@@ -88,11 +89,10 @@
             <form action="/importDosen" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
-                    <label for="formFile" class="form-label">Default file input example</label>
                     <input class="form-control" type="file" name="file" id="formFile">
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-danger" type="button" data-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary">Import</button>
                 </div>
             </form>

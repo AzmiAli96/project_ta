@@ -28,7 +28,7 @@
                 <div class="col-lg-6 text-lg-left">
                     <ul class="list-inline mb-2">
                         <li class="list-inline-item">
-                            <i class="fas fa-id-badge"></i>
+                            <i class="fas fa-phone-square-alt"></i>
                             <span>082392184699</span></a><br>
 
                             <i class="fab fa-instagram"></i>
