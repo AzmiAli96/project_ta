@@ -42,7 +42,7 @@
                                     <input type="hidden" name="jenjang" value="{{$nilai->sidang->validasi->ta->mahasiswa->prodi->jenjang}}">
                                     <input type="hidden" name="penilai" value="pembimbing1">
                                     <button type="submit" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-                                </form>
+                                </form> 
 
                         </tr>
                         <tr>

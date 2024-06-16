@@ -100,6 +100,34 @@ class DatabaseSeeder extends Seeder
             'alamat'=> 'taluak',
         ]);
 
+        // \App\Models\User::create([
+        //     'name'=> 'bagaz tra',
+        //     'email'=> 'bagaz@gmail.com',
+        //     'password'=> bcrypt('123123123'),
+        //     'level'=> 'Mahasiswa',
+        // ]);
+
+        // \App\Models\Mahasiswa::create([
+        //     'nobp'=> '2211081005',
+        //     'user_id'=> '7',
+        //     'jurusan_id'=> '1',
+        //     'prodi'=> '1',
+        // ]);
+
+        // \App\Models\User::create([
+        //     'name'=> 'bagaz tra',
+        //     'email'=> 'bagaz@gmail.com',
+        //     'password'=> bcrypt('123123123'),
+        //     'level'=> 'Mahasiswa',
+        // ]);
+
+        // \App\Models\Mahasiswa::create([
+        //     'nobp'=> '2211081005',
+        //     'user_id'=> '7',
+        //     'jurusan_id'=> '1',
+        //     'prodi'=> '1',
+        // ]);
+
         
 
         // \App\Models\Jurusan::create([

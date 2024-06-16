@@ -25,6 +25,8 @@ return new class extends Migration
             $table->String('n8')->nullable();
             $table->String('n9')->nullable();
             $table->String('n10')->nullable();
+            $table->String('total_nilai')->nullable();
+            $table->String('rata-rata')->nullable();
             $table->String('ket')->nullable();
             $table->timestamps();
         });

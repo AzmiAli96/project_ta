@@ -16,6 +16,6 @@ class Penjumlahan extends Model
     
     public function scopeWithNilaiIdAndPenilai($query, $nilaiId, $penilai)
     {
-        return $query->where('nilai_id', $nilaiId)->where('penilai', $penilai)->first();
+        return $query->where('nilai_id', $nilaiId)->where('penilai', $penilai);
     }
 }

@@ -52,7 +52,7 @@
                         <td>5 </td>
                         <td>
                             <div class="col-2">
-                                <input type="number">
+                                <input type="text">
                             </div>
                         </td>
                     </tr>
@@ -62,17 +62,37 @@
                         <td>5</td>
                         <td>
                             <div class="col-2">
-                                <input type="number">
+                                <input type="text">
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>Penguatan Materi</td>
+                        <td>Penguatan materi Pengetahuan dasar</td>
+                        <td>10 </td>
+                        <td>
+                            <div class="col-2">
+                                <input type="text">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Penguatan materi Pemahaman</td>
+                        <td>10 </td>
+                        <td>
+                            <div class="col-2">
+                                <input type="text">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Penguatan materi Kemampuan Terapan</td>
                         <td>20 </td>
                         <td>
                             <div class="col-2">
-                                <input type="number">
+                                <input type="text">
                             </div>
                         </td>
                     </tr>
@@ -82,61 +102,41 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td>Identifikasi Masalah, tujuan dan kontribusi penelitian</td>
+                        <td>Bahasa dan Tata Tulis</td>
                         <td>5 </td>
                         <td>
                             <div class="col-2">
-                                <input type="number">
+                                <input type="text">
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>Relevasnsi teori/referensi pustaka dan konsep dengan masalah penelitian</td>
-                        <td>5</td>
-                        <td>
-                            <div class="col-2">
-                                <input type="number">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>Metode / Algoritma yang digunakan</td>
-                        <td>10</td>
-                        <td>
-                            <div class="col-2">
-                                <input type="number">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>Hasil dan Pembahasan</td>
+                        <td>penerapan Siklus Pengembangan Sistem</td>
                         <td>15</td>
                         <td>
                             <div class="col-2">
-                                <input type="number">
+                                <input type="text">
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>Kesimpulan dan Saran</td>
-                        <td>5</td>
+                        <td>Kesesuaian Hasil dengan Kebutuhan Sistem</td>
+                        <td>15</td>
                         <td>
                             <div class="col-2">
-                                <input type="number">
+                                <input type="text">
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>Penggunaan Bahasa dan Tata Tulis</td>
-                        <td>5</td>
+                        <td>Kesesuaian Hasil dengan Kebutuhan Sistem</td>
+                        <td>15</td>
                         <td>
                             <div class="col-2">
-                                <input type="number">
+                                <input type="text">
                             </div>
                         </td>
                     </tr>
@@ -146,11 +146,11 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td>Kesesuaian fungsionalitas sistem</td>
-                        <td>25</td>
+                        <td>Program/Sistem</td>
+                        <td>15</td>
                         <td>
                             <div class="col-2">
-                                <input type="number">
+                                <input type="text">
                             </div>
                         </td>
                     </tr>
@@ -159,7 +159,7 @@
                         <td colspan="2"><b>Total</b></td>
                         <td>
                             <div class="col-2">
-                                <input type="number">
+                                <input type="text">
                             </div>
                         </td>
                     </tr>

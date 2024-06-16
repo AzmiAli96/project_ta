@@ -70,7 +70,7 @@ class PenjumlahanController extends Controller
         return redirect()->back()->withErrors(['msg' => 'Nilai not found.']);
     }
 
-    $penjumlahan = Penjumlahan::withNilaiIdAndPenilai(request('nilai_id'), $penilai);
+    $penjumlahan = Penjumlahan::withNilaiIdAndPenilai(request('nilai_id'), $penilai)->first();
 
     if ($jenjang == 'D3') {
         return view('nilai.D3')->with([
@@ -96,20 +96,54 @@ class PenjumlahanController extends Controller
         $validated = $request->validate([
             'nilai_id'=> 'required',
             'penilai'=> 'required',
-            'n1'=> 'nullable',
-            'n2'=> 'nullable',
-            'n3'=> 'nullable',
-            'n4'=> 'nullable',
-            'n5'=> 'nullable',
-            'n6'=> 'nullable',
-            'n7'=> 'nullable',
-            'n8'=> 'nullable',
-            'n9'=> 'nullable',
-            'n10'=> 'nullable',
+            'n1'=> 'nullable|numeric',
+            'n2'=> 'nullable|numeric',
+            'n3'=> 'nullable|numeric',
+            'n4'=> 'nullable|numeric',
+            'n5'=> 'nullable|numeric',
+            'n6'=> 'nullable|numeric',
+            'n7'=> 'nullable|numeric',
+            'n8'=> 'nullable|numeric',
+            'n9'=> 'nullable|numeric',
+            'n10'=> 'nullable|numeric',
+            'total_nilai'=> 'nullable',
+            'rata-rata'=> 'nullable',
             'ket'=> 'required',
         ]);
+        
+        $jenjang = request('jenjang');
+
+        if($jenjang == 'D4'){
+            $n1 = $request->input('n1');
+            $n2 = $request->input('n2');
+            $n3 = $request->input('n3');
+            $n4 = $request->input('n4');
+            $n5 = $request->input('n5');
+            $n6 = $request->input('n6');
+            $n7 = $request->input('n7');
+            $n8 = $request->input('n8');
+            $n9 = $request->input('n9');
+            $n10 = $request->input('n10');
+            $total_nilai = ($n1 * 0.05) + ($n2 * 0.05) + ($n3 * 0.2) + ($n4 * 0.05) + ($n5 * 0.05) + ($n6 * 0.1) + ($n7 * 0.15) + ($n8 * 0.05) + ($n9 * 0.05) + ($n10 * 0.25);
+        }else {
+            if($jenjang == 'D#'){
+                $n1 = $request->input('n1');
+                $n2 = $request->input('n2');
+                $n3 = $request->input('n3');
+                $n4 = $request->input('n4');
+                $n5 = $request->input('n5');
+                $n6 = $request->input('n6');
+                $n7 = $request->input('n7');
+                $n8 = $request->input('n8');
+                $n9 = $request->input('n9');
+                $n10 = $request->input('n10');
+                $hasil_nilai = ($n1 * 0.05) + ($n2 * 0.05) + ($n3 * 0.2) + ($n4 * 0.05) + ($n5 * 0.05) + ($n6 * 0.1) + ($n7 * 0.15) + ($n8 * 0.05) + ($n9 * 0.05);
+            }
+        }
+
+
         Penjumlahan::where('id',$id)->update($validated);
-        return redirect('/nilai')->with('pesan', 'berhasil di-update.');
+        return redirect('/nilai/{{ $nilai->id }}/edit')->with('pesan', 'berhasil di-update.');
     }
 
     /**
