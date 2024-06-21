@@ -3,7 +3,7 @@
 @section('content')
 
 <!-- <p class="mb-4">Semua </p> -->
-@if (sessioan()->has('pesn'))
+@if (session()->has('pesan'))
 <div class="alert alert-primary" role="alert">
     {{ session('pesan') }}
 </div>
@@ -16,14 +16,14 @@
 
     <div class="card-body">
         <div class="table-responsive">
-            <form action="/nilai/penjumlah" method="post">
-                @method('PUT')
+            <form action="/nilai/penjumlahan/{{ $penjumlahan->id }}" method="post">
                 @csrf
+                @method('PUT')
                 <div class="col-3">
                     <table>
                         <td>Mahasiswa</td>
                         <td>
-                            
+                            <input type="text" value="{{$penilai}}" name="penilai">
                         </td>
                     </table>
                 </div>
@@ -48,7 +48,7 @@
                             <td>5 </td>
                             <td>
                                 <div class="col-4">
-                                    <input type="text" class="form-control @error('n1') is-invalid @enderror" name="n1" value="{{old('n1',optional($penjumlahan)->n1)}}" placeholder="00.00">
+                                    <input type="text" class="form-control @error('n1') is-invalid @enderror" name="n1" value="{{old('n1',optional($penjumlahan)->n1,)?1:10}}" placeholder="00.00">
                                     @error('n1')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -63,7 +63,7 @@
                             <td>5</td>
                             <td>
                                 <div class="col-4">
-                                    <input type="text" class="form-control @error('n2') is-invalid @enderror" name="n2" value="{{old('n2',optional($penjumlahan)->n2)}}" placeholder="00.00">
+                                    <input type="text" class="form-control @error('n2') is-invalid @enderror" name="n2" value="{{old('n2',optional($penjumlahan)->n2)?1:10}}" placeholder="00.00">
                                     @error('n2')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -78,7 +78,7 @@
                             <td>20 </td>
                             <td>
                                 <div class="col-4">
-                                    <input type="text" class="form-control @error('n3') is-invalid @enderror" name="n3" value="{{old('n3',optional($penjumlahan)->n3)}}" placeholder="00.00">
+                                    <input type="text" class="form-control @error('n3') is-invalid @enderror" name="n3" value="{{old('n3',optional($penjumlahan)->n3)?1:10}}" placeholder="00.00">
                                     @error('n3')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -97,7 +97,7 @@
                             <td>5 </td>
                             <td>
                                 <div class="col-4">
-                                    <input type="text" class="form-control @error('n4') is-invalid @enderror" name="n4" value="{{old('n4',optional($penjumlahan)->n4)}}" placeholder="00.00">
+                                    <input type="text" class="form-control @error('n4') is-invalid @enderror" name="n4" value="{{old('n4',optional($penjumlahan)->n4)?1:10}}" placeholder="00.00">
                                     @error('n4')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -113,7 +113,7 @@
                             <td>
 
                                 <div class="col-4">
-                                    <input type="text" class="form-control @error('n5') is-invalid @enderror" name="n5" value="{{old('n5',optional($penjumlahan)->n5)}}" placeholder="00.00">
+                                    <input type="text" class="form-control @error('n5') is-invalid @enderror" name="n5" value="{{old('n5',optional($penjumlahan)->n5)?1:10}}" placeholder="00.00">
                                     @error('n5')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -129,7 +129,7 @@
                             <td>
 
                                 <div class="col-4">
-                                    <input type="text" class="form-control @error('n6') is-invalid @enderror" name="n6" value="{{old('n6',optional($penjumlahan)->n6)}}" placeholder="00.00">
+                                    <input type="text" class="form-control @error('n6') is-invalid @enderror" name="n6" value="{{old('n6',optional($penjumlahan)->n6)?1:10}}" placeholder="00.00">
                                     @error('n6')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -144,7 +144,7 @@
                             <td>15</td>
                             <td>
                                 <div class="col-4">
-                                    <input type="text" class="form-control @error('n7') is-invalid @enderror" name="n7" value="{{old('n7',optional($penjumlahan)->n7)}}" placeholder="00.00">
+                                    <input type="text" class="form-control @error('n7') is-invalid @enderror" name="n7" value="{{old('n7',optional($penjumlahan)->n7)?1:10}}" placeholder="00.00">
                                     @error('n7')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -159,7 +159,7 @@
                             <td>5</td>
                             <td>
                                 <div class="col-4">
-                                    <input type="text" class="form-control @error('n8') is-invalid @enderror" name="n8" value="{{old('n8',optional($penjumlahan)->n8)}}" placeholder="00.00">
+                                    <input type="text" class="form-control @error('n8') is-invalid @enderror" name="n8" value="{{old('n8',optional($penjumlahan)->n8)?1:10}}" placeholder="00.00">
                                     @error('n8')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -174,7 +174,7 @@
                             <td>5</td>
                             <td>
                                 <div class="col-4">
-                                    <input type="text" class="form-control @error('n9') is-invalid @enderror" name="n9" value="{{old('n9',optional($penjumlahan)->n9)}}" placeholder="00.00">
+                                    <input type="text" class="form-control @error('n9') is-invalid @enderror" name="n9" value="{{old('n9',optional($penjumlahan)->n9)?1:10}}" placeholder="00.00">
                                     @error('n9')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -193,7 +193,7 @@
                             <td>25</td>
                             <td>
                                 <div class="col-4">
-                                    <input type="text" class="form-control @error('n10') is-invalid @enderror" name="n10" value="{{old('n10',optional($penjumlahan)->n10)}}" placeholder="00.00">
+                                    <input type="text" class="form-control @error('n10') is-invalid @enderror" name="n10" value="{{old('n10',optional($penjumlahan)->n10)?1:10}}" placeholder="00.00">
                                     @error('n10')
                                     <div class="invalid-feedback">
                                         {{ $message }}

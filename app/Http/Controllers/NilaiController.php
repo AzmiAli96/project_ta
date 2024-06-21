@@ -57,7 +57,11 @@ class NilaiController extends Controller
      */
     public function edit(string $id)
     {
-        return view('nilai.edit',['sidangs'=>Sidang::all(),'penjumlahans'=>Penjumlahan::all(),'nilai'=>Nilai::find($id)]);
+        // $sidang = Sidang::all();
+        // $penjumlahan = Penjumlahan::all();
+        $nilai = Nilai::find($id);
+
+        return view('nilai.edit',['sidangs'=>Sidang::all(),'penjumlahans'=>Penjumlahan::all(),'nilai'=>Nilai::find($id), 'jenjang'=>$nilai->sidang->validasi->ta->mahasiswa->prodi->jenjang]);
     }
 
     /**

@@ -1,14 +1,6 @@
 @extends('layout.main')
 @section('title', 'Penilaian')
 @section('content')
-
-<!-- <p class="mb-4">Semua </p> -->
-@if (session()->has('pesan'))
-<div class="alert alert-primary" role="alert">
-    {{ session('pesan') }}
-</div>
-@endif
-
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">DataTables Prodi</h6>
@@ -58,7 +50,7 @@
                         <td>{{ $nilai->nilai_akhir }}</td>
                         <td>{{ $nilai->status ? 'Lulus':'Belum lulus' }}</td>
                         <td>
-                            <form action="/nilai/{{$nilai->id}}" method="post" class="d-inline">
+                            <form action="/nilay/{{$nilai->id}}" method="post" class="d-inline">
                                 @method('DELETE')
                                 @csrf
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin mau dihapus?')"><i class="fas fa-trash-alt"></i></button>
@@ -69,7 +61,7 @@
                                 <input type="hidden" name="jenjang" value="{{$nilai->sidang->validasi->ta->mahasiswa->prodi->jenjang}}">
                                 <button type="submit" class="btn btn-warning"><i class="fas fa-edit"></i></button>
                             </form> --}}
-                            <a class="btn btn-sm btn-warning" href="/nilai/{{ $nilai->id }}/edit"><i class="fas fa-edit"></i></a>
+                            <a class="btn btn-sm btn-warning" href="/nilay/{{ $nilai->id }}/edit"><i class="fas fa-edit"></i></a>
                         </td>
                     </tr>
                     @endforeach
@@ -79,5 +71,4 @@
         </div>
     </div>
 </div>
-
 @endsection
