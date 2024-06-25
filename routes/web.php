@@ -8,6 +8,7 @@ use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\PenjumlahanController;
 use App\Http\Controllers\ProdiController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RuanganController;
 use App\Http\Controllers\SesiController;
@@ -52,9 +53,12 @@ route::middleware(['guest'])->group(function () {
 route::middleware(['auth'])->group(function () {
 
     ////////////////// Akses untuk semua level user//////////////////
-    Route::get('/profile', function () {
-        return view('profile/index');
-    });
+    // Route::resource('/profile', ProfileController::class);
+
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+
 
     Route::get('download-dokumen/{id}', function ($id) {
         $dokumen = TA::where('id', $id)->first();
@@ -90,6 +94,8 @@ route::middleware(['auth'])->group(function () {
         route::get('/exportMahasiswa', [MahasiswaController::class, 'export'])->name('mahasiswa.export');
         route::post('/importMahasiswa', [MahasiswaController::class, 'import']);
         route::get('/exportDosen', [DosenController::class, 'export'])->name('dosen.export');
+        route::post('/importDosen', [DosenController::class, 'import']);
+
 
     });
     ////////////////----------------------------////////////////////

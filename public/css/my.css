@@ -1,5 +1,6 @@
-.profile-picture {
-    float: left;
+.custom-avatar {
     align-items: center;
-    
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
 }

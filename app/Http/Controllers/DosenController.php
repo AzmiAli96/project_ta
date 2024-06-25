@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\DosenImport;
 use App\Exports\DosenExport;
 use App\Models\Dosen;
 use App\Models\User;
@@ -104,5 +105,11 @@ class DosenController extends Controller
     public function export()
     {
         return Excel::download(new DosenExport(), 'Dosen.xlsx');
+    }
+
+    public function import()
+    {
+        Excel::import(new DosenImport, request()->file('file'));
+        return redirect('/dosen');
     }
 }
