@@ -33,7 +33,7 @@ class LoginController extends Controller
             activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' Berhasil melakukan login');
             return redirect('/');
         } else {
-            return back()->withErrors('username dan password yang dimasukkan tidak sesuai')->withInput();
+            return back()->withErrors('username/password yang anda masukkan tidak sesuai')->withInput();
         }
     }
 
