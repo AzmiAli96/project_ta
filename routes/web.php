@@ -92,6 +92,7 @@ route::middleware(['auth'])->group(function () {
         route::resource('/nilai/penjumlahan', PenjumlahanController::class);
         route::post('penjumlahan/{id}', [PenjumlahanController::class, 'update']);
         route::resource('/nilay', NilayController::class);
+        route::get('nilaik/{id}', [NilayController::class, 'edit']);
         // route::post('/nilai/penjumlahan', [PenjumlahanController::class, 'edit']);
         // route::put('/nilai/penjumlahan/{id}/update', [PenjumlahanController::class, 'update']);
         route::get('/exportMahasiswa', [MahasiswaController::class, 'export'])->name('mahasiswa.export');

@@ -66,9 +66,6 @@ class PenjumlahanController extends Controller
         $penilai = request('penilai');
         $nilai = Nilai::find(request('nilai_id'));
 
-        dd($nilai->sidang->validasi->ta->mahasiswa->prodi->jenjang);
-
-        dd($jenjang);
         if (!$nilai) {
             return redirect()->back()->withErrors(['msg' => 'Nilai not found.']);
         }

@@ -69,7 +69,7 @@
                                 <input type="hidden" name="jenjang" value="{{$nilai->sidang->validasi->ta->mahasiswa->prodi->jenjang}}">
                                 <button type="submit" class="btn btn-warning"><i class="fas fa-edit"></i></button>
                             </form> --}}
-                            <a class="btn btn-sm btn-warning" href="/nilai/{{ $nilai->id }}/edit"><i class="fas fa-edit"></i></a>
+                            <a class="btn btn-sm btn-warning" href="/nilaik/{{ $nilai->id }}"><i class="fas fa-edit"></i></a>
                         </td>
                     </tr>
                     @endforeach

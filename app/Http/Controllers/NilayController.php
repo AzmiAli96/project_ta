@@ -60,7 +60,6 @@ class NilayController extends Controller
         $sidang = Sidang::all();
         $penjumlahan = Penjumlahan::all();
         $nilai = Nilai::find($id);
-
         return view('nilay.edit', [
             'sidangs' => $sidang,
             'penjumlahans' => $penjumlahan,

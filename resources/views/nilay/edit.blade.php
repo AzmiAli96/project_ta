@@ -395,8 +395,8 @@
                         console.log(response);
                         const data = response.data[0];
                         $('#modalEdit').modal('show');
-                        $('#nilai_id').val(data.nilai_id ?? 0);
-                        $('#penilai').val(data.penilai ?? 0);
+                        $('#nilai_id').val(data.nilai_id);
+                        $('#penilai').val(data.penilai);
                         $('#n1').val(data.n1 ?? 0);
                         $('#n1').val(data.n1 ?? 0);
                         $('#n2').val(data.n2 ?? 0);
