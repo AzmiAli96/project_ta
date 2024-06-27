@@ -47,6 +47,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {{-- @dd() --}}
                     @foreach ($tas as $ta )
                     <tr>
                         <td>{{ $tas->firstItem()+$loop->index }}</td>

@@ -39,6 +39,9 @@ Route::get('/main', function () {
 Route::get('/404', function () {
     return view('404');
 });
+Route::get('/welcome', function () {
+    return view('awal');
+});
 
 //------------------------------------------------------------------//
 
