@@ -62,7 +62,7 @@
 
 <div class="content">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             @if(session('pesan'))
                 <div class="alert alert-success">
                     {{ session('pesan') }}
@@ -73,6 +73,9 @@
                     {{ session('error') }}
                 </div>
             @endif
+        </div>
+        <div class="col-md-8">
+            
             <div class="card">
                 <div class="card-header color-lemon">
                     <h5 class="title">Edit Profile</h5>
@@ -117,7 +120,7 @@
                         <div class="form-group text-center"> 
                             {{-- <img class="avatar rounded-circle custom-avatar" src="/avatars/{{ Auth::user()->avatar }}" style=""> --}}
                             <input id="avatar" type="file" class="form-control @error('avatar') is-invalid @enderror" name="avatar" value="{{ old('avatar') }}" required autocomplete="avatar" style="display: none;">
-                            <img  class="avatar rounded-circle custom-avatar" src="/avatars/{{ Auth::user()->avatar }}" id="avatarPreview" style="cursor: pointer;">
+                            <img  class="avatar avatar-border avatar-size" src="/avatars/{{ Auth::user()->avatar }}" id="avatarPreview" style="cursor: pointer;">
 
                             <h5 class="title">{{ $user->name }}</h5>
                         </div>
