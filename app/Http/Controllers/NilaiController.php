@@ -14,8 +14,8 @@ class NilaiController extends Controller
      */
     public function index()
     {
-        $nilai=Nilai::latest()->paginate(10);
-        return view ('nilai.index', ['nilais'=>$nilai]);
+        $sidang=Sidang::latest()->paginate(10);
+        return view ('nilai.index', ['sidangs'=>$sidang]);
     }
 
     /**
@@ -23,7 +23,7 @@ class NilaiController extends Controller
      */
     public function create()
     {
-        return view('nilai.create',['sidangs'=>Sidang::all()]);
+        // return view('nilai.create',['sidangs'=>Sidang::all()]);
     }
 
     /**
@@ -31,17 +31,17 @@ class NilaiController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'sidang_id'=> 'required',
-            'nilai_ketua'=> 'nullable',
-            'nilai_sekr'=> 'nullable',
-            'nilai_ang1'=> 'nullable',
-            'nilai_ang2'=> 'nullable',
-            'nilai_akhir'=> 'nullable',
-            'status'=> 'required',
-        ]);
-        Nilai::create($validated);
-        return redirect('/nilai')->with('pesan', 'berhasil menyimpan data.');
+        // $validated = $request->validate([
+        //     'sidang_id'=> 'required',
+        //     'nilai_ketua'=> 'nullable',
+        //     'nilai_sekr'=> 'nullable',
+        //     'nilai_ang1'=> 'nullable',
+        //     'nilai_ang2'=> 'nullable',
+        //     'nilai_akhir'=> 'nullable',
+        //     'status'=> 'required',
+        // ]);
+        // Nilai::create($validated);
+        // return redirect('/nilai')->with('pesan', 'berhasil menyimpan data.');
     }
 
     /**
@@ -59,33 +59,61 @@ class NilaiController extends Controller
     {
         // $sidang = Sidang::all();
         // $penjumlahan = Penjumlahan::all();
-        $nilai = Nilai::find($id);
+        $sidang = Sidang::find($id);
 
-        return view('nilai.edit',['sidangs'=>Sidang::all(),'penjumlahans'=>Penjumlahan::all(),'nilai'=>Nilai::find($id), 'jenjang'=>$nilai->sidang->validasi->ta->mahasiswa->prodi->jenjang]);
+        return view('nilai.edit',['sidang'=>$sidang, 'jenjang'=>$sidang->validasi->ta->mahasiswa->prodi->jenjang]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $nilai_id)
     {
         $validated = $request->validate([
             'sidang_id'=> 'required',
-            'nilai_ketua'=> 'nullable',
-            'nilai_sekr'=> 'nullable',
-            'nilai_ang1'=> 'nullable',
-            'nilai_ang2'=> 'nullable',
-            'nilai_akhir'=> 'nullable',
-            'status'=> 'required',
+            'penilai'=> 'nullable',
+            'n1'=> 'numeric',
+            'n2'=> 'numeric',
+            'n3'=> 'numeric',
+            'n4'=> 'numeric',
+            'n5'=> 'numeric',
+            'n6'=> 'numeric',
+            'n7'=> 'numeric',
+            'n8'=> 'numeric',
+            'n9'=> 'numeric',
+            'n10'=> 'nullable',
+        ],[
+            'sidang_id'=> 'salah id',
+            'penilai'=> 'salah penilai',
+            'n1'=> 'salah 1',
+            'n2'=> 'salah 2',
+            'n3'=> 'salah 3',
+            'n4'=> 'salah 4',
+            'n5'=> 'salah 5',
+            'n6'=> 'salah 6',
+            'n7'=> 'salah 7',
+            'n8'=> 'salah 8',
+            'n9'=> 'salah 9',
+            'n10'=> 'salah 10'
         ]);
-        Nilai::where('id',$id)->update($validated);
+        Nilai::where('id',$nilai_id)->update($validated);
         return redirect('/nilai')->with('pesan', 'berhasil di-update.');
     }
 
-    // public function D4(string $id)
-    // {
-    //     return view('nilai.D4',['sidangs'=>Sidang::all(),'nilai'=>Nilai::find($id)]);
-    // }
+    public function berinilai($sidang_id, $penilai, $jenjang)
+    {
+        // Create a new Nilai record
+        $nilai = Nilai::firstOrCreate(
+            ['sidang_id' => $sidang_id, 'penilai' => $penilai],['status' => false]
+        );
+
+        // Return different views based on the jenjang value
+        if ($jenjang == 'D4') {
+            return view('nilai.D4', ['nilai' => $nilai]);
+        } else {
+            return view('nilai.D3', ['nilai' => $nilai]);
+        }
+    }
 
     /**     
      * Remove the specified resource from storage.

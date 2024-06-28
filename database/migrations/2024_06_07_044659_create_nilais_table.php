@@ -13,12 +13,18 @@ return new class extends Migration
     {
         Schema::create('nilais', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sidang_id')->unique();
-            $table->float('nilai_ketua')->nullable();
-            $table->float('nilai_sekre')->nullable();
-            $table->float('nilai_ang1')->nullable();
-            $table->float('nilai_ang2')->nullable();
-            $table->float('nilai_akhir')->nullable();
+            $table->foreignId('sidang_id');
+            $table->string('penilai');
+            $table->String('n1')->nullable();
+            $table->String('n2')->nullable();
+            $table->String('n3')->nullable();
+            $table->String('n4')->nullable();
+            $table->String('n5')->nullable();
+            $table->String('n6')->nullable();
+            $table->String('n7')->nullable();
+            $table->String('n8')->nullable();
+            $table->String('n9')->nullable();
+            $table->String('n10')->nullable();
             $table->boolean('status');
             $table->timestamps();
         });

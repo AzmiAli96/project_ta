@@ -37,7 +37,7 @@ class TAController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nobp' => 'required|unique:mahasiswas',
+            'nobp' => 'required|unique:t_a_s',
             'judul' => 'required',
             'dokumen' => 'required',
             'pembimbing1' => 'required|exists:dosens,id|different:pembimbing2',
