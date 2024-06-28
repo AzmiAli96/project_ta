@@ -8,33 +8,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
-// class ProfileController extends Controller
-// {
-//     public function index()
-//     {
-//         // $user = auth()->user();
-//         // return view('profile.index', compact('user')); // Menggunakan profile.index untuk mengarahkan ke file yang benar
-
-//         $title = 'My Profile';
-//         $user = User::where('id', Auth::user()->id)->first();
-
-//         return view('profile.index', compact('title','user'));
-//     }
-     
-//     // public function update(Request $request, string $id)
-//     // {
-//     //     $validated = $request->validate([
-//     //         'name' => 'required|min:3',
-//     //         'email' => 'required',
-//     //         'password' => 'required'
-//     //     ]);
-//     //     User::where('id',$id)->update($validated);
-//     //     return redirect('/profile')->with('pesan','Data berhasil di update   !');
-//     // }
-// }
-
 class ProfileController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
+
     public function index()
     {
         $title = 'My Profile';
@@ -76,5 +56,19 @@ class ProfileController extends Controller
         }
 
         return redirect()->route('profile.index')->with('pesan', 'Data berhasil diupdate!');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'avatar' => 'required|image',
+        ]);
+
+        $avatarName = time().'.'.$request->avatar->getClientOriginalExtension();
+        $request->avatar->move(public_path('avatars'), $avatarName);
+
+        Auth()->user()->update(['avatar' => $avatarName]);
+
+        return back()->with('success', 'Avatar updated successfully.');
     }
 }

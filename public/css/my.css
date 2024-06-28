@@ -47,3 +47,32 @@
     height: 40px;
     color: #fff;
 }
+
+/* ---COLORING SECTION--- */
+    /* --Solid-- */
+        .color-lemon {
+            background-color: #ffc400;
+            color: white;
+        }
+    /* --------- */
+
+    /* --Gradient-- */
+        /* Gradasi Biru ke Orange */
+        .color-gradient-blue {
+            background: linear-gradient(180deg, #00144b, #0044ff);
+            color: white;
+        }
+
+        /* Gradasi Biru ke Orange */
+        .color-gradient-blue-orange {
+            background: linear-gradient(45deg, #007BFF, #f37005);
+            color: white;
+        }
+
+        /* Gradasi Ungu ke Pink dari atas ke bawah */
+        .color-gradient-purple-pink {
+        background: linear-gradient(to bottom, #6f42c1, #e83e8c);
+        color: white;
+    /* ----------- */
+}
+/* ---------- */

@@ -62,6 +62,7 @@ route::middleware(['auth'])->group(function () {
     // Route::resource('/profile', ProfileController::class);
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::post('/profile', [App\Http\Controllers\ProfileController::class, 'store'])->name('user.profile.store');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
 
