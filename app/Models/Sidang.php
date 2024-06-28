@@ -29,4 +29,29 @@ class Sidang extends Model
     public function panggota2(){
         return $this->belongsTo(Dosen::class,'anggota2');
     }
+
+    public function nilai(){
+        return $this->hasMany(nilai::class,'sidang_id', 'id');
+    }
+
+    public function nilaiPembimbing1(){
+        return $this->hasMany(Nilai::class, 'sidang_id', 'id')->where('penilai', 'pembimbing1');
+    }
+    public function nilaiPembimbing2(){
+        return $this->hasMany(Nilai::class, 'sidang_id', 'id')->where('penilai', 'pembimbing2');
+    }
+    public function nilaiketua(){
+        return $this->hasMany(Nilai::class, 'sidang_id', 'id')->where('penilai', 'ketua');
+    }
+    public function nilaisekretaris(){
+        return $this->hasMany(Nilai::class, 'sidang_id', 'id')->where('penilai', 'sekretaris');
+    }
+    public function nilaianggota1(){
+        return $this->hasMany(Nilai::class, 'sidang_id', 'id')->where('penilai', 'anggota1');
+    }
+    public function nilaianggota2(){
+        return $this->hasMany(Nilai::class, 'sidang_id', 'id')->where('penilai', 'anggota2');
+    }
+
+
 }

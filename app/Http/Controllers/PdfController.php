@@ -1,0 +1,63 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Nilai;
+use App\Models\Sidang;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Request;
+
+class PdfController extends Controller
+{
+    public function generatePdf()
+    {
+        $sidang = Sidang::with(['validasi.ta.Dpembimbing1.user', 'validasi.ta.Dpembimbing2.user', 'nilaiPembimbing1', 'nilaiPembimbing2', 'nilaiketua', 'nilaisekretaris', 'psek_sidang.user', 'panggota1.user', 'panggota2.user'])->first(); // Adjust your query as needed
+
+        // Calculate the values
+        $nilai_pembimbing1 = $this->calculateNilai($sidang->nilaiPembimbing1 ?? []);
+        $nilai_pembimbing2 = $this->calculateNilai($sidang->nilaiPembimbing2 ?? []);
+        $nilai_ketua = $this->calculateNilai($sidang->nilaiketua ?? []);
+        $nilai_sekretaris = $this->calculateNilai($sidang->nilaisekretaris ?? []);
+        $nilai_anggota1 = $this->calculateNilai($sidang->nilaianggota1 ?? []);
+        $nilai_anggota2 = $this->calculateNilai($sidang->nilaianggota2 ?? []);
+
+        $rata_pendidikan = ($nilai_pembimbing1 + $nilai_pembimbing2) / 2;
+        $rata_penguji = ($nilai_ketua + $nilai_sekretaris + $nilai_anggota1 + $nilai_anggota2) / 4;
+        $nilai_akhir = ($rata_pendidikan + $rata_penguji) / 2;
+        $status = $nilai_akhir >= 65 ? 'Lulus' : 'Tidak Lulus';
+
+        // Pass data to the view
+        $data = compact('sidang', 'nilai_pembimbing1', 'nilai_pembimbing2', 'rata_pendidikan', 'nilai_ketua', 'nilai_sekretaris', 'nilai_anggota1', 'nilai_anggota2', 'rata_penguji', 'nilai_akhir', 'status');
+
+        // Load the view and pass the data
+        $pdf = PDF::loadView('pdf', $data);
+
+        return $pdf->download('data-nilai-mahasiswa.pdf');
+    }
+
+    private function calculateNilai($nilaiCollection)
+    {
+        $total_nilai = 0;
+        $jumlah_penilai = $nilaiCollection ? $nilaiCollection->count() : 0;
+
+        if ($jumlah_penilai > 0) {
+            foreach ($nilaiCollection as $value) {
+                $total_nilai +=
+                ($value->n1 ?? 0) * 0.05 +
+                ($value->n2 ?? 0) * 0.05 +
+                ($value->n3 ?? 0) * 0.2 +
+                ($value->n4 ?? 0) * 0.05 +
+                ($value->n5 ?? 0) * 0.05 +
+                ($value->n6 ?? 0) * 0.1 +
+                ($value->n7 ?? 0) * 0.15 +
+                ($value->n8 ?? 0) * 0.05 +
+                ($value->n9 ?? 0) * 0.05 +
+                ($value->n10 ?? 0) * 0.25;
+            }
+
+            return $total_nilai / $jumlah_penilai;
+        }
+
+        return 0;
+    }
+}

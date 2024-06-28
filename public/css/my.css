@@ -4,3 +4,46 @@
     height: 150px;
     object-fit: cover;
 }
+
+/* public/css/styles.css */
+.header-section {
+    background: linear-gradient(135deg, #3b82f6, #9333ea);
+    padding: 60px 0;
+    color: rgb(255, 255, 255);
+    border-bottom-left-radius: 50% 20%;
+    border-bottom-right-radius: 50% 20%;
+}
+
+.header-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.feature-box {
+    padding: 20px;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    background-color: #fff;
+    transition: transform 0.3s;
+}
+
+.feature-box:hover {
+    transform: translateY(-10px);
+}
+
+.icon-container {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #3b82f6, #9333ea);
+    border-radius: 50%;
+}
+
+.icon {
+    width: 40px;
+    height: 40px;
+    color: #fff;
+}

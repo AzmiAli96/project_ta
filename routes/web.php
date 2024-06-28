@@ -6,6 +6,8 @@ use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\NilaiController;
+use App\Http\Controllers\PdfController;
+// use App\Http\Controllers\NilayController;
 use App\Http\Controllers\PenjumlahanController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\ProfileController;
@@ -19,6 +21,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ValidasiController;
 use App\Models\Dosen;
 use App\Models\Mahasiswa;
+use App\Models\Penjumlahan;
 use App\Models\Sidang;
 use App\Models\TA;
 use App\Models\tanggal;
@@ -36,6 +39,9 @@ Route::get('/main', function () {
 
 Route::get('/404', function () {
     return view('404');
+});
+Route::get('/welcome', function () {
+    return view('awal');
 });
 
 //------------------------------------------------------------------//
@@ -90,11 +96,20 @@ route::middleware(['auth'])->group(function () {
 
         route::resource('/validasi', ValidasiController::class);
         route::resource('/nilai', NilaiController::class);
-        route::post('/nilai/penjumlahan', [PenjumlahanController::class, 'edit']);
+        route::get('/berinilai/{sidang_id}/{penilai}/{jenjang}', [NilaiController::class, 'berinilai']);
+        route::put('/berinilai/{nilai_id}/edit', [NilaiController::class, 'update']);
+        // route::get('/cek-nilai/{id}', [NilayController::class, 'nilai']);
+        route::resource('/nilai/penjumlahan', PenjumlahanController::class);
+        route::post('penjumlahan/{id}', [PenjumlahanController::class, 'update']);
+        // route::resource('/nilay', NilayController::class);
+        // route::get('nilaik/{id}', [NilayController::class, 'edit']);
+        // route::post('/nilai/penjumlahan', [PenjumlahanController::class, 'edit']);
+        // route::put('/nilai/penjumlahan/{id}/update', [PenjumlahanController::class, 'update']);
         route::get('/exportMahasiswa', [MahasiswaController::class, 'export'])->name('mahasiswa.export');
         route::post('/importMahasiswa', [MahasiswaController::class, 'import']);
         route::get('/exportDosen', [DosenController::class, 'export'])->name('dosen.export');
         route::post('/importDosen', [DosenController::class, 'import']);
+        route::get('/pdf',[PdfController::class, 'generatePdf']);
 
 
     });
