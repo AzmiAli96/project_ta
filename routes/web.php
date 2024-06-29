@@ -41,7 +41,7 @@ Route::get('/main', function () {
 Route::get('/404', function () {
     return view('404');
 });
-Route::get('/welcome', function () {
+Route::get('/', function () {
     return view('awal');
 });
 
@@ -65,6 +65,8 @@ route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::post('/profile', [App\Http\Controllers\ProfileController::class, 'store'])->name('user.profile.store');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+    
     Route::resource('/dashboard', DashboardController::class);
     route::get('/pdf',[PdfController::class, 'generatePdf']);
     route::resource('/nilai', NilaiController::class);

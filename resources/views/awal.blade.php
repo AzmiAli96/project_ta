@@ -3,26 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carousel Lengkung dengan Tombol</title>
+    <title>LandingPage</title>
     
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/my.css" rel="stylesheet">
 </head>
 
+    
 
 <header>
-
+    
 </header>
 
 <body>
+    <!-- Navbar -->
+
+    <nav class="navbar bg-body-tertiary">
+        <form class="container-fluid justify-content-end">
+            <a class="btn button-ol-purple me-2" href="{{ url('/login') }}">Sign in</a>
+            <a class="btn button-purple" href="{{ url('/register') }}">Sign Up</a>
+        </form>
+    </nav>
+
+    
+    
+    <!-- Main Content -->
     <div class="header-section d-flex align-items-center">
         <div class="container text-white">
             <div class="row">
                 <div class="col-md-6">
-                    <h1>Build your next project faster with SB UI Kit Pro</h1>
-                    <p>Welcome to SB UI Kit Pro, a toolkit for building beautiful web interfaces, created by the development team at Start Bootstrap</p>
-                    <a href="#" class="btn btn-success">View Pages</a>
-                    <a href="#" class="btn btn-outline-light">Documentation</a>
+                    <h1>Sistem Penjadwalan Sidang Tugas Akhir</h1>
+                    <p>Selamat datang di laman depan website ini, sistem ini diperuntukkan bagi kebutuhan sidang tugas akhir jurusan Teknologi Informasi PNP</p>
+                    <a class="btn button-into me-2" href="{{ url('/login') }}">Sign in</a>
+                    <a class="btn button-in" href="{{ url('/register') }}">Sign Up</a>
                 </div>
                 <div class="col-md-6 text-center">
                     <img src="/image/ta.png" alt="Logo" class="img-fluid">

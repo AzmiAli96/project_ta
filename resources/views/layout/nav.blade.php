@@ -171,7 +171,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
-                                <img class="avatar avatar-border-2" src="/avatars/{{ Auth::user()->avatar }}" style="width: 30pt; height: 30pt">
+                                <img class="avatar avatar-custom-sm" src="{{ Auth::user()->avatar ? '/avatars/' . Auth::user()->avatar : '/image/default.jpg' }}" style="width: 30pt; height: 30pt">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

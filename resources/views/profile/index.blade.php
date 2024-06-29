@@ -4,61 +4,6 @@
 
 
 
-{{-- <div class="content">
-    <div class="row">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="title">Edit Profile</h5>
-                </div>
-                <form method="post" action="https://black-dashboard-laravel.creative-tim.com/profile" autocomplete="off">
-                    <div class="card-body">
-                        <input type="hidden" name="_token" value="TKAmd0RaK7a8uQsSk09EZmnUIdL8jlMSG4uL63TV" autocomplete="off">
-                        <input type="hidden" name="_method" value="put">
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" name="name" class="form-control" placeholder="Name" value="{{ $user->name }}">
-                        </div>
-                        <div class="form-group">
-                            <label>Email address</label>
-                            <input type="email" name="email" class="form-control" placeholder="Email address" value="{{ $user->email }}">
-                        </div>
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input type="text" name="password" class="form-control" placeholder="Password" value="">
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary" value="update">Ubah</button>
-                    </div>
-                </form>
-            </div>
-            
-        </div>
-        <div class="col-md-4">
-            <div class="card card-user">
-                <div class="card-body">
-                    <p class="card-text"></p>
-                    <div class="text-center">
-                        <a href="#">
-                            @php
-                                $user = Auth::user();
-                                $photo = $user->photo ?? 'default-user.png';
-                            @endphp
-                            <img class="avatar rounded-circle custom-avatar" src="{{ asset('photo/' . $photo) }}" alt="User Profile Picture">
-                            <h5 class="title">{{ $user->name }}</h5>
-                        </a>
-                    </div>
-                    <p></p>
-                    <div class="card-description">
-                        Do not be scared of the truth because we need to restart the human foundation in truth
-                        And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> --}}
 
 <div class="content">
     <div class="row">
@@ -77,7 +22,7 @@
         <div class="col-md-8">
             
             <div class="card">
-                <div class="card-header color-lemon">
+                <div class="card-header bg-gradient-custom">
                     <h5 class="title">Edit Profile</h5>
                 </div>
                 <form method="post" action="{{ route('profile.update') }}" autocomplete="off">
@@ -103,7 +48,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" class="btn button-purple">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -111,7 +56,7 @@
 
         <div class="col-md-4">
             <div class="card">
-                <div class="card-header color-lemon">
+                <div class="card-header bg-gradient-custom">
                     <h5 class="title text-center">Photo Profile</h5>
                 </div>
                 <form method="POST" action="{{ route('user.profile.store') }}" enctype="multipart/form-data">
@@ -120,7 +65,7 @@
                         <div class="form-group text-center"> 
                             {{-- <img class="avatar rounded-circle custom-avatar" src="/avatars/{{ Auth::user()->avatar }}" style=""> --}}
                             <input id="avatar" type="file" class="form-control @error('avatar') is-invalid @enderror" name="avatar" value="{{ old('avatar') }}" required autocomplete="avatar" style="display: none;">
-                            <img  class="avatar avatar-border avatar-size" src="/avatars/{{ Auth::user()->avatar }}" id="avatarPreview" style="cursor: pointer;">
+                            <img class="avatar avatar-custom" src="{{ Auth::user()->avatar ? '/avatars/' . Auth::user()->avatar : '/image/default.jpg' }}" id="avatarPreview" style="cursor: pointer;">
 
                             <h5 class="title">{{ $user->name }}</h5>
                         </div>
@@ -136,7 +81,7 @@
                     </div>
                     <div class="card-footer">
                         <div class="text-center">
-                            <button type="submit" class="btn btn-dark">
+                            <button type="submit" class="btn button-purple">
                                 {{ __('Simpan Perubahan') }}
                             </button>
                         </div>

@@ -42,10 +42,20 @@
     color: #fff;
 }
 
+.bg-gradient-custom {
+    background: linear-gradient(135deg, #3b82f6,#9333ea);
+    color: white;
+}
+
 /* ---COLORING SECTION--- */
     /* --Solid-- */
         .color-lemon {
             background-color: #ffc400f1;
+            color: white;
+        }
+
+        .color-prime {
+            background-color: #1360dd;
             color: white;
         }
 
@@ -55,13 +65,7 @@
     /* --Gradient-- */
         /* Gradasi Biru ke Orange */
         .color-gradient-blue {
-            background: linear-gradient(180deg, #00144b, #0044ff);
-            color: white;
-        }
-
-        /* Gradasi Biru ke Orange */
-        .color-gradient-blue-orange {
-            background: linear-gradient(45deg, #007BFF, #f37005);
+            background: linear-gradient(135deg, #166af1, #750fd4);
             color: white;
         }
 
@@ -74,38 +78,119 @@
 /* ---------- */
 
 /* -----AVATAR-IMAGE----- */
-    .avatar-size {
+    .avatar-custom {
         align-items: center;
         width: 150px;
         height: 150px;
         object-fit: cover;
+        border-radius: 50%;
+        border: 4px solid #9333ea; /* Warna dan ketebalan border */
+        padding: 3px; /* Jarak antara gambar dan border */
     }
 
     @media (max-width: 1080px) {
-        .avatar-size {
+        .avatar-custom {
             width: 120px;
             height: 120px;
         }
     }
 
     @media (max-width: 850px) {
-        .avatar-size {
+        .avatar-custom {
             width: 90px;
             height: 90px;
         }
     }
 
-    /**/
-
-    .avatar-border{
+    .avatar-custom-sm {
+        align-items: center;
+        width: 30px;
+        height: 30px;
+        object-fit: cover;
         border-radius: 50%;
-        border: 4px solid #ffd900; /* Warna dan ketebalan border */
-        padding: 3px; /* Jarak antara gambar dan border */
-    }
-
-    .avatar-border-2{
-        border-radius: 50%;
-        border: 2px solid #003cbd; /* Warna dan ketebalan border */
+        border: 2px solid #9333ea; /* Warna dan ketebalan border */
         padding: 2px; /* Jarak antara gambar dan border */
     }
+
+    /**/
+
+
+   
 /* ---------------------- */
+
+/* Button */
+
+    .button-purple{
+        background-color: #9333ea;
+        color: white;
+        font-size-adjust: 80;
+        font-weight: 400; /* Mengatur ketebalan teks */
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        padding: 0.375rem 0.75rem; /* Padding untuk memberi ruang di sekitar teks */
+        width: fit-content;
+        height: 40px;
+    }
+    .button-purple:hover {
+        background-color: #a748ff;
+        color: rgb(245, 245, 245);
+        text-decoration: none; /* Menghapus underline saat hover */
+    }
+
+    .button-ol-purple {
+        color: #9333ea;
+        background-color: transparent;
+        border: 1px solid #9333ea; /* Mengatur ketebalan outline */
+        font-size-adjust: 80;
+        font-weight: 450; /* Mengatur ketebalan teks */
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        padding: 0.375rem 0.75rem; /* Padding untuk memberi ruang di sekitar teks */
+        width: fit-content;
+        height: 40px;
+    }
+    
+    .button-ol-purple:hover {
+        background-color: #771dcc;
+        color: white;
+        /* border-color: #9333ea; Mengatur warna outline saat dihover */
+        text-decoration: none; /* Menghapus underline saat hover */
+    }
+
+    .button-in {
+        color: white;
+        background-color: #771dcc;
+        /* border: 1px solid #9333ea; Mengatur ketebalan outline */
+        font-size-adjust: 90;
+        font-weight: 500; /* Mengatur ketebalan teks */
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        padding: 0.375rem 0.75rem; /* Padding untuk memberi ruang di sekitar teks */
+        width: 120px;
+        height: 40px;
+    }
+    
+    .button-in:hover {
+        background-color: white;
+        color: #9333ea;
+        /* border-color: #9333ea; Mengatur warna outline saat dihover */
+        text-decoration: none; /* Menghapus underline saat hover */
+    }
+
+    .button-into {
+        color: #9333ea;
+        background-color: rgba(255, 255, 255, 0.966);
+        /* border: 1px solid #9333ea; Mengatur ketebalan outline */
+        font-size-adjust: 90;
+        font-weight: 500; /* Mengatur ketebalan teks */
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        padding: 0.375rem 0.75rem; /* Padding untuk memberi ruang di sekitar teks */
+        width: 120px;
+        height: 40px;
+    }
+    
+    .button-into:hover {
+        background-color: #771dcc;
+        color: white;
+        /* border-color: #9333ea; Mengatur warna outline saat dihover */
+        text-decoration: none; /* Menghapus underline saat hover */
+    }
+    
+    
