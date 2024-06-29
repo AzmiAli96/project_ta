@@ -16,11 +16,12 @@ class DashboardController extends Controller
         $sidang=Sidang::latest()->paginate(10);
         return view ('dashbord', ['sidangs'=>$sidang]);
 
-        // $user= User::find();
-
-        // $data = [];
-
     }
+
+    // public function char($id){
+    //     $userCount = User::count();
+    //     return view('dashboard', compact('userCount'));
+    // }
 
     
 }
