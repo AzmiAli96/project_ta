@@ -11,7 +11,7 @@
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">DataTables Prodi</h6>
+            <h6 class="m-0 font-weight-bold text-primary">DataTables Nilai</h6>
         </div>
 
         <div class="card-body">
@@ -61,28 +61,46 @@
                                 <td>{{ $sidang->psek_sidang->user->name }}</td>
                                 <td>{{ $sidang->panggota1->user->name }} & {{ $sidang->panggota2->user->name }}</td>
                                 @php
+
                                     $nilai_akhir = 0;
                                     $total_nilai = 0;
+                                    $jenjang = 'D4';
 
-                                    foreach ($sidang->nilai as $value) {
-                                        $total_nilai +=
-                                            $value->n1 * 0.05 +
-                                            $value->n2 * 0.05 +
-                                            $value->n3 * 0.2 +
-                                            $value->n4 * 0.05 +
-                                            $value->n5 * 0.05 +
-                                            $value->n6 * 0.1 +
-                                            $value->n7 * 0.15 +
-                                            $value->n8 * 0.05 +
-                                            $value->n9 * 0.05 +
-                                            $value->n10 * 0.25;
+                                    if ($jenjang === 'D4') {
+                                        foreach ($sidang->nilai as $value) {
+                                            $total_nilai +=
+                                                $value->n1 * 0.05 +
+                                                $value->n2 * 0.05 +
+                                                $value->n3 * 0.2 +
+                                                $value->n4 * 0.05 +
+                                                $value->n5 * 0.05 +
+                                                $value->n6 * 0.1 +
+                                                $value->n7 * 0.15 +
+                                                $value->n8 * 0.05 +
+                                                $value->n9 * 0.05 +
+                                                $value->n10 * 0.25;
+                                        }
+                                    } else {
+                                        foreach ($sidang->nilai as $value) {
+                                            $total_nilai +=
+                                                $value->n1 * 0.05 +
+                                                $value->n2 * 0.05 +
+                                                $value->n3 * 0.1 +
+                                                $value->n4 * 0.1 +
+                                                $value->n5 * 0.2 +
+                                                $value->n6 * 0.05 +
+                                                $value->n7 * 0.15 +
+                                                $value->n8 * 0.15 +
+                                                $value->n9 * 0.15;
+                                        }
+                                    }
+                                    // Menghitung rata-rata nilai akhir
+                                    if ($sidang->nilai->count() != 0) {
+                                        $nilai_akhir = $total_nilai / $sidang->nilai->count();
                                     }
 
-                                    // Menghitung rata-rata nilai akhir
-                                    $nilai_akhir = $total_nilai / $sidang->nilai->count();
-
                                     $status = 'Tidak Lulus';
-                                    if ($nilai_akhir > 65 ){
+                                    if ($nilai_akhir > 65) {
                                         $status = 'Lulus';
                                     }
                                 @endphp

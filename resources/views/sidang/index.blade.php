@@ -40,7 +40,6 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>NoBP</th>
                         <th>Mahasiswa</th>
                         <th>Judul</th>
                         <th>Dokumen</th>
@@ -51,15 +50,14 @@
                         <th>Sekretaris Sidang</th>
                         <th>Anggota sidang 1</th>
                         <th>Anggota sidang 2</th>
-                        <th class="d-flex justify-content-center">Action</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($sidangs as $sidang )
                     <tr>
                         <td>{{ $sidangs->firstItem()+$loop->index }}</td>
-                        <td>{{ $sidang->validasi->ta->nobp }}</td>
-                        <td>{{ $sidang->validasi->ta->mahasiswa->user->name }}</td>
+                        <td>{{ $sidang->validasi->ta->nobp }} / {{ $sidang->validasi->ta->mahasiswa->user->name }}</td>
                         <td>{{ $sidang->validasi->ta->judul }}</td>
                         <td>{{ $sidang->validasi->ta->dokumen }}</td>
                         <td>{{ $sidang->jadwal->tanggal }}</td>

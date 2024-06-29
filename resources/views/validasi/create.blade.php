@@ -17,7 +17,7 @@
             <select name="ta_id" class="form-select">
                 <option value="" hidden>--pilih Tugas Akhir Mahasiswa--</option>
                 @foreach ($tas as $ta)
-                <option value="{{$ta->id}}">{{$ta->nobp}}</option>
+                <option value="{{$ta->id}}">{{$ta->nobp}} / {{ $ta->mahasiswa->user->name }}</option>
                 @endforeach
             </select>
             @error('ta_id')

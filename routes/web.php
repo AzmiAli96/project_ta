@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActivityLogController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\LoginController;
@@ -29,12 +30,12 @@ use App\Models\Validasi;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
-Route::get('/', function () {
-    return view('dashbord');
-})->middleware('auth');
+// Route::get('/', function () {
+//     return view('dashbord');
+// })->middleware('auth');
 
 Route::get('/main', function () {
-    return view('layout/main');
+    return view('test');
 });
 
 Route::get('/404', function () {
@@ -63,6 +64,9 @@ route::middleware(['auth'])->group(function () {
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::resource('/dashboard', DashboardController::class);
+    route::get('/pdf',[PdfController::class, 'generatePdf']);
+    route::resource('/nilai', NilaiController::class);
 
 
 
@@ -75,6 +79,13 @@ route::middleware(['auth'])->group(function () {
     route::resource('/sidang', SidangController::class);
     route::get('/logout', [LoginController::class, 'logout']);
     //////////////////--------------------------/////////////////////
+
+    ///////////////// Akses hanya untuk dosen /////////////////////
+    route::get('/berinilai/{sidang_id}/{penilai}/{jenjang}', [NilaiController::class, 'berinilai']);
+    route::put('/berinilai/{nilai_id}/edit', [NilaiController::class, 'update']);
+
+    /////////////////---------------------------////////////////////
+
 
     Route::group(['middleware' => 'userAkses:Admin'], function () {
 
@@ -95,9 +106,6 @@ route::middleware(['auth'])->group(function () {
         route::resource('/tanggal', TanggalController::class);
 
         route::resource('/validasi', ValidasiController::class);
-        route::resource('/nilai', NilaiController::class);
-        route::get('/berinilai/{sidang_id}/{penilai}/{jenjang}', [NilaiController::class, 'berinilai']);
-        route::put('/berinilai/{nilai_id}/edit', [NilaiController::class, 'update']);
         // route::get('/cek-nilai/{id}', [NilayController::class, 'nilai']);
         route::resource('/nilai/penjumlahan', PenjumlahanController::class);
         route::post('penjumlahan/{id}', [PenjumlahanController::class, 'update']);
@@ -109,7 +117,7 @@ route::middleware(['auth'])->group(function () {
         route::post('/importMahasiswa', [MahasiswaController::class, 'import']);
         route::get('/exportDosen', [DosenController::class, 'export'])->name('dosen.export');
         route::post('/importDosen', [DosenController::class, 'import']);
-        route::get('/pdf',[PdfController::class, 'generatePdf']);
+
 
 
     });

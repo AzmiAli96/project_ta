@@ -31,7 +31,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($data)) {
             activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' Berhasil melakukan login');
-            return redirect('/');
+            return redirect('/dashboard');
         } else {
             return back()->withErrors('username/password yang anda masukkan tidak sesuai')->withInput();
         }
@@ -44,6 +44,6 @@ class LoginController extends Controller
     {
         activity()->causedBy(Auth::user())->log('user ' . auth()->user()->name . ' melakukan logout');
         Auth::logout();
-        return redirect('');
+        return redirect('/dashboard');
     }
 }

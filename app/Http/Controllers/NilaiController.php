@@ -60,7 +60,7 @@ class NilaiController extends Controller
         // $sidang = Sidang::all();
         // $penjumlahan = Penjumlahan::all();
         $sidang = Sidang::find($id);
-
+//  dd($sidang->validasi->ta->mahasiswa->prodi->jenjang);
         return view('nilai.edit',['sidang'=>$sidang, 'jenjang'=>$sidang->validasi->ta->mahasiswa->prodi->jenjang]);
     }
 
@@ -106,7 +106,6 @@ class NilaiController extends Controller
         $nilai = Nilai::firstOrCreate(
             ['sidang_id' => $sidang_id, 'penilai' => $penilai],['status' => false]
         );
-
         // Return different views based on the jenjang value
         if ($jenjang == 'D4') {
             return view('nilai.D4', ['nilai' => $nilai]);

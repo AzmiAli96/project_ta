@@ -37,7 +37,7 @@
                         </a>
                     </li>
                     @endif
-                    @if (auth()->user()->level == 'Admin'|auth()->user()->level == 'Kaprodi')
+                    @if (auth()->user()->level == 'Admin'|auth()->user()->level == 'Kaprodi' |auth()->user()->level == 'Dosen')
                     <!-- Nav Item - Pages Collapse Menu -->
                     <li class="nav-item {{ request()->routeIs('dosen.index') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('dosen.index') }}">

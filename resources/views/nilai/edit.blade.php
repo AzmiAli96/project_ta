@@ -15,15 +15,15 @@
         </div>
         <div class="card-body">
             <!-- <form action="/nilai/penilai" method="post">
-                            @method('PUT')
-                            @csrf -->
+                                @method('PUT')
+                                @csrf -->
             <div class="table-responsive">
                 <div class="container d-flex ">
                     <div class="col-md-8">
-                    <h4>
-                        <p><b>Mahasiswa :</b> {{ $sidang->validasi->ta->nobp }} /
-                            {{ $sidang->validasi->ta->mahasiswa->user->name }}</p>
-                    </h4>
+                        <h4>
+                            <p><b>Mahasiswa :</b> {{ $sidang->validasi->ta->nobp }} /
+                                {{ $sidang->validasi->ta->mahasiswa->user->name }}</p>
+                        </h4>
                     </div>
                     <div class="col-md-4 text-md-right">
                         <a href="/pdf" class="btn btn-primary mb-3 "> Download</a>
@@ -48,31 +48,49 @@
                                 $total_nilai = 0;
                                 $jumlah_penilai = $sidang->nilaiPembimbing1->count();
 
-                                if ($jumlah_penilai > 0) {
-                                    foreach ($sidang->nilaiPembimbing1 as $value) {
-                                        $total_nilai +=
+                                if ($jenjang === 'D4') {
+                                    if ($jumlah_penilai > 0) {
+                                        foreach ($sidang->nilaiPembimbing1 as $value) {
+                                            $total_nilai +=
+                                                $value->n1 * 0.05 +
+                                                $value->n2 * 0.05 +
+                                                $value->n3 * 0.2 +
+                                                $value->n4 * 0.05 +
+                                                $value->n5 * 0.05 +
+                                                $value->n6 * 0.1 +
+                                                $value->n7 * 0.15 +
+                                                $value->n8 * 0.05 +
+                                                $value->n9 * 0.05 +
+                                                $value->n10 * 0.25;
+                                        }
+                                        $nilai_pembimbing1 = $total_nilai / $jumlah_penilai;
+                                    }else {
+                                        $nilai_pembimbing1 = 0;
+                                    }
+                                } else {
+                                    if ($jumlah_penilai > 0) {
+                                        foreach ($sidang->nilaiPembimbing1 as $value) {
+                                            $total_nilai +=
                                             $value->n1 * 0.05 +
                                             $value->n2 * 0.05 +
-                                            $value->n3 * 0.2 +
-                                            $value->n4 * 0.05 +
-                                            $value->n5 * 0.05 +
-                                            $value->n6 * 0.1 +
+                                            $value->n3 * 0.1 +
+                                            $value->n4 * 0.1 +
+                                            $value->n5 * 0.2 +
+                                            $value->n6 * 0.05 +
                                             $value->n7 * 0.15 +
-                                            $value->n8 * 0.05 +
-                                            $value->n9 * 0.05 +
-                                            $value->n10 * 0.25;
+                                            $value->n8 * 0.15 +
+                                            $value->n9 * 0.15;
+                                        }
+                                        $nilai_pembimbing1 = $total_nilai / $jumlah_penilai;
+                                    } else {
+                                        $nilai_pembimbing1 = 0;
                                     }
-
-                                    // Menghitung rata-rata nilai akhir
-                                    $nilai_pembimbing1 = $total_nilai / $jumlah_penilai;
-                                } else {
-                                    $nilai_pembimbing1 = 0; // Jika tidak ada data
                                 }
                             @endphp
                             <td>{{ $nilai_pembimbing1 }}</td>
                             <td>
                                 <a href="/berinilai/{{ $sidang->id }}/pembimbing1/{{ $jenjang }}" type="submit"
-                                    class="btn btn-warning"><i class="fas fa-edit"></i> edit nilai</a>
+                                    class="btn btn-warning"><i class="fas fa-edit"></i></a>
                                 {{-- <button class="btn btn-success btn-sm">beri nilai</button> --}}
                             </td>
                         </tr>
@@ -84,25 +102,43 @@
                                 $total_nilai = 0;
                                 $jumlah_penilai = $sidang->nilaiPembimbing2->count();
 
-                                if ($jumlah_penilai > 0) {
-                                    foreach ($sidang->nilaiPembimbing2 as $value) {
-                                        $total_nilai +=
+                                if ($jenjang === 'D4') {
+                                    if ($jumlah_penilai > 0) {
+                                        foreach ($sidang->nilaiPembimbing2 as $value) {
+                                            $total_nilai +=
+                                                $value->n1 * 0.05 +
+                                                $value->n2 * 0.05 +
+                                                $value->n3 * 0.2 +
+                                                $value->n4 * 0.05 +
+                                                $value->n5 * 0.05 +
+                                                $value->n6 * 0.1 +
+                                                $value->n7 * 0.15 +
+                                                $value->n8 * 0.05 +
+                                                $value->n9 * 0.05 +
+                                                $value->n10 * 0.25;
+                                        }
+                                        $nilai_pembimbing2 = $total_nilai / $jumlah_penilai;
+                                    }else {
+                                        $nilai_pembimbing2 = 0;
+                                    }
+                                } else {
+                                    if ($jumlah_penilai > 0) {
+                                        foreach ($sidang->nilaiPembimbing2 as $value) {
+                                            $total_nilai +=
                                             $value->n1 * 0.05 +
                                             $value->n2 * 0.05 +
-                                            $value->n3 * 0.2 +
-                                            $value->n4 * 0.05 +
-                                            $value->n5 * 0.05 +
-                                            $value->n6 * 0.1 +
+                                            $value->n3 * 0.1 +
+                                            $value->n4 * 0.1 +
+                                            $value->n5 * 0.2 +
+                                            $value->n6 * 0.05 +
                                             $value->n7 * 0.15 +
-                                            $value->n8 * 0.05 +
-                                            $value->n9 * 0.05 +
-                                            $value->n10 * 0.25;
+                                            $value->n8 * 0.15 +
+                                            $value->n9 * 0.15;
+                                        }
+                                        $nilai_pembimbing2 = $total_nilai / $jumlah_penilai;
+                                    } else {
+                                        $nilai_pembimbing2 = 0;
                                     }
-
-                                    // Menghitung rata-rata nilai akhir
-                                    $nilai_pembimbing2 = $total_nilai / $jumlah_penilai;
-                                } else {
-                                    $nilai_pembimbing2 = 0; // Jika tidak ada data
                                 }
                             @endphp
                             <td>{{ $nilai_pembimbing2 }}</td>
@@ -123,29 +159,47 @@
                             <td>Ketua</td>
                             <td>{{ $sidang->validasi->ta->Dpembimbing1->user->name }} /
                                 {{ $sidang->validasi->ta->Dpembimbing2->user->name }} </td>
-                            @php
+                                @php
                                 $total_nilai = 0;
                                 $jumlah_penilai = $sidang->nilaiketua->count();
 
-                                if ($jumlah_penilai > 0) {
-                                    foreach ($sidang->nilaiketua as $value) {
-                                        $total_nilai +=
+                                if ($jenjang === 'D4') {
+                                    if ($jumlah_penilai > 0) {
+                                        foreach ($sidang->nilaiketua as $value) {
+                                            $total_nilai +=
+                                                $value->n1 * 0.05 +
+                                                $value->n2 * 0.05 +
+                                                $value->n3 * 0.2 +
+                                                $value->n4 * 0.05 +
+                                                $value->n5 * 0.05 +
+                                                $value->n6 * 0.1 +
+                                                $value->n7 * 0.15 +
+                                                $value->n8 * 0.05 +
+                                                $value->n9 * 0.05 +
+                                                $value->n10 * 0.25;
+                                        }
+                                        $nilai_ketua = $total_nilai / $jumlah_penilai;
+                                    }else {
+                                        $nilai_ketua = 0;
+                                    }
+                                } else {
+                                    if ($jumlah_penilai > 0) {
+                                        foreach ($sidang->nilaiketua as $value) {
+                                            $total_nilai +=
                                             $value->n1 * 0.05 +
                                             $value->n2 * 0.05 +
-                                            $value->n3 * 0.2 +
-                                            $value->n4 * 0.05 +
-                                            $value->n5 * 0.05 +
-                                            $value->n6 * 0.1 +
+                                            $value->n3 * 0.1 +
+                                            $value->n4 * 0.1 +
+                                            $value->n5 * 0.2 +
+                                            $value->n6 * 0.05 +
                                             $value->n7 * 0.15 +
-                                            $value->n8 * 0.05 +
-                                            $value->n9 * 0.05 +
-                                            $value->n10 * 0.25;
+                                            $value->n8 * 0.15 +
+                                            $value->n9 * 0.15;
+                                        }
+                                        $nilai_ketua = $total_nilai / $jumlah_penilai;
+                                    } else {
+                                        $nilai_ketua = 0;
                                     }
-
-                                    // Menghitung rata-rata nilai akhir
-                                    $nilai_ketua = $total_nilai / $jumlah_penilai;
-                                } else {
-                                    $nilai_ketua = 0; // Jika tidak ada data
                                 }
                             @endphp
                             <td>{{ $nilai_ketua }}</td>
@@ -160,25 +214,43 @@
                                 $total_nilai = 0;
                                 $jumlah_penilai = $sidang->nilaisekretaris->count();
 
-                                if ($jumlah_penilai > 0) {
-                                    foreach ($sidang->nilaisekretaris as $value) {
-                                        $total_nilai +=
+                                if ($jenjang === 'D4') {
+                                    if ($jumlah_penilai > 0) {
+                                        foreach ($sidang->nilaisekretaris as $value) {
+                                            $total_nilai +=
+                                                $value->n1 * 0.05 +
+                                                $value->n2 * 0.05 +
+                                                $value->n3 * 0.2 +
+                                                $value->n4 * 0.05 +
+                                                $value->n5 * 0.05 +
+                                                $value->n6 * 0.1 +
+                                                $value->n7 * 0.15 +
+                                                $value->n8 * 0.05 +
+                                                $value->n9 * 0.05 +
+                                                $value->n10 * 0.25;
+                                        }
+                                        $nilai_sekretaris = $total_nilai / $jumlah_penilai;
+                                    }else {
+                                        $nilai_sekretaris = 0;
+                                    }
+                                } else {
+                                    if ($jumlah_penilai > 0) {
+                                        foreach ($sidang->nilaisekretaris as $value) {
+                                            $total_nilai +=
                                             $value->n1 * 0.05 +
                                             $value->n2 * 0.05 +
-                                            $value->n3 * 0.2 +
-                                            $value->n4 * 0.05 +
-                                            $value->n5 * 0.05 +
-                                            $value->n6 * 0.1 +
+                                            $value->n3 * 0.1 +
+                                            $value->n4 * 0.1 +
+                                            $value->n5 * 0.2 +
+                                            $value->n6 * 0.05 +
                                             $value->n7 * 0.15 +
-                                            $value->n8 * 0.05 +
-                                            $value->n9 * 0.05 +
-                                            $value->n10 * 0.25;
+                                            $value->n8 * 0.15 +
+                                            $value->n9 * 0.15;
+                                        }
+                                        $nilai_sekretaris = $total_nilai / $jumlah_penilai;
+                                    } else {
+                                        $nilai_sekretaris = 0;
                                     }
-
-                                    // Menghitung rata-rata nilai akhir
-                                    $nilai_sekretaris = $total_nilai / $jumlah_penilai;
-                                } else {
-                                    $nilai_sekretaris = 0; // Jika tidak ada data
                                 }
                             @endphp
                             <td>{{ $nilai_sekretaris }}</td>
@@ -193,25 +265,43 @@
                                 $total_nilai = 0;
                                 $jumlah_penilai = $sidang->nilaianggota1->count();
 
-                                if ($jumlah_penilai > 0) {
-                                    foreach ($sidang->nilaianggota1 as $value) {
-                                        $total_nilai +=
+                                if ($jenjang === 'D4') {
+                                    if ($jumlah_penilai > 0) {
+                                        foreach ($sidang->nilaianggota1 as $value) {
+                                            $total_nilai +=
+                                                $value->n1 * 0.05 +
+                                                $value->n2 * 0.05 +
+                                                $value->n3 * 0.2 +
+                                                $value->n4 * 0.05 +
+                                                $value->n5 * 0.05 +
+                                                $value->n6 * 0.1 +
+                                                $value->n7 * 0.15 +
+                                                $value->n8 * 0.05 +
+                                                $value->n9 * 0.05 +
+                                                $value->n10 * 0.25;
+                                        }
+                                        $nilai_anggota1 = $total_nilai / $jumlah_penilai;
+                                    }else {
+                                        $nilai_anggota1 = 0;
+                                    }
+                                } else {
+                                    if ($jumlah_penilai > 0) {
+                                        foreach ($sidang->nilaianggota1 as $value) {
+                                            $total_nilai +=
                                             $value->n1 * 0.05 +
                                             $value->n2 * 0.05 +
-                                            $value->n3 * 0.2 +
-                                            $value->n4 * 0.05 +
-                                            $value->n5 * 0.05 +
-                                            $value->n6 * 0.1 +
+                                            $value->n3 * 0.1 +
+                                            $value->n4 * 0.1 +
+                                            $value->n5 * 0.2 +
+                                            $value->n6 * 0.05 +
                                             $value->n7 * 0.15 +
-                                            $value->n8 * 0.05 +
-                                            $value->n9 * 0.05 +
-                                            $value->n10 * 0.25;
+                                            $value->n8 * 0.15 +
+                                            $value->n9 * 0.15;
+                                        }
+                                        $nilai_anggota1 = $total_nilai / $jumlah_penilai;
+                                    } else {
+                                        $nilai_anggota1 = 0;
                                     }
-
-                                    // Menghitung rata-rata nilai akhir
-                                    $nilai_anggota1 = $total_nilai / $jumlah_penilai;
-                                } else {
-                                    $nilai_anggota1 = 0; // Jika tidak ada data
                                 }
                             @endphp
                             <td>{{ $nilai_anggota1 }}</td>
@@ -226,25 +316,43 @@
                                 $total_nilai = 0;
                                 $jumlah_penilai = $sidang->nilaianggota2->count();
 
-                                if ($jumlah_penilai > 0) {
-                                    foreach ($sidang->nilaianggota2 as $value) {
-                                        $total_nilai +=
+                                if ($jenjang === 'D4') {
+                                    if ($jumlah_penilai > 0) {
+                                        foreach ($sidang->nilaianggota2 as $value) {
+                                            $total_nilai +=
+                                                $value->n1 * 0.05 +
+                                                $value->n2 * 0.05 +
+                                                $value->n3 * 0.2 +
+                                                $value->n4 * 0.05 +
+                                                $value->n5 * 0.05 +
+                                                $value->n6 * 0.1 +
+                                                $value->n7 * 0.15 +
+                                                $value->n8 * 0.05 +
+                                                $value->n9 * 0.05 +
+                                                $value->n10 * 0.25;
+                                        }
+                                        $nilai_anggota2 = $total_nilai / $jumlah_penilai;
+                                    }else {
+                                        $nilai_anggota2 = 0;
+                                    }
+                                } else {
+                                    if ($jumlah_penilai > 0) {
+                                        foreach ($sidang->nilaianggota2 as $value) {
+                                            $total_nilai +=
                                             $value->n1 * 0.05 +
                                             $value->n2 * 0.05 +
-                                            $value->n3 * 0.2 +
-                                            $value->n4 * 0.05 +
-                                            $value->n5 * 0.05 +
-                                            $value->n6 * 0.1 +
+                                            $value->n3 * 0.1 +
+                                            $value->n4 * 0.1 +
+                                            $value->n5 * 0.2 +
+                                            $value->n6 * 0.05 +
                                             $value->n7 * 0.15 +
-                                            $value->n8 * 0.05 +
-                                            $value->n9 * 0.05 +
-                                            $value->n10 * 0.25;
+                                            $value->n8 * 0.15 +
+                                            $value->n9 * 0.15;
+                                        }
+                                        $nilai_anggota2 = $total_nilai / $jumlah_penilai;
+                                    } else {
+                                        $nilai_anggota2 = 0;
                                     }
-
-                                    // Menghitung rata-rata nilai akhir
-                                    $nilai_anggota2 = $total_nilai / $jumlah_penilai;
-                                } else {
-                                    $nilai_anggota2 = 0; // Jika tidak ada data
                                 }
                             @endphp
                             <td>{{ $nilai_anggota2 }}</td>

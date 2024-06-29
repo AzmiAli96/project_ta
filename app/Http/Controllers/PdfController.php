@@ -12,6 +12,7 @@ class PdfController extends Controller
     public function generatePdf()
     {
         $sidang = Sidang::with(['validasi.ta.Dpembimbing1.user', 'validasi.ta.Dpembimbing2.user', 'nilaiPembimbing1', 'nilaiPembimbing2', 'nilaiketua', 'nilaisekretaris', 'psek_sidang.user', 'panggota1.user', 'panggota2.user'])->first(); // Adjust your query as needed
+        
 
         // Calculate the values
         $nilai_pembimbing1 = $this->calculateNilai($sidang->nilaiPembimbing1 ?? []);
@@ -39,20 +40,34 @@ class PdfController extends Controller
     {
         $total_nilai = 0;
         $jumlah_penilai = $nilaiCollection ? $nilaiCollection->count() : 0;
+        $jenjang = 'D4'; // Atur sesuai dengan kondisi jenjang yang ada
 
         if ($jumlah_penilai > 0) {
             foreach ($nilaiCollection as $value) {
-                $total_nilai +=
-                ($value->n1 ?? 0) * 0.05 +
-                ($value->n2 ?? 0) * 0.05 +
-                ($value->n3 ?? 0) * 0.2 +
-                ($value->n4 ?? 0) * 0.05 +
-                ($value->n5 ?? 0) * 0.05 +
-                ($value->n6 ?? 0) * 0.1 +
-                ($value->n7 ?? 0) * 0.15 +
-                ($value->n8 ?? 0) * 0.05 +
-                ($value->n9 ?? 0) * 0.05 +
-                ($value->n10 ?? 0) * 0.25;
+                if ($jenjang === 'D4') {
+                    $total_nilai +=
+                    ($value->n1 ?? 0) * 0.05 +
+                    ($value->n2 ?? 0) * 0.05 +
+                    ($value->n3 ?? 0) * 0.2 +
+                    ($value->n4 ?? 0) * 0.05 +
+                    ($value->n5 ?? 0) * 0.05 +
+                    ($value->n6 ?? 0) * 0.1 +
+                    ($value->n7 ?? 0) * 0.15 +
+                    ($value->n8 ?? 0) * 0.05 +
+                    ($value->n9 ?? 0) * 0.05 +
+                    ($value->n10 ?? 0) * 0.25;
+                } else {
+                    $total_nilai +=
+                    ($value->n1 ?? 0) * 0.05 +
+                    ($value->n2 ?? 0) * 0.05 +
+                    ($value->n3 ?? 0) * 0.1 +
+                    ($value->n4 ?? 0) * 0.1 +
+                    ($value->n5 ?? 0) * 0.2 +
+                    ($value->n6 ?? 0) * 0.05 +
+                    ($value->n7 ?? 0) * 0.15 +
+                    ($value->n8 ?? 0) * 0.15 +
+                    ($value->n9 ?? 0) * 0.15;
+                }
             }
 
             return $total_nilai / $jumlah_penilai;
