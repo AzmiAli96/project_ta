@@ -22,7 +22,7 @@ class DosenImport implements ToModel, WithHeadingRow
         }
 
         return new Dosen([
-
+// 'id_user'
             "nidn" => $row['nidn'],
             "no_telp" => $row['no_telp'],
             "alamat" => $row['alamat']

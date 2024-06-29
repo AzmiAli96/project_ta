@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('dosens', function (Blueprint $table) {
             $table->id();
             $table->char('nidn',10)->unique();
-            $table->foreignId('user_id');
+            $table->foreignId('user_id')->nullable();
             $table->char('no_telp',15);
             $table->string('alamat');
             $table->timestamps();
