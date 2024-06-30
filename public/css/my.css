@@ -49,9 +49,9 @@
 
 /* ---COLORING SECTION--- */
     /* --Solid-- */
-        .color-lemon {
-            background-color: #ffc400f1;
-            color: white;
+        .color-soft {
+            background-color: #d8b2fc8a;
+            /* color: white; */
         }
 
         .color-prime {

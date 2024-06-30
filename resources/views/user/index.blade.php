@@ -12,7 +12,7 @@
 @endif
 
 <div class="card mb-4">
-    <div class="card-header py-3">
+    <div class="card-header color-soft py-3">
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <!-- Topbar Search -->
             <form action="/user" method="GET" class="d-none d-sm-inline-block form-inline mr-auto md-3 my-2 my-md-0 mw-100 navbar-search">
@@ -26,13 +26,13 @@
                     </div>
                 </div>
             </form>
-            <a href="/exportUser" class="btn btn-sm btn-dark mr-1">
+            <a href="/exportUser" class="btn btn-sm button-purple mr-1">
                 <i class="fas fa-solid fa-download"> </i> Export
             </a>
-            <a href="/importUser" class="btn btn-sm btn-dark mr-1" data-toggle="modal" data-target="#importForm">
+            <a href="/importUser" class="btn btn-sm button-purple mr-1" data-toggle="modal" data-target="#importForm">
                 <i class="fas fa-solid fa-upload"> </i> Import
             </a>
-            <a href="user/create" class="btn btn-primary">
+            <a href="user/create" class="btn button-ol-purple">
                 <i class="fas fa-solid fa-user-plus"></i>
             </a>
         </div>
