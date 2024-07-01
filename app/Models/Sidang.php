@@ -10,8 +10,11 @@ class Sidang extends Model
     use HasFactory;
     protected $guarded=[];
 
-    public function validasi(){
-        return $this->belongsTo(Validasi::class,'validasi_id');
+    // public function validasi(){
+    //     return $this->belongsTo(Validasi::class,'validasi_id');
+    // }
+    public function ta(){
+        return $this->belongsTo(Validasi::class,'ta_id');
     }
 
     public function jadwal(){

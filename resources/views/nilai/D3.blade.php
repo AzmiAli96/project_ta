@@ -200,6 +200,15 @@
                             </tr>
                         </tbody>
                     </table>
+                    <div class="mb-3">
+                        <label class="form-label">Revisi</label>
+                        <textarea class="form-control @error('revisi') is-invalid @enderror" rows="3" name="revisi" placeholder="Lihat isi Laporan">{{ old('revisi') }}</textarea>
+                        @error('revisi')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
                     {{-- <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Revisi</label>
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Lihat isi Laporan"></textarea>

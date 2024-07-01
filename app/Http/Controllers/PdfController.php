@@ -9,18 +9,19 @@ use Illuminate\Http\Request;
 
 class PdfController extends Controller
 {
-    public function generatePdf()
+    public function generatePdf(string $id)
     {
-        $sidang = Sidang::with(['validasi.ta.Dpembimbing1.user', 'validasi.ta.Dpembimbing2.user', 'nilaiPembimbing1', 'nilaiPembimbing2', 'nilaiketua', 'nilaisekretaris', 'psek_sidang.user', 'panggota1.user', 'panggota2.user'])->first(); // Adjust your query as needed
-        
+        $sidang = Sidang::where('id',$id)->with(['validasi.ta.Dpembimbing1.user', 'validasi.ta.Dpembimbing2.user', 'nilaiPembimbing1', 'nilaiPembimbing2', 'nilaiketua', 'nilaisekretaris', 'psek_sidang.user', 'panggota1.user', 'panggota2.user'])->first(); // Adjust your query as needed
+        $jenjang = $sidang->validasi->ta->mahasiswa->prodi->jenjang;
+
 
         // Calculate the values
-        $nilai_pembimbing1 = $this->calculateNilai($sidang->nilaiPembimbing1 ?? []);
-        $nilai_pembimbing2 = $this->calculateNilai($sidang->nilaiPembimbing2 ?? []);
-        $nilai_ketua = $this->calculateNilai($sidang->nilaiketua ?? []);
-        $nilai_sekretaris = $this->calculateNilai($sidang->nilaisekretaris ?? []);
-        $nilai_anggota1 = $this->calculateNilai($sidang->nilaianggota1 ?? []);
-        $nilai_anggota2 = $this->calculateNilai($sidang->nilaianggota2 ?? []);
+        $nilai_pembimbing1 = $this->calculateNilai($sidang->nilaiPembimbing1 ?? [], $jenjang);
+        $nilai_pembimbing2 = $this->calculateNilai($sidang->nilaiPembimbing2 ?? [], $jenjang);
+        $nilai_ketua = $this->calculateNilai($sidang->nilaiketua ?? [], $jenjang);
+        $nilai_sekretaris = $this->calculateNilai($sidang->nilaisekretaris ?? [], $jenjang);
+        $nilai_anggota1 = $this->calculateNilai($sidang->nilaianggota1 ?? [], $jenjang);
+        $nilai_anggota2 = $this->calculateNilai($sidang->nilaianggota2 ?? [], $jenjang);
 
         $rata_pendidikan = ($nilai_pembimbing1 + $nilai_pembimbing2) / 2;
         $rata_penguji = ($nilai_ketua + $nilai_sekretaris + $nilai_anggota1 + $nilai_anggota2) / 4;
@@ -36,12 +37,12 @@ class PdfController extends Controller
         return $pdf->download('data-nilai-mahasiswa.pdf');
     }
 
-    private function calculateNilai($nilaiCollection)
+    private function calculateNilai($nilaiCollection, $jenjang)
     {
         $total_nilai = 0;
         $jumlah_penilai = $nilaiCollection ? $nilaiCollection->count() : 0;
-        $jenjang = 'D4'; // Atur sesuai dengan kondisi jenjang yang ada
-
+        
+        
         if ($jumlah_penilai > 0) {
             foreach ($nilaiCollection as $value) {
                 if ($jenjang === 'D4') {

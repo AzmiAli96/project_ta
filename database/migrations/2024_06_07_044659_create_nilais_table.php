@@ -25,6 +25,7 @@ return new class extends Migration
             $table->String('n8')->nullable();
             $table->String('n9')->nullable();
             $table->String('n10')->nullable();
+            $table->String('revisi')->nullable();
             $table->boolean('status');
             $table->timestamps();
         });

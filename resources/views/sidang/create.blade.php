@@ -13,14 +13,14 @@
     <form action="/sidang" method="post">
         @csrf
         <div class="mb-3">
-            <label class="form-label @error('validasi_id') is-invalid @enderror">Mahasiswa TA</label>
-            <select name="validasi_id" class="form-select">
+            <label class="form-label @error('ta_id') is-invalid @enderror">Mahasiswa TA</label>
+            <select name="ta_id" class="form-select">
                 <option value="" hidden>--pilih Mahasiswa--</option>
-                @foreach ($validasis as $validasi)
-                <option value="{{$validasi->id}}">{{$validasi->ta->mahasiswa->user->name}}  -   {{$validasi->ta->nobp}}</option>
+                @foreach ($tas as $ta)
+                <option value="{{$ta->id}}">{{$ta->mahasiswa->user->name}}  -   {{$ta->nobp}}</option>
                 @endforeach
             </select>
-            @error('validasi_id')
+            @error('ta_id')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>

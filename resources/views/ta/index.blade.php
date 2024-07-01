@@ -43,6 +43,9 @@
                         <th>Dokumen</th>
                         <th>Pembimbing 1</th>
                         <th>Pembimbing 2</th>
+                        <th>Keterangan</th>
+                        <th>Komentar</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -56,6 +59,9 @@
                         <td> <a href="/download-dokumen/{{ $ta->id }}" >{{ $ta->dokumen }}</a> </td>
                         <td>{{ $ta->Dpembimbing1->user->name }}</td>
                         <td>{{ $ta->Dpembimbing2->user->name }}</td>
+                        <td>{{ $ta->ket }}</td>
+                        <td>{{ $ta->komentar }}</td>
+                        <td>{{ $ta->status ? 'Lengkap':'Belum Lengkap' }}</td>
                         <td>
                             <form action="/ta/{{$ta->id}}" method="post" class="d-inline">
                                 @method('DELETE')

@@ -20,6 +20,9 @@ return new class extends Migration
             $table->string('dokumen');
             $table->foreignId('pembimbing1')->constrain('dosen_id');
             $table->foreignId('pembimbing2')->constrain('dosen_id');
+            $table->string('ket')->nullable();
+            $table->string('komentar')->nullable();
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }

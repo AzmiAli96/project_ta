@@ -43,8 +43,8 @@
                             <th>Ketua Sidang</th>
                             <th>Sekretaris Sidang</th>
                             <th>Anggota Sidang</th>
-                            <th>Nilai Akhir</th>
-                            <th>Status</th>
+                            {{-- <th>Nilai Akhir</th>
+                            <th>Status</th> --}}
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -60,13 +60,14 @@
                                     {{ $sidang->validasi->ta->Dpembimbing2->user->name }}</td>
                                 <td>{{ $sidang->psek_sidang->user->name }}</td>
                                 <td>{{ $sidang->panggota1->user->name }} & {{ $sidang->panggota2->user->name }}</td>
-                                @php
+                                {{-- @php
 
-                                    $nilai_akhir = 0;
                                     $total_nilai = 0;
-                                    $jenjang = 'D4';
+                                    $jumlah_penilai = $sidang->nilaiPembimbing1->count();
 
-                                    if ($jenjang === 'D4') {
+                                    
+                                    if ($sidang->validasi->ta->mahasiswa->prodi->jenjang === 'D4') {
+                                        // $rataPend = $sidang->nilaiPembimbing1
                                         foreach ($sidang->nilai as $value) {
                                             $total_nilai +=
                                                 $value->n1 * 0.05 +
@@ -105,7 +106,7 @@
                                     }
                                 @endphp
                                 <td>{{ $nilai_akhir }}</td>
-                                <td>{{ $status }}</td>
+                                <td>{{ $status }}</td> --}}
                                 <td>
                                     <a class="btn btn-sm btn-warning" href="/nilai/{{ $sidang->id }}/edit"><i
                                             class="fas fa-edit"></i></a>

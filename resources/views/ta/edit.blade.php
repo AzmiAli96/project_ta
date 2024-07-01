@@ -15,7 +15,7 @@
             @csrf
             <div class="mb-3">
                 <label class="form-label @error('nobp') is-invalid @enderror">sesi</label>
-                <select name="nobp" class="form-select" disabled>
+                <select name="nobp" class="form-select" readonly>
                     <option value="" hidden>--pilih sesi--</option>
                     @foreach ($mahasiswas as $mahasiswa)
                         @if (old('nobp', $ta->nobp) == $mahasiswa->nobp)
@@ -87,6 +87,37 @@
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
+                @enderror
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Keterangan</label>
+                <textarea class="form-control @error('ket') is-invalid @enderror" rows="3" name="ket">{{old('ket',$ta->ket)}}</textarea>
+                @error('ket')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Komentar</label>
+                <textarea class="form-control @error('komentar') is-invalid @enderror" rows="3" name="komentar">{{old('komentar',$ta->komentar)}}</textarea>
+                @error('komentar')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+            <div class="mb-3">
+                <label class="form-label @error('status') is-invalid @enderror">status</label>
+                <select name="status" class="form-select">
+                    <option value="" hidden>--pilih status--</option>
+                    <option value="1" {{ old('status', $ta->status) == 1 ? 'selected' : '' }} >Lengkap</option>
+                    <option value="0" {{ old('status', $ta->status) == 0 ? 'selected' : '' }}>Belum Lengkap</option>
+                </select>
+                @error('status')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
                 @enderror
             </div>
             <button type="submit" class="btn btn-primary" value="update">submit</button>

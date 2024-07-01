@@ -68,7 +68,7 @@ route::middleware(['auth'])->group(function () {
 
     
     Route::resource('/dashboard', DashboardController::class);
-    route::get('/pdf',[PdfController::class, 'generatePdf']);
+    route::get('/pdf/{id}',[PdfController::class, 'generatePdf']);
     route::resource('/nilai', NilaiController::class);
 
 

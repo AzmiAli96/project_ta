@@ -26,7 +26,7 @@
                         </h4>
                     </div>
                     <div class="col-md-4 text-md-right">
-                        <a href="/pdf" class="btn btn-primary mb-3 "> Download</a>
+                        <a href="/pdf/{{ $sidang->id }}" class="btn btn-primary mb-3 "> Download</a>
                     </div>
                 </div>
                 <table class="table table-bordered" width="100%" cellspacing="0">
