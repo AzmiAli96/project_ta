@@ -22,8 +22,7 @@ class MahasiswaExport implements WithHeadings, FromCollection
             'NoBP',
             'Nama',
             'Jurusan',
-            'Program Studi',
-            'Email',
+            'Prodi',
             'Status',
             'IPS'
         ];
@@ -44,10 +43,9 @@ class MahasiswaExport implements WithHeadings, FromCollection
         return Mahasiswa::with(['jurusan', 'prodi','user'])->get()->map(function($mahasiswa){
             return [
                 'nobp' => $mahasiswa->nobp,
-                'nama' => $mahasiswa->user->name,
+                'nama' => $mahasiswa->namalengkap,
                 'nama_jurusan' => $mahasiswa->jurusan->nama_jurusan,
                 'nama_prodi' => $mahasiswa->prodi->nama_prodi,
-                'email' => $mahasiswa->user->email,
                 'status' => $mahasiswa->status,
                 'IPS' => $mahasiswa->ips
 

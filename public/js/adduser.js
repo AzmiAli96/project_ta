@@ -32,13 +32,26 @@ $(document).ready(function () {
                     </select>
                     </div>` );
 
+            // $.ajax({
+            //     type: 'GET',
+            //     url: '/getMahasiswa',
+            //     dataType: 'json',
+            //     success: function (res) {
+            //         for (let i = 0; i < res[0].length; i++) {
+            //             $('#nobp').append(`<option value='${res[0][i].id}'>${res[0][i].nobp}</option>`)
+                        
+            //         }
+            //         $('#nobp').selectpicker('refresh');
+            //     }
+            // });
+
             $.ajax({
                 type: 'GET',
                 url: '/getMahasiswa',
                 dataType: 'json',
                 success: function (res) {
                     for (let i = 0; i < res[0].length; i++) {
-                        $('#nobp').append(`<option value='${res[0][i].id}'>${res[0][i].nobp}</option>`)
+                        $('#nobp').append(`<option value='${res[0][i].id}'>${res[0][i].namalengkap} (${res[0][i].nobp})</option>`);
                     }
                     $('#nobp').selectpicker('refresh');
                 }

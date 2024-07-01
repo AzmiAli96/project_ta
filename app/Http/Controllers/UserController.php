@@ -34,27 +34,33 @@ class UserController extends Controller
     {
         $rules = [
             'username' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
             'password' => 'required|min:8',
-            'level' => 'required|exists:users,level'
+            'level' => 'required'
         ];
+
         $request->validate($rules);
+        // dd($request);
         $data = [
-            'name' => str_replace('', '_', strtolower($request->username)),
+            'name' => str_replace(' ', '_', strtolower($request->username)),
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'level' => $request->level,
-
         ];
+
+        // dd($request->nobp);
         User::create($data);
         $userID = User::latest()->first();
         if (in_array($request->level, ['Dosen', 'Kaprodi'])) {
             Dosen::find($request->nidn)->update(['user_id' => $userID->id]);
         }
+
+        // dd($userID->id);
         if ($request->level == 'Mahasiswa') {
-            if (User::create($data)) {
-                Mahasiswa::find($request->nobp)->update(['user_id' => $userID->id]);
-            }
+            // if (User::create($data)) {
+            //     Mahasiswa::find($request->nobp)->update(['user_id' => $userID->id]);
+            // }
+            Mahasiswa::where('id', $request->nobp)->update(['user_id'=> $userID->id]);
         }
 
         return redirect('/user')->with('success', 'berhasil menambahkan user');

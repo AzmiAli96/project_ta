@@ -22,16 +22,16 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label class="form-label">Nama</label>
-            <input type="text" class="form-control @error('name') is-invalid @enderror" name="firstname" value="{{old('name')}}">
-            @error('name')
+            <label class="form-label">Nama Lengkap</label>
+            <input type="text" class="form-control @error('namalengkap') is-invalid @enderror" name="namalengkap" value="{{old('namalengkap')}}">
+            @error('namalengkap')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
             @enderror
         </div>
         <input type="hidden" name="lastname" value="">
-        <div class="mb-3">
+        {{-- <div class="mb-3">
             <label class="form-label">Email</label>
             <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{old('email')}}">
             @error('email')
@@ -48,7 +48,7 @@
                 {{ $message }}
             </div>
             @enderror
-        </div>
+        </div> --}}
         <div class="mb-3">
             <label class="form-label @error('jurusan_id') is-invalid @enderror">Jurusan</label>
             <select name="jurusan_id" class="form-select">

@@ -46,18 +46,17 @@ class MahasiswaController extends Controller
         //     'status_id'=>'required',
         // ]);
 
-        $users = User::create([
-            'name'=>$request->firstname.' '.$request->lastname,
-            'email'=>$request->email,
-            'level'=>$request->level,
-            'password'=>Hash::make($request->password),
-        ]);
+        // $users = User::create([
+        //     'namalengkap'=>$request->namalengkap,
+        //     'level'=>$request->level,
+        //     'password'=>Hash::make($request->password),
+        // ]);
         $mahasiswa = Mahasiswa::create([
+            'namalengkap'=>$request->namalengkap,
             'nobp'=>$request->nobp,
-            'user_id'=>$users->id,
             'jurusan_id'=>$request->jurusan_id,
             'prodi_id'=>$request->prodi_id,
-            
+            'ips'=>$request->ips,
         ]);
         return redirect('/mahasiswa')->with('pesan', 'berhasil menyimpan data.');
     }
@@ -83,15 +82,10 @@ class MahasiswaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $validatedU = $request->validate([
-            'name'=> 'required',
-            'email'=>'required',
-            'password'=>'required',
-        ]);
-        User::where('id',Mahasiswa::findOrFail($id)->user->id)->update($validatedU);
-
+       
         $validatedM = $request->validate([
             'nobp'=> 'required',
+            'namalengkap'=>'required',
             'jurusan_id'=>'required',
             'prodi_id'=>'required',
             'ips'=>'nullable',
