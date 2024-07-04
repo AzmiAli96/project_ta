@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('mahasiswas', function (Blueprint $table) {
             $table->id();
             $table->char('nobp',10)->unique();
-            $table->foreignId('user_id');
+            $table->string('namalengkap')->nullable();
+            $table->foreignId('user_id')->nullable();
             $table->foreignId('jurusan_id');
             $table->foreignId('prodi_id');
             $table->float('ips')->nullable();
