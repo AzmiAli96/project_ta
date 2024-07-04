@@ -91,35 +91,38 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Keterangan</label>
-                <textarea class="form-control @error('ket') is-invalid @enderror" rows="3" name="ket">{{old('ket',$ta->ket)}}</textarea>
+                <textarea class="form-control @error('ket') is-invalid @enderror" rows="3" name="ket">{{ old('ket', $ta->ket) }}</textarea>
                 @error('ket')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
                 @enderror
             </div>
-            <div class="mb-3">
-                <label class="form-label">Komentar</label>
-                <textarea class="form-control @error('komentar') is-invalid @enderror" rows="3" name="komentar">{{old('komentar',$ta->komentar)}}</textarea>
-                @error('komentar')
-                <div class="invalid-feedback">
-                    {{ $message }}
+            @if (auth()->user()->level == 'Kaprodi')
+                <div class="mb-3">
+                    <label class="form-label">Komentar</label>
+                    <textarea class="form-control @error('komentar') is-invalid @enderror" rows="3" name="komentar">{{ old('komentar', $ta->komentar) }}</textarea>
+                    @error('komentar')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
-                @enderror
-            </div>
-            <div class="mb-3">
-                <label class="form-label @error('status') is-invalid @enderror">status</label>
-                <select name="status" class="form-select">
-                    <option value="" hidden>--pilih status--</option>
-                    <option value="1" {{ old('status', $ta->status) == 1 ? 'selected' : '' }} >Lengkap</option>
-                    <option value="0" {{ old('status', $ta->status) == 0 ? 'selected' : '' }}>Belum Lengkap</option>
-                </select>
-                @error('status')
-                <div class="invalid-feedback">
-                    {{ $message }}
+                <div class="mb-3">
+                    <label class="form-label @error('status') is-invalid @enderror">status</label>
+                    <select name="status" class="form-select">
+                        <option value="" hidden>--pilih status--</option>
+                        <option value="1" {{ old('status', $ta->status) == 1 ? 'selected' : '' }}>Lengkap</option>
+                        <option value="0" {{ old('status', $ta->status) == 0 ? 'selected' : '' }}>Belum Lengkap
+                        </option>
+                    </select>
+                    @error('status')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
-                @enderror
-            </div>
+            @endif
             <button type="submit" class="btn btn-primary" value="update">submit</button>
         </form>
     </div>

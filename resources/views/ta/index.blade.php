@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </form>
-            <a href="ta/create" class="btn btn-primary mb-3">Create</a>
+            {{-- <a href="ta/create" class="btn btn-primary mb-3">Create</a> --}}
         </div>
         <div class="table-responsive">
             <table class="table table-bordered" width="100%" cellspacing="0">
