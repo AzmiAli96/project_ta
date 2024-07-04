@@ -61,7 +61,7 @@ class NilaiController extends Controller
         // $penjumlahan = Penjumlahan::all();
         $sidang = Sidang::find($id);
 //  dd($sidang->validasi->ta->mahasiswa->prodi->jenjang);
-        return view('nilai.edit',['sidang'=>$sidang, 'jenjang'=>$sidang->validasi->ta->mahasiswa->prodi->jenjang]);
+        return view('nilai.edit',['sidang'=>$sidang, 'jenjang'=>$sidang->ta->mahasiswa->prodi->jenjang]);
     }
 
     /**

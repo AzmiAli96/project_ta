@@ -15,14 +15,14 @@
         </div>
         <div class="card-body">
             <!-- <form action="/nilai/penilai" method="post">
-                                @method('PUT')
-                                @csrf -->
+                                                @method('PUT')
+                                                @csrf -->
             <div class="table-responsive">
                 <div class="container d-flex ">
                     <div class="col-md-8">
                         <h4>
-                            <p><b>Mahasiswa :</b> {{ $sidang->validasi->ta->nobp }} /
-                                {{ $sidang->validasi->ta->mahasiswa->user->name }}</p>
+                            <p><b>Mahasiswa :</b> {{ $sidang->ta->nobp }} /
+                                {{ $sidang->ta->mahasiswa->user->name }}</p>
                         </h4>
                     </div>
                     <div class="col-md-4 text-md-right">
@@ -36,14 +36,16 @@
                             <th>Jabatan</th>
                             <th>Nama</th>
                             <th>Total Nilai</th>
-                            <th>Action</th>
+                            @if (auth()->user()->level == 'Dosen')
+                                <th>Action</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>1</td>
                             <td>Pembimbing 1</td>
-                            <td>{{ $sidang->validasi->ta->Dpembimbing1->user->name }} </td>
+                            <td>{{ $sidang->ta->Dpembimbing1->user->name }} </td>
                             @php
                                 $total_nilai = 0;
                                 $jumlah_penilai = $sidang->nilaiPembimbing1->count();
@@ -64,22 +66,22 @@
                                                 $value->n10 * 0.25;
                                         }
                                         $nilai_pembimbing1 = $total_nilai / $jumlah_penilai;
-                                    }else {
+                                    } else {
                                         $nilai_pembimbing1 = 0;
                                     }
                                 } else {
                                     if ($jumlah_penilai > 0) {
                                         foreach ($sidang->nilaiPembimbing1 as $value) {
                                             $total_nilai +=
-                                            $value->n1 * 0.05 +
-                                            $value->n2 * 0.05 +
-                                            $value->n3 * 0.1 +
-                                            $value->n4 * 0.1 +
-                                            $value->n5 * 0.2 +
-                                            $value->n6 * 0.05 +
-                                            $value->n7 * 0.15 +
-                                            $value->n8 * 0.15 +
-                                            $value->n9 * 0.15;
+                                                $value->n1 * 0.05 +
+                                                $value->n2 * 0.05 +
+                                                $value->n3 * 0.1 +
+                                                $value->n4 * 0.1 +
+                                                $value->n5 * 0.2 +
+                                                $value->n6 * 0.05 +
+                                                $value->n7 * 0.15 +
+                                                $value->n8 * 0.15 +
+                                                $value->n9 * 0.15;
                                         }
                                         $nilai_pembimbing1 = $total_nilai / $jumlah_penilai;
                                     } else {
@@ -89,15 +91,17 @@
                             @endphp
                             <td>{{ $nilai_pembimbing1 }}</td>
                             <td>
-                                <a href="/berinilai/{{ $sidang->id }}/pembimbing1/{{ $jenjang }}" type="submit"
-                                    class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                                {{-- <button class="btn btn-success btn-sm">beri nilai</button> --}}
+                                @if (auth()->user()->level == 'Dosen')
+                                    <a href="/berinilai/{{ $sidang->id }}/pembimbing1/{{ $jenjang }}" type="submit"
+                                        class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                    {{-- <button class="btn btn-success btn-sm">beri nilai</button> --}}
+                                @endif
                             </td>
                         </tr>
                         <tr>
                             <td>2</td>
                             <td>Pembimbing 2 </td>
-                            <td>{{ $sidang->validasi->ta->Dpembimbing2->user->name }}</td>
+                            <td>{{ $sidang->ta->Dpembimbing2->user->name }}</td>
                             @php
                                 $total_nilai = 0;
                                 $jumlah_penilai = $sidang->nilaiPembimbing2->count();
@@ -118,22 +122,22 @@
                                                 $value->n10 * 0.25;
                                         }
                                         $nilai_pembimbing2 = $total_nilai / $jumlah_penilai;
-                                    }else {
+                                    } else {
                                         $nilai_pembimbing2 = 0;
                                     }
                                 } else {
                                     if ($jumlah_penilai > 0) {
                                         foreach ($sidang->nilaiPembimbing2 as $value) {
                                             $total_nilai +=
-                                            $value->n1 * 0.05 +
-                                            $value->n2 * 0.05 +
-                                            $value->n3 * 0.1 +
-                                            $value->n4 * 0.1 +
-                                            $value->n5 * 0.2 +
-                                            $value->n6 * 0.05 +
-                                            $value->n7 * 0.15 +
-                                            $value->n8 * 0.15 +
-                                            $value->n9 * 0.15;
+                                                $value->n1 * 0.05 +
+                                                $value->n2 * 0.05 +
+                                                $value->n3 * 0.1 +
+                                                $value->n4 * 0.1 +
+                                                $value->n5 * 0.2 +
+                                                $value->n6 * 0.05 +
+                                                $value->n7 * 0.15 +
+                                                $value->n8 * 0.15 +
+                                                $value->n9 * 0.15;
                                         }
                                         $nilai_pembimbing2 = $total_nilai / $jumlah_penilai;
                                     } else {
@@ -142,8 +146,10 @@
                                 }
                             @endphp
                             <td>{{ $nilai_pembimbing2 }}</td>
-                            <td><a href="/berinilai/{{ $sidang->id }}/pembimbing2/{{ $jenjang }}"
-                                    class="btn btn-warning"><i class="fas fa-edit"></i></a></td>
+                            @if (auth()->user()->level == 'Dosen')
+                                <td><a href="/berinilai/{{ $sidang->id }}/pembimbing2/{{ $jenjang }}"
+                                        class="btn btn-warning"><i class="fas fa-edit"></i></a></td>
+                            @endif
                         </tr>
                         <tr>
                             <td></td>
@@ -157,9 +163,9 @@
                         <tr>
                             <td>3</td>
                             <td>Ketua</td>
-                            <td>{{ $sidang->validasi->ta->Dpembimbing1->user->name }} /
-                                {{ $sidang->validasi->ta->Dpembimbing2->user->name }} </td>
-                                @php
+                            <td>{{ $sidang->ta->Dpembimbing1->user->name }} /
+                                {{ $sidang->ta->Dpembimbing2->user->name }} </td>
+                            @php
                                 $total_nilai = 0;
                                 $jumlah_penilai = $sidang->nilaiketua->count();
 
@@ -179,22 +185,22 @@
                                                 $value->n10 * 0.25;
                                         }
                                         $nilai_ketua = $total_nilai / $jumlah_penilai;
-                                    }else {
+                                    } else {
                                         $nilai_ketua = 0;
                                     }
                                 } else {
                                     if ($jumlah_penilai > 0) {
                                         foreach ($sidang->nilaiketua as $value) {
                                             $total_nilai +=
-                                            $value->n1 * 0.05 +
-                                            $value->n2 * 0.05 +
-                                            $value->n3 * 0.1 +
-                                            $value->n4 * 0.1 +
-                                            $value->n5 * 0.2 +
-                                            $value->n6 * 0.05 +
-                                            $value->n7 * 0.15 +
-                                            $value->n8 * 0.15 +
-                                            $value->n9 * 0.15;
+                                                $value->n1 * 0.05 +
+                                                $value->n2 * 0.05 +
+                                                $value->n3 * 0.1 +
+                                                $value->n4 * 0.1 +
+                                                $value->n5 * 0.2 +
+                                                $value->n6 * 0.05 +
+                                                $value->n7 * 0.15 +
+                                                $value->n8 * 0.15 +
+                                                $value->n9 * 0.15;
                                         }
                                         $nilai_ketua = $total_nilai / $jumlah_penilai;
                                     } else {
@@ -203,8 +209,10 @@
                                 }
                             @endphp
                             <td>{{ $nilai_ketua }}</td>
-                            <td><a href="/berinilai/{{ $sidang->id }}/ketua/{{ $jenjang }}"
-                                    class="btn btn-warning"><i class="fas fa-edit"></i></a></td>
+                            @if (auth()->user()->level == 'Dosen')
+                                <td><a href="/berinilai/{{ $sidang->id }}/ketua/{{ $jenjang }}"
+                                        class="btn btn-warning"><i class="fas fa-edit"></i></a></td>
+                            @endif
                         </tr>
                         <tr>
                             <td>4</td>
@@ -230,22 +238,22 @@
                                                 $value->n10 * 0.25;
                                         }
                                         $nilai_sekretaris = $total_nilai / $jumlah_penilai;
-                                    }else {
+                                    } else {
                                         $nilai_sekretaris = 0;
                                     }
                                 } else {
                                     if ($jumlah_penilai > 0) {
                                         foreach ($sidang->nilaisekretaris as $value) {
                                             $total_nilai +=
-                                            $value->n1 * 0.05 +
-                                            $value->n2 * 0.05 +
-                                            $value->n3 * 0.1 +
-                                            $value->n4 * 0.1 +
-                                            $value->n5 * 0.2 +
-                                            $value->n6 * 0.05 +
-                                            $value->n7 * 0.15 +
-                                            $value->n8 * 0.15 +
-                                            $value->n9 * 0.15;
+                                                $value->n1 * 0.05 +
+                                                $value->n2 * 0.05 +
+                                                $value->n3 * 0.1 +
+                                                $value->n4 * 0.1 +
+                                                $value->n5 * 0.2 +
+                                                $value->n6 * 0.05 +
+                                                $value->n7 * 0.15 +
+                                                $value->n8 * 0.15 +
+                                                $value->n9 * 0.15;
                                         }
                                         $nilai_sekretaris = $total_nilai / $jumlah_penilai;
                                     } else {
@@ -254,8 +262,10 @@
                                 }
                             @endphp
                             <td>{{ $nilai_sekretaris }}</td>
-                            <td><a href="/berinilai/{{ $sidang->id }}/sekretaris/{{ $jenjang }}"
-                                    class="btn btn-warning"><i class="fas fa-edit"></i></a></td>
+                            @if (auth()->user()->level == 'Dosen')
+                                <td><a href="/berinilai/{{ $sidang->id }}/sekretaris/{{ $jenjang }}"
+                                        class="btn btn-warning"><i class="fas fa-edit"></i></a></td>
+                            @endif
                         </tr>
                         <tr>
                             <td>5</td>
@@ -281,22 +291,22 @@
                                                 $value->n10 * 0.25;
                                         }
                                         $nilai_anggota1 = $total_nilai / $jumlah_penilai;
-                                    }else {
+                                    } else {
                                         $nilai_anggota1 = 0;
                                     }
                                 } else {
                                     if ($jumlah_penilai > 0) {
                                         foreach ($sidang->nilaianggota1 as $value) {
                                             $total_nilai +=
-                                            $value->n1 * 0.05 +
-                                            $value->n2 * 0.05 +
-                                            $value->n3 * 0.1 +
-                                            $value->n4 * 0.1 +
-                                            $value->n5 * 0.2 +
-                                            $value->n6 * 0.05 +
-                                            $value->n7 * 0.15 +
-                                            $value->n8 * 0.15 +
-                                            $value->n9 * 0.15;
+                                                $value->n1 * 0.05 +
+                                                $value->n2 * 0.05 +
+                                                $value->n3 * 0.1 +
+                                                $value->n4 * 0.1 +
+                                                $value->n5 * 0.2 +
+                                                $value->n6 * 0.05 +
+                                                $value->n7 * 0.15 +
+                                                $value->n8 * 0.15 +
+                                                $value->n9 * 0.15;
                                         }
                                         $nilai_anggota1 = $total_nilai / $jumlah_penilai;
                                     } else {
@@ -305,8 +315,10 @@
                                 }
                             @endphp
                             <td>{{ $nilai_anggota1 }}</td>
-                            <td><a href="/berinilai/{{ $sidang->id }}/anggota1/{{ $jenjang }}"
-                                    class="btn btn-warning"><i class="fas fa-edit"></i></a></td>
+                            @if (auth()->user()->level == 'Dosen')
+                                <td><a href="/berinilai/{{ $sidang->id }}/anggota1/{{ $jenjang }}"
+                                        class="btn btn-warning"><i class="fas fa-edit"></i></a></td>
+                            @endif
                         </tr>
                         <tr>
                             <td>6</td>
@@ -332,22 +344,22 @@
                                                 $value->n10 * 0.25;
                                         }
                                         $nilai_anggota2 = $total_nilai / $jumlah_penilai;
-                                    }else {
+                                    } else {
                                         $nilai_anggota2 = 0;
                                     }
                                 } else {
                                     if ($jumlah_penilai > 0) {
                                         foreach ($sidang->nilaianggota2 as $value) {
                                             $total_nilai +=
-                                            $value->n1 * 0.05 +
-                                            $value->n2 * 0.05 +
-                                            $value->n3 * 0.1 +
-                                            $value->n4 * 0.1 +
-                                            $value->n5 * 0.2 +
-                                            $value->n6 * 0.05 +
-                                            $value->n7 * 0.15 +
-                                            $value->n8 * 0.15 +
-                                            $value->n9 * 0.15;
+                                                $value->n1 * 0.05 +
+                                                $value->n2 * 0.05 +
+                                                $value->n3 * 0.1 +
+                                                $value->n4 * 0.1 +
+                                                $value->n5 * 0.2 +
+                                                $value->n6 * 0.05 +
+                                                $value->n7 * 0.15 +
+                                                $value->n8 * 0.15 +
+                                                $value->n9 * 0.15;
                                         }
                                         $nilai_anggota2 = $total_nilai / $jumlah_penilai;
                                     } else {
@@ -356,8 +368,10 @@
                                 }
                             @endphp
                             <td>{{ $nilai_anggota2 }}</td>
-                            <td><a href="/berinilai/{{ $sidang->id }}/anggota2/{{ $jenjang }}"
-                                    class="btn btn-warning"><i class="fas fa-edit"></i></a></td>
+                            @if (auth()->user()->level == 'Dosen')
+                                <td><a href="/berinilai/{{ $sidang->id }}/anggota2/{{ $jenjang }}"
+                                        class="btn btn-warning"><i class="fas fa-edit"></i></a></td>
+                            @endif
                         </tr>
                         <tr>
                             <td></td>

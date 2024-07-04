@@ -11,8 +11,8 @@ class PdfController extends Controller
 {
     public function generatePdf(string $id)
     {
-        $sidang = Sidang::where('id',$id)->with(['validasi.ta.Dpembimbing1.user', 'validasi.ta.Dpembimbing2.user', 'nilaiPembimbing1', 'nilaiPembimbing2', 'nilaiketua', 'nilaisekretaris', 'psek_sidang.user', 'panggota1.user', 'panggota2.user'])->first(); // Adjust your query as needed
-        $jenjang = $sidang->validasi->ta->mahasiswa->prodi->jenjang;
+        $sidang = Sidang::where('id',$id)->with(['ta.Dpembimbing1.user', 'ta.Dpembimbing2.user', 'nilaiPembimbing1', 'nilaiPembimbing2', 'nilaiketua', 'nilaisekretaris', 'psek_sidang.user', 'panggota1.user', 'panggota2.user'])->first(); // Adjust your query as needed
+        $jenjang = $sidang->ta->mahasiswa->prodi->jenjang;
 
 
         // Calculate the values

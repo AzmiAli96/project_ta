@@ -133,8 +133,8 @@
 
                                     // Check if the logged in user's name is in any of these roles
                                     if (
-                                        $sidang->validasi->ta->Dpembimbing1->user->name === auth()->user()->name ||
-                                        $sidang->validasi->ta->Dpembimbing2->user->name === auth()->user()->name ||
+                                        $sidang->ta->Dpembimbing1->user->name === auth()->user()->name ||
+                                        $sidang->ta->Dpembimbing2->user->name === auth()->user()->name ||
                                         $sidang->psek_sidang->user->name === auth()->user()->name ||
                                         $sidang->panggota1->user->name === auth()->user()->name ||
                                         $sidang->panggota2->user->name === auth()->user()->name
@@ -146,12 +146,12 @@
                                 @if ($showRow)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $sidang->validasi->ta->nobp }} /
-                                            {{ $sidang->validasi->ta->mahasiswa->user->name }}</td>
-                                        <td>{{ $sidang->validasi->ta->mahasiswa->prodi->jenjang }} -
-                                            {{ $sidang->validasi->ta->mahasiswa->prodi->kode_prodi }}</td>
-                                        <td>{{ $sidang->validasi->ta->Dpembimbing1->user->name }} /
-                                            {{ $sidang->validasi->ta->Dpembimbing2->user->name }}</td>
+                                        <td>{{ $sidang->ta->nobp }} /
+                                            {{ $sidang->ta->mahasiswa->user->name }}</td>
+                                        <td>{{ $sidang->ta->mahasiswa->prodi->jenjang }} -
+                                            {{ $sidang->ta->mahasiswa->prodi->kode_prodi }}</td>
+                                        <td>{{ $sidang->ta->Dpembimbing1->user->name }} /
+                                            {{ $sidang->ta->Dpembimbing2->user->name }}</td>
                                         <td>{{ $sidang->psek_sidang->user->name }}</td>
                                         <td>{{ $sidang->panggota1->user->name }} / {{ $sidang->panggota2->user->name }}
                                         </td>

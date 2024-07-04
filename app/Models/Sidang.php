@@ -14,7 +14,7 @@ class Sidang extends Model
     //     return $this->belongsTo(Validasi::class,'validasi_id');
     // }
     public function ta(){
-        return $this->belongsTo(Validasi::class,'ta_id');
+        return $this->belongsTo(TA::class,'ta_id');
     }
 
     public function jadwal(){

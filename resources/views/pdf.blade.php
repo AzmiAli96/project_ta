@@ -19,8 +19,8 @@
 <body>
     <h1>Data Nilai Mahasiswa</h1>
     <h4>
-        <p><b>Mahasiswa :</b> {{ $sidang->validasi->ta->nobp }} /
-            {{ $sidang->validasi->ta->mahasiswa->user->name }}</p>
+        <p><b>Mahasiswa :</b> {{ $sidang->ta->nobp }} /
+            {{ $sidang->ta->mahasiswa->user->name }}</p>
     </h4>
     <div class="table-responsive">
         <table class="table table-bordered" width="100%" cellspacing="0">
@@ -36,13 +36,13 @@
                 <tr>
                     <td>1</td>
                     <td>Pembimbing 1</td>
-                    <td>{{ $sidang->validasi->ta->Dpembimbing1->user->name }} </td>
+                    <td>{{ $sidang->ta->Dpembimbing1->user->name }} </td>
                     <td>{{ $nilai_pembimbing1 }}</td>
                 </tr>
                 <tr>
                     <td>2</td>
                     <td>Pembimbing 2 </td>
-                    <td>{{ $sidang->validasi->ta->Dpembimbing2->user->name }}</td>
+                    <td>{{ $sidang->ta->Dpembimbing2->user->name }}</td>
                     <td>{{ $nilai_pembimbing2 }}</td>
                 </tr>
                 <tr>
@@ -54,8 +54,8 @@
                 <tr>
                     <td>3</td>
                     <td>Ketua</td>
-                    <td>{{ $sidang->validasi->ta->Dpembimbing1->user->name }} /
-                        {{ $sidang->validasi->ta->Dpembimbing2->user->name }} </td>
+                    <td>{{ $sidang->ta->Dpembimbing1->user->name }} /
+                        {{ $sidang->ta->Dpembimbing2->user->name }} </td>
                     <td>{{ $nilai_ketua }}</td>
                 </tr>
                 <tr>
