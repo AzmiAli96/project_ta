@@ -31,7 +31,9 @@
                     </div>
                 </div>
             </form>
-            {{-- <a href="ta/create" class="btn btn-primary mb-3">Create</a> --}}
+            @if (auth()->user()->level == 'Admin' )
+            <a href="ta/create" class="btn btn-primary mb-3">Create</a>
+            @endif
         </div>
         <div class="table-responsive">
             <table class="table table-bordered" width="100%" cellspacing="0">

@@ -17,7 +17,7 @@
             <select name="ta_id" class="form-select">
                 <option value="" hidden>--pilih Mahasiswa--</option>
                 @foreach ($tas as $ta)
-                <option value="{{$ta->id}}">{{$ta->mahasiswa->user->name}}  -   {{$ta->nobp}}</option>
+                <option value="{{$ta->id}}">{{$ta->mahasiswa->namalengkap}}  -   {{$ta->nobp}}</option>
                 @endforeach
             </select>
             @error('ta_id')

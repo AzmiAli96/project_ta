@@ -81,14 +81,14 @@
                                 <!-- <div class="collapse-divider"></div>
                                 <h6 class="collapse-header">Other Pages:</h6> -->
                                 <a class="collapse-item" href="/sesi">Sesi waktu</a>
-                                <a class="collapse-item" href="/tanggal">Tanggal</a>
                                 @endif
                                 @if (auth()->user()->level == 'Admin' |auth()->user()->level == 'Kaprodi' )
+                                <a class="collapse-item" href="/tanggal">Tanggal</a>
                                 <a class="collapse-item" href="/ta">Tugas Akhir</a>
                                 @endif
-                                @if (auth()->user()->level == 'Mahasiswa' )
+                                {{-- @if (auth()->user()->level == 'Mahasiswa' )
                                 <a class="collapse-item" href="/ta/{{ auth()->user()->mahasiswa->ta->id }}/edit">Tugas Akhir</a>
-                                @endif
+                                @endif --}}
                                 {{-- @if (auth()->user()->level == 'Admin'|auth()->user()->level == 'Kaprodi' )
                                 <a class="collapse-item" href="/validasi">Validasi</a>
                                 @endif --}}

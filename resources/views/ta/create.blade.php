@@ -28,7 +28,7 @@
                     <select name="nobp" class="form-select">
                         <option value="" hidden>--pilih Mahasiswa--</option>
                         @foreach ($mahasiswas as $mahasiswa)
-                            <option value="{{ $mahasiswa->nobp }}">{{ $mahasiswa->nobp }} - {{ $mahasiswa->user->name }}
+                            <option value="{{ $mahasiswa->nobp }}">{{ $mahasiswa->nobp }} - {{ $mahasiswa->namalengkap }}
                             </option>
                         @endforeach
                     </select>

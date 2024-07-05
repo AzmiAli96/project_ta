@@ -57,7 +57,7 @@
                     @foreach ($sidangs as $sidang )
                     <tr>
                         <td>{{ $sidangs->firstItem()+$loop->index }}</td>
-                        <td>{{ $sidang->ta->nobp }} / {{ $sidang->ta->mahasiswa->user->name }}</td>
+                        <td>{{ $sidang->ta->nobp }} / {{ $sidang->ta->mahasiswa->namalengkap }}</td>
                         <td>{{ $sidang->ta->judul }}</td>
                         <td>{{ $sidang->ta->dokumen }}</td>
                         <td>{{ $sidang->jadwal->tanggal }}</td>

@@ -22,7 +22,7 @@
                     <div class="col-md-8">
                         <h4>
                             <p><b>Mahasiswa :</b> {{ $sidang->ta->nobp }} /
-                                {{ $sidang->ta->mahasiswa->user->name }}</p>
+                                {{ $sidang->ta->mahasiswa->namalengkap }}</p>
                         </h4>
                     </div>
                     <div class="col-md-4 text-md-right">
@@ -36,7 +36,7 @@
                             <th>Jabatan</th>
                             <th>Nama</th>
                             <th>Total Nilai</th>
-                            @if (auth()->user()->level == 'Dosen')
+                            @if (auth()->user()->level == 'Admin' | auth()->user()->level == 'Dosen')
                                 <th>Action</th>
                             @endif
                         </tr>
@@ -91,7 +91,7 @@
                             @endphp
                             <td>{{ $nilai_pembimbing1 }}</td>
                             <td>
-                                @if (auth()->user()->level == 'Dosen')
+                                @if (auth()->user()->level == 'Admin' | auth()->user()->level == 'Dosen')
                                     <a href="/berinilai/{{ $sidang->id }}/pembimbing1/{{ $jenjang }}" type="submit"
                                         class="btn btn-warning"><i class="fas fa-edit"></i></a>
                                     {{-- <button class="btn btn-success btn-sm">beri nilai</button> --}}
@@ -146,7 +146,7 @@
                                 }
                             @endphp
                             <td>{{ $nilai_pembimbing2 }}</td>
-                            @if (auth()->user()->level == 'Dosen')
+                            @if (auth()->user()->level == 'Admin' | auth()->user()->level == 'Dosen')
                                 <td><a href="/berinilai/{{ $sidang->id }}/pembimbing2/{{ $jenjang }}"
                                         class="btn btn-warning"><i class="fas fa-edit"></i></a></td>
                             @endif
@@ -209,7 +209,7 @@
                                 }
                             @endphp
                             <td>{{ $nilai_ketua }}</td>
-                            @if (auth()->user()->level == 'Dosen')
+                            @if (auth()->user()->level == 'Admin' | auth()->user()->level == 'Dosen')
                                 <td><a href="/berinilai/{{ $sidang->id }}/ketua/{{ $jenjang }}"
                                         class="btn btn-warning"><i class="fas fa-edit"></i></a></td>
                             @endif
@@ -262,7 +262,7 @@
                                 }
                             @endphp
                             <td>{{ $nilai_sekretaris }}</td>
-                            @if (auth()->user()->level == 'Dosen')
+                            @if (auth()->user()->level == 'Admin' | auth()->user()->level == 'Dosen')
                                 <td><a href="/berinilai/{{ $sidang->id }}/sekretaris/{{ $jenjang }}"
                                         class="btn btn-warning"><i class="fas fa-edit"></i></a></td>
                             @endif
@@ -315,7 +315,7 @@
                                 }
                             @endphp
                             <td>{{ $nilai_anggota1 }}</td>
-                            @if (auth()->user()->level == 'Dosen')
+                            @if (auth()->user()->level == 'Admin' | auth()->user()->level == 'Dosen')
                                 <td><a href="/berinilai/{{ $sidang->id }}/anggota1/{{ $jenjang }}"
                                         class="btn btn-warning"><i class="fas fa-edit"></i></a></td>
                             @endif
@@ -368,7 +368,7 @@
                                 }
                             @endphp
                             <td>{{ $nilai_anggota2 }}</td>
-                            @if (auth()->user()->level == 'Dosen')
+                            @if (auth()->user()->level == 'Admin' | auth()->user()->level == 'Dosen')
                                 <td><a href="/berinilai/{{ $sidang->id }}/anggota2/{{ $jenjang }}"
                                         class="btn btn-warning"><i class="fas fa-edit"></i></a></td>
                             @endif

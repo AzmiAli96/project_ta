@@ -147,7 +147,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $sidang->ta->nobp }} /
-                                            {{ $sidang->ta->mahasiswa->user->name }}</td>
+                                            {{ $sidang->ta->mahasiswa->namalengkap }}</td>
                                         <td>{{ $sidang->ta->mahasiswa->prodi->jenjang }} -
                                             {{ $sidang->ta->mahasiswa->prodi->kode_prodi }}</td>
                                         <td>{{ $sidang->ta->Dpembimbing1->user->name }} /

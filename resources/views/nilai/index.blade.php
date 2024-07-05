@@ -52,7 +52,7 @@
                         @foreach ($sidangs as $sidang)
                             <tr>
                                 <td>{{ $sidangs->firstItem() + $loop->index }}</td>
-                                <td>{{ $sidang->ta->nobp }} / {{ $sidang->ta->mahasiswa->user->name }}
+                                <td>{{ $sidang->ta->nobp }} / {{ $sidang->ta->mahasiswa->namalengkap }}
                                 </td>
                                 <td>{{ $sidang->ta->mahasiswa->prodi->jenjang }} -
                                     {{ $sidang->ta->mahasiswa->prodi->kode_prodi }}</td>

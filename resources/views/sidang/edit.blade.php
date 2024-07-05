@@ -19,9 +19,9 @@
                 <option value="" hidden>--pilih Mahasiswa--</option>
                 @foreach ($validasis as $validasi)
                 @if (old('validasi_id',$sidang->validasi_id)==$validasi->id)
-                <option value="{{$validasi->nobp}}" selected>{{ $validasi->nobp }} {{ $validasi->ta->mahasiswa->user->name }}</option>
+                <option value="{{$validasi->nobp}}" selected>{{ $validasi->nobp }} {{ $validasi->ta->mahasiswa->namalengkap }}</option>
                 @else
-                <option value="{{ $validasi->nobp }}">{{ $validasi->nobp }} {{ $validasi->ta->mahasiswa->user->name }}</option>
+                <option value="{{ $validasi->nobp }}">{{ $validasi->nobp }} {{ $validasi->ta->mahasiswa->namalengkap }}</option>
                 @endif
                 @endforeach
             </select>

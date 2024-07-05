@@ -20,9 +20,9 @@
                     @foreach ($mahasiswas as $mahasiswa)
                         @if (old('nobp', $ta->nobp) == $mahasiswa->nobp)
                             <option value="{{ $mahasiswa->nobp }}" selected>{{ $mahasiswa->nobp }} -
-                                {{ $mahasiswa->user->name }}</option>
+                                {{ $mahasiswa->namalengkap }}</option>
                         @else
-                            <option value="{{ $mahasiswa->nobp }}">{{ $mahasiswa->nobp }} - {{ $mahasiswa->user->name }}
+                            <option value="{{ $mahasiswa->nobp }}">{{ $mahasiswa->nobp }} - {{ $mahasiswa->namalengkap }}
                             </option>
                         @endif
                     @endforeach
@@ -98,7 +98,7 @@
                     </div>
                 @enderror
             </div>
-            @if (auth()->user()->level == 'Kaprodi')
+            @if (auth()->user()->level == 'Admin' | auth()->user()->level == 'Kaprodi')
                 <div class="mb-3">
                     <label class="form-label">Komentar</label>
                     <textarea class="form-control @error('komentar') is-invalid @enderror" rows="3" name="komentar">{{ old('komentar', $ta->komentar) }}</textarea>
