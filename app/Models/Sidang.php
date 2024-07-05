@@ -21,6 +21,10 @@ class Sidang extends Model
         return $this->belongsTo(tanggal::class,'tanggal_id');
     }
 
+    public function pketua_sidang(){
+        return $this->belongsTo(Dosen::class,'ketua_sidang');
+    }
+
     public function psek_sidang(){
         return $this->belongsTo(Dosen::class,'sekr_sidang');
     }

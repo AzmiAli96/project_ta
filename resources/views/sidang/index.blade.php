@@ -63,7 +63,7 @@
                         <td>{{ $sidang->jadwal->tanggal }}</td>
                         <td>{{ $sidang->jadwal->ruangan->nama_ruangan }}</td>
                         <td>{{ $sidang->jadwal->sesi->sesi }}</td>
-                        <td>{{ $sidang->ta->Dpembimbing1->user->name }} && {{ $sidang->ta->Dpembimbing2->user->name }}</td>
+                        <td>{{ $sidang->pketua_sidang->user->name }}</td>
                         <td>{{ $sidang->psek_sidang->user->name }}</td>
                         <td>{{ $sidang->panggota1->user->name }}</td>
                         <td>{{ $sidang->panggota2->user->name }}</td>

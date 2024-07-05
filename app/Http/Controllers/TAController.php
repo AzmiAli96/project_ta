@@ -42,8 +42,10 @@ class TAController extends Controller
             'dokumen' => 'required',
             'pembimbing1' => 'required|exists:dosens,id|different:pembimbing2',
             'pembimbing2' => 'required|exists:dosens,id|different:pembimbing1',
-            'ket' => 'nullable',
+            // 'ket' => 'nullable',
             'komentar' => 'nullable',
+            'status_p1' => 'required',
+            'status_p2' => 'required',
             'status' => 'required',
         ]);
 
@@ -59,8 +61,10 @@ class TAController extends Controller
             'dokumen'=>$fileName,
             'pembimbing1'=>$request->pembimbing1,
             'pembimbing2'=>$request->pembimbing2,
-            'ket' => $request->ket,
+            // 'ket' => $request->ket,
             'komentar' => $request->komentar,
+            'status_p1' => $request->status_p1,
+            'status_p2' => $request->status_p2,
             'status' => $request->status,
         ]);
         return redirect('/ta')->with('pesan', 'berhasil menyimpan data.');
@@ -91,10 +95,12 @@ class TAController extends Controller
             'nobp' => 'required',
             'judul' => 'required',
             'dokumen' => 'required',
-            'pembimbing1' => 'required',
-            'pembimbing2' => 'required',
-            'ket' => 'required',
-            'komentar' => 'required',
+            'pembimbing1' => 'required|exists:dosens,id|different:pembimbing2',
+            'pembimbing2' => 'required|exists:dosens,id|different:pembimbing1 ',
+            // 'ket' => 'required',
+            'komentar' => 'nullable',
+            'status_p1' => 'required',
+            'status_p2' => 'required',
             'status' => 'required',
         ]);
         TA::where('id',$id)->update($validated);

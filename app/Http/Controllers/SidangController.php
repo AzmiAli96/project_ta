@@ -16,10 +16,10 @@ class SidangController extends Controller
      */
     public function index()
     {
-        $sidang=Sidang::with([
+        $sidang = Sidang::with([
             'ta'
         ])->latest()->paginate(10);
-        return view ('sidang.index', ['sidangs'=>$sidang]);
+        return view('sidang.index', ['sidangs' => $sidang, ]);
     }
 
     /**
@@ -27,9 +27,9 @@ class SidangController extends Controller
      */
     public function create()
     {
-       $taTervalidasi = ta::where('status', '=', true)->get();
+        $taTervalidasi = ta::where('status', '=', true )->get();
 
-        return view('sidang.create',['tas'=>$taTervalidasi,'tanggals'=>tanggal::all(),'dosens'=> Dosen::all()]);
+        return view('sidang.create', ['tas' => $taTervalidasi, 'tanggals' => tanggal::all(), 'dosens' => Dosen::all()]);
     }
 
     /**
@@ -39,16 +39,17 @@ class SidangController extends Controller
     {
         $validated = $request->validate([
             // 'validasi_id' => 'required',
-            'ta_id'=>'required',
+            'ta_id' => 'required',
             'tanggal_id' => 'required',
-            'sekr_sidang' => 'required',
-            'anggota1' => 'required',
-            'anggota2' => 'required',
+            'ketua_sidang' => 'required|exists:dosens,id|different:sekr_sidang,anggota1,anggota2',
+            'sekr_sidang' => 'required|exists:dosens,id|different:ketua_sidang,anggota1,anggota2',
+            'anggota1' => 'required|exists:dosens,id|different:ketua_sidang,sekr_sidang,anggota2',
+            'anggota2' => 'required|exists:dosens,id|different:ketua_sidang,sekr_sidang,anggota1',
         ]);
 
-// $data = [
-//     "validasi_id	tanggal_id	sekr_sidang	anggota1	anggota2"
-// ];
+        // $data = [
+        //     "validasi_id	tanggal_id	sekr_sidang	anggota1	anggota2"
+        // ];
         Sidang::create($validated);
         return redirect('/sidang')->with('pesan', 'berhasil menyimpan data.');
     }
@@ -66,7 +67,7 @@ class SidangController extends Controller
      */
     public function edit(string $id)
     {
-        return view('sidang.edit',['tas'=>TA::all(),'dosens'=>Dosen::all(),'tanggals'=>tanggal::all(),'sidang'=>Sidang::find($id)]);
+        return view('sidang.edit', ['tas' => TA::all(), 'dosens' => Dosen::all(), 'tanggals' => tanggal::all(), 'sidang' => Sidang::find($id)]);
     }
 
     /**
@@ -76,12 +77,14 @@ class SidangController extends Controller
     {
         $validated = $request->validate([
             // 'validasi_id' => 'required',
-            'ta_id'=>'required',
+            'ta_id' => 'required',
             'tanggal_id' => 'required',
-            'sekr_sidang' => 'required',
-            'anggota_sidang' => 'required',
+            'ketua_sidang' => 'required|exists:dosens,id|different:sekr_sidang,anggota1,anggota2',
+            'sekr_sidang' => 'required|exists:dosens,id|different:ketua_sidang,anggota1,anggota2',
+            'anggota1' => 'required|exists:dosens,id|different:ketua_sidang,sekr_sidang,anggota2',
+            'anggota2' => 'required|exists:dosens,id|different:ketua_sidang,sekr_sidang,anggota1',
         ]);
-        Sidang::where('id',$id)->update($validated);
+        Sidang::where('id', $id)->update($validated);
         return redirect('/sidang')->with('pesan', 'berhasil di-update.');
     }
 

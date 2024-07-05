@@ -88,7 +88,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="mb-3">
+            {{-- <div class="mb-3">
                 <label class="form-label">Keterangan</label>
                 <textarea class="form-control @error('ket') is-invalid @enderror" rows="3" name="ket" placeholder="Buatlah tanggal berapa kamu ingin sidang ">{{old('ket')}}</textarea>
                 @error('ket')
@@ -96,7 +96,9 @@
                     {{ $message }}
                 </div>
                 @enderror
-            </div>
+            </div> --}}
+            <input type="hidden" name="status_p1" value="0">
+            <input type="hidden" name="status_p2" value="0">
             <input type="hidden" name="status" value="0">
             <button type="submit" class="btn btn-primary">submit</button>
         </form>

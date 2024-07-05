@@ -41,6 +41,26 @@
             @enderror
         </div>
         <div class="mb-3">
+            <label class="form-label @error('ketua_sidang') is-invalid @enderror">Ketua Sidang</label>
+            <select name="ketua_sidang" class="form-select">
+                <option value="" hidden>--pilih dosen--</option>
+                @foreach ($tas as $ta)
+                    @if($ta->Dpembimbing1)
+                        <option value="{{ $ta->Dpembimbing1->user->id }}">{{ $ta->Dpembimbing1->user->name }}</option>
+                    @endif
+                    @if($ta->Dpembimbing2)
+                        <option value="{{ $ta->Dpembimbing2->user->id }}">{{ $ta->Dpembimbing2->user->name }}</option>
+                    @endif
+                @endforeach
+            </select>
+            @error('ketua_sidang')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        
+        <div class="mb-3">
             <label class="form-label @error('sekr_sidang') is-invalid @enderror">Sekretaris Sidang</label>
             <select name="sekr_sidang" class="form-select">
                 <option value="" hidden>--pilih dosen--</option>
