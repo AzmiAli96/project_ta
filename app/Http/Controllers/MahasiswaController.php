@@ -101,7 +101,7 @@ class MahasiswaController extends Controller
      */
     public function destroy(string $id)
     {
-        User::destroy(Mahasiswa::findOrFail($id)->user->id);
+        // User::destroy(Mahasiswa::findOrFail($id)->user->id);
         Mahasiswa::destroy($id);
         return redirect('/mahasiswa')->with('pesan', 'Berhasil Dihapuskan.');
     }
