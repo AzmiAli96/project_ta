@@ -35,7 +35,9 @@
 
     <!-- Page level custom scripts -->
     <script src="{{ asset('vendor/startbootstrap-sb-admin-2-gh-pages/js/demo/chart-pie-demo.js') }}"></script>
-    <script src="/js/char-bar.js"></script>
-
+    <script src="/js/chart.js"></script>
+    
+    {{-- <script src="/js/chart-pie.js"></script> --}}
+    
     <script src="/js/bootstrap.bundle.min.js" ></script>
     @yield('scriptpages')

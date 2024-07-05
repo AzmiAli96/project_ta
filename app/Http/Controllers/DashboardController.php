@@ -14,7 +14,7 @@ class DashboardController extends Controller
     public function index()
     {
         $sidang=Sidang::latest()->paginate(10);
-        return view ('dashbord', ['sidangs'=>$sidang]);
+        return view ('dashboard', ['sidangs'=>$sidang]);
 
     }
 

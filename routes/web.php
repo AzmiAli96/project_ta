@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActivityLogController;
+use App\Http\Controllers\ChartDataController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\JurusanController;
@@ -31,7 +32,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
 // Route::get('/', function () {
-//     return view('dashbord');
+//     return view('dashboard');
 // })->middleware('auth');
 
 Route::get('/main', function () {
@@ -67,7 +68,11 @@ route::middleware(['auth'])->group(function () {
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
     
+    
     Route::resource('/dashboard', DashboardController::class);
+    Route::get('/dashboard', [ChartDataController::class, 'index'])->name('dashboard');
+
+
     route::get('/pdf/{id}',[PdfController::class, 'generatePdf']);
     route::resource('/nilai', NilaiController::class);
 

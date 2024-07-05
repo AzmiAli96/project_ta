@@ -45,59 +45,59 @@ class DatabaseSeeder extends Seeder
         ]);
         
         \App\Models\User::create([
-            'name'=> 'azmi ali',
-            'email'=> 'azmiali@gmail.com',
+            'name'=> 'Meri Azmi',
+            'email'=> 'azmimeri@gmail.com',
             'password'=> bcrypt('123123123'),
             'level'=> 'Dosen',
         ]);
         
         
         \App\Models\Dosen::create([
-            'nidn'=> '2211081004',
+            'nidn'=> '02155476889',
             'user_id'=> '3',
             'no_telp'=> '082199175396',
-            'alamat'=> 'taluak',
+            'alamat'=> 'Padang',
         ]);
         
         \App\Models\User::create([
-            'name'=> 'farhan arya',
-            'email'=> 'farhan@gmail.com',
+            'name'=> 'Ronal Hadi',
+            'email'=> 'HadiRon@gmail.com',
             'password'=> bcrypt('123123123'),
             'level'=> 'Dosen',
         ]);
 
         \App\Models\Dosen::create([
-            'nidn'=> '2211083017',
+            'nidn'=> '0231083017',
             'user_id'=> '4',
             'no_telp'=> '082155441234',
             'alamat'=> 'taluak',
         ]);
 
         \App\Models\User::create([
-            'name'=> 'atul abiyyah',
-            'email'=> 'atul@gmail.com',
+            'name'=> 'Ainil Mardiyah',
+            'email'=> 'Ainil333@gmail.com',
             'password'=> bcrypt('123123123'),
             'level'=> 'Dosen',
         ]);
 
         \App\Models\Dosen::create([
-            'nidn'=> '2211081017',
+            'nidn'=> '0218881017',
             'user_id'=> '5',
             'no_telp'=> '082199542112',
-            'alamat'=> 'taluak',
+            'alamat'=> 'Ampang',
         ]);
         \App\Models\User::create([
-            'name'=> 'hans demberger',
-            'email'=> 'hans@gmail.com',
+            'name'=> 'Fazrol Rozi',
+            'email'=> 'Fazrozi@gmail.com',
             'password'=> bcrypt('123123123'),
             'level'=> 'Dosen',
         ]);
 
         \App\Models\Dosen::create([
-            'nidn'=> '2211082052',
+            'nidn'=> '0234433552',
             'user_id'=> '6',
             'no_telp'=> '081352456525',
-            'alamat'=> 'taluak',
+            'alamat'=> 'Limau Manis',
         ]);
 
         // \App\Models\User::create([
