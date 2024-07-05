@@ -61,6 +61,19 @@
 
         {{-- bar char --}}
         <div class="row">
+            {{-- <div class="col-xl-8 col-lg-7">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-bar">
+                            <canvas id="myBarChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div> --}}
+
             <div class="col-xl-8 col-lg-7">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
@@ -73,6 +86,7 @@
                     </div>
                 </div>
             </div>
+
             {{-- donut bar --}}
             <div class="col-xl-4 col-lg-5">
                 <div class="card shadow mb-4">
@@ -90,6 +104,8 @@
             </div>
         </div>
     @endif
+
+
 
     @if (auth()->user()->level == 'Mahasiswa')
         <div class="row ml-2 col-6">
@@ -166,6 +182,15 @@
         </div>
     @endif
 
+ <!-- Add the data to the view -->
+<script id="barChartData" type="application/json">
+    @json($barChartData)
+</script>
+<script id="pieChartData" type="application/json">
+    @json($pieChartData)
+</script>
 
+<!-- Include the chart.js script -->
+<script src="{{ asset('js/chart.js') }}"></script>
 
 @endsection
