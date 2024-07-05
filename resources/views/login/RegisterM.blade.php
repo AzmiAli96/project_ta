@@ -76,6 +76,9 @@
                                         <input type="number" id="nobp" class="form-control form-control-user" name="nobp" placeholder="NO BP">
                                     </div>
                                     <div class="form-group">
+                                        <input type="text" id="namalengkap" class="form-control form-control-user" name="namalengkap" placeholder="Nama Mahasiswa">
+                                    </div>
+                                    <div class="form-group">
                                         <select name="jurusan_id" id="jurusan_id" class="form-select form-control">
                                             <option value="" hidden>--pilih Jurusan--</option>
                                             @foreach ($jurusans as $jurusan)
