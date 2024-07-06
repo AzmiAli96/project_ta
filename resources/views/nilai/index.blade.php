@@ -296,7 +296,7 @@
                                         ($nilai_ketua + $nilai_sekretaris + $nilai_anggota1 + $nilai_anggota2) / 4;
                                     $nilai_akhir = ($rata_pendidikan + $rata_penguji) / 2;
 
-                                    $status = 'Tidak Lulus';
+                                    // $status = 'Tidak Lulus';
                                     $count = 0;
                                     if ($nilai_ketua > 65) {
                                         $count++;
@@ -311,11 +311,14 @@
                                         $count++;
                                     }
                                     if ($count > 2) {
-                                        $status = 'Lulus';
+                                        // $status = 'Lulus';
+                                        $sidang->update(["status"=>true]);
+                                    } else {
+                                        $sidang->update(["status"=>false]);
                                     }
                                 @endphp
                                 <td>{{ $nilai_akhir }}</td>
-                                <td>{{ $status }}</td>
+                                <td>{{ $sidang->status == 1 ? 'Lulus' : 'Belum Lulus' }}</td>
                                 <td>
                                     <a class="btn btn-sm btn-warning" href="/nilai/{{ $sidang->id }}/edit"><i
                                             class="fas fa-edit"></i></a>

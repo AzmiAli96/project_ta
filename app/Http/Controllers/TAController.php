@@ -14,13 +14,12 @@ class TAController extends Controller
      */
     public function index()
     {
-        if(in_array(auth()->user()->level, ['Admin', 'Kaprodi'])){
-            $ta=TA::with(['mahasiswa', 'Dpembimbing1', 'Dpembimbing2'])->latest()->paginate(10);
-            
-        }else{
-            $ta=TA::with(['mahasiswa', 'Dpembimbing1', 'Dpembimbing2'])->where('nobp', '=', auth()->user()->mahasiswa->nobp)->latest()->paginate(10);
+        if (in_array(auth()->user()->level, ['Admin', 'Kaprodi'])) {
+            $ta = TA::with(['mahasiswa', 'Dpembimbing1', 'Dpembimbing2'])->latest()->paginate(10);
+        } else {
+            $ta = TA::with(['mahasiswa', 'Dpembimbing1', 'Dpembimbing2'])->where('nobp', '=', auth()->user()->mahasiswa->nobp)->latest()->paginate(10);
         }
-        return view ('ta.index', ['tas'=>$ta]);
+        return view('ta.index', ['tas' => $ta]);
     }
 
     /**
@@ -28,7 +27,7 @@ class TAController extends Controller
      */
     public function create()
     {
-        return view('ta.create',['mahasiswas'=>Mahasiswa::all(),'dosens'=>Dosen::all()]);
+        return view('ta.create', ['mahasiswas' => Mahasiswa::all(), 'dosens' => Dosen::all()]);
     }
 
     /**
@@ -49,18 +48,18 @@ class TAController extends Controller
             'status' => 'required',
         ]);
 
-        if($request->hasFile('dokumen')){
+        if ($request->hasFile('dokumen')) {
             $file = $request->file('dokumen');
-            $fileName = uniqid(). '-'. time().'.'. $file->getClientOriginalExtension();
+            $fileName = uniqid() . '-' . time() . '.' . $file->getClientOriginalExtension();
             $file->storeAs('public/ta', $fileName);
         }
 
         TA::create([
-            'nobp'=>$request->nobp,
-            'judul'=>$request->judul,
-            'dokumen'=>$fileName,
-            'pembimbing1'=>$request->pembimbing1,
-            'pembimbing2'=>$request->pembimbing2,
+            'nobp' => $request->nobp,
+            'judul' => $request->judul,
+            'dokumen' => $fileName,
+            'pembimbing1' => $request->pembimbing1,
+            'pembimbing2' => $request->pembimbing2,
             // 'ket' => $request->ket,
             'komentar' => $request->komentar,
             'status_p1' => $request->status_p1,
@@ -83,7 +82,7 @@ class TAController extends Controller
      */
     public function edit(String $id)
     {
-        return view('ta.edit',['mahasiswas'=>Mahasiswa::all(),'dosens'=>Dosen::all(),'ta'=>TA::find($id)]);
+        return view('ta.edit', ['mahasiswas' => Mahasiswa::all(), 'dosens' => Dosen::all(), 'ta' => TA::find($id)]);
     }
 
     /**
@@ -94,7 +93,7 @@ class TAController extends Controller
         $validated = $request->validate([
             'nobp' => 'required',
             'judul' => 'required',
-            'dokumen' => 'required',
+            // 'dokumen' => 'required',
             'pembimbing1' => 'required|exists:dosens,id|different:pembimbing2',
             'pembimbing2' => 'required|exists:dosens,id|different:pembimbing1 ',
             // 'ket' => 'required',
@@ -103,7 +102,10 @@ class TAController extends Controller
             'status_p2' => 'required',
             'status' => 'required',
         ]);
-        TA::where('id',$id)->update($validated);
+        TA::where('id', $id)->update($validated);
+        if ($request->dokumen) {
+            TA::where('id', $id)->update(['dokumen' => $request->dokumen]);
+        }
         return redirect('/ta')->with('pesan', 'berhasil di-update.');
     }
 
@@ -114,5 +116,26 @@ class TAController extends Controller
     {
         TA::destroy($id);
         return redirect('/ta')->with('pesan', 'Berhasil Dihapuskan.');
+    }
+
+    public function getDosen($ta_id)
+    {
+        $ta = TA::with('Dpembimbing1.user', 'Dpembimbing2.user')->find($ta_id);
+
+        if (!$ta) {
+            return response()->json(['message' => 'Data TA tidak ditemukan'], 404);
+        }
+
+        $dosen = [];
+
+        if ($ta->Dpembimbing1) {
+            $dosen[] = ['id' => $ta->Dpembimbing1->id, 'name' => $ta->Dpembimbing1->user->name];
+        }
+
+        if ($ta->Dpembimbing2) {
+            $dosen[] = ['id' => $ta->Dpembimbing2->id, 'name' => $ta->Dpembimbing2->user->name];
+        }
+
+        return response()->json($dosen);
     }
 }

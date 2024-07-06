@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActivityLogController;
+use App\Http\Controllers\AwalController;
 use App\Http\Controllers\ChartDataController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DosenController;
@@ -42,9 +43,7 @@ Route::get('/main', function () {
 Route::get('/404', function () {
     return view('404');
 });
-Route::get('/', function () {
-    return view('awal');
-});
+Route::resource('/', AwalController::class );
 
 //------------------------------------------------------------------//
 
@@ -85,6 +84,7 @@ route::middleware(['auth'])->group(function () {
 
     route::resource('/ta', TAController::class);
     route::resource('/sidang', SidangController::class);
+    Route::get('/get-dosen/{ta_id}', [TAController::class, 'getDosen']);
     route::get('/logout', [LoginController::class, 'logout']);
     //////////////////--------------------------/////////////////////
 

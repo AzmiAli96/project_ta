@@ -58,7 +58,7 @@
             </div>
             @enderror
         </div>
-        <div class="mb-3">
+        {{-- <div class="mb-3">
             <label class="form-label @error('status') is-invalid @enderror">status</label>
             <select name="status" class="form-select">
                 <option value="" hidden>--pilih status--</option>
@@ -70,7 +70,7 @@
                 {{ $message }}
             </div>
             @enderror
-        </div>
+        </div> --}}
         <button type="submit" class="btn btn-primary" value="update">submit</button>
     </form>
 </div>

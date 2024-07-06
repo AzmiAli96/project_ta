@@ -35,7 +35,7 @@ class TanggalController extends Controller
             'tanggal'=> 'required',
             'sesi_id'=> 'required',
             'ruangan_id'=> 'required',
-            'status'=> 'required',
+            // 'status'=> 'required',
         ]);
         tanggal::create($validated);
         return redirect('/tanggal')->with('pesan', 'berhasil menyimpan data.');
@@ -66,7 +66,7 @@ class TanggalController extends Controller
             'tanggal'=> 'required',
             'sesi_id'=> 'required',
             'ruangan_id'=> 'required',
-            'status'=> 'required',
+            // 'status'=> 'required',
         ]);
         tanggal::where('id',$id)->update($validated);
         return redirect('/tanggal')->with('pesan', 'berhasil di-update.');

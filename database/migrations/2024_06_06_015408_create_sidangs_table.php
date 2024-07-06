@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('sekr_sidang')->constrain('dosen_id');
             $table->string('anggota1')->constrain('dosen_id');
             $table->string('anggota2')->constrain('dosen_id');
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }

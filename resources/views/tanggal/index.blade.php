@@ -41,7 +41,7 @@
                         <th>tanggal</th>
                         <th>Sesi</th>
                         <th>Ruangan</th>
-                        <th>Status</th>
+                        {{-- <th>Status</th> --}}
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -52,7 +52,7 @@
                         <td>{{ $tgl->tanggal }}</td>
                         <td>{{ $tgl->sesi->sesi }}</td>
                         <td>{{ $tgl->ruangan->nama_ruangan }}</td>
-                        <td>{{ $tgl->status ? 'kosong':'Berisi' }}</td>
+                        {{-- <td>{{ $tgl->status ? 'kosong':'Berisi' }}</td> --}}
                         <td>
                             <form action="/tanggal/{{$tgl->id}}" method="post" class="d-inline">
                                 @method('DELETE')

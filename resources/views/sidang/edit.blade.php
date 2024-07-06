@@ -14,18 +14,18 @@
         @method('PUT')
         @csrf
         <div class="mb-3">
-            <label class="form-label @error('validasi_id') is-invalid @enderror">Mahasisawa</label>
-            <select name="validasi_id" class="form-select">
+            <label class="form-label @error('ta_id') is-invalid @enderror">Mahasisawa</label>
+            <select name="ta_id" id="ta_id" class="form-select">
                 <option value="" hidden>--pilih Mahasiswa--</option>
-                @foreach ($validasis as $validasi)
-                @if (old('validasi_id',$sidang->validasi_id)==$validasi->id)
-                <option value="{{$validasi->nobp}}" selected>{{ $validasi->nobp }} {{ $validasi->ta->mahasiswa->namalengkap }}</option>
+                @foreach ($tas as $ta)
+                @if (old('ta_id',$sidang->ta_id)==$ta->id)
+                <option value="{{$ta->nobp}}" selected>{{ $ta->nobp }} {{ $ta->mahasiswa->namalengkap }}</option>
                 @else
-                <option value="{{ $validasi->nobp }}">{{ $validasi->nobp }} {{ $validasi->ta->mahasiswa->namalengkap }}</option>
+                <option value="{{ $ta->nobp }}">{{ $ta->nobp }} {{ $ta->mahasiswa->namalengkap }}</option>
                 @endif
                 @endforeach
             </select>
-            @error('validasi_id')
+            @error('ta_id')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
@@ -44,6 +44,17 @@
                 @endforeach
             </select>
             @error('tanggal_id')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label class="form-label @error('ketua_sidang') is-invalid @enderror">Ketua Sidang</label>
+            <select name="ketua_sidang" id="ketua_sidang" class="form-select">
+                <option value="" hidden>--pilih dosen--</option>
+            </select>
+            @error('ketua_sidang')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
@@ -103,8 +114,41 @@
             </div>
             @enderror
         </div>
+        <input type="hidden" name="status" value="0">
         <button type="submit" class="btn btn-primary" value="update">submit</button>
     </form>
 </div>
+
+<script>
+    document.getElementById('ta_id').addEventListener('change', function() {
+        var taId = this.value;
+        var ketuaSidangSelect = document.getElementById('ketua_sidang');
+
+        // Clear previous options
+        ketuaSidangSelect.innerHTML = '<option value="" hidden>--pilih dosen--</option>';
+
+        if (taId) {
+            fetch('/get-dosen/' + taId)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        data.forEach(dosen => {
+                            console.log(dosen);
+                            var option = document.createElement('option');
+                            option.value = dosen.id;
+                            option.text = dosen.name;
+                            ketuaSidangSelect.appendChild(option);
+                        });
+                    } else {
+                        var option = document.createElement('option');
+                        option.value = "";
+                        option.text = "Tidak ada dosen yang tersedia";
+                        ketuaSidangSelect.appendChild(option);
+                    }
+                })
+                .catch(error => console.error('Error fetching dosen:', error));
+        }
+    });
+</script>
 
 @endsection

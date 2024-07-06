@@ -14,7 +14,7 @@
         @csrf
         <div class="mb-3">
             <label class="form-label @error('ta_id') is-invalid @enderror">Mahasiswa TA</label>
-            <select name="ta_id" class="form-select">
+            <select name="ta_id" id="ta_id" class="form-select">
                 <option value="" hidden>--pilih Mahasiswa--</option>
                 @foreach ($tas as $ta)
                 <option value="{{$ta->id}}">{{$ta->mahasiswa->namalengkap}}  -   {{$ta->nobp}}</option>
@@ -42,16 +42,8 @@
         </div>
         <div class="mb-3">
             <label class="form-label @error('ketua_sidang') is-invalid @enderror">Ketua Sidang</label>
-            <select name="ketua_sidang" class="form-select">
+            <select name="ketua_sidang" id="ketua_sidang" class="form-select">
                 <option value="" hidden>--pilih dosen--</option>
-                @foreach ($tas as $ta)
-                    @if($ta->Dpembimbing1)
-                        <option value="{{ $ta->Dpembimbing1->user->id }}">{{ $ta->Dpembimbing1->user->name }}</option>
-                    @endif
-                    @if($ta->Dpembimbing2)
-                        <option value="{{ $ta->Dpembimbing2->user->id }}">{{ $ta->Dpembimbing2->user->name }}</option>
-                    @endif
-                @endforeach
             </select>
             @error('ketua_sidang')
             <div class="invalid-feedback">
@@ -102,8 +94,42 @@
             </div>
             @enderror
         </div>
+        <input type="hidden" name="status" value="0">
         <button type="submit" class="btn btn-primary">submit</button>
     </form>
 </div>
+
+<script>
+    document.getElementById('ta_id').addEventListener('change', function() {
+        var taId = this.value;
+        var ketuaSidangSelect = document.getElementById('ketua_sidang');
+
+        // Clear previous options
+        ketuaSidangSelect.innerHTML = '<option value="" hidden>--pilih dosen--</option>';
+
+        if (taId) {
+            fetch('/get-dosen/' + taId)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        data.forEach(dosen => {
+                            console.log(dosen);
+                            var option = document.createElement('option');
+                            option.value = dosen.id;
+                            option.text = dosen.name;
+                            ketuaSidangSelect.appendChild(option);
+                        });
+                    } else {
+                        var option = document.createElement('option');
+                        option.value = "";
+                        option.text = "Tidak ada dosen yang tersedia";
+                        ketuaSidangSelect.appendChild(option);
+                    }
+                })
+                .catch(error => console.error('Error fetching dosen:', error));
+        }
+    });
+</script>
+
 
 @endsection

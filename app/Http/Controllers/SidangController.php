@@ -27,9 +27,9 @@ class SidangController extends Controller
      */
     public function create()
     {
-        $taTervalidasi = ta::where('status', '=', true )->get();
+        $taTervalidasi = ta::where('status', '=', true )->where('status_p1', '=', true )->where('status_p2', '=', true )->get();
 
-        return view('sidang.create', ['tas' => $taTervalidasi, 'tanggals' => tanggal::all(), 'dosens' => Dosen::all()]);
+        return view('sidang.create', ['tas'=>$taTervalidasi, 'tanggals' => tanggal::all(), 'dosens' => Dosen::all()]);
     }
 
     /**
