@@ -8,7 +8,9 @@ use App\Models\Dosen;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
+
 
 class DosenController extends Controller
 {
@@ -49,7 +51,8 @@ class DosenController extends Controller
                 'no_telp'=>$request->no_telp,
                 'alamat'=>$request->alamat,            
             ]);
-    
+            activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil menyimpan data dosen dengan ID ' . $dosen->id);
+
             return redirect('/dosen')->with('pesan', 'berhasil menyimpan data.');
         // }
     }
@@ -89,6 +92,8 @@ class DosenController extends Controller
         ]);
 
         Dosen::where('id',$id)->update($validated);
+        activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil mengupdate data dosen dengan ID ' . $id);
+
         return redirect('/dosen')->with('pesan', 'berhasil menyimpan data.');
     }
 
@@ -99,6 +104,8 @@ class DosenController extends Controller
     {
         // User::destroy(Dosen::findOrFail($id)->user->id);
         Dosen::destroy($id);
+        activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil menghapus data dosen dengan ID ' . $id);
+
         return redirect('/dosen')->with('pesan', 'Berhasil Dihapuskan.');
     }
 

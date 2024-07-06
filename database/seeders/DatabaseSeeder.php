@@ -13,6 +13,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call([
+            JurusanSeeder::class,
+            ProdiSeeder::class,
+        ]);
+
         // User::factory(10)->create();
         // \App\Models\Mahasiswa::factory(20)->create();
         // \App\Models\Dosen::factory(20)->create();
@@ -53,7 +58,7 @@ class DatabaseSeeder extends Seeder
         
         
         \App\Models\Dosen::create([
-            'nidn'=> '02155476889',
+            'nidn'=> '0215576889',
             'user_id'=> '3',
             'no_telp'=> '082199175396',
             'alamat'=> 'Padang',

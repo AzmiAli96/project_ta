@@ -6,6 +6,7 @@ use App\Models\Dosen;
 use App\Models\Jurusan;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class JurusanController extends Controller
 {
@@ -37,7 +38,10 @@ class JurusanController extends Controller
             'kajur'=>'nullable|exists:dosens,id|different:sekjur',
             'sekjur'=>'nullable|exists:dosens,id|different:kajur',
         ]);
-        Jurusan::create($validated);
+        $jurusan=Jurusan::create($validated);
+
+        activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil menyimpan data jurusan ' . $jurusan->id);
+
         return redirect('/jurusan')->with('pesan', 'berhasil menyimpan data.');
 
     }
@@ -71,6 +75,8 @@ class JurusanController extends Controller
             'sekjur' => 'nullable|exists:dosens,id|different:kajur',
         ]);
         Jurusan::where('id',$id)->update($validated);
+        activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil mengupdate data jurusan dengan ID ' . $id);
+
         return redirect('/jurusan')->with('pesan', 'Data Berhasil di-update.');
     }
 
@@ -80,6 +86,9 @@ class JurusanController extends Controller
     public function destroy(String $id)
     {
         Jurusan::destroy($id);
+
+        activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil menghapus data jurusan dengan ID ' . $id);
+
         return redirect('/jurusan')->with('pesan', 'Berhasil Dihapuskan.');
     }
 }

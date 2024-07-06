@@ -24,13 +24,13 @@
                     </div>
                 </div>
             </form>
-            <a href="/exportDosen" class="btn btn-dark btn-sm">
+            <a href="/exportDosen" class="btn button-purple btn-sm">
                 <i class="fas fa-solid fa-download"></i> Export
             </a>
-            <a href="/importDosen" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#importForm">
+            <a href="/importDosen" class="btn button-purple btn-sm" data-toggle="modal" data-target="#importForm">
                 <i class="fas fa-solid fa-upload"></i> Import
             </a>
-            <a href="dosen/create" class="btn btn-primary">
+            <a href="dosen/create" class="btn button-purple">
                 <i class="fas fa-solid fa-plus-circle"></i>
             </a>
         </div>

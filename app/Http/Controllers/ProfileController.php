@@ -54,6 +54,7 @@ class ProfileController extends Controller
             Log::error('Error updating user:', ['error' => $e->getMessage()]);
             return redirect()->route('profile.index')->with('error', 'Failed to update profile.');
         }
+        activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil mengubah data profile ');
 
         return redirect()->route('profile.index')->with('pesan', 'Data berhasil diupdate!');
     }
@@ -68,6 +69,8 @@ class ProfileController extends Controller
         $request->avatar->move(public_path('avatars'), $avatarName);
 
         Auth()->user()->update(['avatar' => $avatarName]);
+
+        activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil mengganti foto profile ');
 
         return back()->with('success', 'Avatar updated successfully.');
     }

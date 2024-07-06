@@ -40,7 +40,7 @@ class UserController extends Controller
         ];
 
         $request->validate($rules);
-        // dd($request);
+
         $data = [
             'name' => str_replace(' ', '_', strtolower($request->username)),
             'email' => $request->email,
@@ -48,22 +48,20 @@ class UserController extends Controller
             'level' => $request->level,
         ];
 
-        // dd($request->nobp);
         User::create($data);
         $userID = User::latest()->first();
+
         if (in_array($request->level, ['Dosen', 'Kaprodi'])) {
             Dosen::find($request->nidn)->update(['user_id' => $userID->id]);
         }
 
-        // dd($userID->id);
         if ($request->level == 'Mahasiswa') {
-            // if (User::create($data)) {
-            //     Mahasiswa::find($request->nobp)->update(['user_id' => $userID->id]);
-            // }
-            Mahasiswa::where('id', $request->nobp)->update(['user_id'=> $userID->id]);
+            Mahasiswa::where('id', $request->nobp)->update(['user_id' => $userID->id]);
         }
 
-        return redirect('/user')->with('success', 'berhasil menambahkan user');
+        activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil menyimpan data user dengan ID ' . $userID->id);
+
+        return redirect('/user')->with('success', 'Berhasil menambahkan user');
     }
 
     /**
@@ -79,7 +77,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('user.edit', compact('user'));
     }
 
     /**
@@ -87,7 +85,41 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $rules = [
+            'username' => 'required',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'level' => 'required'
+        ];
+
+        if ($request->password) {
+            $rules['password'] = 'required|min:8';
+        }
+
+        $request->validate($rules);
+
+        $data = [
+            'name' => str_replace(' ', '_', strtolower($request->username)),
+            'email' => $request->email,
+            'level' => $request->level,
+        ];
+
+        if ($request->password) {
+            $data['password'] = bcrypt($request->password);
+        }
+
+        $user->update($data);
+
+        if (in_array($request->level, ['Dosen', 'Kaprodi'])) {
+            Dosen::find($request->nidn)->update(['user_id' => $user->id]);
+        }
+
+        if ($request->level == 'Mahasiswa') {
+            Mahasiswa::where('id', $request->nobp)->update(['user_id' => $user->id]);
+        }
+
+        activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil mengupdate data user dengan ID ' . $user->id);
+
+        return redirect('/user')->with('success', 'Berhasil mengupdate user');
     }
 
     /**
@@ -96,8 +128,8 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         User::destroy($id);
+        activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil menghapus data user dengan ID ' . $id);
+
         return redirect('/user')->with('pesan', 'Berhasil Dihapuskan.');
     }
-
-   
 }

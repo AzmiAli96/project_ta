@@ -11,6 +11,7 @@ use App\Models\Status;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 class MahasiswaController extends Controller
@@ -20,9 +21,8 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        $mahasiswa=Mahasiswa::latest()->pencarian()->paginate(10);
-        return view ('mahasiswa.index', ['mahasiswas'=>$mahasiswa]);
-        
+        $mahasiswa = Mahasiswa::latest()->pencarian()->paginate(10);
+        return view('mahasiswa.index', ['mahasiswas' => $mahasiswa]);
     }
 
     /**
@@ -30,7 +30,7 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        return view('mahasiswa.create',['prodis'=>prodi::all(),'jurusans'=>Jurusan::all()]);
+        return view('mahasiswa.create', ['prodis' => prodi::all(), 'jurusans' => Jurusan::all()]);
     }
 
     /**
@@ -38,26 +38,16 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        // $validated = $request->validate([
-        //     'no_bp'=> 'required|unique:mahasiswas',
-        //     'user_id'=>'required',
-        //     'prodi_id'=>'required',
-        //     'ipk'=>'required',
-        //     'status_id'=>'required',
-        // ]);
-
-        // $users = User::create([
-        //     'namalengkap'=>$request->namalengkap,
-        //     'level'=>$request->level,
-        //     'password'=>Hash::make($request->password),
-        // ]);
         $mahasiswa = Mahasiswa::create([
-            'namalengkap'=>$request->namalengkap,
-            'nobp'=>$request->nobp,
-            'jurusan_id'=>$request->jurusan_id,
-            'prodi_id'=>$request->prodi_id,
-            'ips'=>$request->ips,
+            'namalengkap' => $request->namalengkap,
+            'nobp' => $request->nobp,
+            'jurusan_id' => $request->jurusan_id,
+            'prodi_id' => $request->prodi_id,
+            'ips' => $request->ips,
         ]);
+
+        activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil menyimpan data mahasiswa dengan ID ' . $mahasiswa->id);
+
         return redirect('/mahasiswa')->with('pesan', 'berhasil menyimpan data.');
     }
 
@@ -74,7 +64,7 @@ class MahasiswaController extends Controller
      */
     public function edit(string $id)
     {
-        return view('mahasiswa.edit',['prodis'=>prodi::all(),'jurusans'=>Jurusan::all(),'mahasiswa'=>Mahasiswa::find($id)]);
+        return view('mahasiswa.edit', ['prodis' => prodi::all(), 'jurusans' => Jurusan::all(), 'mahasiswa' => Mahasiswa::find($id)]);
     }
 
     /**
@@ -82,17 +72,18 @@ class MahasiswaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-       
         $validatedM = $request->validate([
-            'nobp'=> 'required',
-            'namalengkap'=>'required',
-            'jurusan_id'=>'required',
-            'prodi_id'=>'required',
-            'ips'=>'nullable',
-            // 'status_id'=>'required',
+            'nobp' => 'required',
+            'namalengkap' => 'required',
+            'jurusan_id' => 'required',
+            'prodi_id' => 'required',
+            'ips' => 'nullable',
         ]);
-        
-        Mahasiswa::where('id',$id)->update($validatedM);
+
+        Mahasiswa::where('id', $id)->update($validatedM);
+
+        activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil mengupdate data mahasiswa dengan ID ' . $id);
+
         return redirect('/mahasiswa')->with('pesan', 'Data Berhasil di-edit.');
     }
 
@@ -101,8 +92,10 @@ class MahasiswaController extends Controller
      */
     public function destroy(string $id)
     {
-        // User::destroy(Mahasiswa::findOrFail($id)->user->id);
         Mahasiswa::destroy($id);
+
+        activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil menghapus data mahasiswa dengan ID ' . $id);
+
         return redirect('/mahasiswa')->with('pesan', 'Berhasil Dihapuskan.');
     }
 

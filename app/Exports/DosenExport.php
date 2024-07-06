@@ -22,7 +22,7 @@ class DosenExport implements WithHeadings, FromCollection
             'NIDN',
             'Nama',
             'Email',
-            'NoTelp',
+            'No_Telp',
             'Alamat'
         ];
     }

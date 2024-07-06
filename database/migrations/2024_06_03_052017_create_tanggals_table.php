@@ -17,7 +17,6 @@ return new class extends Migration
             $table->date('tanggal');
             $table->foreignId('ruangan_id');
             $table->foreignId('sesi_id');
-            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }
