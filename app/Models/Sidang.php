@@ -17,6 +17,14 @@ class Sidang extends Model
         return $this->belongsTo(TA::class,'ta_id');
     }
 
+    public function sesi(){
+        return $this->belongsTo(Sesi::class,'sesi_id');
+    }
+
+    public function ruangan(){
+        return $this->belongsTo(Ruangan::class,'ruangan_id');
+    }
+
     public function jadwal(){
         return $this->belongsTo(tanggal::class,'tanggal_id');
     }

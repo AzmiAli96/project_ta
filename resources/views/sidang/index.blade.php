@@ -58,9 +58,9 @@
                         <td>{{ $sidang->ta->nobp }} / {{ $sidang->ta->mahasiswa->namalengkap }}</td>
                         <td>{{ $sidang->ta->judul }}</td>
                         <td>{{ $sidang->ta->dokumen }}</td>
-                        <td>{{ $sidang->jadwal->tanggal }}</td>
-                        <td>{{ $sidang->jadwal->ruangan->nama_ruangan }}</td>
-                        <td>{{ $sidang->jadwal->sesi->sesi }}</td>
+                        <td>{{ $sidang->tanggal }}</td>
+                        <td>{{ $sidang->ruangan->nama_ruangan }}</td>
+                        <td>{{ $sidang->sesi->sesi }}</td>
                         <td>{{ $sidang->pketua_sidang->user->name }}</td>
                         <td>{{ $sidang->psek_sidang->user->name }}</td>
                         <td>{{ $sidang->panggota1->user->name }}</td>

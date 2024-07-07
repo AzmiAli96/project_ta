@@ -19,9 +19,9 @@
                 <option value="" hidden>--pilih Mahasiswa--</option>
                 @foreach ($tas as $ta)
                 @if (old('ta_id',$sidang->ta_id)==$ta->id)
-                <option value="{{$ta->nobp}}" selected>{{ $ta->nobp }} {{ $ta->mahasiswa->namalengkap }}</option>
+                <option value="{{$ta->id}}" selected>{{ $ta->nobp }} {{ $ta->mahasiswa->namalengkap }}</option>
                 @else
-                <option value="{{ $ta->nobp }}">{{ $ta->nobp }} {{ $ta->mahasiswa->namalengkap }}</option>
+                <option value="{{ $ta->id }}">{{ $ta->nobp }} {{ $ta->mahasiswa->namalengkap }}</option>
                 @endif
                 @endforeach
             </select>
@@ -120,23 +120,27 @@
 </div>
 
 <script>
-    document.getElementById('ta_id').addEventListener('change', function() {
+     document.getElementById('ta_id').addEventListener('change', function() {
         var taId = this.value;
         var ketuaSidangSelect = document.getElementById('ketua_sidang');
 
         // Clear previous options
         ketuaSidangSelect.innerHTML = '<option value="" hidden>--pilih dosen--</option>';
 
+        console.log(taId);
         if (taId) {
             fetch('/get-dosen/' + taId)
                 .then(response => response.json())
                 .then(data => {
                     if (data.length > 0) {
                         data.forEach(dosen => {
-                            console.log(dosen);
                             var option = document.createElement('option');
                             option.value = dosen.id;
                             option.text = dosen.name;
+                            // Use JSON.stringify to handle complex cases and avoid errors
+                            if (dosen.id == JSON.parse({{ json_encode(old('ketua_sidang')) }})) {
+                                option.selected = true;
+                            }
                             ketuaSidangSelect.appendChild(option);
                         });
                     } else {
@@ -149,6 +153,15 @@
                 .catch(error => console.error('Error fetching dosen:', error));
         }
     });
+
+    // Trigger the change event to load data on page load if there is an old value
+    window.onload = function() {
+        var taIdElement = document.getElementById('ta_id');
+        if (taIdElement.value) {
+            var event = new Event('change');
+            taIdElement.dispatchEvent(event);
+        }
+    }
 </script>
 
 @endsection
