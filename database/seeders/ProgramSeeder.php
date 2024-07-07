@@ -30,7 +30,7 @@ class ProgramSeeder extends Seeder
         \App\Models\prodi::create([
             'kode_prodi'=> 'MI',
             'jenjang'=> 'D3',
-            'nama_prodi'=> 'Manajemen Informasi',
+            'nama_prodi'=> 'Manajemen Informatika',
             'jurusan_id'=> '1',
             'kaprodi'=> '3',
         ]);

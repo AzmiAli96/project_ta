@@ -42,20 +42,7 @@ class MahasiswaSeeder extends Seeder
             'prodi_id'=> '1',
         ]);
 
-        \App\Models\User::create([
-            'name'=> 'Muhammad Rizky',
-            'email'=> 'siki@gmail.com',
-            'password'=> bcrypt('123123123'),
-            'level'=> 'Mahasiswa',
-        ]);
-
-        \App\Models\Mahasiswa::create([
-            'nobp'=> '2211082222',
-            'namalengkap'=> 'Muhammad Rizky',
-            'user_id'=> '9',
-            'jurusan_id'=> '1',
-            'prodi_id'=> '1',
-        ]);
+       
 
        
 
