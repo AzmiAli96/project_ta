@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             // $table->foreignId('validasi_id')->unique();
             $table->foreignId('ta_id')->unique();
-            $table->foreignId('tanggal_id')->unique();
+            $table->date('tanggal');
+            $table->foreignId('ruangan_id');
+            $table->foreignId('sesi_id');
             $table->string('ketua_sidang')->constrain('dosen_id');
             $table->string('sekr_sidang')->constrain('dosen_id');
             $table->string('anggota1')->constrain('dosen_id');

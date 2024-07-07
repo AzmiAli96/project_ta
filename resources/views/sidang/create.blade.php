@@ -27,14 +27,37 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label class="form-label @error('tanggal_id') is-invalid @enderror">Tanggal Penjadwalan</label>
-            <select name="tanggal_id" class="form-select">
-                <option value="" hidden>--pilih Tanggal penjadwalan--</option>
-                @foreach ($tanggals as $tanggal)
-                <option value="{{$tanggal->id}}">{{$tanggal->tanggal}} / {{$tanggal->sesi->sesi}} / {{$tanggal->ruangan->nama_ruangan}} </option>
+            <label class="form-label">Tanggal</label>
+            <input type="date" class="form-control @error('tanggal') is-invalid @enderror" name="tanggal" value="{{old('tanggal')}}">
+            @error('tanggal')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label class="form-label @error('sesi_id') is-invalid @enderror">sesi</label>
+            <select name="sesi_id" class="form-select">
+                <option value="" hidden>--pilih Sesi--</option>
+                @foreach ($sesis as $sesi)
+                <option value="{{$sesi->id}}">{{$sesi->sesi}}</option>
                 @endforeach
             </select>
-            @error('tanggal_id')
+            @error('sesi_id')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label class="form-label @error('ruangan_id') is-invalid @enderror">Ruangan</label>
+            <select name="ruangan_id" class="form-select">
+                <option value="" hidden>--pilih Ruangan--</option>
+                @foreach ($ruangans as $ruangan)
+                <option value="{{$ruangan->id}}">{{$ruangan->nama_ruangan}}</option>
+                @endforeach
+            </select>
+            @error('ruangan_id')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
