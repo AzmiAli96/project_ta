@@ -98,7 +98,7 @@ class NilaiController extends Controller
             'n10'=> 'salah 10'
         ]);
         $nilai=Nilai::where('id',$nilai_id)->update($validated);
-        activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil mengisi nilai dengan ID ' . $nilai->id);
+        // activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil mengisi nilai dengan ID ' . $nilai->id);
 
         return redirect('/nilai')->with('pesan', 'berhasil di-update.');
     }

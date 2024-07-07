@@ -13,9 +13,19 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        if($request->has('search')){
+            $user=User::latest()
+            ->where('name','LIKE','%'.$request->search.'%')
+            ->orWhere('email','LIKE','%'.$request->search.'%')
+            ->orWhere('level','LIKE','%'.$request->search.'%')
+
+            ->paginate(10);
+        }
+        else{
         $user = User::latest()->paginate(10);
+        }
         return view('user.index', ['users' => $user]);
     }
 
@@ -109,8 +119,8 @@ class UserController extends Controller
 
         $user->update($data);
 
-        if (in_array($request->level, ['Dosen', 'Kaprodi'])) {
-            Dosen::find($request->nidn)->update(['user_id' => $user->id]);
+        if (in_array($request->level, ['Dosen'])) {
+            Dosen::where('nidn', $request->nidn)->update(['user_id' => $user->id]);
         }
 
         if ($request->level == 'Mahasiswa') {

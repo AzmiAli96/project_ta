@@ -18,7 +18,7 @@ class DashboardController extends Controller
         $userCount = User::count();
         $tugasAkhirCount = TA::count();
         $penjadwalanCount = Sidang::count();
-        $finishCount = 0; // Sesuaikan dengan logika yang diperlukan untuk menghitung 'Finish'
+        $finishCount = Sidang::where('status', 1)->count(); //  menghitung jumlah sidang yang sudah selesai/'Finish'
 
         // Data untuk bar chart
         $barChartData = [

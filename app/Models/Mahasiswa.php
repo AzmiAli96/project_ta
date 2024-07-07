@@ -32,7 +32,13 @@ class Mahasiswa extends Model
     {
         //query->where('votes', '>', 100);
         if (request('search')){
-            $query->where('nobp', 'like', '%'. request('search') . '%');
+            $query->where(function ($q) {
+                $q->where('nobp', 'like', '%' . request('search') . '%')
+                    ->orWhere('namalengkap', 'like', '%' . request('search') . '%')
+                    ->orWhereHas('prodi', function ($q) {
+                        $q->where('nama_prodi', 'like', '%' . request('search') . '%');
+                    });
+            });
         }
     }
 }
