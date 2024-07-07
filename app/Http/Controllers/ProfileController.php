@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -10,16 +11,12 @@ use Illuminate\Support\Facades\Log;
 
 class ProfileController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
-
     public function index()
     {
         $title = 'My Profile';
         $user = Auth::user();
-        return view('profile.index', compact('title', 'user'));
+        $mahasiswa = $user->mahasiswa; // Ambil data mahasiswa jika ada
+        return view('profile.index', compact('title', 'user', 'mahasiswa'));
     }
 
     public function update(Request $request)
@@ -28,6 +25,7 @@ class ProfileController extends Controller
             'name' => 'required|min:3',
             'email' => 'required|email',
             'password' => 'nullable|min:8|confirmed',
+            'ips' => 'nullable|numeric|min:0|max:4',
         ]);
 
         $user = Auth::user();
@@ -45,15 +43,19 @@ class ProfileController extends Controller
             $updateData['password'] = Hash::make($validated['password']);
         }
 
-        // Debugging: log informasi updateData
-        Log::info('Update data:', ['data' => $updateData]);
-
         try {
             $user->update($updateData);
+
+            // Jika user adalah mahasiswa, update IPS mereka
+            if ($user->mahasiswa && isset($validated['ips'])) {
+                $user->mahasiswa->update(['ips' => $validated['ips']]);
+            }
+
         } catch (\Exception $e) {
             Log::error('Error updating user:', ['error' => $e->getMessage()]);
             return redirect()->route('profile.index')->with('error', 'Failed to update profile.');
         }
+
         activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil mengubah data profile ');
 
         return redirect()->route('profile.index')->with('pesan', 'Data berhasil diupdate!');
