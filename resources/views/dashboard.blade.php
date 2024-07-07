@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <div class="text-bg-warning p-3 rounded mb-3">
+    <div class="color-gradient-blue p-3 rounded mb-3">
         <h1>Selamat Datang, {{ Auth::user()->name }}</h1>
         <p>Hai, {{ Auth::user()->name }} web ini adalah sebuah sistem informasi yang dirancang untuk memudahkan pelaksanaan
             penjadwalan sidang tugas akhir, memastikan proses berjalan dengan efisien dan terorganisir.
@@ -16,44 +16,40 @@
             <div class="col mb-4">
                 <div class="card card-raised border-start border-primary border-4" style="width: 18rem;">
                     <div class="card-body">
-                        <h5 class="card-title">user</h5>
+                        <h5 class="card-title">User</h5>
                         <hr>
-                        <h6 class="card-subtitle mb-2 text-body-secondary"> {{ App\Models\User::count() }} user</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
+                        <h6 class="card-subtitle mb-2 text-body-secondary"> {{ App\Models\User::count() }} akun</h6>
+                        <p class="card-text">telah terdaftar dalam sistem.</p>
                     </div>
                 </div>
             </div>
             <div class="col mb-2">
-                <div class="card card-raised border-start border-secondary border-4" style="width: 18rem;">
+                <div class="card card-raised  border-purple border-4" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">Tugas Akhir</h5>
                         <hr>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">{{ App\Models\TA::count() }} user</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">{{ App\Models\TA::count() }} mahasiswa</h6>
+                        <p class="card-text">telah mengajukan pendaftaran sidang.</p>
                     </div>
                 </div>
             </div>
             <div class="col mb-2">
-                <div class="card card-raised border-start border-warning border-4" style="width: 18rem;">
+                <div class="card card-raised  border-primary border-4" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">Jadwal Sidang</h5>
                         <hr>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">{{ App\Models\Sidang::count() }} user</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">{{ App\Models\Sidang::count() }} mahasiswa</h6>
+                        <p class="card-text">terdaftar untuk mengikuti sidang.</p>
                     </div>
                 </div>
             </div>
             <div class="col mb-2">
-                <div class="card card-raised border-start border-success border-4" style="width: 18rem;">
+                <div class="card card-raised  border-purple border-4" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">Sidang Finish</h5>
                         <hr>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">1234 user</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">{{ App\Models\Sidang::where('status', 1)->count() }} mahasiswa</h6>
+                        <p class="card-text">telah menyelesaikan sidang dan dinyatakan lulus.</p>
                     </div>
                 </div>
             </div>
