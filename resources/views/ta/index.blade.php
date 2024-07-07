@@ -65,9 +65,9 @@
                         <td>{{ $ta->Dpembimbing2->user->name }}</td>
                         {{-- <td>{{ $ta->ket }}</td> --}}
                         <td>{{ $ta->komentar }}</td>
-                        <td>{{ $ta->status_p1 ? 'Lengkap':'Belum Lengkap' }}</td>
-                        <td>{{ $ta->status_p2 ? 'Lengkap':'Belum Lengkap' }}</td>
-                        <td>{{ $ta->status ? 'Lengkap':'Belum Lengkap' }}</td>
+                        <td>{{ $ta->status_p1 ? 'ACC':'Revisi' }}</td>
+                        <td>{{ $ta->status_p2 ? 'ACC':'Revisi' }}</td>
+                        <td>{{ $ta->status ? 'ACC':'Revisi' }}</td>
                         <td>
                             <form action="/ta/{{$ta->id}}" method="post" class="d-inline">
                                 @method('DELETE')

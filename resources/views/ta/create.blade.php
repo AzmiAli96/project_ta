@@ -50,9 +50,9 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="formFileMultiple" class="form-label">file tugas akhir</label>
+                <label for="formFileMultiple" class="form-label">File tugas akhir (ZIP)</label>
                 <input class="form-control @error('dokumen') is-invalid @enderror" type="file" name="dokumen"
-                    value="{{ old('dokumen') }}" id="formFileMultiple" multiple>
+                    value="{{ old('dokumen') }}" id="formFileMultiple" accept=".zip" multiple>
 
                 @error('dokumen')
                     <div class="invalid-feedback">

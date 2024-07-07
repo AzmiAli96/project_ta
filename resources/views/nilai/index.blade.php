@@ -56,8 +56,9 @@
                                 </td>
                                 <td>{{ $sidang->ta->mahasiswa->prodi->jenjang }} -
                                     {{ $sidang->ta->mahasiswa->prodi->kode_prodi }}</td>
-                                <td>{{ $sidang->ta->Dpembimbing1->user->name }} &&
-                                    {{ $sidang->ta->Dpembimbing2->user->name }}</td>
+                                {{-- <td>{{ $sidang->ta->Dpembimbing1->user->name }} &&
+                                    {{ $sidang->ta->Dpembimbing2->user->name }}</td> --}}
+                                <td>{{ $sidang->pketua_sidang->user->name }}</td>
                                 <td>{{ $sidang->psek_sidang->user->name }}</td>
                                 <td>{{ $sidang->panggota1->user->name }} & {{ $sidang->panggota2->user->name }}</td>
 

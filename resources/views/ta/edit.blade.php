@@ -98,7 +98,7 @@
                     </div>
                 @enderror
             </div> --}}
-            @if (auth()->user()->level == 'Admin' | auth()->user()->level == 'Kaprodi')
+            @if (in_array(auth()->user()->level, ['Admin', 'Kaprodi', 'Dosen']))
                 <div class="mb-3">
                     <label class="form-label">Komentar</label>
                     <textarea class="form-control @error('komentar') is-invalid @enderror" rows="3" name="komentar">{{ old('komentar', $ta->komentar) }}</textarea>
@@ -108,12 +108,16 @@
                         </div>
                     @enderror
                 </div>
+            @endif
+            {{-- @dd($ta->Dpembimbing1) --}}
+
+            @if ((auth()->user()->level == 'Admin') || ((auth()->user()->level == 'Dosen') && ($ta->Dpembimbing1->user->id == auth()->user()->id)))
                 <div class="mb-3">
-                    <label class="form-label @error('status_p1') is-invalid @enderror">status pembimbing 1</label>
+                    <label class="form-label @error('status_p1') is-invalid @enderror"> Approval</label>
                     <select name="status_p1" class="form-select">
                         <option value="" hidden>--pilih status_p1--</option>
-                        <option value="1" {{ old('status_p1', $ta->status_p1) == 1 ? 'selected' : '' }}>Lengkap</option>
-                        <option value="0" {{ old('status_p1', $ta->status_p1) == 0 ? 'selected' : '' }}>Belum Lengkap
+                        <option value="1" {{ old('status_p1', $ta->status_p1) == 1 ? 'selected' : '' }}>ACC</option>
+                        <option value="0" {{ old('status_p1', $ta->status_p1) == 0 ? 'selected' : '' }}>Revisi
                         </option>
                     </select>
                     @error('status_p1')
@@ -122,12 +126,15 @@
                         </div>
                     @enderror
                 </div>
+            @endif
+            @if ((auth()->user()->level == 'Admin') || ((auth()->user()->level == 'Dosen') && ($ta->Dpembimbing2->user->id == auth()->user()->id)))
+
                 <div class="mb-3">
-                    <label class="form-label @error('status_p2') is-invalid @enderror">status_p2</label>
+                    <label class="form-label @error('status_p2') is-invalid @enderror">Approval</label>
                     <select name="status_p2" class="form-select">
                         <option value="" hidden>--pilih status_p2--</option>
-                        <option value="1" {{ old('status_p2', $ta->status_p2) == 1 ? 'selected' : '' }}>Lengkap</option>
-                        <option value="0" {{ old('status_p2', $ta->status_p2) == 0 ? 'selected' : '' }}>Belum Lengkap
+                        <option value="1" {{ old('status_p2', $ta->status_p2) == 1 ? 'selected' : '' }}>ACC</option>
+                        <option value="0" {{ old('status_p2', $ta->status_p2) == 0 ? 'selected' : '' }}>Revisi
                         </option>
                     </select>
                     @error('status_p2')
@@ -136,12 +143,15 @@
                         </div>
                     @enderror
                 </div>
+            @endif
+
+            @if (in_array(auth()->user()->level, ['Admin','Kaprodi']))
                 <div class="mb-3">
-                    <label class="form-label @error('status') is-invalid @enderror">status</label>
+                    <label class="form-label @error('status') is-invalid @enderror">Approval</label>
                     <select name="status" class="form-select">
                         <option value="" hidden>--pilih status--</option>
-                        <option value="1" {{ old('status', $ta->status) == 1 ? 'selected' : '' }}>Lengkap</option>
-                        <option value="0" {{ old('status', $ta->status) == 0 ? 'selected' : '' }}>Belum Lengkap
+                        <option value="1" {{ old('status', $ta->status) == 1 ? 'selected' : '' }}>ACC</option>
+                        <option value="0" {{ old('status', $ta->status) == 0 ? 'selected' : '' }}>Revisi
                         </option>
                     </select>
                     @error('status')
@@ -151,6 +161,10 @@
                     @enderror
                 </div>
             @endif
+
+            
+               
+            
             <button type="submit" class="btn btn-primary" value="update">submit</button>
         </form>
     </div>

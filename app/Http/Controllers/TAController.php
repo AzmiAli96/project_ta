@@ -6,6 +6,7 @@ use App\Models\Dosen;
 use App\Models\Mahasiswa;
 use App\Models\TA;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TAController extends Controller
 {
@@ -14,10 +15,11 @@ class TAController extends Controller
      */
     public function index()
     {
+        $user = auth()->user();
         if (in_array(auth()->user()->level, ['Admin', 'Kaprodi'])) {
             $ta = TA::with(['mahasiswa', 'Dpembimbing1', 'Dpembimbing2'])->latest()->paginate(10);
         } else {
-            $ta = TA::with(['mahasiswa', 'Dpembimbing1', 'Dpembimbing2'])->where('nobp', '=', auth()->user()->mahasiswa->nobp)->latest()->paginate(10);
+        $ta = TA::with(['mahasiswa', 'Dpembimbing1' , 'Dpembimbing2'])->where('pembimbing1', auth()->user()->dosen->id)->orWhere('pembimbing2', auth()->user()->dosen->id)->latest()->paginate();
         }
         return view('ta.index', ['tas' => $ta]);
     }
@@ -54,7 +56,7 @@ class TAController extends Controller
             $file->storeAs('public/ta', $fileName);
         }
 
-        TA::create([
+        $ta=TA::create([
             'nobp' => $request->nobp,
             'judul' => $request->judul,
             'dokumen' => $fileName,
@@ -66,6 +68,8 @@ class TAController extends Controller
             'status_p2' => $request->status_p2,
             'status' => $request->status,
         ]);
+        activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil menambahkan data TA dengan ID ' . $ta->id);
+
         return redirect('/ta')->with('pesan', 'berhasil menyimpan data.');
     }
 
@@ -98,14 +102,16 @@ class TAController extends Controller
             'pembimbing2' => 'required|exists:dosens,id|different:pembimbing1 ',
             // 'ket' => 'required',
             'komentar' => 'nullable',
-            'status_p1' => 'required',
-            'status_p2' => 'required',
-            'status' => 'required',
+            'status_p1' => 'nullable',
+            'status_p2' => 'nullable',
+            'status' => 'nullable',
         ]);
         TA::where('id', $id)->update($validated);
         if ($request->dokumen) {
             TA::where('id', $id)->update(['dokumen' => $request->dokumen]);
         }
+        activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil mengupdate data TA dengan ID ' . $id);
+
         return redirect('/ta')->with('pesan', 'berhasil di-update.');
     }
 
@@ -115,6 +121,8 @@ class TAController extends Controller
     public function destroy(String $id)
     {
         TA::destroy($id);
+        activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil menghapus data TA dengan ID ' . $id);
+
         return redirect('/ta')->with('pesan', 'Berhasil Dihapuskan.');
     }
 

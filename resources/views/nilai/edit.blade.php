@@ -36,7 +36,8 @@
                             <th>Jabatan</th>
                             <th>Nama</th>
                             <th>Total Nilai</th>
-                            @if ((auth()->user()->level == 'Admin') | (auth()->user()->level == 'Dosen'))
+                            {{-- @dd(auth()->user()->level) --}}
+                            @if ((auth()->user()->level == 'Admin') || (auth()->user()->level == 'Dosen'))
                                 <th>Action</th>
                             @endif
                         </tr>
@@ -91,7 +92,7 @@
                             @endphp
                             <td>{{ $nilai_pembimbing1 }}</td>
                             <td>
-                                @if ((auth()->user()->level == 'Admin') | (auth()->user()->level == 'Dosen'))
+                                @if (((auth()->user()->level == 'Admin') || (auth()->user()->level == 'Dosen') && auth()->user()->id==$sidang->ta->Dpembimbing1->user->id))
                                     <a href="/berinilai/{{ $sidang->id }}/pembimbing1/{{ $jenjang }}" type="submit"
                                         class="btn btn-warning"><i class="fas fa-edit"></i></a>
                                     {{-- <button class="btn btn-success btn-sm">beri nilai</button> --}}
@@ -146,7 +147,7 @@
                                 }
                             @endphp
                             <td>{{ $nilai_pembimbing2 }}</td>
-                            @if ((auth()->user()->level == 'Admin') | (auth()->user()->level == 'Dosen'))
+                            @if (((auth()->user()->level == 'Admin') || (auth()->user()->level == 'Dosen')&& auth()->user()->id==$sidang->ta->Dpembimbing2->user->id))
                                 <td><a href="/berinilai/{{ $sidang->id }}/pembimbing2/{{ $jenjang }}"
                                         class="btn btn-warning"><i class="fas fa-edit"></i></a></td>
                             @endif
@@ -163,8 +164,8 @@
                         <tr>
                             <td>3</td>
                             <td>Ketua</td>
-                            <td>{{ $sidang->ta->Dpembimbing1->user->name }} /
-                                {{ $sidang->ta->Dpembimbing2->user->name }} </td>
+                            <td>{{ $sidang->pketua_sidang->user->name }} </td>
+                                {{-- {{ $sidang->ta->Dpembimbing2->user->name }} </td> --}}
                             @php
                                 $total_nilai = 0;
                                 $jumlah_penilai = $sidang->nilaiketua->count();
@@ -209,7 +210,7 @@
                                 }
                             @endphp
                             <td>{{ $nilai_ketua }}</td>
-                            @if ((auth()->user()->level == 'Admin') | (auth()->user()->level == 'Dosen'))
+                            @if (((auth()->user()->level == 'Admin') || (auth()->user()->level == 'Dosen')&& auth()->user()->id==$sidang->pketua_sidang->user->id))
                                 <td><a href="/berinilai/{{ $sidang->id }}/ketua/{{ $jenjang }}"
                                         class="btn btn-warning"><i class="fas fa-edit"></i></a></td>
                             @endif
@@ -262,7 +263,7 @@
                                 }
                             @endphp
                             <td>{{ $nilai_sekretaris }}</td>
-                            @if ((auth()->user()->level == 'Admin') | (auth()->user()->level == 'Dosen'))
+                            @if (((auth()->user()->level == 'Admin') || (auth()->user()->level == 'Dosen')&& auth()->user()->id==$sidang->psek_sidang->user->id))
                                 <td><a href="/berinilai/{{ $sidang->id }}/sekretaris/{{ $jenjang }}"
                                         class="btn btn-warning"><i class="fas fa-edit"></i></a></td>
                             @endif
@@ -315,7 +316,7 @@
                                 }
                             @endphp
                             <td>{{ $nilai_anggota1 }}</td>
-                            @if ((auth()->user()->level == 'Admin') | (auth()->user()->level == 'Dosen'))
+                            @if (((auth()->user()->level == 'Admin') || (auth()->user()->level == 'Dosen')&& auth()->user()->id==$sidang->panggota1->user->id))
                                 <td><a href="/berinilai/{{ $sidang->id }}/anggota1/{{ $jenjang }}"
                                         class="btn btn-warning"><i class="fas fa-edit"></i></a></td>
                             @endif
@@ -368,7 +369,7 @@
                                 }
                             @endphp
                             <td>{{ $nilai_anggota2 }}</td>
-                            @if ((auth()->user()->level == 'Admin') | (auth()->user()->level == 'Dosen'))
+                            @if (((auth()->user()->level == 'Admin') || (auth()->user()->level == 'Dosen')&& auth()->user()->id==$sidang->panggota2->user->id))
                                 <td><a href="/berinilai/{{ $sidang->id }}/anggota2/{{ $jenjang }}"
                                         class="btn btn-warning"><i class="fas fa-edit"></i></a></td>
                             @endif

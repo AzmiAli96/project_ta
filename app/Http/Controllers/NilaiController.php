@@ -6,6 +6,7 @@ use App\Models\Nilai;
 use App\Models\Penjumlahan;
 use App\Models\Sidang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NilaiController extends Controller
 {
@@ -96,7 +97,9 @@ class NilaiController extends Controller
             'n9'=> 'salah 9',
             'n10'=> 'salah 10'
         ]);
-        Nilai::where('id',$nilai_id)->update($validated);
+        $nilai=Nilai::where('id',$nilai_id)->update($validated);
+        activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil mengisi nilai dengan ID ' . $nilai->id);
+
         return redirect('/nilai')->with('pesan', 'berhasil di-update.');
     }
 
@@ -120,6 +123,8 @@ class NilaiController extends Controller
     public function destroy(String $id)
     {
         Nilai::destroy($id);
+        activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil menghapus nilai dengan ID ' . $id);
+
         return redirect('/nilai')->with('pesan', 'Berhasil Dihapuskan.');
     }
 }

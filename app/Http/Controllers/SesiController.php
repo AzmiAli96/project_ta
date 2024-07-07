@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sesi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SesiController extends Controller
 {
@@ -33,7 +34,9 @@ class SesiController extends Controller
             'sesi'=> 'required',
             'waktu'=> 'required',
         ]);
-        Sesi::create($validated);
+        $sesi=Sesi::create($validated);
+        activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil menambahkan sesi dengan ID ' . $sesi->id);
+
         return redirect('/sesi')->with('pesan', 'berhasil menyimpan data.');
     }
 
@@ -63,6 +66,8 @@ class SesiController extends Controller
             'waktu'=> 'required',
         ]);
         Sesi::where('id',$id)->update($validated);
+        activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil mengupdate sesi dengan ID ' . $id);
+
         return redirect('/sesi')->with('pesan', 'berhasil di-update.');
     }
 
@@ -72,6 +77,8 @@ class SesiController extends Controller
     public function destroy(string $id)
     {
         Sesi::destroy($id);
+        activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil menghapus sesi dengan ID ' . $id);
+
         return redirect('/sesi')->with('pesan', 'Berhasil Dihapuskan.');
     }
 }

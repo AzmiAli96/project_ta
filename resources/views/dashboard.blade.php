@@ -60,20 +60,85 @@
         </div>
 
         {{-- bar char --}}
-        <div class="row">
-            {{-- <div class="col-xl-8 col-lg-7">
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="chart-bar">
-                            <canvas id="myBarChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
+        @endif
+        
+        
+        
+        @if (auth()->user()->level == 'Mahasiswa')
+        <div class="row ml-2 col-6">
+            <div class="p-2 bg-success bg-gradient ">
+                <h4>Tahap-tahap Pelaksanaan sidang akhir</h4>
+            </div>
+            <div class="bg-success p-2 text-dark bg-opacity-25">
+                <p>Tahap 1 : Pendaftaran Sidang Tugas Akhir <a href="/ta/create"><b>(Pengumpulan)</b></a></p>
+                <p>Tahap 2 : Penungguan verifikasi oleh Kaprodi</p>
+                <p>Tahap 3 : Pemasukkan jadwal sidang TA</p>
+                <p>Tahap 4 : Pelaksanaan Sidang TA</p>
+                <p>Tahap 5 : Penilaian oleh penguji sidang TA</p>
+            </div>
+        </div>
+        @endif
+        
+        @if (auth()->user()->level == 'Dosen')
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Jadwal sidang mahasiswa yang anda sidang sebagau penguji</h6>
+            </div>
 
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Mahasiswa</th>
+                                <th>Prodi</th>
+                                <th>Ketua Sidang</th>
+                                <th>Sekretaris Sidang</th>
+                                <th>Anggota Sidang</th>
+                                {{-- <th>Action</th> --}}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($sidangs as $sidang)
+                                @php
+                                    $showRow = false;
+                                    
+                                    // Check if the logged in user's name is in any of these roles
+                                    if (
+                                        $sidang->ta->Dpembimbing1->user->name === auth()->user()->name ||
+                                        $sidang->ta->Dpembimbing2->user->name === auth()->user()->name ||
+                                        $sidang->psek_sidang->user->name === auth()->user()->name ||
+                                        $sidang->panggota1->user->name === auth()->user()->name ||
+                                        $sidang->panggota2->user->name === auth()->user()->name
+                                        ) {
+                                            $showRow = true;
+                                        }
+                                        @endphp
+
+                                @if ($showRow)
+                                <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $sidang->ta->nobp }} /
+                                            {{ $sidang->ta->mahasiswa->namalengkap }}</td>
+                                            <td>{{ $sidang->ta->mahasiswa->prodi->jenjang }} -
+                                                {{ $sidang->ta->mahasiswa->prodi->kode_prodi }}</td>
+                                                <td>{{ $sidang->ta->Dpembimbing1->user->name }} /
+                                                    {{ $sidang->ta->Dpembimbing2->user->name }}</td>
+                                                    <td>{{ $sidang->psek_sidang->user->name }}</td>
+                                                    <td>{{ $sidang->panggota1->user->name }} / {{ $sidang->panggota2->user->name }}
+                                                    </td>
+                                                </tr>
+                                                @endif
+                                                @endforeach
+                        </tbody>
+                    </table>
+                    {{ $sidangs->links() }}
+                </div>
+            </div>
+        </div>
+        @endif
+        <div class="row">
             <div class="col-xl-8 col-lg-7">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
@@ -103,94 +168,13 @@
                 </div>
             </div>
         </div>
-    @endif
-
-
-
-    @if (auth()->user()->level == 'Mahasiswa')
-        <div class="row ml-2 col-6">
-            <div class="p-2 bg-success bg-gradient ">
-                <h4>Tahap-tahap Pelaksanaan sidang akhir</h4>
-            </div>
-            <div class="bg-success p-2 text-dark bg-opacity-25">
-                <p>Tahap 1 : Pendaftaran Sidang Tugas Akhir <a href="/ta/create"><b>(Pengumpulan)</b></a></p>
-                <p>Tahap 2 : Penungguan verifikasi oleh Kaprodi</p>
-                <p>Tahap 3 : Pemasukkan jadwal sidang TA</p>
-                <p>Tahap 4 : Pelaksanaan Sidang TA</p>
-                <p>Tahap 5 : Penilaian oleh penguji sidang TA</p>
-            </div>
-        </div>
-    @endif
-
-    @if (auth()->user()->level == 'Dosen')
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Jadwal sidang mahasiswa yang anda sidang sebagau penguji</h6>
-            </div>
-
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Mahasiswa</th>
-                                <th>Prodi</th>
-                                <th>Ketua Sidang</th>
-                                <th>Sekretaris Sidang</th>
-                                <th>Anggota Sidang</th>
-                                {{-- <th>Action</th> --}}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($sidangs as $sidang)
-                                @php
-                                    $showRow = false;
-
-                                    // Check if the logged in user's name is in any of these roles
-                                    if (
-                                        $sidang->ta->Dpembimbing1->user->name === auth()->user()->name ||
-                                        $sidang->ta->Dpembimbing2->user->name === auth()->user()->name ||
-                                        $sidang->psek_sidang->user->name === auth()->user()->name ||
-                                        $sidang->panggota1->user->name === auth()->user()->name ||
-                                        $sidang->panggota2->user->name === auth()->user()->name
-                                    ) {
-                                        $showRow = true;
-                                    }
-                                @endphp
-
-                                @if ($showRow)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $sidang->ta->nobp }} /
-                                            {{ $sidang->ta->mahasiswa->namalengkap }}</td>
-                                        <td>{{ $sidang->ta->mahasiswa->prodi->jenjang }} -
-                                            {{ $sidang->ta->mahasiswa->prodi->kode_prodi }}</td>
-                                        <td>{{ $sidang->ta->Dpembimbing1->user->name }} /
-                                            {{ $sidang->ta->Dpembimbing2->user->name }}</td>
-                                        <td>{{ $sidang->psek_sidang->user->name }}</td>
-                                        <td>{{ $sidang->panggota1->user->name }} / {{ $sidang->panggota2->user->name }}
-                                        </td>
-                                    </tr>
-                                @endif
-                            @endforeach
-                        </tbody>
-                    </table>
-                    {{ $sidangs->links() }}
-                </div>
-            </div>
-        </div>
-    @endif
-
- <!-- Add the data to the view -->
-<script id="barChartData" type="application/json">
-    @json($barChartData)
-</script>
-<script id="pieChartData" type="application/json">
+        
+        <!-- Add the data to the view -->
+        <script id="barChartData" type="application/json">
+            @json($barChartData)
+        </script>
+        <script id="pieChartData" type="application/json">
     @json($pieChartData)
 </script>
-
-<!-- Include the chart.js script -->
-<script src="{{ asset('js/chart.js') }}"></script>
 
 @endsection

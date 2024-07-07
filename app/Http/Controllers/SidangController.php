@@ -8,6 +8,7 @@ use App\Models\TA;
 use App\Models\tanggal;
 use App\Models\Validasi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SidangController extends Controller
 {
@@ -50,7 +51,9 @@ class SidangController extends Controller
         // $data = [
         //     "validasi_id	tanggal_id	sekr_sidang	anggota1	anggota2"
         // ];
-        Sidang::create($validated);
+        $sidang=Sidang::create($validated);
+        activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil menambahkan data sidang dengan ID ' . $sidang->id);
+
         return redirect('/sidang')->with('pesan', 'berhasil menyimpan data.');
     }
 
@@ -85,6 +88,8 @@ class SidangController extends Controller
             'anggota2' => 'required|exists:dosens,id|different:ketua_sidang,sekr_sidang,anggota1',
         ]);
         Sidang::where('id', $id)->update($validated);
+        activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil mengupdate data sidang dengan ID ' . $id);
+
         return redirect('/sidang')->with('pesan', 'berhasil di-update.');
     }
 
@@ -94,6 +99,8 @@ class SidangController extends Controller
     public function destroy(String $id)
     {
         Sidang::destroy($id);
+        activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil menghapus data sidang dengan ID ' . $id);
+
         return redirect('/sidang')->with('pesan', 'Berhasil Dihapuskan.');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ruangan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RuanganController extends Controller
 {
@@ -32,7 +33,9 @@ class RuanganController extends Controller
         $validated = $request->validate([
             'nama_ruangan'=> 'required',
         ]);
-        Ruangan::create($validated);
+        $ruang=Ruangan::create($validated);
+        activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil menambahkan ruangan dengan ID ' . $ruang->id);
+
         return redirect('/ruangan')->with('pesan', 'berhasil menyimpan data.');
     }
 
@@ -61,6 +64,8 @@ class RuanganController extends Controller
             'nama_ruangan'=> 'required',
         ]);
         Ruangan::where('id',$id)->update($validated);
+        activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil mengupdate ruangan dengan ID ' . $id);
+
         return redirect('/ruangan')->with('pesan', 'berhasil di-update.');
     }
 
@@ -70,6 +75,8 @@ class RuanganController extends Controller
     public function destroy(string $id)
     {
         Ruangan::destroy($id);
+        activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil menghapus ruangan dengan ID ' . $id);
+
         return redirect('/ruangan')->with('pesan', 'Berhasil Dihapuskan.');
     }
 }
