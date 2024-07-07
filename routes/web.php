@@ -15,6 +15,7 @@ use App\Http\Controllers\PenjumlahanController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\RekapNilaiController;
 use App\Http\Controllers\RuanganController;
 use App\Http\Controllers\SesiController;
 use App\Http\Controllers\SidangController;
@@ -112,6 +113,8 @@ route::middleware(['auth'])->group(function () {
         route::resource('/ruangan', RuanganController::class);
         route::resource('/sesi', SesiController::class);
         route::resource('/tanggal', TanggalController::class);
+        route::resource('/rekap-nilai', RekapNilaiController::class);
+        Route::get('/rekap-nilai-pdf', [PdfController::class, 'exportPDF'])->name('rekap-nilai-pdf');
 
         route::resource('/validasi', ValidasiController::class);
         // route::get('/cek-nilai/{id}', [NilayController::class, 'nilai']);

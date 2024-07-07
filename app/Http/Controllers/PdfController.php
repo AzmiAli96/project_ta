@@ -76,4 +76,21 @@ class PdfController extends Controller
 
         return 0;
     }
+
+    public function exportPDF()
+    {
+        $sidang = Sidang::with([
+            'ta.mahasiswa.prodi', 
+            'nilaiPembimbing1', 
+            'nilaiPembimbing2', 
+            'nilaiketua', 
+            'nilaisekretaris', 
+            'nilaianggota1', 
+            'nilaianggota2'
+        ])->get();
+
+        
+        $pdf = Pdf::loadView('rekapnilai.rekap_nilai_pdf', compact('sidang'));
+        return $pdf->download('rekap_nilai.pdf');
+    }
 }

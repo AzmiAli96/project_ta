@@ -70,7 +70,7 @@ class TAController extends Controller
         ]);
         activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil menambahkan data TA dengan ID ' . $ta->id);
 
-        return redirect('/ta')->with('pesan', 'berhasil menyimpan data.');
+        return redirect('/dashboard')->with('pesan', 'berhasil menyimpan data.');
     }
 
     /**

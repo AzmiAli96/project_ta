@@ -85,9 +85,15 @@
                                 @if (auth()->user()->level == 'Admin' | auth()->user()->level == 'Kaprodi' |auth()->user()->level == 'Dosen' )
                                 <a class="collapse-item" href="/tanggal">Tanggal</a>
                                 <a class="collapse-item" href="/ta">Tugas Akhir</a>
+                                <a class="collapse-item" href="/rekap-nilai">Rekap Nilai</a>
                                 @endif
+
                                 @if (auth()->user()->level == 'Mahasiswa' )
+                                @if (auth()->user()->mahasiswa->ta)
                                 <a class="collapse-item" href="/ta/{{ auth()->user()->mahasiswa->ta->id }}/edit">Tugas Akhir</a>
+                                @else
+                                <a class="collapse-item" href="/ta/create">Tugas Akhir</a>
+                                @endif
                                 @endif
                                 {{-- @if (auth()->user()->level == 'Admin'|auth()->user()->level == 'Kaprodi' )
                                 <a class="collapse-item" href="/validasi">Validasi</a>
