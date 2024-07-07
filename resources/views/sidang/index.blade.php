@@ -26,9 +26,11 @@
                     </div>
                 </div>
             </form>
+            @if (auth()->user()->level == 'Admin' | auth()->user()->level == 'Kaprodi' )
             <a href="sidang/create" class="btn btn-primary btn-lg">
                 <i class="fas fa-solid fa-calendar-plus"></i>
             </a>
+            @endif
         </div>
     </div>
 
@@ -48,7 +50,9 @@
                         <th>Sekretaris Sidang</th>
                         <th>Anggota sidang 1</th>
                         <th>Anggota sidang 2</th>
+                        @if (auth()->user()->level == 'Admin' | auth()->user()->level == 'Kaprodi' )
                         <th>Action</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -65,6 +69,7 @@
                         <td>{{ $sidang->psek_sidang->user->name }}</td>
                         <td>{{ $sidang->panggota1->user->name }}</td>
                         <td>{{ $sidang->panggota2->user->name }}</td>
+                        @if (auth()->user()->level == 'Admin' | auth()->user()->level == 'Kaprodi' )
                         <td class="gap-2 d-md-flex justify-content-md-end">
                             <form action="/sidang/{{$sidang->id}}" method="post" class="d-inline">
                                 @method('DELETE')
@@ -73,6 +78,7 @@
                             </form>
                             <a href="/sidang/{{$sidang->id}}/edit" class="btn btn-sm btn-outline-warning"><i class="fas fa-edit"></i></a>
                         </td>
+                        @endif
                     </tr>
                     @endforeach
             </table>

@@ -15,7 +15,7 @@
         @csrf
         <div class="mb-3">
             <label class="form-label">Sesi</label>
-            <input type="text" class="form-control @error('sesi') is-invalid @enderror" nama="sesi" value="{{old('sesi',$sesi->sesi)}}">
+            <input type="text" class="form-control @error('sesi') is-invalid @enderror" name="sesi" value="{{old('sesi',$sesi->sesi)}}">
             @error('sesi')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -24,7 +24,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Waktu</label>
-            <input type="text" class="form-control @error('waktu') is-invalid @enderror" nama="waktu" value="{{old('waktu',$sesi->waktu)}}">
+            <input type="text" class="form-control @error('waktu') is-invalid @enderror" name="waktu" value="{{old('waktu',$sesi->waktu)}}">
             @error('waktu')
             <div class="invalid-feedback">
                 {{ $message }}

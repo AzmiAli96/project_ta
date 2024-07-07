@@ -111,7 +111,9 @@ class TAController extends Controller
             TA::where('id', $id)->update(['dokumen' => $request->dokumen]);
         }
         activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil mengupdate data TA dengan ID ' . $id);
-
+        if (auth()->user()->level == 'Mahasiswa') {
+            return redirect('/dashboard')->with('pesan', 'berhasil di-update.');
+        }
         return redirect('/ta')->with('pesan', 'berhasil di-update.');
     }
 

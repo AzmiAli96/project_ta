@@ -23,7 +23,8 @@
                         <table>
                             <td>Mahasiswa</td>
                             <td>
-                                <input type="text" value="{{ $nilai->sidang_id }}" name="sidang_id">
+                                <input type="text" value="{{ $nilai->sidang->ta->mahasiswa->namalengkap }}">
+                                <input type="text" value="{{ $nilai->sidang_id }}" name="sidang_id" hidden>
                             </td>
                             <td>Penilai</td>
                             <td>

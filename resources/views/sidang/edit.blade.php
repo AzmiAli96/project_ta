@@ -32,18 +32,45 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label class="form-label @error('tanggal_id') is-invalid @enderror">Tanggal Pejadwalan</label>
-            <select name="tanggal_id" class="form-select" >
-                <option value="" hidden>--pilih Tanggal, sesi dan ruang--</option>
-                @foreach ($tanggals as $tanggal)
-                @if (old('tanggal_id',$sidang->tanggal_id)==$tanggal->id)
-                <option value="{{$tanggal->id}}" selected>{{ $tanggal->tanggal }} / {{ $tanggal->sesi->sesi }} / {{ $tanggal->ruangan->nama_ruangan }}</option>
+            <label class="form-label">Tanggal</label>
+            <input type="text" class="form-control @error('tanggal') is-invalid @enderror" name="tanggal" value="{{old('tanggal',$sidang->tanggal)}}">
+            @error('tanggal')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label class="form-label @error('sesi_id') is-invalid @enderror">sesi</label>
+            <select name="sesi_id" class="form-select">
+                <option value="" hidden>--pilih sesi--</option>
+                @foreach ($sesis as $sesi)
+                @if (old('sesi_id',$sidang->sesi_id)==$sesi->id)
+                <option value="{{$sesi->id}}" selected>{{ $sesi->sesi }}</option>
                 @else
-                <option value="{{ $tanggal->id }}">{{ $tanggal->tanggal }} / {{ $tanggal->sesi->sesi }} / {{ $tanggal->ruangan->nama_ruangan }}s</option>
+                <option value="{{ $sesi->id }}">{{ $sesi->sesi }}</option>
                 @endif
                 @endforeach
             </select>
-            @error('tanggal_id')
+            @error('sesi_id')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label class="form-label @error('ruangan_id') is-invalid @enderror">Ruangan</label>
+            <select name="ruangan_id" class="form-select">
+                <option value="" hidden>--pilih Ruangan--</option>
+                @foreach ($ruangans as $ruangan)
+                @if (old('ruangan_id',$sidang->ruangan_id)==$ruangan->id)
+                <option value="{{$ruangan->id}}" selected>{{ $ruangan->nama_ruangan }}</option>
+                @else
+                <option value="{{ $ruangan->id }}">{{ $ruangan->nama_ruangan }}</option>
+                @endif
+                @endforeach
+            </select>
+            @error('ruangan_id')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>

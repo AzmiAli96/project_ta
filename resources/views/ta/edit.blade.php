@@ -44,9 +44,9 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="formFileMultiple" class="form-label">file tugas akhir</label>
+                <label for="formFileMultiple" class="form-label">File tugas akhir (ZIP)</label>
                 <input class="form-control @error('dokumen') is-invalid @enderror" type="file" name="dokumen" value="{{ old('dokumen', $ta->dokumen) }}"
-                    id="formFileMultiple" multiple>
+                accept=".zip" id="formFileMultiple" multiple>
                 @error('dokumen')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -98,7 +98,6 @@
                     </div>
                 @enderror
             </div> --}}
-            @if (in_array(auth()->user()->level, ['Admin', 'Kaprodi', 'Dosen']))
                 <div class="mb-3">
                     <label class="form-label">Komentar</label>
                     <textarea class="form-control @error('komentar') is-invalid @enderror" rows="3" name="komentar">{{ old('komentar', $ta->komentar) }}</textarea>
@@ -108,7 +107,6 @@
                         </div>
                     @enderror
                 </div>
-            @endif
             {{-- @dd($ta->Dpembimbing1) --}}
 
             @if ((auth()->user()->level == 'Admin') || ((auth()->user()->level == 'Dosen') && ($ta->Dpembimbing1->user->id == auth()->user()->id)))

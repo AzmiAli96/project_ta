@@ -17,20 +17,9 @@
         <div class="card-body">
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-                <!-- Topbar Search -->
-                <form action="/sidang" method="GET"
-                    class="d-none d-sm-inline-block form-inline mr-auto md-3 my-2 my-md-0 mw-100 navbar-search">
-                    @csrf
-                    <div class="input-group">
-                        <input type="text" name="search" class="form-control bg-light border-0 small"
-                            placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="submit">
-                                <i class="fas fa-search fa-sm"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
+                <div class="col-md-4 text-md-right">
+                    <a href="/rekap-nilai-pdf" class="btn btn-primary mb-3 "> Download</a>
+                </div>
                 {{-- <a href="nilai/create" class="btn btn-primary mb-3">Create</a> --}}
             </div>
             <div class="table-responsive">

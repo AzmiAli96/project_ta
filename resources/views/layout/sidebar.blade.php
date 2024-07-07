@@ -83,8 +83,10 @@
                                 <a class="collapse-item" href="/sesi">Sesi waktu</a>
                                 @endif
                                 @if (auth()->user()->level == 'Admin' | auth()->user()->level == 'Kaprodi' |auth()->user()->level == 'Dosen' )
-                                <a class="collapse-item" href="/tanggal">Tanggal</a>
+                                {{-- <a class="collapse-item" href="/tanggal">Tanggal</a> --}}
                                 <a class="collapse-item" href="/ta">Tugas Akhir</a>
+                                @endif
+                                @if (auth()->user()->level == 'Admin' | auth()->user()->level == 'Kaprodi'  )
                                 <a class="collapse-item" href="/rekap-nilai">Rekap Nilai</a>
                                 @endif
 

@@ -14,9 +14,27 @@
         @method('PUT')
         @csrf
         <div class="mb-3">
+            <label class="form-label">Kode Prodi</label>
+            <input type="text" class="form-control @error('kode_prodi') is-invalid @enderror" name="kode_prodi" value="{{old('kode_prodi',$prodi->kode_prodi)}}">
+            @error('kode_prodi')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label class="form-label">jenjang</label>
+            <input type="text" class="form-control @error('jenjang') is-invalid @enderror" name="jenjang" value="{{old('jenjang', $prodi->jenjang)}}">
+            @error('jenjang')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="mb-3">
             <label class="form-label">Prodi</label>
-            <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{old('nama',$prodi->nama)}}">
-            @error('nama')
+            <input type="text" class="form-control @error('nama_prodi') is-invalid @enderror" name="nama_prodi" value="{{old('nama_prodi',$prodi->nama_prodi)}}">
+            @error('nama_prodi')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
@@ -27,10 +45,10 @@
             <select name="jurusan_id" class="form-select">
                 <option value="" hidden>--pilih jurusan--</option>
                 @foreach ($jurusans as $jurusan)
-                @if (old('jurusan_id',$jurusan->jurusan_id)==$jurusan->id)
-                <option value="{{$jurusan->id}}" selected>{{ $jurusan->nama }}</option>
+                @if (old('jurusan_id',$prodi->jurusan_id)==$jurusan->id)
+                <option value="{{$jurusan->id}}" selected>{{ $jurusan->nama_jurusan }}</option>
                 @else
-                <option value="{{ $jurusan->id }}">{{ $jurusan->nama }}</option>
+                <option value="{{ $jurusan->id }}">{{ $jurusan->nama_jurusan }}</option>
                 @endif
                 @endforeach
             </select>
@@ -45,10 +63,10 @@
             <select name="kaprodi" class="form-select">
                 <option value="" hidden>--pilih ketua program studi--</option>
                 @foreach ($dosens as $dosen)
-                @if (old('kaprodi',$dosen->kaprodi)==$dosen->id)
-                <option value="{{$dosen->id}}" selected>{{ $dosen->user->nama }}</option>
+                @if (old('kaprodi',$prodi->kaprodi)==$dosen->id)
+                <option value="{{$dosen->id}}" selected>{{ $dosen->user->name }}</option>
                 @else
-                <option value="{{ $dosen->id }}">{{ $dosen->user->nama }}</option>
+                <option value="{{ $dosen->id }}">{{ $dosen->user->name }}</option>
                 @endif
                 @endforeach
             </select>

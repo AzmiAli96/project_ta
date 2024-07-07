@@ -6,6 +6,7 @@ use App\Models\Dosen;
 use App\Models\Jurusan;
 use App\Models\prodi;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ProdiController extends Controller
 {
@@ -32,7 +33,7 @@ class ProdiController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'kode_prodi' => 'required|unique:prodis',
+            'kode_prodi' => 'required',
             'jenjang' => 'required',
             'nama_prodi' => 'required',
             'jurusan_id' => 'required',
@@ -57,7 +58,7 @@ class ProdiController extends Controller
      */
     public function edit(string $id)
     {
-        return view('prodi.edit',['jurusan'=>Jurusan::all(),'dosen'=>Dosen::all(),'prodi'=>prodi::find($id)]);
+        return view('prodi.edit',['jurusans'=>Jurusan::all(),'dosens'=>Dosen::all(),'prodi'=>prodi::find($id)]);
     }
 
     /**
@@ -65,10 +66,13 @@ class ProdiController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $data = prodi::find($id);
         $validated = $request->validate([
-            'nama'=> 'required',
-            'jurusan_id'=>'required',
-            'kaprodi'=>'required',
+            'kode_prodi' => 'required|'. Rule::unique('prodis')->ignore($data),
+            'jenjang' => 'required',
+            'nama_prodi' => 'required',
+            'jurusan_id' => 'required',
+            'kaprodi' => 'nullable|exists:dosens,id|different:kajur|different:sekjur',
         ]);
         prodi::where('id',$id)->update($validated);
         return redirect('/prodi')->with('pesan', 'berhasil di-update.');

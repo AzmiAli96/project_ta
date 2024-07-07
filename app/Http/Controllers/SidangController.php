@@ -54,6 +54,7 @@ class SidangController extends Controller
     'anggota2' => 'required|exists:dosens,id|different:ketua_sidang,sekr_sidang,anggota1',
 ]);
 
+
 $validator = Validator::make($request->all(), [
     'ta_id' => 'required',
     'tanggal' => 'required|date',
