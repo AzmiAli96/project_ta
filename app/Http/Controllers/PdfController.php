@@ -79,7 +79,7 @@ class PdfController extends Controller
 
     public function exportPDF()
     {
-        $sidang = Sidang::with([
+        $sidangs = Sidang::with([
             'ta.mahasiswa.prodi', 
             'nilaiPembimbing1', 
             'nilaiPembimbing2', 
@@ -90,7 +90,7 @@ class PdfController extends Controller
         ])->get();
 
         
-        $pdf = Pdf::loadView('rekapnilai.rekap_nilai_pdf', compact('sidang'));
+        $pdf = Pdf::loadView('rekapnilai.rekap_nilai_pdf', compact('sidangs'));
         return $pdf->download('rekap_nilai.pdf');
     }
 }
