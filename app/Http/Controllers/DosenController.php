@@ -116,7 +116,12 @@ class DosenController extends Controller
 
     public function import()
     {
-        Excel::import(new DosenImport, request()->file('file'));
-        return redirect('/dosen');
+        try {
+            Excel::import(new DosenImport, request()->file('file'));
+            return redirect('/dosen')->with('pesan', 'Berhasil mengimpor data dosen.');
+        } catch (\Exception $e) {
+            // Tangani kesalahan dan tambahkan pesan ke dalam session
+            return redirect('/dosen')->with('error', 'Gagal mengimpor data dosen: ' . $e->getMessage());
+        }
     }
 }

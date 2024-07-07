@@ -10,6 +10,12 @@
 </div>
 @endif
 
+@if (session()->has('error'))
+<div class="alert alert-danger" role="alert">
+    {{ session('error') }}
+</div>
+@endif
+
 <div class="card mb-4">
     <div class="card-header py-3">
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -99,8 +105,5 @@
         </div>
     </div>
 </div>
-
-
-
 
 @endsection
