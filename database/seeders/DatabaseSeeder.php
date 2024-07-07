@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             ProgramSeeder::class,
-            MahasiswaSeeder::class
+            // MahasiswaSeeder::class
         ]);
 
         // User::factory(10)->create();
@@ -103,6 +103,11 @@ class DatabaseSeeder extends Seeder
             'user_id'=> '6',
             'no_telp'=> '081352456525',
             'alamat'=> 'Limau Manis',
+        ]);
+        
+        $this->call([
+            // ProgramSeeder::class,
+            MahasiswaSeeder::class
         ]);
 
         // \App\Models\User::create([

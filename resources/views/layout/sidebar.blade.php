@@ -89,7 +89,8 @@
                                 @endif
 
                                 @if (auth()->user()->level == 'Mahasiswa' )
-                                @if (auth()->user()->mahasiswa->ta)
+                            {{-- @dd(auth()->user()->mahasiswa) --}}
+                                @if (auth()->user()->mahasiswa->ta!=null)
                                 <a class="collapse-item" href="/ta/{{ auth()->user()->mahasiswa->ta->id }}/edit">Tugas Akhir</a>
                                 @else
                                 <a class="collapse-item" href="/ta/create">Tugas Akhir</a>
