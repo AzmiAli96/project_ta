@@ -24,7 +24,7 @@ class SidangController extends Controller
         $sidang = Sidang::with([
             'ta'
         ])->latest()->paginate(10);
-        return view('sidang.index', ['sidangs' => $sidang, ]);
+        return view('sidang.index', ['sidangs' => $sidang,]);
     }
 
     /**
@@ -32,9 +32,9 @@ class SidangController extends Controller
      */
     public function create()
     {
-        $taTervalidasi = ta::where('status', '=', true )->where('status_p1', '=', true )->where('status_p2', '=', true )->get();
+        $taTervalidasi = ta::where('status', '=', true)->where('status_p1', '=', true)->where('status_p2', '=', true)->get();
 
-        return view('sidang.create', ['tas'=>$taTervalidasi, 'ruangans' => Ruangan::all(),'sesis' => Sesi::all(), 'dosens' => Dosen::all()]);
+        return view('sidang.create', ['tas' => $taTervalidasi, 'ruangans' => Ruangan::all(), 'sesis' => Sesi::all(), 'dosens' => Dosen::all()]);
     }
 
     /**
@@ -42,63 +42,63 @@ class SidangController extends Controller
      */
     public function store(Request $request)
     {
-            $validated = $request->validate([
-                // 'validasi_id' => 'required',
-                'ta_id' => 'required',
-    'tanggal' => 'required|date',
-    'ruangan_id' => 'required',
-    'sesi_id' => 'required',
-    'ketua_sidang' => 'required|exists:dosens,id|different:sekr_sidang,anggota1,anggota2',
-    'sekr_sidang' => 'required|exists:dosens,id|different:ketua_sidang,anggota1,anggota2',
-    'anggota1' => 'required|exists:dosens,id|different:ketua_sidang,sekr_sidang,anggota2',
-    'anggota2' => 'required|exists:dosens,id|different:ketua_sidang,sekr_sidang,anggota1',
-]);
+        $validated = $request->validate([
+            // 'validasi_id' => 'required',
+            'ta_id' => 'required',
+            'tanggal' => 'required|date',
+            'ruangan_id' => 'required',
+            'sesi_id' => 'required',
+            'ketua_sidang' => 'required|exists:dosens,id|different:sekr_sidang,anggota1,anggota2',
+            'sekr_sidang' => 'required|exists:dosens,id|different:ketua_sidang,anggota1,anggota2',
+            'anggota1' => 'required|exists:dosens,id|different:ketua_sidang,sekr_sidang,anggota2',
+            'anggota2' => 'required|exists:dosens,id|different:ketua_sidang,sekr_sidang,anggota1',
+        ]);
 
 
-$validator = Validator::make($request->all(), [
-    'ta_id' => 'required',
-    'tanggal' => 'required|date',
-    'ruangan_id' => 'required',
-    'sesi_id' => 'required',
-    'ketua_sidang' => 'required|exists:dosens,id|different:sekr_sidang,anggota1,anggota2',
-    'sekr_sidang' => 'required|exists:dosens,id|different:ketua_sidang,anggota1,anggota2',
-    'anggota1' => 'required|exists:dosens,id|different:ketua_sidang,sekr_sidang,anggota2',
-    'anggota2' => 'required|exists:dosens,id|different:ketua_sidang,sekr_sidang,anggota1',
-]);
+        $validator = Validator::make($request->all(), [
+            'ta_id' => 'required',
+            'tanggal' => 'required|date',
+            'ruangan_id' => 'required',
+            'sesi_id' => 'required',
+            'ketua_sidang' => 'required|exists:dosens,id|different:sekr_sidang,anggota1,anggota2',
+            'sekr_sidang' => 'required|exists:dosens,id|different:ketua_sidang,anggota1,anggota2',
+            'anggota1' => 'required|exists:dosens,id|different:ketua_sidang,sekr_sidang,anggota2',
+            'anggota2' => 'required|exists:dosens,id|different:ketua_sidang,sekr_sidang,anggota1',
+        ]);
 
-$validator->after(function ($validator) use ($request) {
-    $tanggal = $request->input('tanggal');
-    $sesi_id = $request->input('sesi_id');
-    $dosens = [
-        'ketua_sidang' => $request->input('ketua_sidang'),
-        'sekr_sidang' => $request->input('sekr_sidang'),
-        'anggota1' => $request->input('anggota1'),
-        'anggota2' => $request->input('anggota2'),
-    ];
+        $validator->after(function ($validator) use ($request) {
+            $tanggal = $request->input('tanggal');
+            $sesi_id = $request->input('sesi_id');
+            $dosens = [
+                'ketua_sidang' => $request->input('ketua_sidang'),
+                'sekr_sidang' => $request->input('sekr_sidang'),
+                'anggota1' => $request->input('anggota1'),
+                'anggota2' => $request->input('anggota2'),
+            ];
 
-    foreach ($dosens as $role => $dosen_id) {
-        $exists = DB::table('sidangs')
-            ->where($role, $dosen_id)
-            ->where('tanggal', $tanggal)
-            ->where('sesi_id', $sesi_id)
-            ->exists();
+            foreach ($dosens as $role => $dosen_id) {
+                $exists = DB::table('sidangs')
+                    ->where($role, $dosen_id)
+                    ->where('tanggal', $tanggal)
+                    ->where('sesi_id', $sesi_id)
+                    ->exists();
 
-        if ($exists) {
-            $validator->errors()->add($role, "penguji $role sudah ada di  .");
+                if ($exists) {
+                    $validator->errors()->add($role, "penguji $role sudah ada di waktu yang sama .");
+                }
+            }
+        });
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
         }
-    }
-});
-
-if ($validator->fails()) {
-    return redirect()->back()
-        ->withErrors($validator)
-        ->withInput();
-}
 
         // $data = [
         //     "validasi_id	tanggal_id	sekr_sidang	anggota1	anggota2"
         // ];
-        $sidang=Sidang::create($validated);
+        $sidang = Sidang::create($validated);
         activity()->causedBy(Auth::user())->log('User ' . auth()->user()->name . ' berhasil menambahkan data sidang dengan ID ' . $sidang->id);
 
         return redirect('/sidang')->with('pesan', 'berhasil menyimpan data.');
@@ -117,7 +117,7 @@ if ($validator->fails()) {
      */
     public function edit(string $id)
     {
-        return view('sidang.edit', ['tas' => TA::all(), 'dosens' => Dosen::all(),'ruangans' => Ruangan::all(),  'sesis' => Sesi::all(), 'sidang' => Sidang::find($id)]);
+        return view('sidang.edit', ['tas' => TA::all(), 'dosens' => Dosen::all(), 'ruangans' => Ruangan::all(),  'sesis' => Sesi::all(), 'sidang' => Sidang::find($id)]);
     }
 
     /**

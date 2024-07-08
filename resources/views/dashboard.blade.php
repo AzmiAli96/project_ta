@@ -48,7 +48,8 @@
                     <div class="card-body">
                         <h5 class="card-title">Sidang Finish</h5>
                         <hr>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">{{ App\Models\Sidang::where('status', 1)->count() }} mahasiswa</h6>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">
+                            {{ App\Models\Sidang::where('status', 1)->count() }} mahasiswa</h6>
                         <p class="card-text">telah menyelesaikan sidang dan dinyatakan lulus.</p>
                     </div>
                 </div>
@@ -102,8 +103,7 @@
 
                                     // Check if the logged in user's name is in any of these roles
                                     if (
-                                        $sidang->ta->Dpembimbing1->user->name === auth()->user()->name ||
-                                        $sidang->ta->Dpembimbing2->user->name === auth()->user()->name ||
+                                        $sidang->pketua_sidang->user->name === auth()->user()->name ||
                                         $sidang->psek_sidang->user->name === auth()->user()->name ||
                                         $sidang->panggota1->user->name === auth()->user()->name ||
                                         $sidang->panggota2->user->name === auth()->user()->name
@@ -119,8 +119,7 @@
                                             {{ $sidang->ta->mahasiswa->namalengkap }}</td>
                                         <td>{{ $sidang->ta->mahasiswa->prodi->jenjang }} -
                                             {{ $sidang->ta->mahasiswa->prodi->kode_prodi }}</td>
-                                        <td>{{ $sidang->ta->Dpembimbing1->user->name }} /
-                                            {{ $sidang->ta->Dpembimbing2->user->name }}</td>
+                                        <td>{{ $sidang->pketua_sidang->user->name }}</td>
                                         <td>{{ $sidang->psek_sidang->user->name }}</td>
                                         <td>{{ $sidang->panggota1->user->name }} / {{ $sidang->panggota2->user->name }}
                                         </td>
@@ -189,9 +188,13 @@
                             @foreach ($sidangs as $sidang)
                                 @php
                                     $showRow = false;
+                                    
+                                    /* dd($sidang->ta->mahasiswa->user->name, auth()->user()->name); */
 
                                     // Check if the logged in user's name is in any of these roles
-                                    if ($sidang->ta->nobp === auth()->user()->name) {
+                                    if (
+                                        $sidang->ta->mahasiswa->user->name === auth()->user()->name
+                                    ) {
                                         $showRow = true;
                                     }
                                 @endphp
