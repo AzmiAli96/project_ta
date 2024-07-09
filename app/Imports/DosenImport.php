@@ -12,6 +12,12 @@ class DosenImport implements ToModel, WithHeadingRow
 {
     public function model(array $row)
     {
+        // Validasi data
+        if (empty($row['nama']) || empty($row['email']) || empty($row['password'])) {
+            // Lewati baris ini jika data penting kosong
+            return null;
+        }
+
         // Cari atau buat user berdasarkan email
         $user = User::where('email', $row['email'])->first();
 

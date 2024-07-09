@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class TA extends Model
 {
@@ -20,8 +21,18 @@ class TA extends Model
         return $this->belongsTo(Dosen::class,'pembimbing2');
     }
     
-public function validasi(){
-    return $this->belongsTo(Validasi::class, 'id', 'ta_id');
-}
+    public function validasi(){
+        return $this->belongsTo(Validasi::class, 'id', 'ta_id');
+    }
+
+    // public function scopePencarian(Builder $query): void
+    // {
+    //     if (request('search')) {
+    //         $query->where(function ($q) {
+    //             $q->where('nobp', 'like', '%' . request('search') . '%')
+    //                 ->orWhere('judul', 'like', '%' . request('search') . '%');
+    //         });
+    //     }
+    // }
 
 }
