@@ -79,6 +79,10 @@ class PdfController extends Controller
 
     public function exportPDF()
     {
+        $data = [
+            'logo'=> public_path('/image/Logo_pnp.png')
+        ];
+
         $sidangs = Sidang::with([
             'ta.mahasiswa.prodi', 
             'nilaiPembimbing1', 
@@ -90,7 +94,7 @@ class PdfController extends Controller
         ])->get();
 
         
-        $pdf = Pdf::loadView('rekapnilai.rekap_nilai_pdf', compact('sidangs'));
+        $pdf = Pdf::loadView('rekapnilai.rekap_nilai_pdf',$data , compact('sidangs'));
         return $pdf->download('rekap_nilai.pdf');
     }
 }
