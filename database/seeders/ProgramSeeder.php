@@ -16,7 +16,7 @@ class ProgramSeeder extends Seeder
             'kode_jurusan'=> 'TI',
             'nama_jurusan'=> 'Teknologi Informasi',
             'kajur'=> '2',
-            'sekjur'=> '3',
+            'sekjur'=> '5',
         ]);
 
         \App\Models\prodi::create([
@@ -25,6 +25,14 @@ class ProgramSeeder extends Seeder
             'nama_prodi'=> 'Teknologi Rekayasa Perangkat Lunak',
             'jurusan_id'=> '1',
             'kaprodi'=> '4',
+        ]);
+
+        \App\Models\prodi::create([
+            'kode_prodi'=> 'TK',
+            'jenjang'=> 'D3',
+            'nama_prodi'=> 'Teknik Komputer',
+            'jurusan_id'=> '3',
+            'kaprodi'=> '6',
         ]);
 
         \App\Models\prodi::create([

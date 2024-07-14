@@ -91,19 +91,73 @@ class DatabaseSeeder extends Seeder
             'no_telp'=> '082199542112',
             'alamat'=> 'Ampang',
         ]);
+
         \App\Models\User::create([
             'name'=> 'Fazrol Rozi',
             'email'=> 'Fazrozi@gmail.com',
             'password'=> bcrypt('123123123'),
             'level'=> 'Dosen',
         ]);
-
         \App\Models\Dosen::create([
             'nidn'=> '0234433552',
             'user_id'=> '6',
             'no_telp'=> '081352456525',
             'alamat'=> 'Limau Manis',
         ]);
+
+        \App\Models\User::create([
+            'name'=> 'Indri Rahmayuni',
+            'email'=> 'indrahma@gmail.com',
+            'password'=> bcrypt('123123123'),
+            'level'=> 'Dosen',
+        ]);
+        \App\Models\Dosen::create([
+            'nidn'=> '0234411552',
+            'user_id'=> '7',
+            'no_telp'=> '081352456115',
+            'alamat'=> 'Limau Manis',
+        ]);
+
+        \App\Models\User::create([
+            'name'=> 'Rahmi Putri kurnia',
+            'email'=> 'rahmapk@gmail.com',
+            'password'=> bcrypt('123123123'),
+            'level'=> 'Dosen',
+        ]);
+        \App\Models\Dosen::create([
+            'nidn'=> '0234411332',
+            'user_id'=> '8',
+            'no_telp'=> '081355556112',
+            'alamat'=> 'Limau Pahit',
+        ]);
+
+        \App\Models\User::create([
+            'name'=> 'Mutia Rahmi Dewi',
+            'email'=> 'dewimut@gmail.com',
+            'password'=> bcrypt('123123123'),
+            'level'=> 'Dosen',
+        ]);
+        \App\Models\Dosen::create([
+            'nidn'=> '0239411311',
+            'user_id'=> '9',
+            'no_telp'=> '081355556999',
+            'alamat'=> 'Limau Asem',
+        ]);
+
+        \App\Models\User::create([
+            'name'=> 'Deni Satria',
+            'email'=> 'Densatri@gmail.com',
+            'password'=> bcrypt('123123123'),
+            'level'=> 'Dosen',
+        ]);
+        \App\Models\Dosen::create([
+            'nidn'=> '0234491112',
+            'user_id'=> '10',
+            'no_telp'=> '081355676112',
+            'alamat'=> 'Pisang',
+        ]);
+
+
         
         $this->call([
             // ProgramSeeder::class,

@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </form>
-            <a href="sesi/create" class="btn btn-primary mb-3">Create</a>
+            <a href="sesi/create" class="btn btn-primary mb-3" id="btn-create">Create</a>
         </div>
         <div class="table-responsive">
             <table class="table table-bordered" width="100%" cellspacing="0">
@@ -53,9 +53,9 @@
                             <form action="/sesi/{{$sesi->id}}" method="post" class="d-inline">
                                 @method('DELETE')
                                 @csrf
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin mau dihapus?')"><i class="fas fa-trash-alt"></i></button>
+                                <button type="submit" class="btn btn-outline-danger" onclick="return confirm('Yakin mau dihapus?')"><i class="fas fa-trash-alt"></i></button>
                             </form>
-                            <a href="/sesi/{{$sesi->id}}/edit" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                            <a href="/sesi/{{$sesi->id}}/edit" class="btn btn-outline-warning"><i class="fas fa-edit"></i></a>
                         </td>
                     </tr>
                     @endforeach

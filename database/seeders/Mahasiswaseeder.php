@@ -22,7 +22,7 @@ class MahasiswaSeeder extends Seeder
         \App\Models\Mahasiswa::create([
             'nobp'=> '2211083036',
             'namalengkap'=> 'Muhammad Farhan Arya',
-            'user_id'=> '7',
+            'user_id'=> '11',
             'jurusan_id'=> '1',
             'prodi_id'=> '1',
         ]);
@@ -37,7 +37,7 @@ class MahasiswaSeeder extends Seeder
         \App\Models\Mahasiswa::create([
             'nobp'=> '2211081012',
             'namalengkap'=> 'Hans Demberger S',
-            'user_id'=> '8',
+            'user_id'=> '12',
             'jurusan_id'=> '1',
             'prodi_id'=> '1',
         ]);
