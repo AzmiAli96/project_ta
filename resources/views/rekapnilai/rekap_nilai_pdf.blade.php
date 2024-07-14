@@ -82,27 +82,26 @@
                 </td>
             </tr>
         </table>
-
-
     </div>
 </header>
 
 <body>
-    <h1>Rekap Nilai Sidang</h1>
+    <h2 style="text-align: center">REKAP NILAI</h2>
+    <p style="text-align: justify">Berikut adalah rekapan mahasiswa/mahasiswi yang sudah menyelesaikan sidang tugas akhir</p>
     <table>
         <thead>
             <tr>
-                <th>No</th>
-                <th>Mahasiswa</th>
-                <th>Prodi</th>
-                <th>Nilai Akhir</th>
-                <th>Status</th>
+                <th style="text-align: center">No</th>
+                <th style="text-align: center">Mahasiswa</th>
+                <th style="text-align: center">Prodi</th>
+                <th style="text-align: center">Nilai Akhir</th>
+                <th style="text-align: center">Status</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($sidangs as $sidang)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
+                    <td style="text-align: center">{{ $loop->iteration }}</td>
                     <td>{{ $sidang->ta->nobp }} / {{ $sidang->ta->mahasiswa->namalengkap }}</td>
                     <td>{{ $sidang->ta->mahasiswa->prodi->jenjang }} - {{ $sidang->ta->mahasiswa->prodi->kode_prodi }}
                     </td>
@@ -366,6 +365,7 @@
             @endforeach
         </tbody>
     </table>
+    <p style="text-align: justify">Sekian merupakan rekapan mahasiswa/mahasiswi yang sudah menyelesaikan persidangan. sekian dari kami, kami ucapkan terima kasih</p>
 </body>
 
 </html>

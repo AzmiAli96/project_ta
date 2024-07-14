@@ -61,12 +61,12 @@
                                         @csrf
                                         <div class="form-group">
                                             <input type="email" value="{{old ('email')}}" class="form-control form-control-user"
-                                                name="email" id="exampleInputEmail" aria-describedby="emailHelp"
+                                                name="email" id="email" aria-describedby="emailHelp"
                                                 placeholder="Enter Email Address...">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                name="password" id="exampleInputPassword" placeholder="Password">
+                                                name="password" id="password" placeholder="Password">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -75,7 +75,7 @@
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                                        <button type="submit" id="btnLogin" class="btn btn-primary btn-user btn-block">
                                             Login
                                         </button>
                                         

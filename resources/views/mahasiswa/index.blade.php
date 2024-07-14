@@ -32,7 +32,7 @@
             <a href="/importMahasiswa" class="btn btn-sm button-purple mr-1" data-toggle="modal" data-target="#importForm">
                 <i class="fas fa-solid fa-upload"></i> Import
             </a>
-            <a href="mahasiswa/create" class="btn button-ol-purple">
+            <a href="mahasiswa/create" id="btnCreate" class="btn button-ol-purple">
                 <i class="fas fa-plus fa-sm"></i>
             </a>
         </div>
@@ -67,9 +67,9 @@
                             <form action="/mahasiswa/{{$mahasiswa->id}}" method="post" class="d-inline">
                                 @method('DELETE')
                                 @csrf
-                                <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Yakin mau dihapus?')"><i class="fas fa-trash-alt"></i></button>
+                                <button type="submit" class="btn btn-outline-danger btn-sm" id="btnDelete" onclick="return confirm('Yakin mau dihapus?')"><i class="fas fa-trash-alt"></i></button>
                             </form>
-                            <a href="/mahasiswa/{{$mahasiswa->id}}/edit" class="btn btn-outline-warning btn-sm"><i class="fas fa-edit"></i></a>
+                            <a href="/mahasiswa/{{$mahasiswa->id}}/edit" id="btnEdit" class="btn btn-outline-warning btn-sm"><i class="fas fa-edit"></i></a>
                         </td>
                     </tr>
                     @endforeach

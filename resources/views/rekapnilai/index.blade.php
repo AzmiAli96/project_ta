@@ -18,7 +18,11 @@
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
                 <div class="col-md-4 text-md-right">
-                    <a href="/rekap-nilai-pdf" class="btn btn-primary mb-3 "> Download</a>
+                    {{-- <a href="/rekap-nilai-pdf" class="btn btn-primary mb-3 "> Download</a> --}}
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        Download
+                    </button>
                 </div>
                 {{-- <a href="nilai/create" class="btn btn-primary mb-3">Create</a> --}}
             </div>
@@ -292,9 +296,9 @@
                                     }
                                     if ($count > 2) {
                                         // $status = 'Lulus';
-                                        $sidang->update(["status"=>true]);
+                                        $sidang->update(['status' => true]);
                                     } else {
-                                        $sidang->update(["status"=>false]);
+                                        $sidang->update(['status' => false]);
                                     }
                                 @endphp
                                 <td>{{ $nilai_akhir }}</td>
@@ -307,5 +311,48 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Download Rekap Nilai Mahasiswa</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label class="form-label">Pemilihan Filter</label>
+                <select id="prodiSelect" name="status" class="form-select">
+                    <option value="" hidden>--Download--</option>
+                    <option value="all">Semua Prodi</option>
+                    <option value="TRPL">Teknologi Rekayasa Perangkat Lunak</option>
+                    <option value="MI">Manajemen Informatika</option>
+                    <option value="TEKOM">Teknik Komputer</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>  
+                <a id="downloadLink" href="#" class="btn btn-primary">Download</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('prodiSelect').addEventListener('change', function() {
+        var selectedProdi = this.value;
+        var downloadLink = document.getElementById('downloadLink');
+        
+        if (selectedProdi) {
+            downloadLink.href = '/rekap-nilai-pdf?prodi=' + selectedProdi;
+        } else {
+            downloadLink.href = '#';
+        }
+    });
+
+    // Set default download link if needed
+    document.getElementById('downloadLink').href = '#';
+</script>
 
 @endsection
